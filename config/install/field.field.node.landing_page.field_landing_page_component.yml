@@ -47,8 +47,6 @@ settings:
       card_navigation_auto: card_navigation_auto
       card_keydates: card_keydates
       call_to_action: call_to_action
-      embedded_webform: embedded_webform
-      featured_news: featured_news
       news_listing: news_listing
       media_gallery: media_gallery
       card_event_auto: card_event_auto
@@ -107,12 +105,6 @@ settings:
       call_to_action:
         enabled: true
         weight: 21
-      embedded_webform:
-        enabled: true
-        weight: 22
-      featured_news:
-        enabled: true
-        weight: 23
       news_listing:
         enabled: true
         weight: 24
