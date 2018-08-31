@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.landing_page.field_landing_page_contact
     - field.field.node.landing_page.field_landing_page_hero_image
     - field.field.node.landing_page.field_landing_page_hero_theme
+    - field.field.node.landing_page.field_landing_page_hero_logo    
     - field.field.node.landing_page.field_landing_page_intro_text
     - field.field.node.landing_page.field_landing_page_key_journeys
     - field.field.node.landing_page.field_landing_page_nav_title
@@ -65,7 +66,7 @@ content:
     type: entity_reference_label
     region: content
   field_landing_page_bg_colour:
-    weight: 18
+    weight: 19
     label: above
     settings: {  }
     third_party_settings: {  }
@@ -100,7 +101,7 @@ content:
     region: content
   field_landing_page_contact:
     type: entity_reference_revisions_entity_view
-    weight: 13
+    weight: 14
     label: above
     settings:
       view_mode: default
@@ -115,6 +116,17 @@ content:
       link: true
     third_party_settings: {  }
     region: content
+  field_landing_page_hero_logo:
+    type: entity_reference_entity_view
+    weight: 11
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    region: content
+  field_landing_page_hero_theme:
+    weight: 12
   field_landing_page_hero_theme:
     weight: 11
     label: above
@@ -139,7 +151,7 @@ content:
     third_party_settings: {  }
     region: content
   field_landing_page_nav_title:
-    weight: 17
+    weight: 18
     label: above
     settings:
       link_to_entity: false
@@ -147,7 +159,7 @@ content:
     type: string
     region: content
   field_landing_page_show_contact:
-    weight: 12
+    weight: 13
     label: above
     settings:
       format: default
@@ -157,7 +169,7 @@ content:
     type: boolean
     region: content
   field_metatags:
-    weight: 14
+    weight: 15
     label: above
     settings: {  }
     third_party_settings: {  }
@@ -173,7 +185,7 @@ content:
     third_party_settings: {  }
     region: content
   field_show_news_search:
-    weight: 19
+    weight: 20
     label: above
     settings:
       format: default
@@ -183,7 +195,7 @@ content:
     type: boolean
     region: content
   field_show_site_section_nav:
-    weight: 15
+    weight: 16
     label: above
     settings:
       format: default
@@ -193,7 +205,7 @@ content:
     type: boolean
     region: content
   field_show_topic_term_and_tags:
-    weight: 16
+    weight: 17
     label: above
     settings:
       format: default

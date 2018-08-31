@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.landing_page.field_landing_page_contact
     - field.field.node.landing_page.field_landing_page_hero_image
     - field.field.node.landing_page.field_landing_page_hero_theme
+    - field.field.node.landing_page.field_landing_page_hero_logo
     - field.field.node.landing_page.field_landing_page_intro_text
     - field.field.node.landing_page.field_landing_page_key_journeys
     - field.field.node.landing_page.field_landing_page_nav_title
@@ -68,7 +69,7 @@ third_party_settings:
         - group_contact_us
         - group_blocks
       parent_name: ''
-      weight: 1
+      weight: 2
       format_type: tabs
       format_settings:
         id: ''
@@ -83,6 +84,7 @@ third_party_settings:
         - field_landing_page_hero_image
         - field_graphical_image
         - field_landing_page_hero_theme
+        - field_landing_page_hero_logo
         - field_landing_page_intro_text
         - field_landing_page_summary
         - field_landing_page_key_journeys
@@ -229,7 +231,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 6
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -264,7 +266,7 @@ content:
     type: entity_browser_entity_reference
     region: content
   field_landing_page_bg_colour:
-    weight: 18
+    weight: 19
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -313,6 +315,23 @@ content:
       default_paragraph_type: _none
     third_party_settings: {  }
     region: content
+  field_landing_page_hero_logo:
+    weight: 3
+    settings:
+      entity_browser: tide_image_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      field_widget_replace: false
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_landing_page_intro_text:
+    weight: 6
   field_landing_page_hero_image:
     weight: 2
     settings:
@@ -344,7 +363,7 @@ content:
     region: content
   field_landing_page_key_journeys:
     type: entity_reference_paragraphs
-    weight: 7
+    weight: 8
     settings:
       title: 'Key journey'
       title_plural: 'Key journeys'
@@ -370,7 +389,7 @@ content:
     type: boolean_checkbox
     region: content
   field_landing_page_summary:
-    weight: 6
+    weight: 7
     settings:
       rows: 5
       placeholder: ''
@@ -383,7 +402,7 @@ content:
     type: string_textarea
     region: content
   field_metatags:
-    weight: 15
+    weight: 16
     settings: {  }
     third_party_settings: {  }
     type: metatag_firehose
@@ -406,12 +425,12 @@ content:
     type: boolean_checkbox
     region: content
     field_name: field_show_content_rating
-    weight: 2
+    weight: 3
     settings:
       display_label: true
     third_party_settings: {  }
   field_show_news_search:
-    weight: 3
+    weight: 4
     settings:
       display_label: true
     third_party_settings: {  }
@@ -446,7 +465,7 @@ content:
     type: boolean_checkbox
     region: content
   field_show_topic_term_and_tags:
-    weight: 14
+    weight: 15
     settings:
       display_label: true
     third_party_settings: {  }
@@ -460,7 +479,7 @@ content:
       display_label: true
     third_party_settings: {  }
   field_tags:
-    weight: 13
+    weight: 14
     settings:
       match_operator: CONTAINS
       size: 60
@@ -469,7 +488,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_topic:
-    weight: 12
+    weight: 13
     settings:
       match_operator: CONTAINS
       size: 60
@@ -479,7 +498,7 @@ content:
     region: content
   field_whats_next:
     type: entity_reference_paragraphs
-    weight: 24
+    weight: 25
     region: content
     settings:
       title: 'What''s Next block'
@@ -491,13 +510,13 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 11
+    weight: 12
     settings: {  }
     region: content
     third_party_settings: {  }
   path:
     type: path
-    weight: 7
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -505,12 +524,12 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 8
+    weight: 9
     region: content
     third_party_settings: {  }
   scheduled_archiving:
     type: inline_entity_form_complex
-    weight: 20
+    weight: 21
     settings:
       override_labels: true
       label_singular: 'Scheduled Archiving'
@@ -526,7 +545,7 @@ content:
     region: content
   scheduled_publishing:
     type: inline_entity_form_complex
-    weight: 19
+    weight: 20
     settings:
       override_labels: true
       label_singular: 'Scheduled Publishing'
@@ -544,14 +563,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 10
+    weight: 11
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 5
+    weight: 6
     region: content
     third_party_settings: {  }
   title:
@@ -567,7 +586,7 @@ content:
         maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
   uid:
     type: entity_reference_autocomplete
-    weight: 4
+    weight: 5
     settings:
       match_operator: CONTAINS
       size: 60
@@ -575,7 +594,7 @@ content:
     region: content
     third_party_settings: {  }
   url_redirects:
-    weight: 9
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
