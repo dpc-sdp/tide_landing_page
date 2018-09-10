@@ -1,0 +1,58 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.tide_image_browser
+    - field.field.paragraph.anchor_hero.field_paragraph_ahero_image
+    - field.field.paragraph.anchor_hero.field_paragraph_ahero_intro
+    - field.field.paragraph.anchor_hero.field_paragraph_ahero_title
+    - paragraphs.paragraphs_type.anchor_hero
+  module:
+    - content_moderation
+    - entity_browser
+id: paragraph.anchor_hero.default
+targetEntityType: paragraph
+bundle: anchor_hero
+mode: default
+content:
+  field_paragraph_ahero_image:
+    weight: 103
+    settings:
+      entity_browser: tide_image_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: media_browser_preview
+      field_widget_replace: false
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_paragraph_ahero_intro:
+    weight: 102
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_paragraph_ahero_title:
+    weight: 101
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

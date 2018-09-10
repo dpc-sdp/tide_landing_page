@@ -1,0 +1,53 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.masonry_image_gallery_content.field_paragraph_masonry_image
+    - field.field.paragraph.masonry_image_gallery_content.field_paragraph_masonry_intro
+    - field.field.paragraph.masonry_image_gallery_content.field_paragraph_masonry_link
+    - field.field.paragraph.masonry_image_gallery_content.field_paragraph_masonry_title
+    - paragraphs.paragraphs_type.masonry_image_gallery_content
+  module:
+    - link
+id: paragraph.masonry_image_gallery_content.default
+targetEntityType: paragraph
+bundle: masonry_image_gallery_content
+mode: default
+content:
+  field_paragraph_masonry_image:
+    type: entity_reference_entity_view
+    weight: 2
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    region: content
+  field_paragraph_masonry_intro:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_paragraph_masonry_link:
+    weight: 3
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_paragraph_masonry_title:
+    weight: 0
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

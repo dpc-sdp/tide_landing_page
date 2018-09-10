@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.anchor_hero.field_paragraph_ahero_image
+    - field.field.paragraph.anchor_hero.field_paragraph_ahero_intro
+    - field.field.paragraph.anchor_hero.field_paragraph_ahero_title
+    - paragraphs.paragraphs_type.anchor_hero
+id: paragraph.anchor_hero.default
+targetEntityType: paragraph
+bundle: anchor_hero
+mode: default
+content:
+  field_paragraph_ahero_image:
+    type: entity_reference_entity_view
+    weight: 2
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    region: content
+  field_paragraph_ahero_intro:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_paragraph_ahero_title:
+    weight: 0
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: masonry_image_gallery
+label: 'Masonry image gallery'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }
