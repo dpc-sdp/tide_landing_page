@@ -1,0 +1,99 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_paragraph_masonry_content
+    - paragraphs.paragraphs_type.card_navigation_featured
+    - paragraphs.paragraphs_type.masonry_image_gallery
+  module:
+    - entity_reference_revisions
+id: paragraph.masonry_image_gallery.field_paragraph_masonry_content
+field_name: field_paragraph_masonry_content
+entity_type: paragraph
+bundle: masonry_image_gallery
+label: 'Masonry gallery content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      card_navigation_featured: card_navigation_featured
+    target_bundles_drag_drop:
+      accordion:
+        weight: 27
+        enabled: false
+      accordion_content:
+        weight: 28
+        enabled: false
+      anchor_hero:
+        weight: 29
+        enabled: false
+      banner:
+        weight: 30
+        enabled: false
+      basic_text:
+        weight: 31
+        enabled: false
+      call_to_action:
+        weight: 32
+        enabled: false
+      card_event:
+        weight: 33
+        enabled: false
+      card_keydates:
+        weight: 34
+        enabled: false
+      card_navigation:
+        weight: 35
+        enabled: false
+      card_navigation_auto:
+        weight: 36
+        enabled: false
+      card_navigation_featured:
+        enabled: true
+        weight: 37
+      card_navigation_featured_auto:
+        weight: 38
+        enabled: false
+      card_promotion:
+        weight: 39
+        enabled: false
+      card_promotion_auto:
+        weight: 40
+        enabled: false
+      contact_us:
+        weight: 41
+        enabled: false
+      embedded_webform:
+        weight: 42
+        enabled: false
+      featured_news:
+        weight: 43
+        enabled: false
+      keydates:
+        weight: 44
+        enabled: false
+      key_journeys:
+        weight: 45
+        enabled: false
+      links:
+        weight: 46
+        enabled: false
+      masonry_image_gallery:
+        weight: 47
+        enabled: false
+      phone:
+        weight: 48
+        enabled: false
+      related_links:
+        weight: 49
+        enabled: false
+      social_link:
+        weight: 50
+        enabled: false
+field_type: entity_reference_revisions
