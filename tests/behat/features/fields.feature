@@ -21,6 +21,9 @@ Feature: Fields for Landing Page content type
     And the "#edit-field-landing-page-hero-logo" element should contain "Hero Logo"
     And I should see an "input#edit-field-landing-page-hero-logo-entity-browser-entity-browser-open-modal" element
 
+    And the "#edit-field-bottom-graphical-image" element should contain "Bottom Graphical Image"
+    And I should see an "input#edit-field-bottom-graphical-image-entity-browser-target" element
+
     And I see field "Show Social Sharing?"
     And I should see an "input#edit-field-show-social-sharing-value" element
     And I should not see an "input#edit-field-show-social-sharing-value.required" element
