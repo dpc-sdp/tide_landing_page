@@ -5,6 +5,7 @@ dependencies:
     - field.storage.node.field_landing_page_component
     - node.type.landing_page
     - paragraphs.paragraphs_type.accordion
+    - paragraphs.paragraphs_type.anchor_hero
     - paragraphs.paragraphs_type.basic_text
     - paragraphs.paragraphs_type.call_to_action
     - paragraphs.paragraphs_type.card_event
@@ -16,6 +17,7 @@ dependencies:
     - paragraphs.paragraphs_type.card_promotion
     - paragraphs.paragraphs_type.card_promotion_auto
     - paragraphs.paragraphs_type.news_listing
+    - paragraphs.paragraphs_type.masonry_image_gallery
   module:
     - entity_reference_revisions
 id: node.landing_page.field_landing_page_component
@@ -45,6 +47,8 @@ settings:
       card_keydates: card_keydates
       call_to_action: call_to_action
       news_listing: news_listing
+      anchor_hero: anchor_hero
+      masonry_image_gallery: masonry_image_gallery
     target_bundles_drag_drop:
       banner:
         weight: -33
@@ -100,6 +104,9 @@ settings:
       news_listing:
         enabled: true
         weight: 24
+      anchor_hero:
+        enabled: true
+        weight: 28
       contact_us:
         weight: 34
         enabled: false
@@ -108,5 +115,11 @@ settings:
         enabled: false
       social_link:
         weight: 40
+        enabled: false
+      masonry_image_gallery:
+        enabled: true
+        weight: 49
+      masonry_image_gallery_content:
+        weight: 50
         enabled: false
 field_type: entity_reference_revisions

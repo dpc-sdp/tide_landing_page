@@ -38,8 +38,6 @@ dependencies:
     - metatag
     - options
     - user
-_core:
-  default_config_hash: sMSNyLAySfCJcMykcHr3cyYRCKXQBAnEd4NySLTql18
 id: node.landing_page.default
 targetEntityType: node
 bundle: landing_page
