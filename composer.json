@@ -29,5 +29,12 @@
         },
         "process-timeout": 0,
         "sort-packages": true
+    },
+    "extra": {
+        "patches": {
+            "dpc-sdp/tide_core": {
+                "[SDPA-922] Add Bottom Graphical Image Storage": "https://patch-diff.githubusercontent.com/raw/dpc-sdp/tide_core/pull/11.patch"
+            }
+        }
     }
 }
