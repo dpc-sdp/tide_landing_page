@@ -90,6 +90,7 @@ install:
 ## Install current module.
 install-module:
 	# Clear Caches.
+	$(call exec,docker-compose exec cli composer clearcache)
 	$(call exec,docker-compose exec cli drush cr)
 	$(call title,Installing current module and dependencies)
 	# If running with suggested modules, requre them first.
