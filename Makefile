@@ -89,6 +89,8 @@ install:
 
 ## Install current module.
 install-module:
+	# Clear Caches.
+	$(call exec,docker-compose exec cli drush cr)
 	$(call title,Installing current module and dependencies)
 	# If running with suggested modules, requre them first.
 	$(call exec,docker-compose exec cli bash -c "if [ "$(INSTALL_SUGGEST)" = "1" ] ; then cat $(COMPOSER_BUILD) | jq -r 'select(.suggest != null) | .suggest | keys[]' | xargs -i composer require {}; fi")
