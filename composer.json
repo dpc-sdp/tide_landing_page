@@ -12,7 +12,7 @@
     },
     "suggest": {
         "dpc-sdp/tide_api": "@dev",
-        "dpc-sdp/tide_news": "@dev",
+        "dpc-sdp/tide_news": "dev-feature/SDPA-904-event-content-type",
         "dpc-sdp/tide_webform": "@dev"
     },
     "repositories": {
