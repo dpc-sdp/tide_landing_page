@@ -4,7 +4,7 @@
     "type": "drupal-module",
     "license": "proprietary",
     "require": {
-        "dpc-sdp/tide_core": "dev-master",
+        "dpc-sdp/tide_core": "@dev",
         "dpc-sdp/tide_media": "@dev",
         "drupal/paragraphs": "1.2",
         "drupal/maxlength": "^1.0@beta",
