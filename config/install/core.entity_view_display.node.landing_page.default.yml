@@ -88,7 +88,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    type: entity_reference_entity_id
     region: content
   field_landing_page_c_secondary:
     weight: 6
@@ -97,7 +97,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    type: entity_reference_entity_id
     region: content
   field_landing_page_component:
     weight: 1
