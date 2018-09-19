@@ -1,5 +1,5 @@
 {
-    "name": "dpc-sdp/tide-dev",
+    "name": "dpc-sdp/tide_landing_page",
     "description": "Development configuration for all Tide modules. This file is merged with module's composer.json for development and testing.",
     "type": "drupal-module",
     "license": "proprietary",
