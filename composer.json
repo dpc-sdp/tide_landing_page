@@ -1,19 +1,14 @@
 {
     "name": "dpc-sdp/tide_landing_page",
-    "description": "Development configuration for all Tide modules. This file is merged with module's composer.json for development and testing.",
+    "description": "Landing Page content type and related configuration for Tide Drupal 8 distribution",
     "type": "drupal-module",
     "license": "GPL-2.0+",
     "require": {
-        "dpc-sdp/tide_core": "^0.0.1",
+        "dpc-sdp/tide_core": "@dev",
         "dpc-sdp/tide_media": "@dev",
         "drupal/paragraphs": "1.2",
         "drupal/maxlength": "^1.0@beta",
-        "drupal/smart_trim": "^1.1",
-        "composer/installers": "^1.2.0",
-        "cweagans/composer-patches": "^1.6.0",
-        "drupal-composer/drupal-scaffold": "^2.3",
-        "webflo/drupal-finder": "^1.0",
-        "webmozart/path-util": "^2.3"
+        "drupal/smart_trim": "^1.1"
     },
     "suggest": {
         "dpc-sdp/tide_api": "@dev",
@@ -24,130 +19,6 @@
         "drupal": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
-        },
-        "dpc-sdp/tide": {
-            "type": "vcs",
-            "no-api": true,
-            "url": "https://github.com/dpc-sdp/tide.git"
-        },
-        "dpc-sdp/tide_api": {
-            "type": "vcs",
-            "no-api": true,
-            "url": "https://github.com/dpc-sdp/tide_api.git"
-        },
-        "dpc-sdp/tide_core": {
-            "type": "vcs",
-            "no-api": true,
-            "url": "https://github.com/dpc-sdp/tide_core.git"
-        },
-        "dpc-sdp/tide_event": {
-            "type": "vcs",
-            "no-api": true,
-            "url": "https://github.com/dpc-sdp/tide_event.git"
-        },
-        "dpc-sdp/tide_landing_page": {
-            "type": "vcs",
-            "no-api": true,
-            "url": "https://github.com/dpc-sdp/tide_landing_page.git"
-        },
-        "dpc-sdp/tide_media": {
-            "type": "vcs",
-            "no-api": true,
-            "url": "https://github.com/dpc-sdp/tide_media.git"
-        },
-        "dpc-sdp/tide_monsido": {
-            "type": "vcs",
-            "no-api": true,
-            "url": "https://github.com/dpc-sdp/tide_monsido.git"
-        },
-        "dpc-sdp/tide_news": {
-            "type": "vcs",
-            "no-api": true,
-            "url": "https://github.com/dpc-sdp/tide_news.git"
-        },
-        "dpc-sdp/tide_page": {
-            "type": "vcs",
-            "no-api": true,
-            "url": "https://github.com/dpc-sdp/tide_page.git"
-        },
-        "dpc-sdp/tide_search": {
-            "type": "vcs",
-            "no-api": true,
-            "url": "https://github.com/dpc-sdp/tide_search.git"
-        },
-        "dpc-sdp/tide_site": {
-            "type": "vcs",
-            "no-api": true,
-            "url": "https://github.com/dpc-sdp/tide_site.git"
-        },
-        "dpc-sdp/tide_test": {
-            "type": "vcs",
-            "no-api": true,
-            "url": "https://github.com/dpc-sdp/tide_test.git"
-        },
-        "dpc-sdp/tide_webform": {
-            "type": "vcs",
-            "no-api": true,
-            "url": "https://github.com/dpc-sdp/tide_webform.git"
-        },
-        "library/dropzone": {
-            "type": "package",
-            "package": {
-                "name": "library/dropzone",
-                "version": "4.3.0",
-                "type": "drupal-library",
-                "dist": {
-                    "url": "https://github.com/enyo/dropzone/archive/v4.3.0.zip",
-                    "type": "zip"
-                }
-            }
-        },
-        "ckeditor/iframe": {
-            "type": "package",
-            "package": {
-                "name": "ckeditor/iframe",
-                "type": "drupal-library",
-                "version": "4.5.11",
-                "dist": {
-                    "type": "zip",
-                    "url": "https://download.ckeditor.com/iframe/releases/iframe_4.5.11.zip"
-                },
-                "require": {
-                    "composer/installers": "~1.0"
-                }
-            }
-        },
-        "ckeditor/fakeobjects": {
-            "type": "package",
-            "package": {
-                "name": "ckeditor/fakeobjects",
-                "type": "drupal-library",
-                "version": "4.5.11",
-                "dist": {
-                    "type": "zip",
-                    "url": "https://download.ckeditor.com/fakeobjects/releases/fakeobjects_4.5.11.zip"
-                },
-                "require": {
-                    "composer/installers": "~1.0"
-                }
-            }
-        },
-        "ckeditor/templates": {
-            "type": "package",
-            "package": {
-                "name": "ckeditor/templates",
-                "type": "drupal-library",
-                "version": "4.5.7",
-                "dist": {
-                    "type": "zip",
-                    "url": "https://download.ckeditor.com/templates/releases/templates_4.5.7.zip"
-                }
-            }
-        },
-        "ubirak/rest-api-behat-extension": {
-            "type": "vcs",
-            "no-api": true,
-            "url": "https://github.com/integratedexperts/rest-api-behat-extension"
         }
     },
     "minimum-stability": "dev",
@@ -160,57 +31,7 @@
         "sort-packages": true
     },
     "extra": {
-        "patches": {},
-        "enable-patching": true,
-        "composer-exit-on-patch-failure": true,
-        "installer-paths": {
-            "build/docroot/core": [
-                "type:drupal-core"
-            ],
-            "build/docroot/modules/contrib/{$name}": [
-                "type:drupal-module"
-            ],
-            "build/docroot/themes/contrib/{$name}": [
-                "type:drupal-theme"
-            ],
-            "build/docroot/profiles/contrib/{$name}": [
-                "type:drupal-profile"
-            ],
-            "build/docroot/libraries/{$name}": [
-                "type:drupal-library"
-            ]
+        "patches": {
         }
-    },
-    "require-dev": {
-        "behat/behat": "^3.4",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
-        "drupal/coder": "^8.2.12",
-        "drupal/drupal-extension": "^v3.4",
-        "integratedexperts/behat-format-progress-fail": "^0.2",
-        "integratedexperts/behat-screenshot": "^0.7",
-        "integratedexperts/behat-steps": "^0.1.2",
-        "integratedexperts/behat-relativity": "^0.3",
-        "jakub-onderka/php-parallel-lint": "^1.0",
-        "php-http/curl-client": "^1.7",
-        "wimg/php-compatibility": "^8.1",
-        "ubirak/rest-api-behat-extension": "dev-feature/drupalextension-compatibility as 7.0.0"
-    },
-    "autoload": {
-        "classmap": [
-            "scripts/composer/"
-        ]
-    },
-    "conflict": {
-        "drupal/core": "7.*"
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
-            "rm -f docroot/sites/default/settings.php",
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-        ],
-        "drupal-post-install": [
-            "drush -r docroot cr"
-        ]
     }
 }
