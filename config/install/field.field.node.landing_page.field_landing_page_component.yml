@@ -8,6 +8,7 @@ dependencies:
     - paragraphs.paragraphs_type.basic_text
     - paragraphs.paragraphs_type.call_to_action
     - paragraphs.paragraphs_type.card_event
+    - paragraphs.paragraphs_type.card_event_auto
     - paragraphs.paragraphs_type.card_keydates
     - paragraphs.paragraphs_type.card_navigation
     - paragraphs.paragraphs_type.card_navigation_auto
@@ -45,6 +46,7 @@ settings:
       card_keydates: card_keydates
       call_to_action: call_to_action
       news_listing: news_listing
+      card_event_auto: card_event_auto
     target_bundles_drag_drop:
       banner:
         weight: -33
@@ -97,10 +99,22 @@ settings:
       call_to_action:
         enabled: true
         weight: 21
+      embedded_webform:
+        enabled: true
+        weight: 22
+      featured_news:
+        enabled: true
+        weight: 23
       news_listing:
         enabled: true
         weight: 24
+      card_event_auto:
+        enabled: true
+        weight: 28
       contact_us:
+        weight: 34
+        enabled: false
+      call_to_action_image:
         weight: 34
         enabled: false
       phone:
@@ -108,5 +122,11 @@ settings:
         enabled: false
       social_link:
         weight: 40
+        enabled: false
+      event_details:
+        weight: 45
+        enabled: false
+      introduction_banner:
+        weight: 47
         enabled: false
 field_type: entity_reference_revisions
