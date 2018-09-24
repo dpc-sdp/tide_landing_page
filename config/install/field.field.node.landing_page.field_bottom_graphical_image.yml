@@ -2,24 +2,24 @@ langcode: en
 status: true
 dependencies:
   config:
-    - block_content.type.campaign
-    - field.storage.node.field_landing_page_c_primary
+    - field.storage.node.field_bottom_graphical_image
+    - media.type.image
     - node.type.landing_page
-id: node.landing_page.field_landing_page_c_primary
-field_name: field_landing_page_c_primary
+id: node.landing_page.field_bottom_graphical_image
+field_name: field_bottom_graphical_image
 entity_type: node
 bundle: landing_page
-label: 'Primary Campaign'
-description: ''
+label: 'Bottom Graphical Image'
+description: 'The bottom graphical image will not be displayed when a hero image is added.'
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:block_content'
+  handler: 'default:media'
   handler_settings:
     target_bundles:
-      campaign: campaign
+      image: image
     sort:
       field: _none
     auto_create: false

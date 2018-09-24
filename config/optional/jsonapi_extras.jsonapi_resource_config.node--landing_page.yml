@@ -196,6 +196,22 @@ resourceFields:
     disabled: false
     advancedOptionsIcon: ''
     enhancer_label: ''
+  field_landing_page_hero_image:
+    fieldName: field_landing_page_hero_image
+    publicName: field_landing_page_hero_image
+    enhancer:
+      id: ''
+    disabled: false
+    advancedOptionsIcon: ''
+    enhancer_label: ''
+  field_landing_page_hero_theme:
+    fieldName: field_landing_page_hero_theme
+    publicName: field_landing_page_hero_theme
+    enhancer:
+      id: ''
+    disabled: false
+    advancedOptionsIcon: ''
+    enhancer_label: ''
   field_landing_page_bg_colour:
     fieldName: field_landing_page_bg_colour
     publicName: field_landing_page_bg_colour
@@ -231,6 +247,14 @@ resourceFields:
   field_landing_page_c_secondary:
     fieldName: field_landing_page_c_secondary
     publicName: field_landing_page_c_secondary
+    enhancer:
+      id: ''
+    disabled: false
+    advancedOptionsIcon: ''
+    enhancer_label: ''
+  field_landing_page_header:
+    fieldName: field_landing_page_header
+    publicName: field_landing_page_header
     enhancer:
       id: ''
     disabled: false

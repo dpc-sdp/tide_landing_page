@@ -2,25 +2,16 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.card_navigation_auto.field_paragraph_cta_text
-    - field.field.paragraph.card_navigation_auto.field_paragraph_reference
-    - paragraphs.paragraphs_type.card_navigation_auto
+    - field.field.paragraph.news_listing.field_paragraph_topic
+    - paragraphs.paragraphs_type.news_listing
   module:
     - content_moderation
-id: paragraph.card_navigation_auto.default
+id: paragraph.news_listing.default
 targetEntityType: paragraph
-bundle: card_navigation_auto
+bundle: news_listing
 mode: default
 content:
-  field_paragraph_cta_text:
-    weight: 102
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_paragraph_reference:
+  field_paragraph_topic:
     weight: 101
     settings:
       match_operator: CONTAINS

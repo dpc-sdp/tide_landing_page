@@ -258,3 +258,32 @@ function _tide_landing_page_add_fields_search_api() {
     $index->save();
   }
 }
+
+/**
+ * Update default Style for existing CTA paragraphs [SDPA-790].
+ */
+function tide_landing_page_update_8004() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  _tide_import_single_config('field.storage.paragraph.field_paragraph_cta_style', $config_location);
+  _tide_import_single_config('field.field.paragraph.call_to_action.field_paragraph_cta_style', $config_location);
+
+  $paragraphs = \Drupal::entityTypeManager()->getStorage('paragraph')
+    ->loadByProperties(['type' => 'call_to_action']);
+  if ($paragraphs && count($paragraphs)) {
+    /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+    foreach ($paragraphs as $paragraph) {
+      try {
+        if ($paragraph->hasField('field_paragraph_cta_style')) {
+          if ($paragraph->get('field_paragraph_cta_style')->isEmpty()) {
+            $paragraph->set('field_paragraph_cta_style', 'banner');
+            $paragraph->setNewRevision(FALSE);
+            $paragraph->save();
+          }
+        }
+      } catch (\Exception $e) {
+        watchdog_exception('tide_landing_page', $e);
+      }
+    }
+  }
+}

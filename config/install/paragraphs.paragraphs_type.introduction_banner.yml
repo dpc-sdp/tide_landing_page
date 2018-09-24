@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: introduction_banner
+label: 'Introduction Banner'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

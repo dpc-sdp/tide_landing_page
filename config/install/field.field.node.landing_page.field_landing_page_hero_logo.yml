@@ -1,25 +1,26 @@
+uuid: 4c208d31-b2cf-449f-a011-336196222da3
 langcode: en
 status: true
 dependencies:
   config:
-    - block_content.type.campaign
-    - field.storage.node.field_landing_page_c_primary
+    - field.storage.node.field_landing_page_hero_logo
+    - media.type.image
     - node.type.landing_page
-id: node.landing_page.field_landing_page_c_primary
-field_name: field_landing_page_c_primary
+id: node.landing_page.field_landing_page_hero_logo
+field_name: field_landing_page_hero_logo
 entity_type: node
 bundle: landing_page
-label: 'Primary Campaign'
+label: 'Hero Logo'
 description: ''
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:block_content'
+  handler: 'default:media'
   handler_settings:
     target_bundles:
-      campaign: campaign
+      image: image
     sort:
       field: _none
     auto_create: false

@@ -24,7 +24,11 @@ This module defines all the fields, paragraph types and block types used in Land
 
 # INSTALLATION
 Include the Tide Landing Page module in your composer.json file
+
 ```bash
 composer require dpc-sdp/tide_landing_page
 ```
 
+# Caveats
+
+Tide Core is on the alpha release, use with caution. APIs are likely to change before the stable version, that there will be breaking changes and that we're not supporting it for external production sites at the moment.
