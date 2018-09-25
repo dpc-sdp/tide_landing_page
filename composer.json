@@ -29,9 +29,5 @@
         },
         "process-timeout": 0,
         "sort-packages": true
-    },
-    "extra": {
-        "patches": {
-        }
     }
 }

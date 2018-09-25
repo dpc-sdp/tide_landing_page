@@ -16,6 +16,7 @@ dependencies:
     - paragraphs.paragraphs_type.card_navigation_featured_auto
     - paragraphs.paragraphs_type.card_promotion
     - paragraphs.paragraphs_type.card_promotion_auto
+    - paragraphs.paragraphs_type.media_gallery
     - paragraphs.paragraphs_type.news_listing
   module:
     - entity_reference_revisions
@@ -47,6 +48,7 @@ settings:
       call_to_action: call_to_action
       news_listing: news_listing
       card_event_auto: card_event_auto
+      media_gallery: media_gallery
     target_bundles_drag_drop:
       banner:
         weight: -33
@@ -111,6 +113,9 @@ settings:
       card_event_auto:
         enabled: true
         weight: 28
+      media_gallery:
+        enabled: true
+        weight: 26
       contact_us:
         weight: 34
         enabled: false
