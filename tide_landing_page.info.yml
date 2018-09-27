@@ -5,6 +5,7 @@ package: Tide
 core: 8.x
 dependencies:
   - drupal:datetime
+  - drupal:datetime_range
   - drupal:field
   - drupal:link
   - drupal:menu_ui
@@ -45,6 +46,8 @@ config_devel:
     - core.entity_form_display.paragraph.card_promotion_auto.default
     - core.entity_form_display.paragraph.key_journeys.default
     - core.entity_form_display.paragraph.keydates.default
+    - core.entity_form_display.paragraph.latest_events.default
+    - core.entity_view_display.paragraph.latest_events.default
     - core.entity_form_display.paragraph.media_gallery.default
     - core.entity_form_display.paragraph.embedded_webform.default
     - core.entity_form_display.paragraph.featured_news.default
@@ -133,6 +136,7 @@ config_devel:
     - field.field.paragraph.card_event_auto.field_paragraph_reference
     - field.field.paragraph.card_event.field_paragraph_cta
     - field.field.paragraph.card_event.field_paragraph_date
+    - field.field.paragraph.card_event.field_paragraph_date_range
     - field.field.paragraph.card_event.field_paragraph_location
     - field.field.paragraph.card_event.field_paragraph_media
     - field.field.paragraph.card_event.field_paragraph_topic
@@ -169,6 +173,8 @@ config_devel:
     - field.field.paragraph.keydates.field_paragraph_link
     - field.field.paragraph.keydates.field_paragraph_summary
     - field.field.paragraph.keydates.field_paragraph_title
+    - field.field.paragraph.latest_events.field_paragraph_cta_card_event
+    - field.field.paragraph.latest_events.field_paragraph_title
     - field.field.paragraph.media_gallery.field_paragraph_media_gallery
     - field.field.node.landing_page.field_landing_page_contact
     - field.field.node.landing_page.field_landing_page_show_contact
@@ -209,6 +215,7 @@ config_devel:
     - field.storage.paragraph.field_paragraph_accordion_name
     - field.storage.paragraph.field_paragraph_accordion_style
     - field.storage.paragraph.field_paragraph_body
+    - field.storage.paragraph.field_paragraph_cta_card_event
     - field.storage.paragraph.field_paragraph_cta_style
     - field.storage.paragraph.field_paragraph_cta_text
     - field.storage.paragraph.field_paragraph_date
@@ -248,6 +255,7 @@ config_devel:
     - paragraphs.paragraphs_type.introduction_banner
     - paragraphs.paragraphs_type.key_journeys
     - paragraphs.paragraphs_type.keydates
+    - paragraphs.paragraphs_type.latest_events
     - paragraphs.paragraphs_type.media_gallery
     - paragraphs.paragraphs_type.contact_us
     - paragraphs.paragraphs_type.news_listing
