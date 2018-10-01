@@ -32,6 +32,10 @@ Feature: Fields for Landing Page content type
     And I should see an "textarea#edit-field-landing-page-intro-text-0-value" element
     And I should not see an "textarea#edit-field-landing-page-intro-text-0-value.required" element
 
+    And I should see text matching "Header components"
+    And I should see text matching "No Component added yet."
+    And I should see "Introduction Banner" in the "select[name='field_landing_page_header[add_more][add_more_select]']" element
+
     And I should see text matching "Campaign Primary"
     And I should see an "input#edit-field-landing-page-c-primary-0-target-id" element
     And I should not see an "input#edit-field-landing-page-c-primary-0-target-id.required" element
@@ -56,7 +60,10 @@ Feature: Fields for Landing Page content type
     And I should see "Basic Text" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Accordion" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Call to Action" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
+    And I should see "Card Carousel" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Card Event" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
+    And I should see "Card Event Automated" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
+    And I should see "Latest Events" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Promotion" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Navigation featured" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Navigation featured Automated" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
@@ -65,6 +72,7 @@ Feature: Fields for Landing Page content type
     And I should see "Key dates" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Masonry image gallery" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Anchor hero" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
+    And I should see "Image Gallery" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
 
     And I see field "Tags"
     And I should see an "input#edit-field-tags-0-target-id" element
