@@ -303,7 +303,7 @@ function tide_landing_page_update_8005() {
   if ($pages && count($pages)) {
     /** @var \Drupal\node\Entity\Node $node */
     foreach ($pages as $node) {
-      if ($node->hasField('field_show_news_search') and $node->field_show_news_search->getValue()[0]['value'] == 1) {
+      if ($node->hasField('field_show_news_search') && $node->field_show_news_search->getValue()[0]['value'] === 1) {
 
         $search_form_data = [
           'type' => 'embedded_search_form',

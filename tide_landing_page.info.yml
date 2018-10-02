@@ -45,7 +45,6 @@ config_devel:
     - core.entity_form_display.paragraph.card_promotion.default
     - core.entity_form_display.paragraph.card_promotion_auto.default
     - core.entity_form_display.paragraph.embedded_search_form.default
-    - core.entity_view_display.paragraph.embedded_search_form.default
     - core.entity_form_display.paragraph.key_journeys.default
     - core.entity_form_display.paragraph.keydates.default
     - core.entity_form_display.paragraph.latest_events.default
@@ -76,6 +75,7 @@ config_devel:
     - core.entity_view_display.paragraph.card_promotion.default
     - core.entity_view_display.paragraph.card_promotion_auto.default
     - core.entity_view_display.paragraph.card_promotion.default
+    - core.entity_view_display.paragraph.embedded_search_form.default
     - core.entity_view_display.paragraph.embedded_webform.default
     - core.entity_view_display.paragraph.embedded_webform.preview
     - core.entity_view_display.paragraph.featured_news.default
