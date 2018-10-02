@@ -14,7 +14,7 @@ settings:
       value: none
       label: None
     -
-      value: events
+      value: event
       label: Events
     -
       value: news
