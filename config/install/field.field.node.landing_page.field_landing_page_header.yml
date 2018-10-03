@@ -4,6 +4,7 @@ dependencies:
   config:
     - field.storage.node.field_landing_page_header
     - node.type.landing_page
+    - paragraphs.paragraphs_type.embedded_search_form
     - paragraphs.paragraphs_type.introduction_banner
   module:
     - entity_reference_revisions
@@ -23,6 +24,7 @@ settings:
     negate: 0
     target_bundles:
       introduction_banner: introduction_banner
+      embedded_search_form: embedded_search_form
     target_bundles_drag_drop:
       introduction_banner:
         enabled: true
@@ -39,6 +41,9 @@ settings:
       basic_text:
         weight: 29
         enabled: false
+      embedded_search_form:
+        enabled: true
+        weight: 30
       call_to_action:
         weight: 30
         enabled: false
