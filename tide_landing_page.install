@@ -6,8 +6,9 @@
  */
 
 use Drupal\field\Entity\FieldConfig;
-use Drupal\workflows\Entity\Workflow;
+use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\search_api\Item\Field;
+use Drupal\workflows\Entity\Workflow;
 
 /**
  * Implements hook_install().
