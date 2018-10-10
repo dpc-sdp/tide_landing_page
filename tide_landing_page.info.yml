@@ -280,6 +280,7 @@ config_devel:
     - jsonapi_extras.jsonapi_resource_config.paragraph--card_navigation_featured
     - jsonapi_extras.jsonapi_resource_config.paragraph--card_promotion
     - jsonapi_extras.jsonapi_resource_config.paragraph--featured_news
+    - jsonapi_extras.jsonapi_resource_config.paragraph--introduction_banner
     - jsonapi_extras.jsonapi_resource_config.paragraph--key_journeys
     - jsonapi_extras.jsonapi_resource_config.paragraph--keydates
     - jsonapi_extras.jsonapi_resource_config.paragraph--media_gallery
