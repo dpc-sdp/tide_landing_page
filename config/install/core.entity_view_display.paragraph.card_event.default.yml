@@ -14,8 +14,6 @@ dependencies:
     - address
     - datetime_range
     - link
-_core:
-  default_config_hash: 0ulRWD_sj1X3OPk881pLuMCM8BuX2IEHvBlesABWEmQ
 id: paragraph.card_event.default
 targetEntityType: paragraph
 bundle: card_event
