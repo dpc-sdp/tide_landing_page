@@ -207,7 +207,6 @@ config_devel:
     - field.storage.node.field_landing_page_component
     - field.storage.node.field_landing_page_contact
     - field.storage.node.field_landing_page_header
-    - field.storage.node.field_landing_page_intro_text
     - field.storage.node.field_landing_page_key_journeys
     - field.storage.node.field_landing_page_show_contact
     - field.storage.node.field_landing_page_summary
