@@ -5,8 +5,8 @@
     "license": "GPL-2.0+",
     "require": {
         "dpc-sdp/tide_core": "dev-feature/MovingStorageFieldToTideCore",
-        "dpc-sdp/tide_event": "@dev",
-        "dpc-sdp/tide_media": "@dev",
+        "dpc-sdp/tide_event": "dev-feature/MovingStorageFieldToTideCore",
+        "dpc-sdp/tide_media": "dev-feature/MovingStorageFieldToTideCore",
         "drupal/paragraphs": "1.2",
         "drupal/maxlength": "^1.0@beta",
         "drupal/smart_trim": "^1.1"
