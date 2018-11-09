@@ -14,7 +14,7 @@
     "suggest": {
         "dpc-sdp/tide_api": "dev-feature/MovingStorageFieldToTideCore",
         "dpc-sdp/tide_news": "dev-feature/MovingStorageFieldToTideCore",
-        "dpc-sdp/tide_webform": "dev-feature/MovingStorageFieldToTideCore",
+        "dpc-sdp/tide_webform": "dev-feature/MovingStorageFieldToTideCore"
     },
     "repositories": {
         "drupal": {
