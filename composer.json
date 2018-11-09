@@ -12,9 +12,9 @@
         "drupal/smart_trim": "^1.1"
     },
     "suggest": {
-        "dpc-sdp/tide_api": "@dev",
-        "dpc-sdp/tide_news": "@dev",
-        "dpc-sdp/tide_webform": "@dev"
+        "dpc-sdp/tide_api": "dev-feature/MovingStorageFieldToTideCore",
+        "dpc-sdp/tide_news": "dev-feature/MovingStorageFieldToTideCore",
+        "dpc-sdp/tide_webform": "dev-feature/MovingStorageFieldToTideCore",
     },
     "repositories": {
         "drupal": {
