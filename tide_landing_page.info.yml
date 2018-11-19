@@ -266,6 +266,7 @@ config_devel:
     - paragraphs.paragraphs_type.news_listing
     - paragraphs.paragraphs_type.phone
     - paragraphs.paragraphs_type.social_link
+    - paragraphs.paragraphs_type.timelines
     - field.field.node.landing_page.scheduled_archiving
     - field.field.node.landing_page.scheduled_publishing
   optional:
