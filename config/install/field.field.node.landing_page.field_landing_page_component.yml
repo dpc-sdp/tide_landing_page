@@ -17,9 +17,12 @@ dependencies:
     - paragraphs.paragraphs_type.card_navigation_featured_auto
     - paragraphs.paragraphs_type.card_promotion
     - paragraphs.paragraphs_type.card_promotion_auto
+    - paragraphs.paragraphs_type.embedded_webform
+    - paragraphs.paragraphs_type.featured_news
     - paragraphs.paragraphs_type.latest_events
     - paragraphs.paragraphs_type.media_gallery
     - paragraphs.paragraphs_type.news_listing
+    - paragraphs.paragraphs_type.timelines
   module:
     - entity_reference_revisions
 id: node.landing_page.field_landing_page_component
@@ -48,11 +51,14 @@ settings:
       card_navigation_auto: card_navigation_auto
       card_keydates: card_keydates
       call_to_action: call_to_action
+      embedded_webform: embedded_webform
+      featured_news: featured_news
       news_listing: news_listing
-      card_event_auto: card_event_auto
       media_gallery: media_gallery
+      card_event_auto: card_event_auto
       latest_events: latest_events
       card_carousel: card_carousel
+      timelines: timelines
     target_bundles_drag_drop:
       banner:
         weight: -33
@@ -114,18 +120,18 @@ settings:
       news_listing:
         enabled: true
         weight: 24
-      card_event_auto:
-        enabled: true
-        weight: 28
       media_gallery:
         enabled: true
         weight: 26
+      card_event_auto:
+        enabled: true
+        weight: 28
       latest_events:
         enabled: true
         weight: 29
       card_carousel:
         enabled: true
-        weight: 30
+        weight: 29
       contact_us:
         weight: 34
         enabled: false
@@ -144,4 +150,16 @@ settings:
       introduction_banner:
         weight: 48
         enabled: false
+      embedded_search_form:
+        weight: 52
+        enabled: false
+      grants_overview:
+        weight: 56
+        enabled: false
+      timeline:
+        weight: 67
+        enabled: false
+      timelines:
+        enabled: true
+        weight: 68
 field_type: entity_reference_revisions
