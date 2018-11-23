@@ -286,3 +286,5 @@ config_devel:
     - jsonapi_extras.jsonapi_resource_config.paragraph--keydates
     - jsonapi_extras.jsonapi_resource_config.paragraph--media_gallery
     - jsonapi_extras.jsonapi_resource_config.paragraph--social_link
+    - jsonapi_extras.jsonapi_resource_config.paragraph--timeline
+    - jsonapi_extras.jsonapi_resource_config.paragraph--timelines
