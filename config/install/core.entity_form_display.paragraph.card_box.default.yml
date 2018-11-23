@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.card_box.field_card_box_content
+    - paragraphs.paragraphs_type.card_box
+  module:
+    - content_moderation
+    - paragraphs
+id: paragraph.card_box.default
+targetEntityType: paragraph
+bundle: card_box
+mode: default
+content:
+  field_card_box_content:
+    type: entity_reference_paragraphs
+    weight: 101
+    settings:
+      title: 'Card Box'
+      title_plural: 'Card Boxes'
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: card_box_content
+    third_party_settings: {  }
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

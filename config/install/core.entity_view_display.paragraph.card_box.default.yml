@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.card_box.field_card_box_content
+    - paragraphs.paragraphs_type.card_box
+  module:
+    - entity_reference_revisions
+id: paragraph.card_box.default
+targetEntityType: paragraph
+bundle: card_box
+mode: default
+content:
+  field_card_box_content:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden: {  }

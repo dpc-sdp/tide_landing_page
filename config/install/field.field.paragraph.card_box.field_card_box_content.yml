@@ -1,0 +1,123 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_card_box_content
+    - paragraphs.paragraphs_type.card_box
+    - paragraphs.paragraphs_type.card_box_content
+  module:
+    - entity_reference_revisions
+id: paragraph.card_box.field_card_box_content
+field_name: field_card_box_content
+entity_type: paragraph
+bundle: card_box
+label: 'Card Box Content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      card_box_content: card_box_content
+    target_bundles_drag_drop:
+      card_box_content:
+        enabled: true
+        weight: 34
+      accordion:
+        weight: 35
+        enabled: false
+      accordion_content:
+        weight: 36
+        enabled: false
+      banner:
+        weight: 37
+        enabled: false
+      basic_text:
+        weight: 38
+        enabled: false
+      call_to_action:
+        weight: 39
+        enabled: false
+      call_to_action_image:
+        weight: 40
+        enabled: false
+      card_box:
+        weight: 41
+        enabled: false
+      card_carousel:
+        weight: 42
+        enabled: false
+      card_event:
+        weight: 43
+        enabled: false
+      card_event_auto:
+        weight: 44
+        enabled: false
+      card_keydates:
+        weight: 45
+        enabled: false
+      card_navigation:
+        weight: 46
+        enabled: false
+      card_navigation_auto:
+        weight: 47
+        enabled: false
+      card_navigation_featured:
+        weight: 48
+        enabled: false
+      card_navigation_featured_auto:
+        weight: 49
+        enabled: false
+      card_promotion:
+        weight: 50
+        enabled: false
+      card_promotion_auto:
+        weight: 51
+        enabled: false
+      contact_us:
+        weight: 52
+        enabled: false
+      embedded_webform:
+        weight: 53
+        enabled: false
+      event_details:
+        weight: 54
+        enabled: false
+      featured_news:
+        weight: 55
+        enabled: false
+      introduction_banner:
+        weight: 56
+        enabled: false
+      keydates:
+        weight: 57
+        enabled: false
+      key_journeys:
+        weight: 58
+        enabled: false
+      latest_events:
+        weight: 59
+        enabled: false
+      links:
+        weight: 60
+        enabled: false
+      media_gallery:
+        weight: 61
+        enabled: false
+      news_listing:
+        weight: 62
+        enabled: false
+      phone:
+        weight: 63
+        enabled: false
+      related_links:
+        weight: 64
+        enabled: false
+      social_link:
+        weight: 65
+        enabled: false
+field_type: entity_reference_revisions

@@ -223,6 +223,18 @@ config_devel:
     - paragraphs.paragraphs_type.social_link
     - field.field.node.landing_page.scheduled_archiving
     - field.field.node.landing_page.scheduled_publishing
+    - paragraphs.paragraphs_type.card_box
+    - paragraphs.paragraphs_type.card_box_content
+    - field.storage.paragraph.field_card_box_content
+    - field.field.paragraph.card_box.field_card_box_content
+    - field.field.paragraph.card_box_content.field_paragraph_cta
+    - field.field.paragraph.card_box_content.field_paragraph_name
+    - field.field.paragraph.card_box_content.field_paragraph_summary
+    - field.field.paragraph.card_box_content.field_paragraph_title
+    - core.entity_view_display.paragraph.card_box.default
+    - core.entity_view_display.paragraph.card_box_content.default
+    - core.entity_form_display.paragraph.card_box.default
+    - core.entity_form_display.paragraph.card_box_content.default
   optional:
     - jsonapi_extras.jsonapi_resource_config.node--landing_page
     - jsonapi_extras.jsonapi_resource_config.block_content--campaign
@@ -237,3 +249,4 @@ config_devel:
     - jsonapi_extras.jsonapi_resource_config.paragraph--key_journeys
     - jsonapi_extras.jsonapi_resource_config.paragraph--keydates
     - jsonapi_extras.jsonapi_resource_config.paragraph--social_link
+    - jsonapi_extras.jsonapi_resource_config.paragraph--card_box_content
