@@ -22,9 +22,9 @@ dependencies:
     - paragraphs.paragraphs_type.latest_events
     - paragraphs.paragraphs_type.media_gallery
     - paragraphs.paragraphs_type.news_listing
-    - paragraphs.paragraphs_type.timelines
   module:
     - entity_reference_revisions
+    - tide_core
 id: node.landing_page.field_landing_page_component
 field_name: field_landing_page_component
 entity_type: node
