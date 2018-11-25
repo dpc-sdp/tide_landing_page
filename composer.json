@@ -4,7 +4,7 @@
     "type": "drupal-module",
     "license": "GPL-2.0+",
     "require": {
-        "dpc-sdp/tide_core": "@dev",
+        "dpc-sdp/tide_core": "dev-feature/SDPA-1328-timeline-api-overwrites",
         "dpc-sdp/tide_event": "@dev",
         "dpc-sdp/tide_media": "@dev",
         "drupal/paragraphs": "1.2",
@@ -14,7 +14,7 @@
     "suggest": {
         "dpc-sdp/tide_api": "@dev",
         "dpc-sdp/tide_news": "@dev",
-        "dpc-sdp/tide_webform": "@dev"
+        "dpc-sdp/tide_webform": "dev-feature/SDPA-1328_timeline-api-overwrites"
     },
     "repositories": {
         "drupal": {
@@ -30,12 +30,5 @@
         },
         "process-timeout": 0,
         "sort-packages": true
-    },
-    "extra": {
-        "patches": {
-            "dpc-sdp/tide_core": {
-                "SDPA-1328: Added the URL enhancer configuration for Timelines.": "https://patch-diff.githubusercontent.com/raw/dpc-sdp/tide_core/pull/38.patch"
-            }
-        }
     }
 }
