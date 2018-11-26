@@ -7,7 +7,6 @@ dependencies:
     - paragraphs.paragraphs_type.accordion
     - paragraphs.paragraphs_type.basic_text
     - paragraphs.paragraphs_type.call_to_action
-    - paragraphs.paragraphs_type.card_box
     - paragraphs.paragraphs_type.card_event
     - paragraphs.paragraphs_type.card_keydates
     - paragraphs.paragraphs_type.card_navigation
@@ -46,7 +45,6 @@ settings:
       card_keydates: card_keydates
       call_to_action: call_to_action
       news_listing: news_listing
-      card_box: card_box
     target_bundles_drag_drop:
       banner:
         weight: -33
