@@ -7,13 +7,13 @@
         "dpc-sdp/tide_core": "dev-feature/SDPA-1328-timeline-api-overwrites",
         "dpc-sdp/tide_event": "@dev",
         "dpc-sdp/tide_media": "dev-feature/SDPA-1328_timeline-api-overwrites",
+        "dpc-sdp/tide_news": "@dev",
         "drupal/paragraphs": "1.2",
         "drupal/maxlength": "^1.0@beta",
         "drupal/smart_trim": "^1.1"
     },
     "suggest": {
         "dpc-sdp/tide_api": "@dev",
-        "dpc-sdp/tide_news": "@dev",
         "dpc-sdp/tide_webform": "dev-feature/SDPA-1328_timeline-api-overwrites"
     },
     "repositories": {
