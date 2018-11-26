@@ -235,6 +235,9 @@ config_devel:
     - core.entity_view_display.paragraph.card_box_content.default
     - core.entity_form_display.paragraph.card_box.default
     - core.entity_form_display.paragraph.card_box_content.default
+    - field.storage.node.field_landing_page_card_comp
+    - field.field.node.landing_page.field_landing_page_card_comp
+
   optional:
     - jsonapi_extras.jsonapi_resource_config.node--landing_page
     - jsonapi_extras.jsonapi_resource_config.block_content--campaign

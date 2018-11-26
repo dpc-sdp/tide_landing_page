@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.landing_page.field_landing_page_bg_colour
     - field.field.node.landing_page.field_landing_page_c_primary
     - field.field.node.landing_page.field_landing_page_c_secondary
+    - field.field.node.landing_page.field_landing_page_card_comp
     - field.field.node.landing_page.field_landing_page_component
     - field.field.node.landing_page.field_landing_page_contact
     - field.field.node.landing_page.field_landing_page_hero_image
@@ -222,8 +223,22 @@ third_party_settings:
         required_fields: true
       label: 'Site-section Navigation'
       region: content
+    group_card_content:
+      children:
+        - field_landing_page_card_comp
+      parent_name: group_content
+      weight: 3
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Card Content'
+      region: content
 _core:
-  default_config_hash: pN7fy_ZaJVA-sEQWPZUCiV_-5V5W_ZSuZ7Rbql6y5kg
+  default_config_hash: XPq5BXghaf-kR5FBaxv0s3wYDB0R3Yu8swXO0n6Kip4
 id: node.landing_page.default
 targetEntityType: node
 bundle: landing_page
@@ -281,13 +296,27 @@ content:
     type: entity_reference_revisions_autocomplete
     region: content
   field_landing_page_c_secondary:
-    weight: 26
+    weight: 40
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_revisions_autocomplete
+    region: content
+  field_landing_page_card_comp:
+    type: paragraphs
+    weight: 41
+    settings:
+      title: Component
+      title_plural: Components
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: none
+      add_mode: select
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
     region: content
   field_landing_page_component:
     type: paragraphs
@@ -407,7 +436,7 @@ content:
     region: content
   field_related_links:
     type: paragraphs
-    weight: 39
+    weight: 11
     settings:
       title: Link
       title_plural: Links
@@ -514,7 +543,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 8
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -522,12 +551,12 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 9
+    weight: 8
     region: content
     third_party_settings: {  }
   scheduled_archiving:
     type: inline_entity_form_complex
-    weight: 21
+    weight: 19
     settings:
       override_labels: true
       label_singular: 'Scheduled Archiving'
@@ -543,7 +572,7 @@ content:
     region: content
   scheduled_publishing:
     type: inline_entity_form_complex
-    weight: 20
+    weight: 18
     settings:
       override_labels: true
       label_singular: 'Scheduled Publishing'
@@ -592,7 +621,7 @@ content:
     region: content
     third_party_settings: {  }
   url_redirects:
-    weight: 10
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
