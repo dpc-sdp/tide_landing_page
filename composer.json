@@ -6,7 +6,7 @@
     "require": {
         "dpc-sdp/tide_core": "dev-feature/SDPA-1328-timeline-api-overwrites",
         "dpc-sdp/tide_event": "@dev",
-        "dpc-sdp/tide_media": "@dev",
+        "dpc-sdp/tide_media": "dev-feature/SDPA-1328_timeline-api-overwrites",
         "drupal/paragraphs": "1.2",
         "drupal/maxlength": "^1.0@beta",
         "drupal/smart_trim": "^1.1"
