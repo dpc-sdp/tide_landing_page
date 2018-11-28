@@ -2,15 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
-    - paragraphs.paragraphs_type.call_to_action
-id: paragraph--call_to_action
+    - paragraphs.paragraphs_type.introduction_banner
+id: paragraph--introduction_banner
 disabled: false
-path: paragraph/call_to_action
-resourceType: paragraph--call_to_action
+path: paragraph/introduction_banner
+resourceType: paragraph--introduction_banner
 resourceFields:
   id:
     fieldName: id
-    publicName: entity_id
+    publicName: id
     enhancer:
       id: ''
     disabled: false
@@ -28,7 +28,7 @@ resourceFields:
     disabled: false
   type:
     fieldName: type
-    publicName: entity_type
+    publicName: type
     enhancer:
       id: ''
     disabled: false
@@ -54,7 +54,9 @@ resourceFields:
     fieldName: created
     publicName: created
     enhancer:
-      id: ''
+      id: date_time
+      settings:
+        dateTimeFormat: 'Y-m-d\TH:i:sP'
     disabled: false
   revision_uid:
     fieldName: revision_uid
@@ -110,27 +112,15 @@ resourceFields:
     enhancer:
       id: ''
     disabled: false
-  field_paragraph_body:
-    fieldName: field_paragraph_body
-    publicName: field_paragraph_body
-    enhancer:
-      id: ''
-    disabled: false
-  field_paragraph_cta:
-    fieldName: field_paragraph_cta
-    publicName: field_paragraph_cta
+  field_paragraph_links:
+    fieldName: field_paragraph_links
+    publicName: field_paragraph_links
     enhancer:
       id: link_enhancer
     disabled: false
-  field_paragraph_cta_style:
-    fieldName: field_paragraph_cta_style
-    publicName: field_paragraph_cta_style
-    enhancer:
-      id: ''
-    disabled: false
-  field_paragraph_media:
-    fieldName: field_paragraph_media
-    publicName: field_paragraph_media
+  field_paragraph_summary:
+    fieldName: field_paragraph_summary
+    publicName: field_paragraph_summary
     enhancer:
       id: ''
     disabled: false

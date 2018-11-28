@@ -6,8 +6,9 @@
  */
 
 use Drupal\field\Entity\FieldConfig;
-use Drupal\workflows\Entity\Workflow;
+use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\search_api\Item\Field;
+use Drupal\workflows\Entity\Workflow;
 
 /**
  * Implements hook_install().
@@ -256,5 +257,67 @@ function _tide_landing_page_add_fields_search_api() {
     $index->addField($field_paragraph_topic_uuid);
 
     $index->save();
+  }
+}
+
+/**
+ * Update default Style for existing CTA paragraphs [SDPA-790].
+ */
+function tide_landing_page_update_8004() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  _tide_import_single_config('field.storage.paragraph.field_paragraph_cta_style', $config_location);
+  _tide_import_single_config('field.field.paragraph.call_to_action.field_paragraph_cta_style', $config_location);
+
+  $paragraphs = \Drupal::entityTypeManager()->getStorage('paragraph')
+    ->loadByProperties(['type' => 'call_to_action']);
+  if ($paragraphs && count($paragraphs)) {
+    /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+    foreach ($paragraphs as $paragraph) {
+      try {
+        if ($paragraph->hasField('field_paragraph_cta_style')) {
+          if ($paragraph->get('field_paragraph_cta_style')->isEmpty()) {
+            $paragraph->set('field_paragraph_cta_style', 'banner');
+            $paragraph->setNewRevision(FALSE);
+            $paragraph->save();
+          }
+        }
+      } catch (\Exception $e) {
+        watchdog_exception('tide_landing_page', $e);
+      }
+    }
+  }
+}
+
+/**
+ * Replace show_news_search field by Header Component Embedded Search Form [SDPA-943].
+ */
+function tide_landing_page_update_8005() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  _tide_import_single_config('field.storage.paragraph.field_paragraph_search_block', $config_location);
+  _tide_import_single_config('field.field.paragraph.embedded_search_form.field_paragraph_search_block', $config_location);
+  _tide_import_single_config('field.field.node.landing_page.field_landing_page_header', $config_location);
+
+  $pages = \Drupal::entityTypeManager()->getStorage('node')
+    ->loadByProperties(['type' => 'landing_page']);
+  if ($pages && count($pages)) {
+    /** @var \Drupal\node\Entity\Node $node */
+    foreach ($pages as $node) {
+      if ($node->hasField('field_show_news_search') && $node->field_show_news_search->getValue()[0]['value'] === 1) {
+
+        $search_form_data = [
+          'type' => 'embedded_search_form',
+          'field_paragraph_search_block' => ['value' => 'news'],
+        ];
+
+        $search_form = Paragraph::create($search_form_data);
+        $search_form->save();
+
+        $node->field_landing_page_header->appendItem($search_form);
+        $node->setNewRevision(FALSE);
+        $node->save();
+      }
+    }
   }
 }

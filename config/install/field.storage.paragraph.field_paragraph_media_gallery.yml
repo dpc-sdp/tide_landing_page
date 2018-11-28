@@ -2,14 +2,15 @@ langcode: en
 status: true
 dependencies:
   module:
-    - address
+    - block_content
     - paragraphs
-id: paragraph.field_paragraph_location
-field_name: field_paragraph_location
+id: paragraph.field_paragraph_media_gallery
+field_name: field_paragraph_media_gallery
 entity_type: paragraph
-type: address
-settings: {  }
-module: address
+type: entity_reference
+settings:
+  target_type: block_content
+module: core
 locked: false
 cardinality: 1
 translatable: true

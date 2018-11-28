@@ -2,15 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
-    - paragraphs.paragraphs_type.call_to_action
-id: paragraph--call_to_action
+    - block_content.type.media_gallery
+id: block_content--media_gallery
 disabled: false
-path: paragraph/call_to_action
-resourceType: paragraph--call_to_action
+path: block_content/media_gallery
+resourceType: block_content--media_gallery
 resourceFields:
   id:
     fieldName: id
-    publicName: entity_id
+    publicName: id
     enhancer:
       id: ''
     disabled: false
@@ -26,21 +26,33 @@ resourceFields:
     enhancer:
       id: ''
     disabled: false
-  type:
-    fieldName: type
-    publicName: entity_type
-    enhancer:
-      id: ''
-    disabled: false
   langcode:
     fieldName: langcode
     publicName: langcode
     enhancer:
       id: ''
     disabled: false
-  uid:
-    fieldName: uid
-    publicName: uid
+  type:
+    fieldName: type
+    publicName: type
+    enhancer:
+      id: ''
+    disabled: false
+  revision_created:
+    fieldName: revision_created
+    publicName: revision_created
+    enhancer:
+      id: ''
+    disabled: false
+  revision_user:
+    fieldName: revision_user
+    publicName: revision_user
+    enhancer:
+      id: ''
+    disabled: false
+  revision_log:
+    fieldName: revision_log
+    publicName: revision_log
     enhancer:
       id: ''
     disabled: false
@@ -50,39 +62,15 @@ resourceFields:
     enhancer:
       id: ''
     disabled: false
-  created:
-    fieldName: created
-    publicName: created
+  info:
+    fieldName: info
+    publicName: info
     enhancer:
       id: ''
     disabled: false
-  revision_uid:
-    fieldName: revision_uid
-    publicName: revision_uid
-    enhancer:
-      id: ''
-    disabled: false
-  parent_id:
-    fieldName: parent_id
-    publicName: parent_id
-    enhancer:
-      id: ''
-    disabled: false
-  parent_type:
-    fieldName: parent_type
-    publicName: parent_type
-    enhancer:
-      id: ''
-    disabled: false
-  parent_field_name:
-    fieldName: parent_field_name
-    publicName: parent_field_name
-    enhancer:
-      id: ''
-    disabled: false
-  behavior_settings:
-    fieldName: behavior_settings
-    publicName: behavior_settings
+  changed:
+    fieldName: changed
+    publicName: changed
     enhancer:
       id: ''
     disabled: false
@@ -110,33 +98,33 @@ resourceFields:
     enhancer:
       id: ''
     disabled: false
-  field_paragraph_body:
-    fieldName: field_paragraph_body
-    publicName: field_paragraph_body
+  metatag:
+    fieldName: metatag
+    publicName: metatag
     enhancer:
       id: ''
     disabled: false
-  field_paragraph_cta:
-    fieldName: field_paragraph_cta
-    publicName: field_paragraph_cta
-    enhancer:
-      id: link_enhancer
-    disabled: false
-  field_paragraph_cta_style:
-    fieldName: field_paragraph_cta_style
-    publicName: field_paragraph_cta_style
+  field_gallery_featured_image:
+    fieldName: field_gallery_featured_image
+    publicName: field_gallery_featured_image
     enhancer:
       id: ''
     disabled: false
-  field_paragraph_media:
-    fieldName: field_paragraph_media
-    publicName: field_paragraph_media
+  field_gallery_media:
+    fieldName: field_gallery_media
+    publicName: field_gallery_media
     enhancer:
       id: ''
     disabled: false
-  field_paragraph_title:
-    fieldName: field_paragraph_title
-    publicName: field_paragraph_title
+  field_tags:
+    fieldName: field_tags
+    publicName: field_tags
+    enhancer:
+      id: ''
+    disabled: false
+  field_topic:
+    fieldName: field_topic
+    publicName: field_topic
     enhancer:
       id: ''
     disabled: false
