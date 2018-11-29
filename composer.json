@@ -4,9 +4,9 @@
     "type": "drupal-module",
     "license": "GPL-2.0+",
     "require": {
-        "dpc-sdp/tide_core": "@dev",
+        "dpc-sdp/tide_core": "dev-feature/SDPA-1368-Gran-Remove-paragraph-field-and-additional-changes",
         "dpc-sdp/tide_media": "@dev",
-        "drupal/paragraphs": "1.2",
+        "drupal/paragraphs": "^1.2",
         "drupal/maxlength": "^1.0@beta",
         "drupal/smart_trim": "^1.1"
     },
