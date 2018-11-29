@@ -18,6 +18,12 @@ Feature: Fields for Landing Page content type
     And the "#edit-field-featured-image" element should contain "Feature Image"
     And I should see an "input#edit-field-featured-image-entity-browser-entity-browser-open-modal" element
 
+    And the "#edit-field-landing-page-hero-logo" element should contain "Hero Logo"
+    And I should see an "input#edit-field-landing-page-hero-logo-entity-browser-entity-browser-open-modal" element
+
+    And the "#edit-field-bottom-graphical-image" element should contain "Bottom Graphical Image"
+    And I should see an "input#edit-field-bottom-graphical-image-entity-browser-target" element
+
     And I see field "Show Social Sharing?"
     And I should see an "input#edit-field-show-social-sharing-value" element
     And I should not see an "input#edit-field-show-social-sharing-value.required" element
@@ -25,6 +31,11 @@ Feature: Fields for Landing Page content type
     And I see field "Introduction Text"
     And I should see an "textarea#edit-field-landing-page-intro-text-0-value" element
     And I should not see an "textarea#edit-field-landing-page-intro-text-0-value.required" element
+
+    And I should see text matching "Header components"
+    And I should see text matching "No Component added yet."
+    And I should see "Introduction Banner" in the "select[name='field_landing_page_header[add_more][add_more_select]']" element
+    And I should see "Embedded Search Form" in the "select[name='field_landing_page_header[add_more][add_more_select]']" element
 
     And I should see text matching "Campaign Primary"
     And I should see an "input#edit-field-landing-page-c-primary-0-target-id" element
@@ -50,13 +61,17 @@ Feature: Fields for Landing Page content type
     And I should see "Basic Text" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Accordion" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Call to Action" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
+    And I should see "Card Carousel" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Card Event" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
+    And I should see "Card Event Automated" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
+    And I should see "Latest Events" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Promotion" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Navigation featured" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Navigation featured Automated" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Navigation" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Navigation Automated" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Key dates" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
+    And I should see "Image Gallery" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
 
     And I see field "Tags"
     And I should see an "input#edit-field-tags-0-target-id" element
@@ -162,6 +177,7 @@ Feature: Fields for Landing Page content type
     And I should see "Navigation" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Navigation Automated" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Key dates" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
+    And I should see "Timelines" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
 
     And I should see "Embedded Webform" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Featured news" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element

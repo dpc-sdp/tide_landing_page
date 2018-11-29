@@ -5,6 +5,7 @@ package: Tide
 core: 8.x
 dependencies:
   - drupal:datetime
+  - drupal:datetime_range
   - drupal:field
   - drupal:link
   - drupal:menu_ui
@@ -14,6 +15,7 @@ dependencies:
   - drupal:telephone
   - drupal:user
   - dpc-sdp:tide_core
+  - dpc-sdp:tide_event
   - dpc-sdp:tide_media
   - address:address
   - entity_reference_revisions:entity_reference_revisions
@@ -24,7 +26,9 @@ dependencies:
 config_devel:
   install:
     - block_content.type.campaign
+    - block_content.type.media_gallery
     - core.entity_form_display.block_content.campaign.default
+    - core.entity_form_display.block_content.media_gallery.default
     - core.entity_form_display.node.landing_page.default
     - core.entity_form_display.paragraph.accordion.default
     - core.entity_form_display.paragraph.accordion_content.default
@@ -32,6 +36,7 @@ config_devel:
     - core.entity_form_display.paragraph.basic_text.default
     - core.entity_form_display.paragraph.call_to_action.default
     - core.entity_form_display.paragraph.card_event.default
+    - core.entity_form_display.paragraph.card_event_auto.default
     - core.entity_form_display.paragraph.card_keydates.default
     - core.entity_form_display.paragraph.card_navigation.default
     - core.entity_form_display.paragraph.card_navigation_auto.default
@@ -39,10 +44,16 @@ config_devel:
     - core.entity_form_display.paragraph.card_navigation_featured_auto.default
     - core.entity_form_display.paragraph.card_promotion.default
     - core.entity_form_display.paragraph.card_promotion_auto.default
+    - core.entity_form_display.paragraph.embedded_search_form.default
     - core.entity_form_display.paragraph.key_journeys.default
     - core.entity_form_display.paragraph.keydates.default
+    - core.entity_form_display.paragraph.latest_events.default
+    - core.entity_view_display.paragraph.latest_events.default
+    - core.entity_form_display.paragraph.media_gallery.default
     - core.entity_form_display.paragraph.embedded_webform.default
     - core.entity_form_display.paragraph.featured_news.default
+    - core.entity_form_display.paragraph.introduction_banner.default
+    - core.entity_view_display.block_content.media_gallery.default
     - core.entity_view_display.node.landing_page.card
     - core.entity_view_display.node.landing_page.default
     - core.entity_view_display.node.landing_page.featured_card
@@ -55,6 +66,7 @@ config_devel:
     - core.entity_view_display.paragraph.call_to_action.default
     - core.entity_view_display.paragraph.call_to_action.preview
     - core.entity_view_display.paragraph.card_event.default
+    - core.entity_view_display.paragraph.card_event_auto.default
     - core.entity_view_display.paragraph.card_keydates.default
     - core.entity_view_display.paragraph.card_navigation.default
     - core.entity_view_display.paragraph.card_navigation_auto.default
@@ -63,25 +75,39 @@ config_devel:
     - core.entity_view_display.paragraph.card_promotion.default
     - core.entity_view_display.paragraph.card_promotion_auto.default
     - core.entity_view_display.paragraph.card_promotion.default
+    - core.entity_view_display.paragraph.embedded_search_form.default
     - core.entity_view_display.paragraph.embedded_webform.default
     - core.entity_view_display.paragraph.embedded_webform.preview
     - core.entity_view_display.paragraph.featured_news.default
+    - core.entity_view_display.paragraph.introduction_banner.default
     - core.entity_view_display.paragraph.keydates.default
     - core.entity_view_display.paragraph.key_journeys.default
+    - core.entity_view_display.paragraph.media_gallery.default
     - core.entity_form_display.paragraph.contact_us.default
+    - core.entity_form_display.paragraph.news_listing.default
     - core.entity_form_display.paragraph.phone.default
     - core.entity_form_display.paragraph.social_link.default
     - core.entity_view_display.paragraph.contact_us.default
+    - core.entity_view_display.paragraph.news_listing.default.yml
     - core.entity_view_display.paragraph.phone.default
     - core.entity_view_display.paragraph.social_link.default
     - field.field.block_content.campaign.body
     - field.field.block_content.campaign.field_block_cta
     - field.field.block_content.campaign.field_block_image
     - field.field.block_content.campaign.field_block_title
+    - field.field.block_content.media_gallery.field_gallery_featured_image
+    - field.field.block_content.media_gallery.field_gallery_media
+    - field.field.block_content.media_gallery.field_tags
+    - field.field.block_content.media_gallery.field_topic
     - field.field.node.landing_page.field_landing_page_c_secondary
     - field.field.node.landing_page.field_featured_image
+    - field.field.node.landing_page.field_graphical_image
+    - field.field.node.landing_page.field_bottom_graphical_image
+    - field.field.node.landing_page.field_landing_page_hero_image
+    - field.field.node.landing_page.field_landing_page_hero_theme
     - field.field.node.landing_page.field_landing_page_c_primary
     - field.field.node.landing_page.field_landing_page_component
+    - field.field.node.landing_page.field_landing_page_header
     - field.field.node.landing_page.field_landing_page_intro_text
     - field.field.node.landing_page.field_landing_page_key_journeys
     - field.field.node.landing_page.field_metatags
@@ -105,10 +131,14 @@ config_devel:
     - field.field.paragraph.basic_text.field_paragraph_body
     - field.field.paragraph.call_to_action.field_paragraph_body
     - field.field.paragraph.call_to_action.field_paragraph_cta
+    - field.field.paragraph.call_to_action.field_paragraph_cta_style
     - field.field.paragraph.call_to_action.field_paragraph_media
     - field.field.paragraph.call_to_action.field_paragraph_title
+    - field.field.paragraph.card_event_auto.field_paragraph_cta_text
+    - field.field.paragraph.card_event_auto.field_paragraph_reference
     - field.field.paragraph.card_event.field_paragraph_cta
     - field.field.paragraph.card_event.field_paragraph_date
+    - field.field.paragraph.card_event.field_paragraph_date_range
     - field.field.paragraph.card_event.field_paragraph_location
     - field.field.paragraph.card_event.field_paragraph_media
     - field.field.paragraph.card_event.field_paragraph_topic
@@ -134,6 +164,10 @@ config_devel:
     - field.field.paragraph.card_promotion.field_paragraph_topic
     - field.field.paragraph.card_promotion_auto.field_paragraph_reference
     - field.field.paragraph.card_promotion_auto.field_paragraph_cta_text
+    - field.field.paragraph.embedded_search_form.field_paragraph_search_block
+    - field.field.paragraph.introduction_banner.field_paragraph_links
+    - field.field.paragraph.introduction_banner.field_paragraph_summary
+    - field.field.paragraph.introduction_banner.field_paragraph_title
     - field.field.paragraph.key_journeys.field_paragraph_cta
     - field.field.paragraph.key_journeys.field_paragraph_link
     - field.field.paragraph.key_journeys.field_paragraph_links
@@ -142,6 +176,9 @@ config_devel:
     - field.field.paragraph.keydates.field_paragraph_link
     - field.field.paragraph.keydates.field_paragraph_summary
     - field.field.paragraph.keydates.field_paragraph_title
+    - field.field.paragraph.latest_events.field_paragraph_cta_card_event
+    - field.field.paragraph.latest_events.field_paragraph_title
+    - field.field.paragraph.media_gallery.field_paragraph_media_gallery
     - field.field.node.landing_page.field_landing_page_contact
     - field.field.node.landing_page.field_landing_page_show_contact
     - field.field.node.landing_page.field_landing_page_summary
@@ -162,25 +199,31 @@ config_devel:
     - field.storage.block_content.field_block_cta
     - field.storage.block_content.field_block_image
     - field.storage.block_content.field_block_title
+    - field.storage.block_content.field_gallery_featured_image
+    - field.storage.block_content.field_gallery_media
+    - field.storage.paragraph.field_paragraph_media_gallery
     - field.storage.node.field_landing_page_c_secondary
     - field.storage.node.field_landing_page_c_primary
     - field.storage.node.field_landing_page_component
     - field.storage.node.field_landing_page_contact
+    - field.storage.node.field_landing_page_header
     - field.storage.node.field_landing_page_intro_text
     - field.storage.node.field_landing_page_key_journeys
     - field.storage.node.field_landing_page_show_contact
     - field.storage.node.field_landing_page_summary
+    - field.storage.node.field_graphical_image
+    - field.storage.node.field_bottom_graphical_image
     - field.storage.paragraph.field_paragraph_accordion
     - field.storage.paragraph.field_paragraph_accordion_body
     - field.storage.paragraph.field_paragraph_accordion_name
     - field.storage.paragraph.field_paragraph_accordion_style
     - field.storage.paragraph.field_paragraph_body
-    - field.storage.paragraph.field_paragraph_cta
+    - field.storage.paragraph.field_paragraph_cta_card_event
+    - field.storage.paragraph.field_paragraph_cta_style
     - field.storage.paragraph.field_paragraph_cta_text
     - field.storage.paragraph.field_paragraph_date
     - field.storage.paragraph.field_paragraph_location
     - field.storage.paragraph.field_paragraph_links
-    - field.storage.paragraph.field_paragraph_media
     - field.storage.paragraph.field_paragraph_reference
     - field.storage.paragraph.field_paragraph_title
     - field.storage.paragraph.field_paragraph_keydate
@@ -192,6 +235,7 @@ config_devel:
     - field.storage.paragraph.field_paragraph_phone_number
     - field.storage.paragraph.field_paragraph_phone_title
     - field.storage.paragraph.field_paragraph_phones
+    - field.storage.paragraph.field_paragraph_search_block
     - field.storage.paragraph.field_paragraph_social_list
     - field.storage.paragraph.field_paragraph_social_media
     - field.storage.paragraph.field_paragraph_webform
@@ -203,24 +247,31 @@ config_devel:
     - paragraphs.paragraphs_type.call_to_action
     - paragraphs.paragraphs_type.card_event
     - paragraphs.paragraphs_type.card_keydates
+    - paragraphs.paragraphs_type.card_event_auto
     - paragraphs.paragraphs_type.card_navigation
     - paragraphs.paragraphs_type.card_navigation_auto
     - paragraphs.paragraphs_type.card_navigation_featured
     - paragraphs.paragraphs_type.card_navigation_featured_auto
     - paragraphs.paragraphs_type.card_promotion
     - paragraphs.paragraphs_type.card_promotion_auto
+    - paragraphs.paragraphs_type.embedded_search_form
     - paragraphs.paragraphs_type.embedded_webform
-    - paragraphs.paragraphs_type.featured_news
+    - paragraphs.paragraphs_type.introduction_banner
     - paragraphs.paragraphs_type.key_journeys
     - paragraphs.paragraphs_type.keydates
+    - paragraphs.paragraphs_type.latest_events
+    - paragraphs.paragraphs_type.media_gallery
     - paragraphs.paragraphs_type.contact_us
+    - paragraphs.paragraphs_type.news_listing
     - paragraphs.paragraphs_type.phone
     - paragraphs.paragraphs_type.social_link
+    - paragraphs.paragraphs_type.timelines
     - field.field.node.landing_page.scheduled_archiving
     - field.field.node.landing_page.scheduled_publishing
   optional:
     - jsonapi_extras.jsonapi_resource_config.node--landing_page
     - jsonapi_extras.jsonapi_resource_config.block_content--campaign
+    - jsonapi_extras.jsonapi_resource_config.block_content--media_gallery
     - jsonapi_extras.jsonapi_resource_config.paragraph--banner
     - jsonapi_extras.jsonapi_resource_config.paragraph--call_to_action
     - jsonapi_extras.jsonapi_resource_config.paragraph--card_event
@@ -229,6 +280,8 @@ config_devel:
     - jsonapi_extras.jsonapi_resource_config.paragraph--card_navigation_featured
     - jsonapi_extras.jsonapi_resource_config.paragraph--card_promotion
     - jsonapi_extras.jsonapi_resource_config.paragraph--featured_news
+    - jsonapi_extras.jsonapi_resource_config.paragraph--introduction_banner
     - jsonapi_extras.jsonapi_resource_config.paragraph--key_journeys
     - jsonapi_extras.jsonapi_resource_config.paragraph--keydates
+    - jsonapi_extras.jsonapi_resource_config.paragraph--media_gallery
     - jsonapi_extras.jsonapi_resource_config.paragraph--social_link
