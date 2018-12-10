@@ -18,6 +18,10 @@ Feature: Fields for Landing Page content type
     And the "#edit-field-featured-image" element should contain "Feature Image"
     And I should see an "input#edit-field-featured-image-entity-browser-entity-browser-open-modal" element
 
+    And I see field "Hero Banner"
+    And I should see text matching "No Hero Banner added yet."
+    And I should see the button "Add Hero Banner" in the "content" region
+
     And the "#edit-field-landing-page-hero-logo" element should contain "Hero Logo"
     And I should see an "input#edit-field-landing-page-hero-logo-entity-browser-entity-browser-open-modal" element
 
@@ -132,6 +136,10 @@ Feature: Fields for Landing Page content type
 
     And the "#edit-field-featured-image" element should contain "Feature Image"
     And I should see an "input#edit-field-featured-image-entity-browser-entity-browser-open-modal" element
+
+    And I see field "Hero Banner"
+    And I should see text matching "No Hero Banner added yet."
+    And I should see the button "Add Hero Banner" in the "content" region
 
     And I see field "Show Social Sharing?"
     And I should see an "input#edit-field-show-social-sharing-value" element
