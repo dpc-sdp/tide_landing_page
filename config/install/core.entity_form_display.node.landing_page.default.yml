@@ -1,4 +1,3 @@
-uuid: 12bfcb62-7c72-4462-ae5d-5f397ba71450
 langcode: en
 status: true
 dependencies:
@@ -23,10 +22,7 @@ dependencies:
     - field.field.node.landing_page.field_landing_page_show_contact
     - field.field.node.landing_page.field_landing_page_summary
     - field.field.node.landing_page.field_metatags
-    - field.field.node.landing_page.field_node_primary_site
-    - field.field.node.landing_page.field_node_site
     - field.field.node.landing_page.field_related_links
-    - field.field.node.landing_page.field_show_content_rating
     - field.field.node.landing_page.field_show_news_search
     - field.field.node.landing_page.field_show_related_content
     - field.field.node.landing_page.field_show_site_section_nav
@@ -43,6 +39,7 @@ dependencies:
   module:
     - content_moderation
     - entity_browser
+    - entity_reference_revisions
     - field_group
     - inline_entity_form
     - maxlength
