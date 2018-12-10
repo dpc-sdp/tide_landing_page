@@ -33,15 +33,14 @@ Feature: Fields for Landing Page content type
     And I should not see an "textarea#edit-field-landing-page-intro-text-0-value.required" element
 
     And I should see text matching "Header components"
-    And I should see text matching "No Component added yet."
     And I should see "Introduction Banner" in the "select[name='field_landing_page_header[add_more][add_more_select]']" element
     And I should see "Embedded Search Form" in the "select[name='field_landing_page_header[add_more][add_more_select]']" element
 
-    And I should see text matching "Campaign Primary"
+    And I should see text matching "Primary Campaign"
     And I should see an "input#edit-field-landing-page-c-primary-0-target-id" element
     And I should not see an "input#edit-field-landing-page-c-primary-0-target-id.required" element
 
-    And I should see text matching "Campaign Secondary"
+    And I should see text matching "Secondary Campaign"
     And I should see an "input#edit-field-landing-page-c-secondary-0-target-id" element
     And I should not see an "input#edit-field-landing-page-c-secondary-0-target-id.required" element
 
@@ -57,7 +56,6 @@ Feature: Fields for Landing Page content type
     And I should see the button "Add Related links" in the "content" region
 
     And I should see text matching "Content components"
-    And I should see text matching "No Component added yet."
     And I should see "Basic Text" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Accordion" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Call to Action" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
