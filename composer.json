@@ -14,7 +14,7 @@
     "suggest": {
         "dpc-sdp/tide_api": "@dev",
         "dpc-sdp/tide_news": "@dev",
-        "dpc-sdp/tide_webform": "@dev"
+        "dpc-sdp/tide_webform": "dev-feature/SDPA-1159-Remove-Field-Show-News-Search-Block"
     },
     "repositories": {
         "drupal": {
