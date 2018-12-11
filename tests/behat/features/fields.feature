@@ -18,7 +18,7 @@ Feature: Fields for Landing Page content type
     And the "#edit-field-featured-image" element should contain "Feature Image"
     And I should see an "input#edit-field-featured-image-entity-browser-entity-browser-open-modal" element
 
-    And I see field "Hero Banner"
+    And I should see text matching "Hero Banner"
     And I should see text matching "No Hero Banner added yet."
     And I should see the button "Add Hero Banner" in the "content" region
 
@@ -137,7 +137,7 @@ Feature: Fields for Landing Page content type
     And the "#edit-field-featured-image" element should contain "Feature Image"
     And I should see an "input#edit-field-featured-image-entity-browser-entity-browser-open-modal" element
 
-    And I see field "Hero Banner"
+    And I should see text matching "Hero Banner"
     And I should see text matching "No Hero Banner added yet."
     And I should see the button "Add Hero Banner" in the "content" region
 
