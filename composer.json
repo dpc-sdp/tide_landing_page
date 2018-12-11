@@ -4,9 +4,9 @@
     "type": "drupal-module",
     "license": "GPL-2.0+",
     "require": {
-        "dpc-sdp/tide_core": "dev-master",
+        "dpc-sdp/tide_core": "@dev",
         "dpc-sdp/tide_event": "@dev",
-        "dpc-sdp/tide_media": "dev-master",
+        "dpc-sdp/tide_media": "@dev",
         "drupal/paragraphs": "^1.2",
         "drupal/maxlength": "^1.0@beta",
         "drupal/smart_trim": "^1.1"
