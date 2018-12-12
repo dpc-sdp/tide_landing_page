@@ -18,6 +18,10 @@ Feature: Fields for Landing Page content type
     And the "#edit-field-featured-image" element should contain "Feature Image"
     And I should see an "input#edit-field-featured-image-entity-browser-entity-browser-open-modal" element
 
+    And I should see text matching "Hero Banner"
+    And I should see text matching "No Hero Banner added yet."
+    And I should see the button "Add Hero Banner" in the "content" region
+
     And the "#edit-field-landing-page-hero-logo" element should contain "Hero Logo"
     And I should see an "input#edit-field-landing-page-hero-logo-entity-browser-entity-browser-open-modal" element
 
@@ -131,6 +135,10 @@ Feature: Fields for Landing Page content type
     And the "#edit-field-featured-image" element should contain "Feature Image"
     And I should see an "input#edit-field-featured-image-entity-browser-entity-browser-open-modal" element
 
+    And I should see text matching "Hero Banner"
+    And I should see text matching "No Hero Banner added yet."
+    And I should see the button "Add Hero Banner" in the "content" region
+
     And I see field "Show Social Sharing?"
     And I should see an "input#edit-field-show-social-sharing-value" element
     And I should not see an "input#edit-field-show-social-sharing-value.required" element
@@ -139,11 +147,11 @@ Feature: Fields for Landing Page content type
     And I should see an "textarea#edit-field-landing-page-intro-text-0-value" element
     And I should not see an "textarea#edit-field-landing-page-intro-text-0-value.required" element
 
-    And I should see text matching "Campaign Primary"
+    And I should see text matching "Primary Campaign"
     And I should see an "input#edit-field-landing-page-c-primary-0-target-id" element
     And I should not see an "input#edit-field-landing-page-c-primary-0-target-id.required" element
 
-    And I should see text matching "Campaign Secondary"
+    And I should see text matching "Secondary Campaign"
     And I should see an "input#edit-field-landing-page-c-secondary-0-target-id" element
     And I should not see an "input#edit-field-landing-page-c-secondary-0-target-id.required" element
 
@@ -164,7 +172,6 @@ Feature: Fields for Landing Page content type
     And I should see the button "Add Related links" in the "content" region
 
     And I should see text matching "Content components"
-    And I should see text matching "No Component added yet."
     And I should see "Basic Text" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Accordion" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Call to Action" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
