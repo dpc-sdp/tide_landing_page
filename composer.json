@@ -4,9 +4,9 @@
     "type": "drupal-module",
     "license": "GPL-2.0+",
     "require": {
-        "dpc-sdp/tide_core": "dev-eature/SDPA-1470-Add-Video-Secondary-Campaign-Banner",
+        "dpc-sdp/tide_core": "dev-feature/SDPA-1470-Add-Video-Secondary-Campaign-Banner",
         "dpc-sdp/tide_event": "@dev",
-        "dpc-sdp/tide_media": "dev-eature/SDPA-1470-Add-Video-Secondary-Campaign-Banner",
+        "dpc-sdp/tide_media": "dev-feature/SDPA-1470-Add-Video-Secondary-Campaign-Banner",
         "drupal/paragraphs": "^1.2",
         "drupal/maxlength": "^1.0@beta",
         "drupal/smart_trim": "^1.1"
