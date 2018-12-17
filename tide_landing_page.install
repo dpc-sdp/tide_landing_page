@@ -321,3 +321,83 @@ function tide_landing_page_update_8005() {
     }
   }
 }
+
+/**
+ * Add video to secondary campaign banner  [SDPA-1470].
+ */
+function tide_landing_page_update_8006() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+
+  _tide_import_single_config('field.storage.block_content.field_block_embedded_video', $config_location);
+  _tide_import_single_config('field.field.block_content.campaign_with_video.body', $config_location);
+  _tide_import_single_config('field.field.block_content.campaign_with_video.field_block_cta', $config_location);
+  _tide_import_single_config('field.field.block_content.campaign_with_video.field_block_embedded_video', $config_location);
+  _tide_import_single_config('field.field.block_content.campaign_with_video.field_block_image', $config_location);
+  _tide_import_single_config('field.field.block_content.campaign_with_video.field_block_title', $config_location);
+  _tide_import_single_config('block_content.type.campaign_with_video', $config_location);
+  _tide_import_single_config('core.entity_form_display.block_content.campaign_with_video.default', $config_location);
+  _tide_import_single_config('core.entity_view_display.block_content.campaign_with_video.default', $config_location);
+  _tide_import_single_config('field.field.node.landing_page.field_landing_page_c_secondary', $config_location);
+
+  $primary_campaigns = [];
+  $secondary_campaigns = [];
+
+  $blockEntityManager = \Drupal::entityTypeManager()->getStorage('block_content');
+
+  // Get all landing pages nodes
+  $pages = \Drupal::entityTypeManager()->getStorage('node')
+    ->loadByProperties(['type' => 'landing_page']);
+  if ($pages && count($pages)) {
+    /** @var \Drupal\node\Entity\Node $node */
+
+    // Traverse nodes to do an inventory of unique campaigns used in primary and secondary campaigns.
+    foreach ($pages as $node) {
+      if ($node->hasField('field_landing_page_c_primary') && isset($node->field_landing_page_c_primary->getValue()[0]['target_id'])) {
+        $primary_campaigns[$node->field_landing_page_c_primary->getValue()[0]['target_id']]= $node->field_landing_page_c_primary->getValue()[0]['target_id'];
+      }
+      if ($node->hasField('field_landing_page_c_secondary') && isset($node->field_landing_page_c_secondary->getValue()[0]['target_id'])) {
+        $secondary_campaigns[$node->field_landing_page_c_secondary->getValue()[0]['target_id']]= $node->field_landing_page_c_secondary->getValue()[0]['target_id'];
+      }
+    }
+
+    // Calculate what campaigns are used in both primary and secondary campaigns.
+    $primary_and_secondary_campaigns = array_intersect($primary_campaigns, $secondary_campaigns);
+
+    // Process all campaigns in secondary campaigns to migrate to new block content campaign with video
+    foreach ($secondary_campaigns as $campaign) {
+      // Get original campaign to copy into new campaign.
+      $original_campaign = $blockEntityManager->load($campaign);
+
+      // Create new campaign
+      $new_campaign = $blockEntityManager->create(array("type" => "campaign_with_video"));
+      $new_campaign->set('info', $original_campaign->info->getValue()[0]['value']);
+      $new_campaign->set('status', $original_campaign->status->getValue()[0]['value']);
+      $new_campaign->set('body', $original_campaign->body->getValue()[0]['value']);
+      $new_campaign->set('field_block_cta', $original_campaign->field_block_cta->getValue()[0]);
+      $new_campaign->set('field_block_image', $original_campaign->field_block_image->getValue()[0]['target_id']);
+      $new_campaign->set('field_block_title', $original_campaign->field_block_title->getValue()[0]['value']);
+      $new_campaign->save();
+
+      // Create mapping to replace new references to replace the old ones in landing page secondary campaigns.
+      $secondary_campaigns[$campaign] = $new_campaign->id();
+
+      // Delete campaigns that are only used as secondary campaigns
+      if(!in_array($campaign, $primary_and_secondary_campaigns)) {
+        $original_campaign->delete();
+      }
+    }
+
+    // Re-asign secondary campaigns to point to new content block campaigns with video
+    foreach ($pages as $node) {
+      if ($node->hasField('field_landing_page_c_secondary') && isset($node->field_landing_page_c_secondary->getValue()[0]['target_id'])) {
+        if(isset($secondary_campaigns[$node->field_landing_page_c_secondary->getValue()[0]['target_id']]) and $secondary_campaigns[$node->field_landing_page_c_secondary->getValue()[0]['target_id']] != $node->field_landing_page_c_secondary->getValue()[0]['target_id']) {
+          print "Node Updated: " . $node->id() . " Campaign Updated from " . $node->field_landing_page_c_secondary->getValue()[0]['target_id'] . " to " . $secondary_campaigns[$node->field_landing_page_c_secondary->getValue()[0]['target_id']] . "<br/>";
+          $node->set('field_landing_page_c_secondary', $secondary_campaigns[$node->field_landing_page_c_secondary->getValue()[0]['target_id']]);
+          $node->setNewRevision(FALSE);
+          $node->save();
+        }
+      }
+    }
+  }
+}
