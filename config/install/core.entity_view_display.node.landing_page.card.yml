@@ -13,10 +13,7 @@ dependencies:
     - field.field.node.landing_page.field_landing_page_show_contact
     - field.field.node.landing_page.field_landing_page_summary
     - field.field.node.landing_page.field_metatags
-    - field.field.node.landing_page.field_node_primary_site
-    - field.field.node.landing_page.field_node_site
     - field.field.node.landing_page.field_related_links
-    - field.field.node.landing_page.field_show_content_rating
     - field.field.node.landing_page.field_show_related_content
     - field.field.node.landing_page.field_show_social_sharing
     - field.field.node.landing_page.field_show_whats_next
@@ -27,8 +24,6 @@ dependencies:
   module:
     - smart_trim
     - user
-_core:
-  default_config_hash: bh3RopcGMNw0Q2alFj0mM4xCHJ3kkrfnZTpOsixtkOU
 id: node.landing_page.card
 targetEntityType: node
 bundle: landing_page
@@ -77,12 +72,9 @@ hidden:
   field_landing_page_nav_title: true
   field_landing_page_show_contact: true
   field_metatags: true
-  field_node_primary_site: true
-  field_node_site: true
   field_related_links: true
   field_show_content_rating: true
   field_show_news_search: true
-  field_show_related_content: true
   field_show_site_section_nav: true
   field_show_social_sharing: true
   field_show_table_of_content: true
