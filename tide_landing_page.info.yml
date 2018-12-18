@@ -172,7 +172,6 @@ config_devel:
     - field.field.paragraph.hero_banner.field_paragraph_cta
     - field.field.paragraph.hero_banner.field_paragraph_freetext
     - field.field.paragraph.hero_banner.field_paragraph_link_text
-    - field.field.paragraph.hero_banner.field_paragraph_theme
     - field.field.paragraph.introduction_banner.field_paragraph_links
     - field.field.paragraph.introduction_banner.field_paragraph_summary
     - field.field.paragraph.introduction_banner.field_paragraph_title
@@ -241,7 +240,6 @@ config_devel:
     - field.storage.paragraph.field_paragraph_title
     - field.storage.paragraph.field_paragraph_keydate
     - field.storage.paragraph.field_paragraph_keydates
-    - field.storage.paragraph.field_paragraph_theme
     - field.storage.paragraph.field_paragraph_topic
     - field.storage.paragraph.field_paragraph_email
     - field.storage.paragraph.field_paragraph_name
