@@ -321,3 +321,17 @@ function tide_landing_page_update_8005() {
     }
   }
 }
+
+/**
+ * Remove Show News Search Block? field [SDPA-1159].
+ */
+function tide_landing_page_update_8006() {
+  /* @var $entityFieldManager Drupal\Core\Entity\EntityFieldManager */
+  $entityFieldManager = Drupal::service('entity_field.manager');
+
+  $fields = $entityFieldManager->getFieldDefinitions('node', 'landing_page');
+
+  if (isset($fields['field_show_news_search'])) {
+    $fields['field_show_news_search']->delete();
+  }
+}
