@@ -1,0 +1,4 @@
+landing_page_form:
+  css:
+    theme:
+      css/landing_page.css: {}
