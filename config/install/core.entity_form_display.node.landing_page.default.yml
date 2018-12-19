@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.landing_page.field_landing_page_component
     - field.field.node.landing_page.field_landing_page_contact
     - field.field.node.landing_page.field_landing_page_header
+    - field.field.node.landing_page.field_landing_page_hero_banner
     - field.field.node.landing_page.field_landing_page_hero_image
     - field.field.node.landing_page.field_landing_page_hero_logo
     - field.field.node.landing_page.field_landing_page_hero_theme
@@ -37,7 +38,6 @@ dependencies:
   module:
     - content_moderation
     - entity_browser
-    - entity_reference_revisions
     - field_group
     - inline_entity_form
     - maxlength
@@ -90,6 +90,7 @@ third_party_settings:
         - field_landing_page_hero_theme
         - field_landing_page_intro_text
         - field_landing_page_summary
+        - field_landing_page_hero_banner
         - field_landing_page_key_journeys
       parent_name: group_content
       weight: 1
@@ -107,7 +108,7 @@ third_party_settings:
       children:
         - field_landing_page_c_primary
       parent_name: group_content
-      weight: 3
+      weight: 4
       format_type: tab
       format_settings:
         label: 'Primary Campaign'
@@ -123,7 +124,7 @@ third_party_settings:
         - field_show_table_of_content
         - field_landing_page_component
       parent_name: group_content
-      weight: 4
+      weight: 5
       format_type: tab
       format_settings:
         label: 'Body Content'
@@ -138,7 +139,7 @@ third_party_settings:
       children:
         - field_landing_page_c_secondary
       parent_name: group_content
-      weight: 5
+      weight: 6
       format_type: tab
       format_settings:
         label: 'Secondary Campaign'
@@ -227,9 +228,9 @@ third_party_settings:
       region: content
     group_header_content:
       children:
-      - field_landing_page_header
+        - field_landing_page_header
       parent_name: group_content
-      weight: 2
+      weight: 3
       format_type: tab
       format_settings:
         label: 'Header Content'
@@ -335,6 +336,10 @@ content:
       add_mode: select
       form_display_mode: default
       default_paragraph_type: _none
+      closed_mode_threshold: 0
+      features:
+        duplicate: duplicate
+        collapse_edit_all: collapse_edit_all
     third_party_settings: {  }
   field_landing_page_contact:
     type: entity_reference_paragraphs
@@ -358,6 +363,22 @@ content:
       closed_mode: summary
       autocollapse: none
       add_mode: select
+      form_display_mode: default
+      default_paragraph_type: _none
+      closed_mode_threshold: 0
+      features:
+        duplicate: duplicate
+        collapse_edit_all: collapse_edit_all
+    third_party_settings: {  }
+    region: content
+  field_landing_page_hero_banner:
+    type: entity_reference_paragraphs
+    weight: 9
+    settings:
+      title: 'Hero Banner with CTA'
+      title_plural: 'Hero Banners with CTA'
+      edit_mode: closed
+      add_mode: dropdown
       form_display_mode: default
       default_paragraph_type: _none
     third_party_settings: {  }
@@ -408,7 +429,7 @@ content:
     region: content
   field_landing_page_key_journeys:
     type: entity_reference_paragraphs
-    weight: 9
+    weight: 10
     settings:
       title: 'Key journey'
       title_plural: 'Key journeys'
@@ -452,6 +473,20 @@ content:
     third_party_settings: {  }
     type: metatag_firehose
     region: content
+  field_node_primary_site:
+    type: options_buttons
+    region: content
+    field_name: field_node_primary_site
+    weight: 18
+    settings: {  }
+    third_party_settings: {  }
+  field_node_site:
+    type: options_buttons
+    region: content
+    field_name: field_node_site
+    weight: 17
+    settings: {  }
+    third_party_settings: {  }
   field_related_links:
     type: paragraphs
     weight: 38
@@ -464,6 +499,10 @@ content:
       add_mode: button
       form_display_mode: default
       default_paragraph_type: _none
+      closed_mode_threshold: 0
+      features:
+        duplicate: duplicate
+        collapse_edit_all: collapse_edit_all
     third_party_settings: {  }
     region: content
   field_show_content_rating:
