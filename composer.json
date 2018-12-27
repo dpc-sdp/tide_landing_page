@@ -2,33 +2,24 @@
     "name": "dpc-sdp/tide_landing_page",
     "description": "Landing Page content type and related configuration for Tide Drupal 8 distribution",
     "type": "drupal-module",
-    "license": "GPL-2.0+",
+    "license": "GPL-2.0-or-later",
     "require": {
-        "dpc-sdp/tide_core": "@dev",
-        "dpc-sdp/tide_event": "@dev",
-        "dpc-sdp/tide_media": "@dev",
-        "drupal/paragraphs": "^1.2",
-        "drupal/maxlength": "^1.0@beta",
-        "drupal/smart_trim": "^1.1"
+        "dpc-sdp/tide_core": "dev-ci",
+        "dpc-sdp/tide_event": "dev-ci",
+        "dpc-sdp/tide_media": "dev-ci",
+        "drupal/paragraphs": "1.5",
+        "drupal/maxlength": "1.0@beta2",
+        "drupal/smart_trim": "1.1"
     },
     "suggest": {
-        "dpc-sdp/tide_api": "@dev",
-        "dpc-sdp/tide_news": "@dev",
-        "dpc-sdp/tide_webform": "@dev"
+        "dpc-sdp/tide_api:dev-ci": "Allows to use Drupal in headless mode",
+        "dpc-sdp/tide_webform:dev-ci": "Allows to use questionnaires",
+        "dpc-sdp/tide_news:dev-ci": "News content type and related configuration for Tide Drupal 8 distribution"
     },
     "repositories": {
         "drupal": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "platform": {
-            "php": "7.1"
-        },
-        "process-timeout": 0,
-        "sort-packages": true
     }
 }
