@@ -74,6 +74,7 @@ function tide_landing_page_install() {
 function tide_landing_page_update_dependencies() {
   $dependencies['tide_landing_page'][8001] = ['tide_core' => 8001];
   $dependencies['tide_landing_page'][8002] = ['tide_core' => 8002];
+
   return $dependencies;
 }
 
@@ -148,7 +149,6 @@ function tide_landing_page_update_8003() {
  * Add fields to search API.
  */
 function _tide_landing_page_add_fields_search_api() {
-
   $moduleHandler = \Drupal::service('module_handler');
   if ($moduleHandler->moduleExists('tide_search')) {
     $index_storage = \Drupal::entityTypeManager()
@@ -163,7 +163,7 @@ function _tide_landing_page_add_fields_search_api() {
     $field_landing_page_intro->setLabel('Introduction text');
     $index->addField($field_landing_page_intro);
 
-    // Index the summary field. field_landing_page_summary
+    // Index the summary field.
     $field_landing_page_summary = new Field($index, 'field_landing_page_summary');
     $field_landing_page_summary->setType('text');
     $field_landing_page_summary->setPropertyPath('field_landing_page_summary');
@@ -172,7 +172,7 @@ function _tide_landing_page_add_fields_search_api() {
     $field_landing_page_summary->setLabel('Summary');
     $index->addField($field_landing_page_summary);
 
-    // Index the field field_paragraph_body
+    // Index the field field_paragraph_body.
     $field_paragraph_body = new Field($index, 'field_paragraph_body');
     $field_paragraph_body->setType('text');
     $field_paragraph_body->setPropertyPath('field_landing_page_component:entity:field_paragraph_body');
@@ -180,7 +180,7 @@ function _tide_landing_page_add_fields_search_api() {
     $field_paragraph_body->setLabel('Content components » Paragraph » Body');
     $index->addField($field_paragraph_body);
 
-    // Index the field field_paragraph_topic
+    // Index the field field_paragraph_topic.
     $field_paragraph_topic = new Field($index, 'field_paragraph_topic');
     $field_paragraph_topic->setType('integer');
     $field_paragraph_topic->setPropertyPath('field_landing_page_component:entity:field_paragraph_topic');
@@ -188,7 +188,7 @@ function _tide_landing_page_add_fields_search_api() {
     $field_paragraph_topic->setLabel('Content components » Paragraph » Topic');
     $index->addField($field_paragraph_topic);
 
-    // Index the field field_paragraph_topic_name
+    // Index the field field_paragraph_topic_name.
     $field_paragraph_topic_name = new Field($index, 'field_paragraph_topic_name');
     $field_paragraph_topic_name->setType('integer');
     $field_paragraph_topic_name->setPropertyPath('field_landing_page_component:entity:field_paragraph_topic:entity:name');
@@ -197,7 +197,7 @@ function _tide_landing_page_add_fields_search_api() {
     $field_paragraph_topic_name->setLabel('Content components » Paragraph » Topic » Taxonomy term » Name');
     $index->addField($field_paragraph_topic_name);
 
-    // Index the field field_paragraph_title
+    // Index the field field_paragraph_title.
     $field_paragraph_title = new Field($index, 'field_paragraph_title');
     $field_paragraph_title->setType('text');
     $field_paragraph_title->setPropertyPath('field_landing_page_component:entity:field_paragraph_title');
@@ -206,7 +206,7 @@ function _tide_landing_page_add_fields_search_api() {
     $field_paragraph_title->setBoost(13);
     $index->addField($field_paragraph_title);
 
-    // Index the summary field field_paragraph_summary
+    // Index the summary field field_paragraph_summary.
     $field_paragraph_summary = new Field($index, 'field_paragraph_summary');
     $field_paragraph_summary->setType('text');
     $field_paragraph_summary->setPropertyPath('field_landing_page_component:entity:field_paragraph_summary');
@@ -214,7 +214,7 @@ function _tide_landing_page_add_fields_search_api() {
     $field_paragraph_summary->setLabel('Content components » Paragraph » Summary');
     $index->addField($field_paragraph_summary);
 
-    // Index the summary field field_paragraph_accordion_name
+    // Index the summary field field_paragraph_accordion_name.
     $field_paragraph_accordion_name = new Field($index, 'field_paragraph_accordion_name');
     $field_paragraph_accordion_name->setType('text');
     $field_paragraph_accordion_name->setPropertyPath('field_landing_page_component:entity:field_paragraph_accordion_name');
@@ -223,7 +223,7 @@ function _tide_landing_page_add_fields_search_api() {
     $field_paragraph_accordion_name->setLabel('Content components » Paragraph » Accordion Content » Paragraph » Item Name');
     $index->addField($field_paragraph_accordion_name);
 
-    // Index the summary field field_paragraph_accordion_body
+    // Index the summary field field_paragraph_accordion_body.
     $field_paragraph_accordion_body = new Field($index, 'field_paragraph_accordion_body');
     $field_paragraph_accordion_body->setType('text');
     $field_paragraph_accordion_body->setPropertyPath('field_landing_page_component:entity:field_paragraph_accordion_body');
@@ -231,7 +231,7 @@ function _tide_landing_page_add_fields_search_api() {
     $field_paragraph_accordion_body->setLabel('Content components » Paragraph » Accordion Content » Paragraph » Body');
     $index->addField($field_paragraph_accordion_body);
 
-    // Index the summary field field_landing_page_contact_name
+    // Index the summary field field_landing_page_contact_name.
     $field_landing_page_contact_name = new Field($index, 'field_landing_page_contact_name');
     $field_landing_page_contact_name->setType('text');
     $field_landing_page_contact_name->setPropertyPath('field_landing_page_contact:entity:field_paragraph_name');
@@ -240,7 +240,7 @@ function _tide_landing_page_add_fields_search_api() {
     $field_landing_page_contact_name->setLabel('Content components » Paragraph » Name');
     $index->addField($field_landing_page_contact_name);
 
-    // Index the summary field field_landing_page_contact_body
+    // Index the summary field field_landing_page_contact_body.
     $field_landing_page_contact_body = new Field($index, 'field_landing_page_contact_body');
     $field_landing_page_contact_body->setType('text');
     $field_landing_page_contact_body->setPropertyPath('field_landing_page_contact:entity:field_paragraph_body');
@@ -248,7 +248,7 @@ function _tide_landing_page_add_fields_search_api() {
     $field_landing_page_contact_body->setLabel('Content components » Paragraph » Body');
     $index->addField($field_landing_page_contact_body);
 
-    // Index the summary field field_paragraph_topic_uuid
+    // Index the summary field field_paragraph_topic_uuid.
     $field_paragraph_topic_uuid = new Field($index, 'field_paragraph_topic_uuid');
     $field_paragraph_topic_uuid->setType('string');
     $field_paragraph_topic_uuid->setPropertyPath('field_landing_page_component:entity:field_paragraph_topic:entity:uuid');
@@ -261,7 +261,7 @@ function _tide_landing_page_add_fields_search_api() {
 }
 
 /**
- * Update default Style for existing CTA paragraphs [SDPA-790].
+ * Update default Style for existing CTA paragraphs.
  */
 function tide_landing_page_update_8004() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
@@ -282,7 +282,8 @@ function tide_landing_page_update_8004() {
             $paragraph->save();
           }
         }
-      } catch (\Exception $e) {
+      }
+      catch (\Exception $e) {
         watchdog_exception('tide_landing_page', $e);
       }
     }
@@ -290,7 +291,7 @@ function tide_landing_page_update_8004() {
 }
 
 /**
- * Replace show_news_search field by Header Component Embedded Search Form [SDPA-943].
+ * Replace show_news_search field by Header Component Embedded Search Form.
  */
 function tide_landing_page_update_8005() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
