@@ -136,8 +136,8 @@ Feature: Fields for Landing Page content type
     And I should see an "input#edit-field-featured-image-entity-browser-entity-browser-open-modal" element
 
     And I should see text matching "Hero Banner"
-    And I should see text matching "No Hero Banner added yet."
-    And I should see the button "Add Hero Banner" in the "content" region
+    And I should see text matching "No Hero Banner with CTA added yet."
+    And I should see the button "Add Hero Banner with CTA" in the "content" region
 
     And I see field "Show Social Sharing?"
     And I should see an "input#edit-field-show-social-sharing-value" element

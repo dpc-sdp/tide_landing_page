@@ -323,9 +323,23 @@ function tide_landing_page_update_8005() {
 }
 
 /**
- * Add video to secondary campaign banner  [SDPA-1470].
+ * Remove Show News Search Block? field [SDPA-1159].
  */
 function tide_landing_page_update_8006() {
+  /* @var $entityFieldManager Drupal\Core\Entity\EntityFieldManager */
+  $entityFieldManager = Drupal::service('entity_field.manager');
+
+  $fields = $entityFieldManager->getFieldDefinitions('node', 'landing_page');
+
+  if (isset($fields['field_show_news_search'])) {
+    $fields['field_show_news_search']->delete();
+  }
+}
+
+/**
+ * Add video to secondary campaign banner  [SDPA-1470].
+ */
+function tide_landing_page_update_8007() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
   $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
 
