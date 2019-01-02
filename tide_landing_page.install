@@ -344,12 +344,12 @@ function tide_landing_page_update_8007() {
   $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
 
   _tide_import_single_config('field.storage.block_content.field_block_embedded_video', $config_location);
+  _tide_import_single_config('block_content.type.campaign_with_video', $config_location);
   _tide_import_single_config('field.field.block_content.campaign_with_video.body', $config_location);
   _tide_import_single_config('field.field.block_content.campaign_with_video.field_block_cta', $config_location);
   _tide_import_single_config('field.field.block_content.campaign_with_video.field_block_embedded_video', $config_location);
   _tide_import_single_config('field.field.block_content.campaign_with_video.field_block_image', $config_location);
   _tide_import_single_config('field.field.block_content.campaign_with_video.field_block_title', $config_location);
-  _tide_import_single_config('block_content.type.campaign_with_video', $config_location);
   _tide_import_single_config('core.entity_form_display.block_content.campaign_with_video.default', $config_location);
   _tide_import_single_config('core.entity_view_display.block_content.campaign_with_video.default', $config_location);
   _tide_import_single_config('field.field.node.landing_page.field_landing_page_c_secondary', $config_location);
@@ -406,7 +406,7 @@ function tide_landing_page_update_8007() {
     foreach ($pages as $node) {
       if ($node->hasField('field_landing_page_c_secondary') && isset($node->field_landing_page_c_secondary->getValue()[0]['target_id'])) {
         if(isset($secondary_campaigns[$node->field_landing_page_c_secondary->getValue()[0]['target_id']]) and $secondary_campaigns[$node->field_landing_page_c_secondary->getValue()[0]['target_id']] != $node->field_landing_page_c_secondary->getValue()[0]['target_id']) {
-          print "Node Updated: " . $node->id() . " Campaign Updated from " . $node->field_landing_page_c_secondary->getValue()[0]['target_id'] . " to " . $secondary_campaigns[$node->field_landing_page_c_secondary->getValue()[0]['target_id']] . "<br/>";
+          print "Node Updated: " . $node->id() . " Campaign Updated from " . $node->field_landing_page_c_secondary->getValue()[0]['target_id'] . " to  Campaign with Video " . $secondary_campaigns[$node->field_landing_page_c_secondary->getValue()[0]['target_id']] . "\n";
           $node->set('field_landing_page_c_secondary', $secondary_campaigns[$node->field_landing_page_c_secondary->getValue()[0]['target_id']]);
           $node->setNewRevision(FALSE);
           $node->save();
