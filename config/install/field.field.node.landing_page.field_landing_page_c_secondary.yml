@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - block_content.type.campaign
     - block_content.type.campaign_with_video
     - field.storage.node.field_landing_page_c_secondary
     - node.type.landing_page
@@ -19,6 +20,7 @@ settings:
   handler: 'default:block_content'
   handler_settings:
     target_bundles:
+      campaign: campaign
       campaign_with_video: campaign_with_video
     sort:
       field: _none

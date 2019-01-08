@@ -1,14 +1,12 @@
-uuid: 1fbd3a16-cea7-484f-9c18-36e3919c546f
 langcode: en
 status: true
 dependencies:
   config:
     - block_content.type.campaign_with_video
-    - entity_browser.browser.tide_image_browser
+    - entity_browser.browser.tide_embedded_video_browser
     - field.field.block_content.campaign_with_video.body
     - field.field.block_content.campaign_with_video.field_block_cta
     - field.field.block_content.campaign_with_video.field_block_embedded_video
-    - field.field.block_content.campaign_with_video.field_block_image
     - field.field.block_content.campaign_with_video.field_block_title
   module:
     - entity_browser
@@ -47,21 +45,6 @@ content:
       field_widget_replace: false
       open: false
       field_widget_display_settings: {  }
-    third_party_settings: {  }
-    type: entity_browser_entity_reference
-    region: content
-  field_block_image:
-    weight: 3
-    settings:
-      entity_browser: tide_image_browser
-      field_widget_display: rendered_entity
-      field_widget_edit: true
-      field_widget_remove: true
-      selection_mode: selection_append
-      field_widget_display_settings:
-        view_mode: default
-      field_widget_replace: false
-      open: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content

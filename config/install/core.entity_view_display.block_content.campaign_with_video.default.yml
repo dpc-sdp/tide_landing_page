@@ -1,4 +1,3 @@
-uuid: 8fc6b9ac-f780-4617-b30d-fc88c9ed0a0f
 langcode: en
 status: true
 dependencies:
@@ -7,7 +6,6 @@ dependencies:
     - field.field.block_content.campaign_with_video.body
     - field.field.block_content.campaign_with_video.field_block_cta
     - field.field.block_content.campaign_with_video.field_block_embedded_video
-    - field.field.block_content.campaign_with_video.field_block_image
     - field.field.block_content.campaign_with_video.field_block_title
   module:
     - link
@@ -44,14 +42,6 @@ content:
       view_mode: default
       link: false
     third_party_settings: {  }
-    region: content
-  field_block_image:
-    weight: 2
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
     region: content
   field_block_title:
     weight: 3
