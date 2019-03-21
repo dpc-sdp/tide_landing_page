@@ -4,14 +4,14 @@
     "type": "drupal-module",
     "license": "GPL-2.0-or-later",
     "require": {
-        "dpc-sdp/tide_core": "dev-feature/SDPA-1213_metatag_upgrade as 1.0",
-        "dpc-sdp/tide_event": "dev-feature/SDPA-1213_jsonapi_upgrade as 1.0",
-        "dpc-sdp/tide_media": "dev-feature/SDPA-1213_jsonapi_upgrade as 1.0"
+        "dpc-sdp/tide_core": "dev-develop",
+        "dpc-sdp/tide_event": "dev-develop",
+        "dpc-sdp/tide_media": "dev-develop"
     },
     "suggest": {
-        "dpc-sdp/tide_api:dev-feature/SDPA-1213_jsonapi_upgrade": "Allows to use Drupal in headless mode",
-        "dpc-sdp/tide_webform:dev-feature/SDPA-1213_jsonapi_upgrade": "Allows to use questionnaires",
-        "dpc-sdp/tide_news:dev-feature/SDPA-1213_jsonapi_upgrade": "News content type and related configuration for Tide Drupal 8 distribution"
+        "dpc-sdp/tide_api:dev-develop": "Allows to use Drupal in headless mode",
+        "dpc-sdp/tide_webform:dev-develop": "Allows to use questionnaires",
+        "dpc-sdp/tide_news:dev-develop": "News content type and related configuration for Tide Drupal 8 distribution"
     },
     "repositories": {
         "drupal": {
