@@ -52,7 +52,6 @@ config_devel:
     - core.entity_form_display.paragraph.latest_events.default
     - core.entity_view_display.paragraph.latest_events.default
     - core.entity_form_display.paragraph.media_gallery.default
-    - core.entity_form_display.paragraph.featured_news.default
     - core.entity_form_display.paragraph.hero_banner_with_cta.default
     - core.entity_form_display.paragraph.introduction_banner.default
     - core.entity_view_display.block_content.media_gallery.default
@@ -79,7 +78,6 @@ config_devel:
     - core.entity_view_display.paragraph.card_promotion_auto.default
     - core.entity_view_display.paragraph.card_promotion.default
     - core.entity_view_display.paragraph.embedded_search_form.default
-    - core.entity_view_display.paragraph.featured_news.default
     - core.entity_view_display.paragraph.hero_banner_with_cta.default
     - core.entity_view_display.paragraph.introduction_banner.default
     - core.entity_view_display.paragraph.keydates.default
@@ -284,8 +282,10 @@ config_devel:
     - field.field.node.landing_page.scheduled_publishing
   optional:
     - core.entity_form_display.paragraph.embedded_webform.default
+    - core.entity_form_display.paragraph.featured_news.default
     - core.entity_view_display.paragraph.embedded_webform.default
     - core.entity_view_display.paragraph.embedded_webform.preview
+    - core.entity_view_display.paragraph.featured_news.default
     - field.field.paragraph.embedded_webform.field_paragraph_title
     - field.field.paragraph.embedded_webform.field_paragraph_webform
     - jsonapi_extras.jsonapi_resource_config.node--landing_page
