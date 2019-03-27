@@ -50,7 +50,6 @@ settings:
       card_keydates: card_keydates
       call_to_action: call_to_action
       embedded_webform: embedded_webform
-      featured_news: featured_news
       news_listing: news_listing
       media_gallery: media_gallery
       card_event_auto: card_event_auto
