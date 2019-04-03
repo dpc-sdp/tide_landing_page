@@ -17,10 +17,8 @@ dependencies:
     - paragraphs.paragraphs_type.card_navigation_featured_auto
     - paragraphs.paragraphs_type.card_promotion
     - paragraphs.paragraphs_type.card_promotion_auto
-    - paragraphs.paragraphs_type.embedded_webform
     - paragraphs.paragraphs_type.latest_events
     - paragraphs.paragraphs_type.media_gallery
-    - paragraphs.paragraphs_type.news_listing
   module:
     - entity_reference_revisions
 id: node.landing_page.field_landing_page_component
@@ -50,8 +48,6 @@ settings:
       card_keydates: card_keydates
       call_to_action: call_to_action
       embedded_webform: embedded_webform
-      featured_news: featured_news
-      news_listing: news_listing
       media_gallery: media_gallery
       card_event_auto: card_event_auto
       latest_events: latest_events
