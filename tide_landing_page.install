@@ -336,3 +336,12 @@ function tide_landing_page_update_8006() {
     $fields['field_show_news_search']->delete();
   }
 }
+
+/**
+ * Forced update of the field using config from the module.
+ */
+function tide_landing_page_update_8007() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  _tide_import_single_config('field.field.paragraph.social_link.field_paragraph_link', $config_location);
+}
