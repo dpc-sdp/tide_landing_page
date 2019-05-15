@@ -6,7 +6,7 @@
     "require": {
         "dpc-sdp/tide_core": "1.2.1",
         "dpc-sdp/tide_event": "1.2.2",
-        "dpc-sdp/tide_media": "1.2.1"
+        "dpc-sdp/tide_media": "1.2.2"
     },
     "suggest": {
         "dpc-sdp/tide_api:1.2.3": "Allows to use Drupal in headless mode",
