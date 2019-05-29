@@ -345,3 +345,22 @@ function tide_landing_page_update_8007() {
   $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
   _tide_import_single_config('field.field.paragraph.social_link.field_paragraph_link', $config_location);
 }
+
+/**
+ * Summary field in carousal Card event is restricted to 200 characters.
+ */
+function tide_landing_page_update_8008() {
+  /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $entity_form_display */
+  $entity_form_display = Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('paragraph.card_event.default');
+  $field_paragraph_summary = $entity_form_display->getComponent('field_paragraph_summary');
+  if (!$field_paragraph_summary['third_party_settings']) {
+    $entity_form_display->setComponent('field_paragraph_summary', ['third_party_settings' => ['maxlength' => ['maxlength_js' => 200]]]);
+    $entity_form_display->save();
+  }
+  elseif (isset($field_paragraph_summary['third_party_settings']['maxlength']['maxlength_js']) && $field_paragraph_summary['third_party_settings']['maxlength']['maxlength_js'] !== 200) {
+    $entity_form_display->setComponent('field_paragraph_summary', ['third_party_settings' => ['maxlength' => ['maxlength_js' => 200]]]);
+    $entity_form_display->save();
+  }
+}
