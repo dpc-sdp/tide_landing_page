@@ -345,3 +345,42 @@ function tide_landing_page_update_8007() {
   $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
   _tide_import_single_config('field.field.paragraph.social_link.field_paragraph_link', $config_location);
 }
+
+/**
+ * Add Complex Image component.
+ */
+function tide_landing_page_update_8008() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $configs = [
+    'paragraphs.paragraphs_type.complex_image',
+    'field.storage.paragraph.field_complex_image_caption',
+    'field.storage.paragraph.field_complex_image_data',
+    'field.storage.paragraph.field_complex_image_dl_label',
+    'field.storage.paragraph.field_complex_image_full_label',
+    'field.storage.paragraph.field_complex_image_media',
+    'field.storage.paragraph.field_complex_image_source',
+    'field.storage.paragraph.field_complex_image_title',
+    'field.field.paragraph.complex_image.field_complex_image_caption',
+    'field.field.paragraph.complex_image.field_complex_image_data',
+    'field.field.paragraph.complex_image.field_complex_image_dl_label',
+    'field.field.paragraph.complex_image.field_complex_image_full_label',
+    'field.field.paragraph.complex_image.field_complex_image_media',
+    'field.field.paragraph.complex_image.field_complex_image_source',
+    'field.field.paragraph.complex_image.field_complex_image_title',
+    'core.entity_form_display.paragraph.complex_image.default',
+    'core.entity_view_display.paragraph.complex_image.default',
+  ];
+
+  foreach ($configs as $config) {
+    _tide_import_single_config($config, $config_location);
+  }
+
+  $field_config = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
+  if ($field_config) {
+    $handler_settings = $field_config->getSetting('handler_settings');
+    $handler_settings['target_bundles']['complex_image'] = 'complex_image';
+    $field_config->setSetting('handler_settings', $handler_settings);
+    $field_config->save();
+  }
+}
