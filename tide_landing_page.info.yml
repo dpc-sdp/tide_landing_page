@@ -46,6 +46,7 @@ config_devel:
     - core.entity_form_display.paragraph.card_navigation_featured_auto.default
     - core.entity_form_display.paragraph.card_promotion.default
     - core.entity_form_display.paragraph.card_promotion_auto.default
+    - core.entity_form_display.paragraph.complex_image.default
     - core.entity_form_display.paragraph.embedded_search_form.default
     - core.entity_form_display.paragraph.key_journeys.default
     - core.entity_form_display.paragraph.keydates.default
@@ -77,6 +78,7 @@ config_devel:
     - core.entity_view_display.paragraph.card_promotion.default
     - core.entity_view_display.paragraph.card_promotion_auto.default
     - core.entity_view_display.paragraph.card_promotion.default
+    - core.entity_view_display.paragraph.complex_image.default
     - core.entity_view_display.paragraph.embedded_search_form.default
     - core.entity_view_display.paragraph.hero_banner_with_cta.default
     - core.entity_view_display.paragraph.introduction_banner.default
@@ -88,7 +90,7 @@ config_devel:
     - core.entity_form_display.paragraph.phone.default
     - core.entity_form_display.paragraph.social_link.default
     - core.entity_view_display.paragraph.contact_us.default
-    - core.entity_view_display.paragraph.news_listing.default.yml
+    - core.entity_view_display.paragraph.news_listing.default
     - core.entity_view_display.paragraph.phone.default
     - core.entity_view_display.paragraph.social_link.default
     - field.field.block_content.campaign.body
@@ -169,6 +171,13 @@ config_devel:
     - field.field.paragraph.card_promotion.field_paragraph_topic
     - field.field.paragraph.card_promotion_auto.field_paragraph_reference
     - field.field.paragraph.card_promotion_auto.field_paragraph_cta_text
+    - field.field.paragraph.complex_image.field_complex_image_caption
+    - field.field.paragraph.complex_image.field_complex_image_data
+    - field.field.paragraph.complex_image.field_complex_image_dl_label
+    - field.field.paragraph.complex_image.field_complex_image_full_label
+    - field.field.paragraph.complex_image.field_complex_image_media
+    - field.field.paragraph.complex_image.field_complex_image_source
+    - field.field.paragraph.complex_image.field_complex_image_title
     - field.field.paragraph.embedded_search_form.field_paragraph_search_block
     - field.field.paragraph.hero_banner_with_cta.field_paragraph_background_image
     - field.field.paragraph.hero_banner_with_cta.field_paragraph_cta
@@ -232,6 +241,13 @@ config_devel:
     - field.storage.paragraph.field_paragraph_cta_card_event
     - field.storage.paragraph.field_paragraph_cta_style
     - field.storage.paragraph.field_paragraph_cta_text
+    - field.storage.paragraph.field_complex_image_caption
+    - field.storage.paragraph.field_complex_image_data
+    - field.storage.paragraph.field_complex_image_dl_label
+    - field.storage.paragraph.field_complex_image_full_label
+    - field.storage.paragraph.field_complex_image_media
+    - field.storage.paragraph.field_complex_image_source
+    - field.storage.paragraph.field_complex_image_title
     - field.storage.paragraph.field_paragraph_date
     - field.storage.paragraph.field_paragraph_freetext
     - field.storage.paragraph.field_paragraph_location
@@ -267,6 +283,7 @@ config_devel:
     - paragraphs.paragraphs_type.card_navigation_featured_auto
     - paragraphs.paragraphs_type.card_promotion
     - paragraphs.paragraphs_type.card_promotion_auto
+    - paragraphs.paragraphs_type.complex_image
     - paragraphs.paragraphs_type.embedded_search_form
     - paragraphs.paragraphs_type.hero_banner_with_cta
     - paragraphs.paragraphs_type.introduction_banner
