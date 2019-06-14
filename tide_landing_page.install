@@ -354,15 +354,15 @@ function tide_landing_page_update_8008() {
   $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
   $configs = [
     'paragraphs.paragraphs_type.complex_image',
-    'field.storage.paragraph.field_complex_image_caption',
     'field.storage.paragraph.field_complex_image_data',
+    'field.storage.paragraph.field_complex_image_data_label',
     'field.storage.paragraph.field_complex_image_dl_label',
     'field.storage.paragraph.field_complex_image_full_label',
     'field.storage.paragraph.field_complex_image_media',
     'field.storage.paragraph.field_complex_image_source',
     'field.storage.paragraph.field_complex_image_title',
-    'field.field.paragraph.complex_image.field_complex_image_caption',
     'field.field.paragraph.complex_image.field_complex_image_data',
+    'field.field.paragraph.complex_image.field_complex_image_data_label',
     'field.field.paragraph.complex_image.field_complex_image_dl_label',
     'field.field.paragraph.complex_image.field_complex_image_full_label',
     'field.field.paragraph.complex_image.field_complex_image_media',
