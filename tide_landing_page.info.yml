@@ -46,14 +46,13 @@ config_devel:
     - core.entity_form_display.paragraph.card_navigation_featured_auto.default
     - core.entity_form_display.paragraph.card_promotion.default
     - core.entity_form_display.paragraph.card_promotion_auto.default
+    - core.entity_form_display.paragraph.complex_image.default
     - core.entity_form_display.paragraph.embedded_search_form.default
     - core.entity_form_display.paragraph.key_journeys.default
     - core.entity_form_display.paragraph.keydates.default
     - core.entity_form_display.paragraph.latest_events.default
     - core.entity_view_display.paragraph.latest_events.default
     - core.entity_form_display.paragraph.media_gallery.default
-    - core.entity_form_display.paragraph.embedded_webform.default
-    - core.entity_form_display.paragraph.featured_news.default
     - core.entity_form_display.paragraph.hero_banner_with_cta.default
     - core.entity_form_display.paragraph.introduction_banner.default
     - core.entity_view_display.block_content.media_gallery.default
@@ -79,10 +78,8 @@ config_devel:
     - core.entity_view_display.paragraph.card_promotion.default
     - core.entity_view_display.paragraph.card_promotion_auto.default
     - core.entity_view_display.paragraph.card_promotion.default
+    - core.entity_view_display.paragraph.complex_image.default
     - core.entity_view_display.paragraph.embedded_search_form.default
-    - core.entity_view_display.paragraph.embedded_webform.default
-    - core.entity_view_display.paragraph.embedded_webform.preview
-    - core.entity_view_display.paragraph.featured_news.default
     - core.entity_view_display.paragraph.hero_banner_with_cta.default
     - core.entity_view_display.paragraph.introduction_banner.default
     - core.entity_view_display.paragraph.keydates.default
@@ -93,7 +90,7 @@ config_devel:
     - core.entity_form_display.paragraph.phone.default
     - core.entity_form_display.paragraph.social_link.default
     - core.entity_view_display.paragraph.contact_us.default
-    - core.entity_view_display.paragraph.news_listing.default.yml
+    - core.entity_view_display.paragraph.news_listing.default
     - core.entity_view_display.paragraph.phone.default
     - core.entity_view_display.paragraph.social_link.default
     - field.field.block_content.campaign.body
@@ -174,6 +171,13 @@ config_devel:
     - field.field.paragraph.card_promotion.field_paragraph_topic
     - field.field.paragraph.card_promotion_auto.field_paragraph_reference
     - field.field.paragraph.card_promotion_auto.field_paragraph_cta_text
+    - field.field.paragraph.complex_image.field_complex_image_data
+    - field.field.paragraph.complex_image.field_complex_image_data_label
+    - field.field.paragraph.complex_image.field_complex_image_dl_label
+    - field.field.paragraph.complex_image.field_complex_image_full_label
+    - field.field.paragraph.complex_image.field_complex_image_media
+    - field.field.paragraph.complex_image.field_complex_image_source
+    - field.field.paragraph.complex_image.field_complex_image_title
     - field.field.paragraph.embedded_search_form.field_paragraph_search_block
     - field.field.paragraph.hero_banner_with_cta.field_paragraph_background_image
     - field.field.paragraph.hero_banner_with_cta.field_paragraph_cta
@@ -204,8 +208,6 @@ config_devel:
     - field.field.paragraph.contact_us.field_paragraph_phones
     - field.field.paragraph.contact_us.field_paragraph_social_media
     - field.field.paragraph.contact_us.field_paragraph_title
-    - field.field.paragraph.embedded_webform.field_paragraph_title
-    - field.field.paragraph.embedded_webform.field_paragraph_webform
     - field.field.paragraph.featured_news.field_paragraph_news_reference
     - field.field.paragraph.phone.field_paragraph_phone_number
     - field.field.paragraph.phone.field_paragraph_phone_title
@@ -239,6 +241,13 @@ config_devel:
     - field.storage.paragraph.field_paragraph_cta_card_event
     - field.storage.paragraph.field_paragraph_cta_style
     - field.storage.paragraph.field_paragraph_cta_text
+    - field.storage.paragraph.field_complex_image_data
+    - field.storage.paragraph.field_complex_image_data_label
+    - field.storage.paragraph.field_complex_image_dl_label
+    - field.storage.paragraph.field_complex_image_full_label
+    - field.storage.paragraph.field_complex_image_media
+    - field.storage.paragraph.field_complex_image_source
+    - field.storage.paragraph.field_complex_image_title
     - field.storage.paragraph.field_paragraph_date
     - field.storage.paragraph.field_paragraph_freetext
     - field.storage.paragraph.field_paragraph_location
@@ -274,8 +283,8 @@ config_devel:
     - paragraphs.paragraphs_type.card_navigation_featured_auto
     - paragraphs.paragraphs_type.card_promotion
     - paragraphs.paragraphs_type.card_promotion_auto
+    - paragraphs.paragraphs_type.complex_image
     - paragraphs.paragraphs_type.embedded_search_form
-    - paragraphs.paragraphs_type.embedded_webform
     - paragraphs.paragraphs_type.hero_banner_with_cta
     - paragraphs.paragraphs_type.introduction_banner
     - paragraphs.paragraphs_type.key_journeys
@@ -283,13 +292,19 @@ config_devel:
     - paragraphs.paragraphs_type.latest_events
     - paragraphs.paragraphs_type.media_gallery
     - paragraphs.paragraphs_type.contact_us
-    - paragraphs.paragraphs_type.news_listing
     - paragraphs.paragraphs_type.phone
     - paragraphs.paragraphs_type.social_link
     - paragraphs.paragraphs_type.timelines
     - field.field.node.landing_page.scheduled_archiving
     - field.field.node.landing_page.scheduled_publishing
   optional:
+    - core.entity_form_display.paragraph.embedded_webform.default
+    - core.entity_form_display.paragraph.featured_news.default
+    - core.entity_view_display.paragraph.embedded_webform.default
+    - core.entity_view_display.paragraph.embedded_webform.preview
+    - core.entity_view_display.paragraph.featured_news.default
+    - field.field.paragraph.embedded_webform.field_paragraph_title
+    - field.field.paragraph.embedded_webform.field_paragraph_webform
     - jsonapi_extras.jsonapi_resource_config.node--landing_page
     - jsonapi_extras.jsonapi_resource_config.block_content--campaign
     - jsonapi_extras.jsonapi_resource_config.block_content--media_gallery
@@ -307,3 +322,5 @@ config_devel:
     - jsonapi_extras.jsonapi_resource_config.paragraph--keydates
     - jsonapi_extras.jsonapi_resource_config.paragraph--media_gallery
     - jsonapi_extras.jsonapi_resource_config.paragraph--social_link
+    - paragraphs.paragraphs_type.embedded_webform
+    - paragraphs.paragraphs_type.news_listing
