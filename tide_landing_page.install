@@ -403,4 +403,3 @@ function tide_landing_page_update_8009() {
     $entity_form_display->save();
   }
 }
-
