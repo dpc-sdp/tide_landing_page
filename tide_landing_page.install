@@ -394,11 +394,7 @@ function tide_landing_page_update_8009() {
     ->getStorage('entity_form_display')
     ->load('paragraph.card_event.default');
   $field_paragraph_summary = $entity_form_display->getComponent('field_paragraph_summary');
-  if (!$field_paragraph_summary['third_party_settings']) {
-    $entity_form_display->setComponent('field_paragraph_summary', ['third_party_settings' => ['maxlength' => ['maxlength_js' => 200]]]);
-    $entity_form_display->save();
-  }
-  elseif (isset($field_paragraph_summary['third_party_settings']['maxlength']['maxlength_js']) && $field_paragraph_summary['third_party_settings']['maxlength']['maxlength_js'] !== 200) {
+  if (!$field_paragraph_summary['third_party_settings'] || !$field_paragraph_summary['third_party_settings']['maxlength']['maxlength_js']) {
     $entity_form_display->setComponent('field_paragraph_summary', ['third_party_settings' => ['maxlength' => ['maxlength_js' => 200]]]);
     $entity_form_display->save();
   }
