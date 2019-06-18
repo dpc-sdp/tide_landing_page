@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: complex_image
+label: 'Complex Image'
+icon_uuid: null
+description: 'Provides images with source, caption, and data table.'
+behavior_plugins: {  }

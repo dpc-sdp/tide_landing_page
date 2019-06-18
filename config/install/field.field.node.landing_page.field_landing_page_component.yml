@@ -17,6 +17,7 @@ dependencies:
     - paragraphs.paragraphs_type.card_navigation_featured_auto
     - paragraphs.paragraphs_type.card_promotion
     - paragraphs.paragraphs_type.card_promotion_auto
+    - paragraphs.paragraphs_type.complex_image
     - paragraphs.paragraphs_type.latest_events
     - paragraphs.paragraphs_type.media_gallery
   module:
@@ -47,6 +48,7 @@ settings:
       card_navigation_auto: card_navigation_auto
       card_keydates: card_keydates
       call_to_action: call_to_action
+      complex_image: complex_image
       embedded_webform: embedded_webform
       media_gallery: media_gallery
       card_event_auto: card_event_auto
@@ -70,6 +72,9 @@ settings:
         enabled: true
         weight: -29
       card_promotion_auto:
+        enabled: true
+        weight: -28
+      complex_image:
         enabled: true
         weight: -28
       key_journeys:
