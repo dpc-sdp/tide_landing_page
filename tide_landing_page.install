@@ -384,3 +384,14 @@ function tide_landing_page_update_8008() {
     $field_config->save();
   }
 }
+
+/**
+ * Fixed missing disabled property in JSON:API Resource config of Card Event.
+ */
+function tide_landing_page_update_8009() {
+  if (\Drupal::moduleHandler()->moduleExists('jsonapi_extras')) {
+    module_load_include('inc', 'tide_core', 'includes/helpers');
+    $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/optional'];
+    _tide_import_single_config('jsonapi_extras.jsonapi_resource_config.paragraph--card_event', $config_location);
+  }
+}
