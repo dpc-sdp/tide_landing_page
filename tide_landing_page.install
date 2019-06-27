@@ -384,3 +384,27 @@ function tide_landing_page_update_8008() {
     $field_config->save();
   }
 }
+
+/**
+ * Summary field in carousal Card event is restricted to 200 characters.
+ */
+function tide_landing_page_update_8009() {
+  /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $entity_form_display */
+  $entity_form_display = Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('paragraph.card_event.default');
+  $field_paragraph_summary = $entity_form_display->getComponent('field_paragraph_summary');
+  if (!isset($field_paragraph_summary['third_party_settings']) || !isset($field_paragraph_summary['third_party_settings']['maxlength']['maxlength_js'])) {
+    $entity_form_display->setComponent('field_paragraph_summary', [
+      'third_party_settings' => [
+        'maxlength' => [
+          'maxlength_js' => 200,
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: @remaining',
+          'maxlength_js_enforce' => FALSE,
+          'maxlength_js_truncate_html' => FALSE,
+        ],
+      ],
+    ]);
+    $entity_form_display->save();
+  }
+}
