@@ -241,8 +241,6 @@ content:
     region: content
 hidden:
   field_landing_page_summary: true
-  field_node_primary_site: true
-  field_node_site: true
   field_show_content_rating: true
   field_show_related_content: true
   field_show_social_sharing: true

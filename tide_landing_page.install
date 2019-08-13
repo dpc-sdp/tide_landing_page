@@ -384,3 +384,65 @@ function tide_landing_page_update_8008() {
     $field_config->save();
   }
 }
+
+/**
+ * Summary field in carousal Card event is restricted to 200 characters.
+ */
+function tide_landing_page_update_8009() {
+  /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $entity_form_display */
+  $entity_form_display = Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('paragraph.card_event.default');
+  $field_paragraph_summary = $entity_form_display->getComponent('field_paragraph_summary');
+  if (!isset($field_paragraph_summary['third_party_settings']) || !isset($field_paragraph_summary['third_party_settings']['maxlength']['maxlength_js'])) {
+    $field_paragraph_summary['third_party_settings'] = [
+      'maxlength' => [
+        'maxlength_js' => 200,
+        'maxlength_js_label' => 'Content limited to @limit characters, remaining: @remaining',
+        'maxlength_js_enforce' => FALSE,
+        'maxlength_js_truncate_html' => FALSE,
+      ],
+    ];
+    $entity_form_display->setComponent('field_paragraph_summary', $field_paragraph_summary);
+    $entity_form_display->save();
+  }
+}
+
+/**
+ * Adds field Show Acknowledgement of Country.
+ */
+function tide_landing_page_update_8010() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $configs = [
+    'field.storage.node.field_show_ack_of_country',
+    'field.field.node.landing_page.field_show_ack_of_country',
+  ];
+  foreach ($configs as $config) {
+    _tide_import_single_config($config, $config_location);
+  }
+
+  /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $entity_form_display */
+  $entity_form_display = Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('node.landing_page.default');
+  if ($entity_form_display) {
+    $entity_form_display->setComponent('field_show_ack_of_country', [
+      'weight' => 40,
+      'settings' => ['display_label' => TRUE],
+      'third_party_settings' => [],
+      'type' => 'boolean_checkbox',
+      'region' => 'content',
+    ]);
+
+    $field_group = $entity_form_display->getThirdPartySettings('field_group');
+    if (!empty($field_group['group_header_content']['children'])) {
+      if (!in_array('field_show_ack_of_country', $field_group['group_header_content']['children'])) {
+        $field_group['group_header_content']['children'][] = 'field_show_ack_of_country';
+        $entity_form_display->setThirdPartySetting('field_group', 'group_header_content', $field_group['group_header_content']);
+      }
+    }
+
+    $entity_form_display->save();
+  }
+}
