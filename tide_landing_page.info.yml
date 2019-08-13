@@ -109,6 +109,7 @@ config_devel:
     - field.field.node.landing_page.field_featured_image
     - field.field.node.landing_page.field_graphical_image
     - field.field.node.landing_page.field_bottom_graphical_image
+    - field.field.node.landing_page.field_browse_by_topics
     - field.field.node.landing_page.field_landing_page_hero_image
     - field.field.node.landing_page.field_landing_page_hero_theme
     - field.field.node.landing_page.field_landing_page_c_primary
@@ -120,6 +121,7 @@ config_devel:
     - field.field.node.landing_page.field_metatags
     - field.field.node.landing_page.field_related_links
     - field.field.node.landing_page.field_show_ack_of_country
+    - field.field.node.landing_page.field_show_browse_by_topics
     - field.field.node.landing_page.field_show_content_rating
     - field.field.node.landing_page.field_show_related_content
     - field.field.node.landing_page.field_show_social_sharing
@@ -222,6 +224,7 @@ config_devel:
     - field.storage.block_content.field_gallery_media
     - field.storage.block_content.field_block_embedded_video
     - field.storage.paragraph.field_paragraph_media_gallery
+    - field.storage.node.field_browse_by_topics
     - field.storage.node.field_landing_page_c_secondary
     - field.storage.node.field_landing_page_c_primary
     - field.storage.node.field_landing_page_component
@@ -235,6 +238,7 @@ config_devel:
     - field.storage.node.field_graphical_image
     - field.storage.node.field_bottom_graphical_image
     - field.storage.node.field_show_ack_of_country
+    - field.storage.node.field_show_browse_by_topics
     - field.storage.paragraph.field_paragraph_accordion
     - field.storage.paragraph.field_paragraph_accordion_body
     - field.storage.paragraph.field_paragraph_accordion_name

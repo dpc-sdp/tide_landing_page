@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.landing_page.field_bottom_graphical_image
     - field.field.node.landing_page.field_featured_image
     - field.field.node.landing_page.field_graphical_image
+    - field.field.node.landing_page.field_browse_by_topics
     - field.field.node.landing_page.field_landing_page_bg_colour
     - field.field.node.landing_page.field_landing_page_c_primary
     - field.field.node.landing_page.field_landing_page_c_secondary
@@ -23,6 +24,7 @@ dependencies:
     - field.field.node.landing_page.field_landing_page_summary
     - field.field.node.landing_page.field_metatags
     - field.field.node.landing_page.field_related_links
+    - field.field.node.landing_page.field_show_browse_by_topics
     - field.field.node.landing_page.field_show_ack_of_country
     - field.field.node.landing_page.field_show_content_rating
     - field.field.node.landing_page.field_show_related_content
@@ -68,6 +70,7 @@ third_party_settings:
       children:
         - group_site_section_navigation
         - group_related_links
+        - group_browse_by_topics
         - group_whats_next
         - group_contact_us
         - group_blocks
@@ -236,6 +239,21 @@ third_party_settings:
         classes: ''
       label: 'Header Content'
       region: content
+    group_browse_by_topics:
+      children:
+        - field_show_browse_by_topics
+        - field_browse_by_topics
+      parent_name: group_right_column
+      weight: 27
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: 'Browse by Topics'
+      region: content
 _core:
   default_config_hash: pN7fy_ZaJVA-sEQWPZUCiV_-5V5W_ZSuZ7Rbql6y5kg
 id: node.landing_page.default
@@ -263,6 +281,15 @@ content:
       open: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
+    region: content
+  field_browse_by_topics:
+    weight: 24
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_featured_image:
     weight: 1
@@ -488,6 +515,13 @@ content:
     region: content
   field_show_ack_of_country:
     weight: 40
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_show_browse_by_topics:
+    weight: 23
     settings:
       display_label: true
     third_party_settings: {  }
