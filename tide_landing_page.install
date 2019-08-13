@@ -328,7 +328,7 @@ function tide_landing_page_update_8005() {
  */
 function tide_landing_page_update_8006() {
   /* @var $entityFieldManager Drupal\Core\Entity\EntityFieldManager */
-  $entityFieldManager = Drupal::service('entity_field.manager');
+  $entityFieldManager = \Drupal::service('entity_field.manager');
 
   $fields = $entityFieldManager->getFieldDefinitions('node', 'landing_page');
 
@@ -390,7 +390,7 @@ function tide_landing_page_update_8008() {
  */
 function tide_landing_page_update_8009() {
   /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $entity_form_display */
-  $entity_form_display = Drupal::entityTypeManager()
+  $entity_form_display = \Drupal::entityTypeManager()
     ->getStorage('entity_form_display')
     ->load('paragraph.card_event.default');
   $field_paragraph_summary = $entity_form_display->getComponent('field_paragraph_summary');
@@ -423,7 +423,7 @@ function tide_landing_page_update_8010() {
   }
 
   /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $entity_form_display */
-  $entity_form_display = Drupal::entityTypeManager()
+  $entity_form_display = \Drupal::entityTypeManager()
     ->getStorage('entity_form_display')
     ->load('node.landing_page.default');
   if ($entity_form_display) {
@@ -440,6 +440,87 @@ function tide_landing_page_update_8010() {
       if (!in_array('field_show_ack_of_country', $field_group['group_header_content']['children'])) {
         $field_group['group_header_content']['children'][] = 'field_show_ack_of_country';
         $entity_form_display->setThirdPartySetting('field_group', 'group_header_content', $field_group['group_header_content']);
+      }
+    }
+
+    $entity_form_display->save();
+  }
+}
+
+/**
+ * Add Browse by Topics field.
+ */
+function tide_landing_page_update_8011() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $configs = [
+    'field.storage.node.field_browse_by_topics',
+    'field.storage.node.field_show_browse_by_topics',
+    'field.field.node.landing_page.field_browse_by_topics',
+    'field.field.node.landing_page.field_show_browse_by_topics',
+  ];
+  foreach ($configs as $config) {
+    _tide_import_single_config($config, $config_location);
+  }
+
+  /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $entity_form_display */
+  $entity_form_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('node.landing_page.default');
+  if ($entity_form_display) {
+    $entity_form_display->setComponent('field_show_browse_by_topics', [
+      'weight' => 23,
+      'settings' => ['display_label' => TRUE],
+      'third_party_settings' => [],
+      'type' => 'boolean_checkbox',
+      'region' => 'content',
+    ]);
+    $entity_form_display->setComponent('field_browse_by_topics', [
+      'weight' => 24,
+      'settings' => [
+        'match_operator' => 'CONTAINS',
+        'size' => 60,
+        'placeholder' => '',
+      ],
+      'third_party_settings' => [],
+      'type' => 'boolean_checkbox',
+      'region' => 'content',
+    ]);
+
+    $field_group = $entity_form_display->getThirdPartySettings('field_group');
+    // Create 'Browse by Topics' group.
+    $field_group['group_browse_by_topics'] = [
+      'children' => [
+        'field_show_browse_by_topics',
+        'field_browse_by_topics',
+      ],
+      'parent_name' => 'group_right_column',
+      'weight' => 27,
+      'format_type' => 'tab',
+      'format_settings' => [
+        'id' => '',
+        'classes' => '',
+        'description' => '',
+        'formatter' => 'closed',
+        'required_fields' => TRUE,
+      ],
+      'label' => 'Browse by Topics',
+      'region' => 'content',
+    ];
+    $entity_form_display->setThirdPartySetting('field_group', 'group_browse_by_topics', $field_group['group_browse_by_topics']);
+
+    // Insert 'Browse by Topics' group after 'Related links' in Right Column.
+    if (!empty($field_group['group_right_column']['children'])) {
+      if (!in_array('group_browse_by_topics', $field_group['group_right_column']['children'])) {
+        $group_related_links_position = array_search('group_related_links', $field_group['group_right_column']['children']);
+        if ($group_related_links_position === FALSE) {
+          $field_group['group_right_column']['children'][] = 'group_browse_by_topics';
+        }
+        else {
+          $remaining = array_splice($field_group['group_right_column']['children'], $group_related_links_position, count($field_group['group_right_column']['children']), 'group_browse_by_topics');
+          $field_group['group_right_column']['children'] = array_merge($field_group['group_right_column']['children'], $remaining);
+        }
+        $entity_form_display->setThirdPartySetting('field_group', 'group_right_column', $field_group['group_right_column']);
       }
     }
 
