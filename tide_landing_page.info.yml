@@ -119,6 +119,7 @@ config_devel:
     - field.field.node.landing_page.field_landing_page_key_journeys
     - field.field.node.landing_page.field_metatags
     - field.field.node.landing_page.field_related_links
+    - field.field.node.landing_page.field_show_ack_of_country
     - field.field.node.landing_page.field_show_content_rating
     - field.field.node.landing_page.field_show_related_content
     - field.field.node.landing_page.field_show_social_sharing
@@ -201,6 +202,7 @@ config_devel:
     - field.field.node.landing_page.field_landing_page_contact
     - field.field.node.landing_page.field_landing_page_show_contact
     - field.field.node.landing_page.field_landing_page_summary
+    - field.field.node.landing_page.field_show_content_rating
     - field.field.paragraph.contact_us.field_paragraph_body
     - field.field.paragraph.contact_us.field_paragraph_email
     - field.field.paragraph.contact_us.field_paragraph_location
@@ -232,6 +234,7 @@ config_devel:
     - field.storage.node.field_landing_page_summary
     - field.storage.node.field_graphical_image
     - field.storage.node.field_bottom_graphical_image
+    - field.storage.node.field_show_ack_of_country
     - field.storage.paragraph.field_paragraph_accordion
     - field.storage.paragraph.field_paragraph_accordion_body
     - field.storage.paragraph.field_paragraph_accordion_name
