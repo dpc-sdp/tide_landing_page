@@ -31,8 +31,6 @@ dependencies:
     - field.field.node.landing_page.field_tags
     - field.field.node.landing_page.field_topic
     - field.field.node.landing_page.field_whats_next
-    - field.field.node.landing_page.scheduled_archiving
-    - field.field.node.landing_page.scheduled_publishing
     - node.type.landing_page
   module:
     - entity_reference_revisions
@@ -248,5 +246,3 @@ hidden:
   field_show_whats_next: true
   field_whats_next: true
   links: true
-  scheduled_archiving: true
-  scheduled_publishing: true
