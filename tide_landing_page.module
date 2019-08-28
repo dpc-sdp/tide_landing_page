@@ -76,5 +76,11 @@ function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form
     if (!\Drupal::moduleHandler()->moduleExists('tide_site')) {
       $form['field_show_ack_of_country']['#attributes']['class'][] = 'hidden';
     }
+
+    // Move Show Hero Image caption checkbox to Hero Image field group.
+    if (isset($form['field_show_hero_image_caption']) && isset($form['field_landing_page_hero_image']['widget'])) {
+      $form['field_landing_page_hero_image']['widget']['field_show_hero_image_caption'] = $form['field_show_hero_image_caption'];
+      unset($form['field_show_hero_image_caption']);
+    }
   }
 }

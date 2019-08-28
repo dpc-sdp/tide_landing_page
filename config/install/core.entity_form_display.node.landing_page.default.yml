@@ -25,6 +25,7 @@ dependencies:
     - field.field.node.landing_page.field_related_links
     - field.field.node.landing_page.field_show_ack_of_country
     - field.field.node.landing_page.field_show_content_rating
+    - field.field.node.landing_page.field_show_hero_image_caption
     - field.field.node.landing_page.field_show_related_content
     - field.field.node.landing_page.field_show_site_section_nav
     - field.field.node.landing_page.field_show_social_sharing
@@ -499,6 +500,13 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  field_show_hero_image_caption:
+    weight: 42
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_show_related_content:
     weight: 37
     settings:
