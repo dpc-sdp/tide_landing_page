@@ -457,3 +457,37 @@ function tide_landing_page_update_8011() {
     _tide_import_single_config('jsonapi_extras.jsonapi_resource_config.paragraph--card_event', $config_location);
   }
 }
+
+/**
+ * Add Show Primary Campaign caption field.
+ */
+function tide_landing_page_update_8012() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  _tide_import_single_config('field.storage.node.field_show_c_primary_caption', $config_location);
+  _tide_import_single_config('field.field.node.landing_page.field_show_c_primary_caption', $config_location);
+
+  /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $entity_form_display */
+  $entity_form_display = Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('node.landing_page.default');
+  if ($entity_form_display) {
+    $entity_form_display->setComponent('field_show_c_primary_caption', [
+      'weight' => 41,
+      'settings' => ['display_label' => TRUE],
+      'third_party_settings' => [],
+      'type' => 'boolean_checkbox',
+      'region' => 'content',
+    ]);
+
+    $field_group = $entity_form_display->getThirdPartySettings('field_group');
+    if (!empty($field_group['group_top_banner']['children'])) {
+      if (!in_array('field_show_c_primary_caption', $field_group['group_top_banner']['children'])) {
+        $field_group['group_top_banner']['children'][] = 'field_show_c_primary_caption';
+        $entity_form_display->setThirdPartySetting('field_group', 'group_top_banner', $field_group['group_top_banner']);
+      }
+    }
+
+    $entity_form_display->save();
+  }
+}
