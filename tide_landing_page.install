@@ -459,9 +459,19 @@ function tide_landing_page_update_8011() {
 }
 
 /**
- * Add Show Primary Campaign caption field.
+ * Add Show Hero Image caption field.
  */
 function tide_landing_page_update_8012() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  _tide_import_single_config('field.storage.node.field_show_hero_image_caption', $config_location);
+  _tide_import_single_config('field.field.node.landing_page.field_show_hero_image_caption', $config_location);
+}
+
+/**
+ * Add Show Primary Campaign caption field.
+ */
+function tide_landing_page_update_8013() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
   $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
   _tide_import_single_config('field.storage.node.field_show_c_primary_caption', $config_location);
