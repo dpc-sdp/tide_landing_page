@@ -501,3 +501,19 @@ function tide_landing_page_update_8013() {
     $entity_form_display->save();
   }
 }
+
+/**
+ * Adds timeline paragraph type to field_landing_page_component.
+ */
+function tide_landing_page_update_8014() {
+  $field = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
+  if ($field) {
+    $handler_settings = $field->getSetting('handler_settings');
+    if (isset($handler_settings['target_bundles']) && !in_array('timelines', $handler_settings['target_bundles'])) {
+      $handler_settings['target_bundles']['timelines'] = 'timelines';
+      $handler_settings['target_bundles_drag_drop']['timelines']['enabled'] = TRUE;
+      $field->setSetting('handler_settings', $handler_settings);
+      $field->save();
+    }
+  }
+}
