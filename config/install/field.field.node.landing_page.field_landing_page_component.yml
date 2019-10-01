@@ -20,6 +20,7 @@ dependencies:
     - paragraphs.paragraphs_type.complex_image
     - paragraphs.paragraphs_type.latest_events
     - paragraphs.paragraphs_type.media_gallery
+    - paragraphs.paragraphs_type.timelines
   module:
     - entity_reference_revisions
 id: node.landing_page.field_landing_page_component
