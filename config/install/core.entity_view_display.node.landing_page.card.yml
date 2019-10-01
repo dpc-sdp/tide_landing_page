@@ -84,5 +84,3 @@ hidden:
   field_topic: true
   field_whats_next: true
   links: true
-  scheduled_archiving: true
-  scheduled_publishing: true
