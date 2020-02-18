@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: embedded_webform
-label: 'Embedded Webform'
+label: 'Embedded webform'
 icon_uuid: null
 description: ''
 behavior_plugins: {  }

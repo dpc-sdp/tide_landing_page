@@ -10,8 +10,8 @@ id: paragraph.social_link.field_paragraph_social_list
 field_name: field_paragraph_social_list
 entity_type: paragraph
 bundle: social_link
-label: 'Social Media'
-description: ''
+label: 'Social media'
+description: 'Select the channel from the dropdown list. '
 required: false
 translatable: false
 default_value: {  }

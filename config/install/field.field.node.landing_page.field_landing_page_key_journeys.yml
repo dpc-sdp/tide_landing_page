@@ -11,7 +11,7 @@ id: node.landing_page.field_landing_page_key_journeys
 field_name: field_landing_page_key_journeys
 entity_type: node
 bundle: landing_page
-label: 'Key Journeys'
+label: 'Key journeys'
 description: ''
 required: false
 translatable: false

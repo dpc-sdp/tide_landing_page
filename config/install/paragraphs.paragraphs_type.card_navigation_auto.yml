@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: card_navigation_auto
-label: 'Navigation Automated'
+label: 'Navigation automated'
 icon_uuid: null
 description: ''
 behavior_plugins: {  }

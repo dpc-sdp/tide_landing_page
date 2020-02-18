@@ -9,8 +9,8 @@ id: node.landing_page.field_landing_page_hero_image
 field_name: field_landing_page_hero_image
 entity_type: node
 bundle: landing_page
-label: 'Hero Image'
-description: 'Journey links will not be displayed if hero image is added'
+label: 'Hero image'
+description: 'Hero images display at the top of the page behind the page title. Must be 1600px wide x 600px high. If a hero image is used, key journey links will not display.'
 required: false
 translatable: false
 default_value: {  }

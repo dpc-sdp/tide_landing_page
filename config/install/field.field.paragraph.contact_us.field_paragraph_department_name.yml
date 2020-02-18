@@ -8,7 +8,7 @@ id: paragraph.contact_us.field_paragraph_department_name
 field_name: field_paragraph_department_name
 entity_type: paragraph
 bundle: contact_us
-label: 'Department Name'
+label: 'Department name'
 description: ''
 required: false
 translatable: false

@@ -10,7 +10,7 @@ id: paragraph.contact_us.field_paragraph_postal_address
 field_name: field_paragraph_postal_address
 entity_type: paragraph
 bundle: contact_us
-label: 'Postal Address'
+label: 'Postal address'
 description: ''
 required: false
 translatable: false

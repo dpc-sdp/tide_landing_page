@@ -10,8 +10,8 @@ id: node.landing_page.field_graphical_image
 field_name: field_graphical_image
 entity_type: node
 bundle: landing_page
-label: 'Top Graphical Image'
-description: 'The graphical image will not be displayed when a hero image is added.'
+label: 'Top graphical image'
+description: 'This can only be changed by administrators. The graphical image will not be displayed when a hero image is added.'
 required: false
 translatable: true
 default_value: {  }

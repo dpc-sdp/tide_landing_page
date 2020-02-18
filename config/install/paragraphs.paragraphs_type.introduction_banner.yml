@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: introduction_banner
-label: 'Introduction Banner'
+label: 'Introduction banner'
 icon_uuid: null
-description: ''
+description: 'This sits below the header section of the page (below the title and hero image). Only use this feature with admin approval. '
 behavior_plugins: {  }

@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: media_gallery
-label: 'Image Gallery'
+label: 'Image gallery'
 icon_uuid: null
 description: ''
 behavior_plugins: {  }

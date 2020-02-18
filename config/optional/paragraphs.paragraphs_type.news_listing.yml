@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: news_listing
-label: 'News Listing'
+label: 'News listing'
 icon_uuid: null
 description: ''
 behavior_plugins: {  }

@@ -9,8 +9,8 @@ id: node.landing_page.field_landing_page_c_primary
 field_name: field_landing_page_c_primary
 entity_type: node
 bundle: landing_page
-label: 'Primary Campaign'
-description: ''
+label: 'Primary campaign'
+description: 'Start typing the name of your custom block component to display your campaign. '
 required: false
 translatable: false
 default_value: {  }

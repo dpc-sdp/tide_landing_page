@@ -11,7 +11,7 @@ id: paragraph.contact_us.field_paragraph_social_media
 field_name: field_paragraph_social_media
 entity_type: paragraph
 bundle: contact_us
-label: 'Social Media'
+label: 'Social media'
 description: ''
 required: false
 translatable: false

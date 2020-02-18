@@ -102,7 +102,7 @@ third_party_settings:
         required_fields: true
         id: ''
         classes: ''
-      label: 'Page Header'
+      label: 'Page header'
       region: content
     group_top_banner:
       children:
@@ -117,7 +117,7 @@ third_party_settings:
         required_fields: true
         id: ''
         classes: ''
-      label: 'Primary Campaign'
+      label: 'Primary campaign'
       region: content
     group_components:
       children:
@@ -132,7 +132,7 @@ third_party_settings:
         required_fields: true
         id: ''
         classes: ''
-      label: 'Body Content'
+      label: 'Body content'
       region: content
     group_bottom_:
       children:
@@ -146,7 +146,7 @@ third_party_settings:
         required_fields: true
         id: ''
         classes: ''
-      label: 'Secondary Campaign'
+      label: 'Secondary campaign'
       region: content
     group_blocks:
       children:
@@ -190,7 +190,7 @@ third_party_settings:
         required_fields: true
         id: ''
         classes: ''
-      label: 'What''s Next'
+      label: 'What''s next'
       region: content
     group_contact_us:
       children:
@@ -220,7 +220,7 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-      label: 'Site-section Navigation'
+      label: 'Site-section navigation'
       region: content
     group_header_content:
       children:
@@ -235,7 +235,7 @@ third_party_settings:
         required_fields: true
         id: ''
         classes: ''
-      label: 'Header Content'
+      label: 'Header content'
       region: content
 _core:
   default_config_hash: pN7fy_ZaJVA-sEQWPZUCiV_-5V5W_ZSuZ7Rbql6y5kg

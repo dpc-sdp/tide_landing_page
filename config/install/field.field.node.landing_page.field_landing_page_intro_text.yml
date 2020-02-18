@@ -8,8 +8,8 @@ id: node.landing_page.field_landing_page_intro_text
 field_name: field_landing_page_intro_text
 entity_type: node
 bundle: landing_page
-label: 'Introduction Text'
-description: 'Add Introduction text for this landing page.'
+label: 'Introduction text'
+description: "Add a brief summary of the page. This displays under the page title."
 required: false
 translatable: false
 default_value: {  }

@@ -10,7 +10,7 @@ field_name: field_tags
 entity_type: node
 bundle: landing_page
 label: Tags
-description: 'Use <em>Tags</em> field to relate pages.'
+description: 'Tags are not mandatory. Start typing tags for audience groups who may be interested in this content. <a href="https://www.vic.gov.au/create-new-content-page#mandatory-fields-landing-page" target="_blank">See a list of tags</a>.'
 required: false
 translatable: true
 default_value: {  }
