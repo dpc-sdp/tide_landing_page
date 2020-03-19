@@ -522,11 +522,12 @@ function tide_landing_page_update_8014() {
  * Adds youtube option paragraph type to field_paragraph_social_list.
 */
 function tide_landing_page_update_8015() {
-  $field = FieldConfig::loadByName('paragraph', 'social_link', 'field_paragraph_social_list');
-  $new_field = $field->getSettings()['allowed_values'];
-  $new_field['youtube_channel'] = 'Youtube channel';
-  $field->setSettings([
-    'allowed_values' => $new_field,
-  ]);
-  $field->save();
+  $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_paragraph_social_list');
+  $new_field_storage = $field_storage->toArray();
+  $new_field_storage['settings']['allowed_values']['youtube_channel'] = 'Youtube channel';
+  $new_field_storage = FieldStorageConfig::create($new_field_storage);
+  $new_field_storage->original = $new_field_storage;
+  $new_field_storage->enforceIsNew(FALSE);
+
+  $new_field_storage->save();
 }
