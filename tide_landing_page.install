@@ -9,6 +9,7 @@ use Drupal\field\Entity\FieldConfig;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\search_api\Item\Field;
 use Drupal\workflows\Entity\Workflow;
+use Drupal\field\Entity\FieldStorageConfig;
 
 /**
  * Implements hook_install().
