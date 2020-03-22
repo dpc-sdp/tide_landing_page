@@ -22,6 +22,9 @@ settings:
     -
       value: instagram
       label: Instagram
+    -
+      value: youtube_channel
+      label: Youtube channel
   allowed_values_function: ''
 module: options
 locked: false
