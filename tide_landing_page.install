@@ -524,11 +524,10 @@ function tide_landing_page_update_8014() {
  */
 function tide_landing_page_update_8015() {
   $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_paragraph_social_list');
-  $new_field_storage = $field_storage->toArray();
-  $new_field_storage['settings']['allowed_values']['youtube_channel'] = 'Youtube channel';
-  $new_field_storage = FieldStorageConfig::create($new_field_storage);
-  $new_field_storage->original = $new_field_storage;
-  $new_field_storage->enforceIsNew(FALSE);
-
-  $new_field_storage->save();
+  $new_field = $field_storage->getSettings()['allowed_values'];
+  $new_field['youtube_channel'] = 'Youtube channel';
+  $field_storage->setSettings([
+    'allowed_values' => $new_field,
+  ]);
+  $field_storage->save();
 }
