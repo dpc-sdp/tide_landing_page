@@ -12,13 +12,16 @@ settings:
   allowed_values:
     -
       value: none
-      label: None
+      label: 'Full site search'
     -
       value: event
       label: Events
     -
       value: news
       label: News
+    -
+      value: custom
+      label: Custom
   allowed_values_function: ''
 module: options
 locked: false

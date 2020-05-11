@@ -84,3 +84,27 @@ function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form
     }
   }
 }
+
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ */
+function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormStateInterface $form_state, $context) {
+  if (!empty($element['#paragraph_type']) && $element['#paragraph_type'] == 'embedded_search_form') {
+    /** @var \Drupal\entity_reference_revisions\EntityReferenceRevisionsFieldItemList $items */
+    $items = $context['items'];
+    $parent_field = $items->getName();
+    $condition = [
+      ':input[name="' . $parent_field . '[' . $context['delta'] . '][subform][field_paragraph_search_block]"]' => ['value' => 'custom'],
+    ];
+    if (!empty($element['subform']['field_paragraph_search_url']['widget'][0]['value'])) {
+      $element['subform']['field_paragraph_search_url']['#states']['visible'] = $condition;
+      $element['subform']['field_paragraph_search_url']['widget'][0]['value']['#states']['required'] = $condition;
+    }
+    if (!empty($element['subform']['field_paragraph_search_ph'])) {
+      $element['subform']['field_paragraph_search_ph']['#states']['visible'] = $condition;
+    }
+    if (!empty($element['subform']['field_paragraph_search_target'])) {
+      $element['subform']['field_paragraph_search_target']['#states']['visible'] = $condition;
+    }
+  }
+}
