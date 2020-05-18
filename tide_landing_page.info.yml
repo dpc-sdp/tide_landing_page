@@ -170,6 +170,9 @@ config_devel:
     - field.field.paragraph.complex_image.field_complex_image_source
     - field.field.paragraph.complex_image.field_complex_image_title
     - field.field.paragraph.embedded_search_form.field_paragraph_search_block
+    - field.field.paragraph.embedded_search_form.field_paragraph_search_ph
+    - field.field.paragraph.embedded_search_form.field_paragraph_search_target
+    - field.field.paragraph.embedded_search_form.field_paragraph_search_url
     - field.field.paragraph.hero_banner_with_cta.field_paragraph_background_image
     - field.field.paragraph.hero_banner_with_cta.field_paragraph_cta
     - field.field.paragraph.hero_banner_with_cta.field_paragraph_freetext
@@ -256,6 +259,9 @@ config_devel:
     - field.storage.paragraph.field_paragraph_phone_title
     - field.storage.paragraph.field_paragraph_phones
     - field.storage.paragraph.field_paragraph_search_block
+    - field.storage.paragraph.field_paragraph_search_ph
+    - field.storage.paragraph.field_paragraph_search_target
+    - field.storage.paragraph.field_paragraph_search_url
     - field.storage.paragraph.field_paragraph_social_list
     - field.storage.paragraph.field_paragraph_social_media
     - field.storage.paragraph.field_paragraph_webform
