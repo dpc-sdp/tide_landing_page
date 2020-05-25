@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.card_promotion_auto.field_paragraph_display_topic
     - field.field.paragraph.card_promotion_auto.field_paragraph_cta_text
     - field.field.paragraph.card_promotion_auto.field_paragraph_reference
     - paragraphs.paragraphs_type.card_promotion_auto
@@ -32,3 +33,4 @@ content:
     region: content
 hidden:
   field_paragraph_cta_text: true
+  field_paragraph_display_topic: true
