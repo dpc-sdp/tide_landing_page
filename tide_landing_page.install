@@ -738,3 +738,29 @@ function tide_landing_page_update_8016() {
     }
   }
 }
+
+/**
+ * Adds field_paragraph_display_topic to card_promotion_auto.
+ */
+function tide_landing_page_update_8017() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  _tide_import_single_config('field.storage.paragraph.field_paragraph_display_topic', $config_location);
+  _tide_import_single_config('field.field.paragraph.card_promotion_auto.field_paragraph_display_topic', $config_location);
+
+  /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $entity_form_display */
+  $entity_form_display = Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('paragraph.card_promotion_auto.default');
+  if ($entity_form_display) {
+    $entity_form_display->setComponent('field_paragraph_display_topic', [
+      'weight' => 106,
+      'settings' => ['display_label' => TRUE],
+      'third_party_settings' => [],
+      'type' => 'boolean_checkbox',
+      'region' => 'content',
+    ]);
+
+    $entity_form_display->save();
+  }
+}
