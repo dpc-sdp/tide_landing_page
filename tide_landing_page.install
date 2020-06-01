@@ -764,3 +764,15 @@ function tide_landing_page_update_8017() {
     $entity_form_display->save();
   }
 }
+
+/**
+ * Updates Call to action component to enable WYSIWYG.
+ */
+function tide_landing_page_update_8018() {
+  $field = FieldConfig::loadByName('paragraph', 'call_to_action', 'field_paragraph_body');
+  $settings = $field->getThirdPartySettings('allowed_formats');
+  if ($settings) {
+    $field->setThirdPartySetting('allowed_formats', 'plain_text', '0');
+    $field->save();
+  }
+}
