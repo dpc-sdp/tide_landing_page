@@ -69,6 +69,26 @@ function tide_landing_page_install() {
   }
 
   _tide_landing_page_add_fields_search_api();
+
+  // Enable entity type/bundles for use with scheduled transitions.
+  if (\Drupal::moduleHandler()->moduleExists('scheduled_transitions')) {
+    $config_factory = \Drupal::configFactory();
+    $config = $config_factory->getEditable('scheduled_transitions.settings');
+    $bundles = $config->get('bundles');
+    if ($bundles) {
+      foreach ($bundles as $bundle) {
+        $enabled_bundles[] = $bundle['bundle'];
+      }
+      if (!in_array('landing_page', $enabled_bundles)) {
+        $bundles[] = ['entity_type' => 'node', 'bundle' => 'landing_page'];
+        $config->set('bundles', $bundles)->save();
+      }
+    }
+    else {
+      $bundles[] = ['entity_type' => 'node', 'bundle' => 'landing_page'];
+      $config->set('bundles', $bundles)->save();
+    }
+  }
 }
 
 /**
@@ -774,5 +794,29 @@ function tide_landing_page_update_8018() {
   if ($settings) {
     $field->setThirdPartySetting('allowed_formats', 'plain_text', '0');
     $field->save();
+  }
+}
+
+/**
+ * Enable entity type/bundles for use with scheduled transitions.
+ */
+function tide_landing_page_update_8019() {
+  if (\Drupal::moduleHandler()->moduleExists('scheduled_transitions')) {
+    $config_factory = \Drupal::configFactory();
+    $config = $config_factory->getEditable('scheduled_transitions.settings');
+    $bundles = $config->get('bundles');
+    if ($bundles) {
+      foreach ($bundles as $bundle) {
+        $enabled_bundles[] = $bundle['bundle'];
+      }
+      if (!in_array('landing_page', $enabled_bundles)) {
+        $bundles[] = ['entity_type' => 'node', 'bundle' => 'landing_page'];
+        $config->set('bundles', $bundles)->save();
+      }
+    }
+    else {
+      $bundles[] = ['entity_type' => 'node', 'bundle' => 'landing_page'];
+      $config->set('bundles', $bundles)->save();
+    }
   }
 }
