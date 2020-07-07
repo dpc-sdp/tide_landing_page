@@ -12,6 +12,7 @@ use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\search_api\Item\Field;
 use Drupal\workflows\Entity\Workflow;
 use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\Component\Utility\NestedArray;
 
 /**
  * Implements hook_install().
@@ -817,6 +818,47 @@ function tide_landing_page_update_8019() {
     else {
       $bundles[] = ['entity_type' => 'node', 'bundle' => 'landing_page'];
       $config->set('bundles', $bundles)->save();
+    }
+  }
+}
+
+/**
+ * Fixes the issue between target_bundles_drag_drop and target_bundles.
+ */
+function tide_landing_page_update_8020() {
+  $field_storage = FieldStorageConfig::loadByName('node', 'field_landing_page_component');
+  foreach ($field_storage->getBundles() as $bundle) {
+    $changed = FALSE;
+    $field = \Drupal::entityTypeManager()
+      ->getStorage('field_config')
+      ->load('node.' . $bundle . '.field_landing_page_component');
+    $settings = $field->get('settings');
+    $target_bundles_drag_drop = [];
+    if (isset($settings['handler_settings']['target_bundles_drag_drop']) && !empty($settings['handler_settings']['target_bundles_drag_drop'])) {
+      foreach ($settings['handler_settings']['target_bundles_drag_drop'] as $key => $tbdd) {
+        if ($tbdd['enabled']) {
+          $target_bundles_drag_drop[$key] = $key;
+        }
+      }
+    }
+    // Compares target_bundles_drag_drop and target_bundles to find the
+    // difference, and fills the gap.
+    if ($diffs = array_diff($target_bundles_drag_drop, $settings['handler_settings']['target_bundles'])) {
+      $settings['handler_settings']['target_bundles'] = array_merge($settings['handler_settings']['target_bundles'], $diffs);
+      $changed = TRUE;
+    }
+    if ($diffs = array_diff($settings['handler_settings']['target_bundles'], $target_bundles_drag_drop)) {
+      foreach ($diffs as $diff) {
+        NestedArray::setValue($settings['handler_settings']['target_bundles_drag_drop'], [
+          $diff,
+          'enabled',
+        ], TRUE);
+      }
+      $changed = TRUE;
+    }
+    if ($changed) {
+      $field->set('settings', $settings);
+      $field->save();
     }
   }
 }
