@@ -94,7 +94,7 @@ content:
     type: entity_reference_entity_id
     region: content
   field_landing_page_component:
-    weight: 1
+    weight: 2
     label: above
     settings:
       view_mode: default
@@ -153,7 +153,7 @@ content:
     type: list_default
     region: content
   field_landing_page_intro_text:
-    weight: 2
+    weight: 1
     label: above
     settings: {  }
     third_party_settings: {  }
