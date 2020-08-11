@@ -4,6 +4,8 @@ dependencies:
   config:
     - field.field.paragraph.media_gallery.field_paragraph_media_gallery
     - paragraphs.paragraphs_type.media_gallery
+  module:
+    - content_moderation
 id: paragraph.media_gallery.default
 targetEntityType: paragraph
 bundle: media_gallery
