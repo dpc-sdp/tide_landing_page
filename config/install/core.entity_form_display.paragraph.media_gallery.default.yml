@@ -4,8 +4,6 @@ dependencies:
   config:
     - field.field.paragraph.media_gallery.field_paragraph_media_gallery
     - paragraphs.paragraphs_type.media_gallery
-  module:
-    - content_moderation
 id: paragraph.media_gallery.default
 targetEntityType: paragraph
 bundle: media_gallery
@@ -16,7 +14,7 @@ content:
     settings:
       match_operator: CONTAINS
       size: 60
-      placeholder: ''
+      placeholder: 'Start typing to select'
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content

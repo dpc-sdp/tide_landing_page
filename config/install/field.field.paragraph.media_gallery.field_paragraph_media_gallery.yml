@@ -9,8 +9,8 @@ id: paragraph.media_gallery.field_paragraph_media_gallery
 field_name: field_paragraph_media_gallery
 entity_type: paragraph
 bundle: media_gallery
-label: 'Image Gallery'
-description: ''
+label: 'Gallery name'
+description: "New galleries can be created <a href=\"/admin/structure/block/block-content'\">here</a><br>Find out <a href=\"https://www.vic.gov.au/creating-campaigns-primary-and-secondary\">how to create and use image galleries</a>"
 required: true
 translatable: false
 default_value: {  }
