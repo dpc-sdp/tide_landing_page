@@ -865,3 +865,18 @@ function tide_landing_page_update_8020() {
     }
   }
 }
+
+/**
+ * Moves Site-section navigation title next to Show site section navigation.
+ */
+function tide_landing_page_update_8021() {
+  $entity_view_display_storage = \Drupal::entityTypeManager()
+    ->getStorage('entity_view_display');
+  $entity_view_display_id = 'node.landing_page.default';
+  $entity_view_display = $entity_view_display_storage->load($entity_view_display_id);
+  $content = $entity_view_display->get('content');
+  if (isset($content['field_show_site_section_nav']) && isset($content['field_landing_page_nav_title'])) {
+    $content['field_landing_page_nav_title']['weight'] = $content['field_show_site_section_nav']['weight'] + 1;
+    $entity_view_display->set('content', $content)->save();
+  }
+}
