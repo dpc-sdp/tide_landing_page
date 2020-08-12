@@ -910,7 +910,5 @@ function tide_landing_page_update_8022() {
     $gallery_field->original = $field;
     $gallery_field->enforceIsNew(FALSE);
     $gallery_field->save();
-
-    var_dump($gallery_field->toArray());
   }
 }
