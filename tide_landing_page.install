@@ -882,10 +882,10 @@ function tide_landing_page_update_8021() {
 }
 
 /**
- * Add placeholder and helper texts to Image gallery autocomplete field
+ * Add placeholder and helper texts to Image gallery autocomplete field.
  */
 function tide_landing_page_update_8022() {
-  // Update placeholder field
+  // Update placeholder field.
   $entity_form_display = \Drupal::entityTypeManager()
     ->getStorage('entity_form_display')
     ->load('paragraph.media_gallery.default');
@@ -896,7 +896,7 @@ function tide_landing_page_update_8022() {
     $entity_form_display->set('content', $content)->save();
   }
 
-  // Update label and description
+  // Update label and description.
   $fields = \Drupal::entityTypeManager()
     ->getStorage('field_config')
     ->loadByProperties(['field_name' => 'field_paragraph_media_gallery']);
