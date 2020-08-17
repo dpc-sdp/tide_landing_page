@@ -10,7 +10,7 @@ field_name: field_paragraph_media_gallery
 entity_type: paragraph
 bundle: media_gallery
 label: 'Gallery name'
-description: "New galleries can be created <a href=\"/admin/structure/block/block-content'\">here</a><br>Find out <a href=\"https://www.vic.gov.au/creating-campaigns-primary-and-secondary\">how to create and use image galleries</a>"
+description: "New galleries can be created <a href=\"/admin/structure/block/block-content'\">here</a><br>Find out <a href=\"https://www.singledigitalpresence.vic.gov.au/create-image-gallery\">how to create an image gallery</a>"
 required: true
 translatable: false
 default_value: {  }
