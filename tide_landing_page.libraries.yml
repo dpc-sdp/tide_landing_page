@@ -2,3 +2,7 @@ landing_page_form:
   css:
     theme:
       css/landing_page.css: {}
+  js:
+    js/hide_elements.js: {}
+  dependencies:
+    - core/jquery

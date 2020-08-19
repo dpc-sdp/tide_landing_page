@@ -82,6 +82,21 @@ function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form
       $form['field_landing_page_hero_image']['widget']['field_show_hero_image_caption'] = $form['field_show_hero_image_caption'];
       unset($form['field_show_hero_image_caption']);
     }
+
+    if (isset($form['field_landing_page_component']['widget'][0])) {
+      foreach ($form['field_landing_page_component']['widget'] as $key => $item) {
+        if (is_numeric($key)) {
+          $form['field_landing_page_component']['widget'][$key]['top']['type']['label']['#markup'] = '<span class="paragraph-type-label">Dates</span>';
+          if (isset($form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_keydates']['widget'][0])) {
+            foreach ($form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_keydates']['widget'] as $field => $sub_item) {
+              if (is_numeric($field)) {
+                $form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_keydates']['widget'][$field]['top']['type']['label']['#markup'] = '<span class="paragraph-type-label"></span>';
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
