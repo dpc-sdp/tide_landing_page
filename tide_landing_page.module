@@ -8,6 +8,7 @@
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\workflows\Entity\Workflow;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Implements hook_entity_bundle_create().
@@ -86,6 +87,7 @@ function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form
     if (isset($form['field_landing_page_component']['widget'][0])) {
       foreach ($form['field_landing_page_component']['widget'] as $key => $item) {
         if (is_numeric($key)) {
+          $form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_keydates']['widget']['add_more']['add_more_button_keydates']['#value'] = new TranslatableMarkup("Add another date");
           $form['field_landing_page_component']['widget'][$key]['top']['type']['label']['#markup'] = '<span class="paragraph-type-label">Dates</span>';
           if (isset($form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_keydates']['widget'][0])) {
             foreach ($form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_keydates']['widget'] as $field => $sub_item) {
