@@ -87,6 +87,8 @@ function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form
     if (isset($form['field_landing_page_component']['widget'][0])) {
       foreach ($form['field_landing_page_component']['widget'] as $key => $item) {
         if (is_numeric($key)) {
+          $form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_cta']['widget'][0]['uri']['#title'] = new TranslatableMarkup("CTA link");
+          $form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_cta']['widget'][0]['title']['#title'] = new TranslatableMarkup("CTA text");
           $form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_keydates']['widget']['add_more']['add_more_button_keydates']['#value'] = new TranslatableMarkup("Add another date");
           $form['field_landing_page_component']['widget'][$key]['top']['type']['label']['#markup'] = '<span class="paragraph-type-label">Dates</span>';
           if (isset($form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_keydates']['widget'][0])) {
