@@ -880,3 +880,21 @@ function tide_landing_page_update_8021() {
     $entity_view_display->set('content', $content)->save();
   }
 }
+
+/**
+ * Hides field_paragraph_link field.
+ */
+function tide_landing_page_update_8022() {
+  $entity_form_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('paragraph.keydates.default');
+  $components = $entity_form_display->getComponents();
+  if (isset($components['field_paragraph_link'])) {
+    unset($components['field_paragraph_link']);
+    $entity_form_display->set('content', $components);
+    $hidden = $entity_form_display->get('hidden');
+    $hidden['field_paragraph_link'] = TRUE;
+    $entity_form_display->set('hidden', $hidden);
+    $entity_form_display->save();
+  }
+}
