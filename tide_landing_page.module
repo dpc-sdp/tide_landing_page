@@ -88,7 +88,9 @@ function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form
       foreach ($form['field_landing_page_component']['widget'] as $key => $item) {
         if (is_numeric($key)) {
           $form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_cta']['widget'][0]['uri']['#title'] = new TranslatableMarkup("CTA link");
+          $form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_cta']['widget'][0]['uri']['#description'] = new TranslatableMarkup("A link to a page showing a longer list of public holidays or special dates. Start typing the title of a page in the CMS to select it or paste in a full external URL (eg http://www.example.com).");
           $form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_cta']['widget'][0]['title']['#title'] = new TranslatableMarkup("CTA text");
+          $form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_cta']['widget'][0]['title']['#description'] = new TranslatableMarkup("Type a strong call to action that describes the content of the link destination (eg Find all public holidays).");
           $form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_keydates']['widget']['add_more']['add_more_button_keydates']['#value'] = new TranslatableMarkup("Add another date");
           $form['field_landing_page_component']['widget'][$key]['top']['type']['label']['#markup'] = '<span class="paragraph-type-label">Dates</span>';
           if (isset($form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_keydates']['widget'][0])) {
