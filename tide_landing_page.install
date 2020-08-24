@@ -880,3 +880,35 @@ function tide_landing_page_update_8021() {
     $entity_view_display->set('content', $content)->save();
   }
 }
+
+/**
+ * Add placeholder and helper texts to Image gallery autocomplete field.
+ */
+function tide_landing_page_update_8022() {
+  // Update placeholder field.
+  $entity_form_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('paragraph.media_gallery.default');
+
+  $content = $entity_form_display->get('content');
+  if (isset($content['field_paragraph_media_gallery'])) {
+    $content['field_paragraph_media_gallery']['settings']['placeholder'] = 'Start typing to select';
+    $entity_form_display->set('content', $content)->save();
+  }
+
+  // Update label and description.
+  $fields = \Drupal::entityTypeManager()
+    ->getStorage('field_config')
+    ->loadByProperties(['field_name' => 'field_paragraph_media_gallery']);
+
+  foreach ($fields as $field) {
+    $gallery_field = $field->toArray();
+    $gallery_field['label'] = 'Gallery name';
+    $gallery_field['description'] = 'New galleries can be created <a href="/admin/structure/block/block-content">here</a><br>Find out <a href="https://www.singledigitalpresence.vic.gov.au/create-image-gallery">how to create an image gallery</a>';
+
+    $gallery_field = FieldConfig::create($gallery_field);
+    $gallery_field->original = $field;
+    $gallery_field->enforceIsNew(FALSE);
+    $gallery_field->save();
+  }
+}
