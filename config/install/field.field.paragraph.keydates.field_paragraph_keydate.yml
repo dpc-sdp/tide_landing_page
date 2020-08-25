@@ -8,8 +8,8 @@ id: paragraph.keydates.field_paragraph_keydate
 field_name: field_paragraph_keydate
 entity_type: paragraph
 bundle: keydates
-label: 'Key Dates'
-description: ''
+label: 'Date'
+description: "The date or date range you'd like displayed (eg 1 January 2021; 2 April to 5 April 2020). No abbreviations or punctuation. Use ‘to’ (not a dash) to separate a date span."
 required: true
 translatable: false
 default_value: {  }

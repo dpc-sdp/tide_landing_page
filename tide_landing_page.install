@@ -912,3 +912,37 @@ function tide_landing_page_update_8022() {
     $gallery_field->save();
   }
 }
+
+/**
+ * Hides field_paragraph_link field, and changes help text.
+ */
+function tide_landing_page_update_8023() {
+  $entity_form_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('paragraph.keydates.default');
+  $components = $entity_form_display->getComponents();
+  if (isset($components['field_paragraph_link'])) {
+    unset($components['field_paragraph_link']);
+    $entity_form_display->set('content', $components);
+    $hidden = $entity_form_display->get('hidden');
+    $hidden['field_paragraph_link'] = TRUE;
+    $entity_form_display->set('hidden', $hidden);
+    $entity_form_display->save();
+  }
+  $field_paragraph_summary = $entity_form_display->getComponent('field_paragraph_summary');
+  if (isset($field_paragraph_summary['third_party_settings']['maxlength']['maxlength_js_label'])) {
+    $field_paragraph_summary['third_party_settings']['maxlength']['maxlength_js_label'] = 'A brief description of the public holiday or special date. Max @limit characters, remaining: <strong>@remaining</strong>';
+    $entity_form_display->setComponent('field_paragraph_summary', $field_paragraph_summary)->save();
+  }
+  $field_paragraph_title = $entity_form_display->getComponent('field_paragraph_title');
+  if ($field_paragraph_title['third_party_settings']['maxlength']['maxlength_js_label']) {
+    $field_paragraph_title['third_party_settings']['maxlength']['maxlength_js_label'] = 'Title of the public holiday or special date. Max @limit characters, preferred <70 characters; remaining: <strong>@remaining</strong>';
+    $entity_form_display->setComponent('field_paragraph_title', $field_paragraph_title)->save();
+  }
+  // Change field_paragraph_keydate label to Date.
+  $config = \Drupal::configFactory()
+    ->getEditable('field.field.paragraph.keydates.field_paragraph_keydate');
+  $config->set('label', 'Date');
+  $config->set('description', "The date or date range you'd like displayed (eg 1 January 2021; 2 April to 5 April 2020). No abbreviations or punctuation. Use ‘to’ (not a dash) to separate a date span.");
+  $config->save();
+}
