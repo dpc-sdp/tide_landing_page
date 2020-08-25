@@ -92,7 +92,7 @@ function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form
           $form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_cta']['widget'][0]['title']['#title'] = new TranslatableMarkup("CTA text");
           $form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_cta']['widget'][0]['title']['#description'] = new TranslatableMarkup("Type a strong call to action that describes the content of the link destination (eg Find all public holidays).");
           $form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_keydates']['widget']['add_more']['add_more_button_keydates']['#value'] = new TranslatableMarkup("Add another date");
-          $form['field_landing_page_component']['widget'][$key]['top']['type']['label']['#markup'] = '<span class="paragraph-type-label">Dates</span>';
+          $form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_accordion']['widget']['add_more']['add_more_button_accordion_content']['#value'] = new TranslatableMarkup("Add another accordion item");
           if (isset($form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_keydates']['widget'][0])) {
             foreach ($form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_keydates']['widget'] as $field => $sub_item) {
               if (is_numeric($field)) {

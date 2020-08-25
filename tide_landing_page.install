@@ -907,4 +907,9 @@ function tide_landing_page_update_8022() {
     $field_paragraph_title['third_party_settings']['maxlength']['maxlength_js_label'] = 'Title of the public holiday or special date. Max @limit characters, preferred <70 characters; remaining: <strong>@remaining</strong>';
     $entity_form_display->setComponent('field_paragraph_title', $field_paragraph_title);
   }
+  // Change field_paragraph_keydate label to Date.
+  $config = \Drupal::configFactory()
+    ->getEditable('field.field.paragraph.keydates.field_paragraph_keydate');
+  $config->set('label', 'Date');
+  $config->save();
 }
