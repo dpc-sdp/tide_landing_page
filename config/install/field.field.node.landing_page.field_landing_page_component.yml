@@ -52,6 +52,7 @@ settings:
       call_to_action: call_to_action
       complex_image: complex_image
       embedded_webform: embedded_webform
+      form_embed_openforms: form_embed_openforms
       media_gallery: media_gallery
       card_event_auto: card_event_auto
       latest_events: latest_events
