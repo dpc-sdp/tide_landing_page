@@ -980,6 +980,14 @@ function tide_landing_page_update_8024() {
     }
   }
 
+  // Add the field to JSON API.
+  if (\Drupal::moduleHandler()->moduleExists('jsonapi_extras')) {
+    $json_field = 'jsonapi_extras.jsonapi_resource_config.paragraph--form_embed_openforms';
+    $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/optional'];
+    $config_read = _tide_read_config($json_field, $config_location, TRUE);
+    $config_storage->write($json_field, $config_read);
+  }
+
   // Update embedded_webform paragraph type label.
   $config_factory = \Drupal::configFactory();
   $config = $config_factory->getEditable('paragraphs.paragraphs_type.embedded_webform');
