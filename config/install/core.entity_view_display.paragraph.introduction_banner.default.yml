@@ -7,7 +7,6 @@ dependencies:
     - field.field.paragraph.introduction_banner.field_call_to_action_title
     - field.field.paragraph.introduction_banner.field_paragraph_body
     - field.field.paragraph.introduction_banner.field_paragraph_links
-    - field.field.paragraph.introduction_banner.field_paragraph_summary
     - field.field.paragraph.introduction_banner.field_paragraph_title
     - paragraphs.paragraphs_type.introduction_banner
   module:
@@ -58,13 +57,6 @@ content:
       target: ''
     third_party_settings: {  }
     type: link
-    region: content
-  field_paragraph_summary:
-    weight: 1
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: basic_string
     region: content
   field_paragraph_title:
     weight: 0
