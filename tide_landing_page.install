@@ -960,42 +960,6 @@ function tide_landing_page_update_8024() {
     'field.field.paragraph.introduction_banner.field_banner_type' => 'field_config',
     'field.field.paragraph.introduction_banner.field_banner_display_type' => 'field_config',
   ];
-  $fields = [
-    'field_paragraph_body' => [
-      "weight" => 2,
-      "settings" => [
-        "rows" => 5,
-        "placeholder" => "",
-      ],
-      "third_party_settings" => [],
-      "type" => "text_textarea",
-      "region" => "content",
-    ],
-    'field_banner_type' => [
-      "weight" => 3,
-      "settings" => [],
-      "third_party_settings" => [],
-      "type" => "options_select",
-      "region" => "content",
-    ],
-    'field_banner_display_type' => [
-      "weight" => 4,
-      "settings" => [],
-      "third_party_settings" => [],
-      "type" => "options_buttons",
-      "region" => "content",
-    ],
-    'field_call_to_action_title' => [
-      "weight" => 5,
-      "settings" => [
-        "size" => 60,
-        "placeholder" => "",
-      ],
-      "third_party_settings" => [],
-      "type" => "string_textfield",
-      "region" => "content",
-    ],
-  ];
   module_load_include('inc', 'tide_core', 'includes/helpers');
   $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
   // Check if field already exported to config/sync.
@@ -1005,17 +969,6 @@ function tide_landing_page_update_8024() {
     $config_entity = $storage->createFromStorageRecord($config_read);
     $config_entity->save();
   }
-  $form_display_config = \Drupal::configFactory()
-    ->getEditable('core.entity_form_display.paragraph.introduction_banner.default');
-  $contents = $form_display_config->get('content');
-  $hidden = $form_display_config->get('hidden');
-  foreach ($fields as $field => $values) {
-    if (in_array($field, $hidden)) {
-      unset($hidden[$field]);
-    }
-  }
-  $form_display_config->set('hidden', $hidden);
-  $form_display_config->set('content', $fields + $contents)->save();
 }
 
 /**
@@ -1059,5 +1012,26 @@ function tide_landing_page_update_8025(&$sandbox) {
   if ($sandbox['#finished'] == 1) {
     $field_config = FieldConfig::loadByName('paragraph', 'introduction_banner', 'field_paragraph_summary');
     $field_config->delete();
+  }
+}
+
+/**
+ * Re-order the introduction_banner entity form.
+ */
+function tide_landing_page_update_8026() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_ids = [
+    'core.entity_form_display.paragraph.introduction_banner.default',
+    'core.entity_view_display.paragraph.introduction_banner.default',
+  ];
+  foreach ($config_ids as $config_id) {
+    $config = \Drupal::configFactory()->getEditable($config_id);
+    $config_read = _tide_read_config($config_id, $config_location, FALSE);
+    $fields_settings = $config_read['content'];
+    $hidden = $config_read['hidden'];
+    $config->set('content', $fields_settings);
+    $config->set('hidden', $hidden);
+    $config->save();
   }
 }

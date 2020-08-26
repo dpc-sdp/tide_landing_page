@@ -9,6 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\workflows\Entity\Workflow;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Field\WidgetBase;
 
 /**
  * Implements hook_entity_bundle_create().
@@ -133,6 +134,26 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
     }
     if (!empty($element['subform']['field_paragraph_search_target'])) {
       $element['subform']['field_paragraph_search_target']['#states']['visible'] = $condition;
+    }
+  }
+
+  // Displaying field_call_to_action_title depends on field_banner_display_type.
+  $field_definition = $context['items']->getFieldDefinition();
+  $paragraph_field_name = $field_definition->getName();
+  if ($paragraph_field_name == 'field_landing_page_header') {
+    $widget_state = WidgetBase::getWidgetState($element['#field_parents'], $paragraph_field_name, $form_state);
+    $paragraph = $widget_state['paragraphs'][$element['#delta']]['entity'];
+    $paragraph_type = $paragraph->bundle();
+    if ($paragraph_type == 'introduction_banner') {
+      $element['subform']['field_paragraph_links']['widget']['#title'] = ' ';
+      $selector = sprintf('input[name="%s[%d][subform][%s]"]', $paragraph_field_name, $element['#delta'], 'field_banner_display_type');
+      if (isset($element['subform']['field_call_to_action_title'])) {
+        $element['subform']['field_call_to_action_title']['#states'] = [
+          'visible' => [
+            $selector => ['value' => 'call_to_action'],
+          ],
+        ];
+      }
     }
   }
 }
