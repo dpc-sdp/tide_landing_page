@@ -946,3 +946,43 @@ function tide_landing_page_update_8023() {
   $config->set('description', "The date or date range you'd like displayed (eg 1 January 2021; 2 April to 5 April 2020). No abbreviations or punctuation. Use ‘to’ (not a dash) to separate a date span.");
   $config->save();
 }
+
+/**
+ * Add the new paragraph type form_embed_openforms.
+ */
+function tide_landing_page_update_8024() {
+  $new_felds = [
+    'paragraphs.paragraphs_type.form_embed_openforms',
+    'core.entity_form_display.paragraph.form_embed_openforms.default',
+    'core.entity_view_display.paragraph.form_embed_openforms.default',
+    'field.field.paragraph.form_embed_openforms.field_form_link',
+    'field.storage.paragraph.field_form_link',
+  ];
+
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_storage = \Drupal::service('config.storage');
+  foreach ($new_felds as $field) {
+    // Check if field already exported to config/sync.
+    $config_read = _tide_read_config($field, $config_location, TRUE);
+    $config_storage->write($field, $config_read);
+  }
+
+  // Add the new paragraph type to field_landing_page_component.
+  $field = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
+  if ($field) {
+    $handler_settings = $field->getSetting('handler_settings');
+    if (isset($handler_settings['target_bundles']) && !in_array('form_embed_openforms', $handler_settings['target_bundles'])) {
+      $handler_settings['target_bundles']['form_embed_openforms'] = 'form_embed_openforms';
+      $handler_settings['target_bundles_drag_drop']['form_embed_openforms']['enabled'] = TRUE;
+      $field->setSetting('handler_settings', $handler_settings);
+      $field->save();
+    }
+  }
+
+  // Update embedded_webform paragraph type label.
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('paragraphs.paragraphs_type.embedded_webform');
+  $config->set('label', 'Form embed (Drupal)');
+  $config->save();
+}
