@@ -8,7 +8,7 @@ id: paragraph.introduction_banner.field_call_to_action_title
 field_name: field_call_to_action_title
 entity_type: paragraph
 bundle: introduction_banner
-label: 'Call to action title'
+label: 'Button heading'
 description: ''
 required: false
 translatable: false

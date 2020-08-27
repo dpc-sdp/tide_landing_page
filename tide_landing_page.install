@@ -969,6 +969,12 @@ function tide_landing_page_update_8024() {
     $config_entity = $storage->createFromStorageRecord($config_read);
     $config_entity->save();
   }
+
+  // Changes Feature links to Links.
+  $field_paragraph_links = \Drupal::configFactory()
+    ->getEditable('field.field.paragraph.introduction_banner.field_paragraph_links');
+  $field_paragraph_links->set('label', 'Links');
+  $field_paragraph_links->save();
 }
 
 /**

@@ -14,8 +14,8 @@ settings:
       value: featured_links
       label: 'Featured links'
     -
-      value: call_to_action
-      label: 'Call to action'
+      value: buttons
+      label: 'Buttons'
   allowed_values_function: ''
 module: options
 locked: false

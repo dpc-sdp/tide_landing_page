@@ -145,14 +145,20 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
     $paragraph = $widget_state['paragraphs'][$element['#delta']]['entity'];
     $paragraph_type = $paragraph->bundle();
     if ($paragraph_type == 'introduction_banner') {
-      $element['subform']['field_paragraph_links']['widget']['#title'] = ' ';
       $selector = sprintf('input[name="%s[%d][subform][%s]"]', $paragraph_field_name, $element['#delta'], 'field_banner_display_type');
       if (isset($element['subform']['field_call_to_action_title'])) {
         $element['subform']['field_call_to_action_title']['#states'] = [
           'visible' => [
-            $selector => ['value' => 'call_to_action'],
+            $selector => ['value' => 'buttons'],
           ],
         ];
+      }
+      if (isset($element['subform']['field_paragraph_links']['widget'])) {
+        foreach ($element['subform']['field_paragraph_links']['widget'] as $key => $links) {
+          if (is_numeric($key)) {
+            $element['subform']['field_paragraph_links']['widget'][$key]['title']['#title'] = t('Link text / Button label');
+          }
+        }
       }
     }
   }
