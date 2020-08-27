@@ -31,7 +31,7 @@ field_name: field_form_link
 entity_type: paragraph
 bundle: form_embed_openforms
 label: 'Form link'
-description: ''
+description: 'Copy and paste the embed link from OpenForms.'
 required: true
 translatable: false
 default_value: {  }
