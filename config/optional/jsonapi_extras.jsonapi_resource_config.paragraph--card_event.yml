@@ -210,3 +210,11 @@ resourceFields:
     disabled: false
     advancedOptionsIcon: ''
     enhancer_label: ''
+  field_paragraph_status:
+    fieldName: field_paragraph_status
+    publicName: field_paragraph_status
+    enhancer:
+      id: ''
+    disabled: false
+    advancedOptionsIcon: ''
+    enhancer_label: ''

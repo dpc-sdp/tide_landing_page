@@ -886,8 +886,10 @@ function tide_landing_page_update_8021() {
  */
 function tide_landing_page_update_8022() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
-  _tide_import_single_config('field.storage.paragraph.field_paragraph_status', $config_location);
-  _tide_import_single_config('field.storage.paragraph.field_paragraph_date', $config_location);
-  _tide_import_single_config('core.entity_form_display.paragraph.card_event.default', $config_location);
+  $config_install_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_optional_location = [drupal_get_path('module', 'tide_landing_page') . '/config/optional'];
+  _tide_import_single_config('field.storage.paragraph.field_paragraph_status', $config_install_location);
+  _tide_import_single_config('field.storage.paragraph.field_paragraph_date', $config_install_location);
+  _tide_import_single_config('core.entity_form_display.paragraph.card_event.default', $config_install_location);
+  _tide_import_single_config('jsonapi_extras.jsonapi_resource_config.paragraph--card_event', $config_optional_location);
 }
