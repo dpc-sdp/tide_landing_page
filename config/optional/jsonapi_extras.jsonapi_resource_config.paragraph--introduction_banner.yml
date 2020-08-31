@@ -118,15 +118,34 @@ resourceFields:
     enhancer:
       id: link_enhancer
     disabled: false
-  field_paragraph_summary:
-    fieldName: field_paragraph_summary
-    publicName: field_paragraph_summary
-    enhancer:
-      id: ''
-    disabled: false
   field_paragraph_title:
     fieldName: field_paragraph_title
     publicName: field_paragraph_title
     enhancer:
       id: ''
     disabled: false
+  field_paragraph_body:
+    fieldName: field_paragraph_body
+    publicName: field_paragraph_body
+    enhancer:
+      id: ''
+    disabled: false
+  field_banner_type:
+    fieldName: field_banner_type
+    publicName: field_banner_type
+    enhancer:
+      id: ''
+    disabled: false
+  field_banner_display_type:
+    fieldName: field_banner_display_type
+    publicName: field_banner_display_type
+    enhancer:
+      id: ''
+    disabled: false
+  field_call_to_action_title:
+    fieldName: field_call_to_action_title
+    publicName: field_call_to_action_title
+    enhancer:
+      id: ''
+    disabled: false
+
