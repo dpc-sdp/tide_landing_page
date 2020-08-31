@@ -179,7 +179,6 @@ config_devel:
     - field.field.paragraph.hero_banner_with_cta.field_paragraph_freetext
     - field.field.paragraph.hero_banner_with_cta.field_paragraph_link_text
     - field.field.paragraph.introduction_banner.field_paragraph_links
-    - field.field.paragraph.introduction_banner.field_paragraph_summary
     - field.field.paragraph.introduction_banner.field_paragraph_title
     - field.field.paragraph.key_journeys.field_paragraph_cta
     - field.field.paragraph.key_journeys.field_paragraph_link
