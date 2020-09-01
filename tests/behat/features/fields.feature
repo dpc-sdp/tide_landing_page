@@ -11,10 +11,6 @@ Feature: Fields for Landing Page content type
     Then I see field "Title"
     And I should see an "input#edit-title-0-value.required" element
 
-    And I see field "Summary"
-    And I should see a "textarea#edit-field-landing-page-summary-0-value" element
-    And I should see a "textarea#edit-field-landing-page-summary-0-value.required" element
-
     And the "#edit-field-featured-image" element should contain "Feature Image"
     And I should see an "input#edit-field-featured-image-entity-browser-entity-browser-open-modal" element
 
@@ -129,10 +125,6 @@ Feature: Fields for Landing Page content type
     Then I see field "Title"
     And I should see an "input#edit-title-0-value.required" element
 
-    And I see field "Summary"
-    And I should see a "textarea#edit-field-landing-page-summary-0-value" element
-    And I should see a "textarea#edit-field-landing-page-summary-0-value.required" element
-
     And the "#edit-field-featured-image" element should contain "Feature Image"
     And I should see an "input#edit-field-featured-image-entity-browser-entity-browser-open-modal" element
 
@@ -185,7 +177,8 @@ Feature: Fields for Landing Page content type
     And I should see "Timelines" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Complex Image" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
 
-    And I should see "Embedded Webform" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
+    And I should see "Form embed (Drupal)" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
+    And I should see "Form embed (OpenForms)" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Featured news" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
 
     And I see field "Tags"
