@@ -1014,8 +1014,16 @@ function tide_landing_page_update_8025(&$sandbox) {
     }
     $sandbox['processed']++;
   }
-  $sandbox['#finished'] = ($sandbox['processed'] / $sandbox['total']);
-  if ($sandbox['#finished'] == 1) {
+  $sandbox['#finished'] = $sandbox['total'] ? $sandbox['processed'] / $sandbox['total'] : 1;
+  $sandbox['#finished'] = $sandbox['#finished'] > 1 ? 1 : $sandbox['#finished'];
+}
+
+/**
+ * Deletes field_paragraph_summary from introduction_banner paragraphs.
+ */
+function tide_landing_page_update_8026() {
+  $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_paragraph_summary');
+  if (!empty($field_storage) && in_array('introduction_banner', $field_storage->getBundles())) {
     $field_config = FieldConfig::loadByName('paragraph', 'introduction_banner', 'field_paragraph_summary');
     $field_config->delete();
   }
@@ -1024,7 +1032,7 @@ function tide_landing_page_update_8025(&$sandbox) {
 /**
  * Re-order the introduction_banner entity form.
  */
-function tide_landing_page_update_8026() {
+function tide_landing_page_update_8027() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
   $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
   $config_ids = [
@@ -1045,7 +1053,7 @@ function tide_landing_page_update_8026() {
 /**
  * Add the new paragraph type form_embed_openforms.
  */
-function tide_landing_page_update_8027() {
+function tide_landing_page_update_8028() {
   $new_configs = [
     'paragraphs.paragraphs_type.form_embed_openforms',
     'core.entity_form_display.paragraph.form_embed_openforms.default',
