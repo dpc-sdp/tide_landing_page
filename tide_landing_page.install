@@ -1014,8 +1014,16 @@ function tide_landing_page_update_8025(&$sandbox) {
     }
     $sandbox['processed']++;
   }
-  $sandbox['#finished'] = ($sandbox['processed'] / $sandbox['total']);
-  if ($sandbox['#finished'] == 1) {
+  $sandbox['#finished'] = $sandbox['total'] ? $sandbox['processed'] / $sandbox['total'] : 1;
+  $sandbox['#finished'] = $sandbox['#finished'] > 1 ? 1 : $sandbox['#finished'];
+}
+
+/**
+ * Deletes field_paragraph_summary from introduction_banner paragraphs.
+ */
+function tide_landing_page_update_8026() {
+  $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_paragraph_summary');
+  if (!empty($field_storage) && in_array('introduction_banner', $field_storage->getBundles())) {
     $field_config = FieldConfig::loadByName('paragraph', 'introduction_banner', 'field_paragraph_summary');
     $field_config->delete();
   }
@@ -1024,7 +1032,7 @@ function tide_landing_page_update_8025(&$sandbox) {
 /**
  * Re-order the introduction_banner entity form.
  */
-function tide_landing_page_update_8026() {
+function tide_landing_page_update_8027() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
   $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
   $config_ids = [
@@ -1040,4 +1048,66 @@ function tide_landing_page_update_8026() {
     $config->set('hidden', $hidden);
     $config->save();
   }
+}
+
+/**
+ * Add the new paragraph type form_embed_openforms.
+ */
+function tide_landing_page_update_8028() {
+  $new_configs = [
+    'paragraphs.paragraphs_type.form_embed_openforms',
+    'core.entity_form_display.paragraph.form_embed_openforms.default',
+    'core.entity_view_display.paragraph.form_embed_openforms.default',
+  ];
+
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_storage = \Drupal::service('config.storage');
+  foreach ($new_configs as $config) {
+    // Check if field already exported to config/sync.
+    $config_read = _tide_read_config($config, $config_location, TRUE);
+    $config_storage->write($config, $config_read);
+  }
+
+  $link_field_storage = 'field.storage.paragraph.field_form_link';
+  $config_read = _tide_read_config($link_field_storage, $config_location, TRUE);
+  // Obtain the storage manager for field storage bases.
+  // Create a new field from the yaml configuration and save.
+  \Drupal::entityManager()->getStorage('field_storage_config')
+    ->create($config_read)
+    ->save();
+
+  $link_field = 'field.field.paragraph.form_embed_openforms.field_form_link';
+  $config_read = _tide_read_config($link_field, $config_location, TRUE);
+  // Obtain the storage manager for field instances.
+  // Create a new field instance from the yaml configuration and save.
+  \Drupal::entityManager()->getStorage('field_config')
+    ->create($config_read)
+    ->save();
+
+  // Add the new paragraph type to field_landing_page_component.
+  $field = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
+  if ($field) {
+    $handler_settings = $field->getSetting('handler_settings');
+    if (isset($handler_settings['target_bundles']) && !in_array('form_embed_openforms', $handler_settings['target_bundles'])) {
+      $handler_settings['target_bundles']['form_embed_openforms'] = 'form_embed_openforms';
+      $handler_settings['target_bundles_drag_drop']['form_embed_openforms']['enabled'] = TRUE;
+      $field->setSetting('handler_settings', $handler_settings);
+      $field->save();
+    }
+  }
+
+  // Add the field to JSON API.
+  if (\Drupal::moduleHandler()->moduleExists('jsonapi_extras')) {
+    $json_field = 'jsonapi_extras.jsonapi_resource_config.paragraph--form_embed_openforms';
+    $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/optional'];
+    $config_read = _tide_read_config($json_field, $config_location, TRUE);
+    $config_storage->write($json_field, $config_read);
+  }
+
+  // Update embedded_webform paragraph type label.
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('paragraphs.paragraphs_type.embedded_webform');
+  $config->set('label', 'Form embed (Drupal)');
+  $config->save();
 }
