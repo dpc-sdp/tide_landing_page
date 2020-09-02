@@ -10,7 +10,7 @@ id: paragraph.introduction_banner.field_paragraph_links
 field_name: field_paragraph_links
 entity_type: paragraph
 bundle: introduction_banner
-label: 'Featured Links'
+label: 'Links'
 description: ''
 required: false
 translatable: true

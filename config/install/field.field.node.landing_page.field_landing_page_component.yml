@@ -18,6 +18,7 @@ dependencies:
     - paragraphs.paragraphs_type.card_promotion
     - paragraphs.paragraphs_type.card_promotion_auto
     - paragraphs.paragraphs_type.complex_image
+    - paragraphs.paragraphs_type.form_embed_openforms
     - paragraphs.paragraphs_type.latest_events
     - paragraphs.paragraphs_type.media_gallery
     - paragraphs.paragraphs_type.timelines
@@ -51,6 +52,7 @@ settings:
       call_to_action: call_to_action
       complex_image: complex_image
       embedded_webform: embedded_webform
+      form_embed_openforms: form_embed_openforms
       media_gallery: media_gallery
       card_event_auto: card_event_auto
       latest_events: latest_events
@@ -115,12 +117,15 @@ settings:
       embedded_webform:
         enabled: true
         weight: 22
-      featured_news:
+      form_embed_openforms:
         enabled: true
         weight: 23
-      news_listing:
+      featured_news:
         enabled: true
         weight: 24
+      news_listing:
+        enabled: true
+        weight: 25
       media_gallery:
         enabled: true
         weight: 26

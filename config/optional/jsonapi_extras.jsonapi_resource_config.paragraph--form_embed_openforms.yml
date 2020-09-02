@@ -2,11 +2,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - paragraphs.paragraphs_type.introduction_banner
-id: paragraph--introduction_banner
+    - paragraphs.paragraphs_type.form_embed_openforms
+id: paragraph--form_embed_openforms
 disabled: false
-path: paragraph/introduction_banner
-resourceType: paragraph--introduction_banner
+path: paragraph/form_embed_openforms
+resourceType: paragraph--form_embed_openforms
 resourceFields:
   id:
     fieldName: id
@@ -26,21 +26,15 @@ resourceFields:
     enhancer:
       id: ''
     disabled: false
-  type:
-    fieldName: type
-    publicName: type
-    enhancer:
-      id: ''
-    disabled: false
   langcode:
     fieldName: langcode
     publicName: langcode
     enhancer:
       id: ''
     disabled: false
-  uid:
-    fieldName: uid
-    publicName: uid
+  type:
+    fieldName: type
+    publicName: type
     enhancer:
       id: ''
     disabled: false
@@ -53,14 +47,6 @@ resourceFields:
   created:
     fieldName: created
     publicName: created
-    enhancer:
-      id: date_time
-      settings:
-        dateTimeFormat: 'Y-m-d\TH:i:sP'
-    disabled: false
-  revision_uid:
-    fieldName: revision_uid
-    publicName: revision_uid
     enhancer:
       id: ''
     disabled: false
@@ -106,46 +92,9 @@ resourceFields:
     enhancer:
       id: ''
     disabled: false
-  moderation_state:
-    fieldName: moderation_state
-    publicName: moderation_state
+  field_form_link:
+    fieldName: field_form_link
+    publicName: field_form_link
     enhancer:
       id: ''
     disabled: false
-  field_paragraph_links:
-    fieldName: field_paragraph_links
-    publicName: field_paragraph_links
-    enhancer:
-      id: link_enhancer
-    disabled: false
-  field_paragraph_title:
-    fieldName: field_paragraph_title
-    publicName: field_paragraph_title
-    enhancer:
-      id: ''
-    disabled: false
-  field_paragraph_body:
-    fieldName: field_paragraph_body
-    publicName: field_paragraph_body
-    enhancer:
-      id: ''
-    disabled: false
-  field_banner_type:
-    fieldName: field_banner_type
-    publicName: field_banner_type
-    enhancer:
-      id: ''
-    disabled: false
-  field_banner_display_type:
-    fieldName: field_banner_display_type
-    publicName: field_banner_display_type
-    enhancer:
-      id: ''
-    disabled: false
-  field_call_to_action_title:
-    fieldName: field_call_to_action_title
-    publicName: field_call_to_action_title
-    enhancer:
-      id: ''
-    disabled: false
-
