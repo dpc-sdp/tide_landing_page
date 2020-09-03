@@ -1111,3 +1111,16 @@ function tide_landing_page_update_8028() {
   $config->set('label', 'Form embed (Drupal)');
   $config->save();
 }
+
+/**
+ * Add the new paragraph type tide_automated_listing.
+ */
+function tide_landing_page_update_8029() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_storage = \Drupal::service('config.storage');
+
+  // Check if field already exported to config/sync.
+  $config_read = _tide_read_config('field.field.node.landing_page.field_landing_page_component', $config_location, TRUE);
+  $config_storage->write('field.field.node.landing_page.field_landing_page_component', $config_read);
+}
