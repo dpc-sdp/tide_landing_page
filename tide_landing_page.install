@@ -1116,6 +1116,11 @@ function tide_landing_page_update_8028() {
  * Add the new paragraph type tide_automated_listing.
  */
 function tide_landing_page_update_8029() {
+  $result = \Drupal::service('module_installer')->install(['tide_automated_listing']);
+  if (!$result) {
+    throw new \Exception(sprintf('Unable to install module %s', 'tide_automated_listing'));
+  }
+
   module_load_include('inc', 'tide_core', 'includes/helpers');
   $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
   $config_storage = \Drupal::service('config.storage');
