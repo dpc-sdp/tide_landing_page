@@ -93,7 +93,6 @@ JS;
 
   /**
    * @Then /^I click on link with href "([^"]*)"$/
-   * @param string $href
    */
   public function clickOnLinkWithHref($href) {
     $page = $this->getSession()->getPage();
@@ -106,7 +105,6 @@ JS;
 
   /**
    * @Then /^I click on the horizontal tab "([^"]*)"$/
-   * @param string $text
    */
   public function clickOnHorzTab($text) {
     $page = $this->getSession()->getPage();
@@ -119,7 +117,6 @@ JS;
 
   /**
    * @Then /^I click on the detail "([^"]*)"$/
-   * @param string $text
    */
   public function clickOnDetail($text) {
     $page = $this->getSession()->getPage();
