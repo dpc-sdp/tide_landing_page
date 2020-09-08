@@ -1,8 +1,9 @@
 langcode: en
 status: true
 dependencies: {  }
-id: embedded_webform
-label: 'Embedded Webform'
+id: form_embed_openforms
+label: 'Form embed (OpenForms)'
 icon_uuid: null
+icon_default: null
 description: ''
 behavior_plugins: {  }
