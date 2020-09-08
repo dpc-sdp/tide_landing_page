@@ -1161,11 +1161,11 @@ function tide_landing_page_update_8031() {
     'fieldName' => 'field_paragraph_status',
     'publicName' => 'field_paragraph_status',
     'enhancer' => [
-      'id' => ''
+      'id' => '',
     ],
     'disabled' => FALSE,
     'advancedOptionsIcon' => '',
-    'enhancer_label' => ''
+    'enhancer_label' => '',
   ];
 
   $config->set('resourceFields', $content);
