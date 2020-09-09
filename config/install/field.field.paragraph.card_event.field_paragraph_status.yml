@@ -9,7 +9,7 @@ field_name: field_paragraph_status
 entity_type: paragraph
 bundle: card_event
 label: Status
-description: ''
+description: 'Use Status to display event frequency. Displays under the title on the Event Cards. Content limited to 44 characters.'
 required: false
 translatable: false
 default_value: {  }
