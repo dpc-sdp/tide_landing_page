@@ -1111,3 +1111,81 @@ function tide_landing_page_update_8028() {
   $config->set('label', 'Form embed (Drupal)');
   $config->save();
 }
+
+/**
+ * Create field status.
+ */
+function tide_landing_page_update_8029() {
+  $configs = [
+    'field.storage.paragraph.field_paragraph_status' => 'field_storage_config',
+    'field.field.paragraph.card_event.field_paragraph_status' => 'field_config',
+  ];
+
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+
+  // Check if field already exported to config/sync.
+  foreach ($configs as $config => $type) {
+    $config_read = _tide_read_config($config, $config_location, TRUE);
+    $storage = \Drupal::entityTypeManager()->getStorage($type);
+    $config_entity = $storage->createFromStorageRecord($config_read);
+    $config_entity->save();
+  }
+}
+
+/**
+ * Add status fields to form display.
+ */
+function tide_landing_page_update_8030() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('core.entity_form_display.paragraph.card_event.default');
+
+  $dependencies = $config->get('dependencies.config');
+  if (!in_array('field.field.paragraph.card_event.field_paragraph_status', $dependencies)) {
+    $dependencies[] = 'field.field.paragraph.card_event.field_paragraph_status';
+    $config->set('dependencies.config', $dependencies);
+  }
+
+  $content = $config->get('content');
+  if (!isset($content['field_paragraph_status'])) {
+    $content['field_paragraph_status'] = [
+      'type' => 'string_textfield',
+      'weight' => 7,
+      'region' => 'content',
+      'settings' => [
+        'size' => 60,
+        'placeholder' => '',
+      ],
+      'third_party_settings' => [],
+    ];
+    $config->set('content', $content);
+  }
+
+  $config->save();
+}
+
+/**
+ * Add status fields to json output.
+ */
+function tide_landing_page_update_8031() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('jsonapi_extras.jsonapi_resource_config.paragraph--card_event');
+
+  $content = $config->get('resourceFields');
+  if (!isset($content['field_paragraph_status'])) {
+    $content['field_paragraph_status'] = [
+      'fieldName' => 'field_paragraph_status',
+      'publicName' => 'field_paragraph_status',
+      'enhancer' => [
+        'id' => '',
+      ],
+      'disabled' => FALSE,
+      'advancedOptionsIcon' => '',
+      'enhancer_label' => '',
+    ];
+
+    $config->set('resourceFields', $content);
+  }
+
+  $config->save();
+}
