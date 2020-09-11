@@ -1116,10 +1116,21 @@ function tide_landing_page_update_8028() {
  * Create field status.
  */
 function tide_landing_page_update_8029() {
+  $configs = [
+    'field.storage.paragraph.field_paragraph_status' => 'field_storage_config',
+    'field.field.paragraph.card_event.field_paragraph_status' => 'field_config',
+  ];
+
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_install_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
-  _tide_import_single_config('field.storage.paragraph.field_paragraph_status', $config_install_location);
-  _tide_import_single_config('field.field.paragraph.card_event.field_paragraph_status', $config_install_location);
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+
+  // Check if field already exported to config/sync.
+  foreach ($configs as $config => $type) {
+    $config_read = _tide_read_config($config, $config_location, TRUE);
+    $storage = \Drupal::entityTypeManager()->getStorage($type);
+    $config_entity = $storage->createFromStorageRecord($config_read);
+    $config_entity->save();
+  }
 }
 
 /**
