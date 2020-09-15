@@ -111,6 +111,16 @@ function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form
         }
       }
     }
+    // Add conditional field for show table of content.
+    if (isset($form['field_node_display_headings'])) {
+      $form['field_node_display_headings']['#states'] = [
+        'visible' => [
+          ':input[name="field_show_table_of_content[value]"]' => [
+            'checked' => TRUE
+          ],
+        ],
+      ];
+    }
   }
 }
 
