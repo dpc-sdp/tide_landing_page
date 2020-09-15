@@ -1257,7 +1257,7 @@ function tide_landing_page_update_8032() {
     $json_config->set('resourceFields', $json_content);
   }
 
-  $config->save();
+  $json_config->save();
 
   // Update show table of content label.
   $field_config = $config_factory->getEditable('field.field.node.landing_page.field_show_table_of_content');
