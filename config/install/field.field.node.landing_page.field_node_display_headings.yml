@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_node_display_headings
-    - node.type.publication_page
+    - node.type.landing_page
   module:
     - options
 id: node.landing_page.field_node_display_headings
