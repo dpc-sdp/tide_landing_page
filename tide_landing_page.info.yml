@@ -105,6 +105,7 @@ config_devel:
     - field.field.node.landing_page.field_featured_image
     - field.field.node.landing_page.field_graphical_image
     - field.field.node.landing_page.field_bottom_graphical_image
+    - field.field.node.landing_page.field_display_headings
     - field.field.node.landing_page.field_landing_page_hero_image
     - field.field.node.landing_page.field_landing_page_hero_theme
     - field.field.node.landing_page.field_landing_page_c_primary
