@@ -101,6 +101,7 @@ function tide_landing_page_update_dependencies() {
   $dependencies['tide_landing_page'][8010] = ['system' => 8805];
   $dependencies['tide_landing_page'][8015] = ['system' => 8805];
   $dependencies['tide_landing_page'][8016] = ['system' => 8805];
+  $dependencies['tide_landing_page'][8032] = ['tide_core' => 8037];
 
   return $dependencies;
 }
@@ -1188,4 +1189,79 @@ function tide_landing_page_update_8031() {
   }
 
   $config->save();
+}
+
+/**
+ * Add field display headings for table of contents.
+ */
+function tide_landing_page_update_8032() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $new_field = 'field.field.node.landing_page.field_node_display_headings';
+  $config_read = _tide_read_config($new_field, $config_location, TRUE);
+  // Obtain the storage manager for field instances.
+  // Create a new field instance from the yaml configuration and save.
+  \Drupal::entityManager()->getStorage('field_config')
+    ->create($config_read)
+    ->save();
+
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('core.entity_form_display.node.landing_page.default');
+
+  $dependencies = $config->get('dependencies.config');
+  if (!in_array('field.field.node.landing_page.field_node_display_headings', $dependencies)) {
+    $dependencies[] = 'field.field.node.landing_page.field_node_display_headings';
+    $config->set('dependencies.config', $dependencies);
+  }
+
+  $third_party_settings = $config->get('third_party_settings.field_group.group_components.children');
+  if (!isset($third_party_settings['field_node_display_headings'])) {
+    $third_party_settings = [
+      'field_show_table_of_content',
+      'field_node_display_headings',
+      'field_landing_page_component',
+    ];
+    $config->set('third_party_settings.field_group.group_components.children', $third_party_settings);
+  }
+  $table_of_content_weight = $config->get('content.field_show_table_of_content.weight');
+  $content = $config->get('content');
+  if (!isset($content['field_node_display_headings'])) {
+    $content['field_node_display_headings'] = [
+      'weight' => $table_of_content_weight + 1,
+      'settings' => [],
+      'third_party_settings' => [],
+      'type' => 'options_buttons',
+      'region' => 'content',
+    ];
+    $config->set('content', $content);
+  }
+  // Increase weight to sit below the new field.
+  $landing_page_component = $config->get('content.field_landing_page_component.weight');
+  $config->set('content.field_landing_page_component.weight', $landing_page_component + 1);
+  $config->save();
+
+  // Add to JSON.
+  $json_config = $config_factory->getEditable('jsonapi_extras.jsonapi_resource_config.node--landing_page');
+
+  $json_content = $json_config->get('resourceFields');
+  if (!isset($json_content['field_node_display_headings'])) {
+    $json_content['field_node_display_headings'] = [
+      'fieldName' => 'field_node_display_headings',
+      'publicName' => 'field_node_display_headings',
+      'enhancer' => [
+        'id' => '',
+      ],
+      'disabled' => FALSE,
+    ];
+
+    $json_config->set('resourceFields', $json_content);
+  }
+
+  $json_config->save();
+
+  // Update show table of content label.
+  $field_config = $config_factory->getEditable('field.field.node.landing_page.field_show_table_of_content');
+  $description = 'The table of contents is automatically built from the heading structure of your page.';
+  $field_config->set('description', $description);
+  $field_config->save();
 }
