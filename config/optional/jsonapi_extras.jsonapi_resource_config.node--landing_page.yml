@@ -308,6 +308,12 @@ resourceFields:
     disabled: false
     advancedOptionsIcon: ''
     enhancer_label: ''
+  field_node_display_headings:
+    fieldName: field_node_display_headings
+    publicName: field_node_display_headings
+    enhancer:
+      id: ''
+    disabled: false
   field_node_primary_site:
     fieldName: field_node_primary_site
     publicName: field_node_primary_site
