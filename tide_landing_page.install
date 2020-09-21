@@ -101,7 +101,7 @@ function tide_landing_page_update_dependencies() {
   $dependencies['tide_landing_page'][8010] = ['system' => 8805];
   $dependencies['tide_landing_page'][8015] = ['system' => 8805];
   $dependencies['tide_landing_page'][8016] = ['system' => 8805];
-  $dependencies['tide_landing_page'][8032] = ['tide_core' => 8036];
+  $dependencies['tide_landing_page'][8032] = ['tide_core' => 8037];
 
   return $dependencies;
 }
