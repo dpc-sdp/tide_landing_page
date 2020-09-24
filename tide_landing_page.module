@@ -120,6 +120,9 @@ function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form
           ],
         ],
       ];
+      if (!isset($form['field_node_display_headings']['widget']['#default_value'])) {
+        $form['field_node_display_headings']['widget']['#default_value'] = 'showH2';
+      }
     }
   }
 }
