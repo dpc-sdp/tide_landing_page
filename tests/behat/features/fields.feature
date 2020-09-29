@@ -106,6 +106,11 @@ Feature: Fields for Landing Page content type
     And I should see an "input#edit-field-show-table-of-content-value" element
     And I should not see an "input#edit-field-show-table-of-content.required" element
 
+    When I check "edit-field-show-table-of-content-value"
+    Then I should see text matching "Display headings"
+    And I should see an "input#edit-field-node-display-headings-showh2" element
+    And I should see an "input#edit-field-node-display-headings-showh2andh3" element
+
     And I see field "Show topic term and tags?"
 
     And I see field "Background Colour"
@@ -214,6 +219,11 @@ Feature: Fields for Landing Page content type
     And I see field "Show Table of Content?"
     And I should see an "input#edit-field-show-table-of-content-value" element
     And I should not see an "input#edit-field-show-table-of-content.required" element
+
+    When I check "edit-field-show-table-of-content-value"
+    Then I should see text matching "Display headings"
+    And I should see an "input#edit-field-node-display-headings-showh2" element
+    And I should see an "input#edit-field-node-display-headings-showh2andh3" element
 
     And I see field "Show topic term and tags?"
 
