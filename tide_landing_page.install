@@ -1269,17 +1269,24 @@ function tide_landing_page_update_8032() {
 /**
  * Add the new paragraph type tide_automated_listing.
  */
-function tide_landing_page_update_8029() {
+function tide_landing_page_update_8033() {
   $result = \Drupal::service('module_installer')->install(['tide_automated_listing']);
   if (!$result) {
     throw new \Exception(sprintf('Unable to install module %s', 'tide_automated_listing'));
   }
 
+  $configs = [
+    'field.field.node.landing_page.field_landing_page_component' => 'field_config',
+  ];
+
   module_load_include('inc', 'tide_core', 'includes/helpers');
   $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
-  $config_storage = \Drupal::service('config.storage');
 
   // Check if field already exported to config/sync.
-  $config_read = _tide_read_config('field.field.node.landing_page.field_landing_page_component', $config_location, TRUE);
-  $config_storage->write('field.field.node.landing_page.field_landing_page_component', $config_read);
+  foreach ($configs as $config => $type) {
+    $config_read = _tide_read_config($config, $config_location, TRUE);
+    $storage = \Drupal::entityTypeManager()->getStorage($type);
+    $config_entity = $storage->createFromStorageRecord($config_read);
+    $config_entity->save();
+  }
 }
