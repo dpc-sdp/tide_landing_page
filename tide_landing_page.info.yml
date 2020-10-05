@@ -23,6 +23,7 @@ dependencies:
   - maxlength:maxlength
   - paragraphs:paragraphs
   - smart_trim:smart_trim
+  - link_field_autocomplete_filter
 config_devel:
   install:
     - block_content.type.campaign
