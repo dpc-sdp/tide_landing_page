@@ -5,7 +5,6 @@ dependencies:
     - field.storage.node.field_landing_page_component
     - node.type.landing_page
     - paragraphs.paragraphs_type.accordion
-    - paragraphs.paragraphs_type.automated_card_listing
     - paragraphs.paragraphs_type.basic_text
     - paragraphs.paragraphs_type.call_to_action
     - paragraphs.paragraphs_type.card_carousel
@@ -25,7 +24,6 @@ dependencies:
     - paragraphs.paragraphs_type.timelines
   module:
     - entity_reference_revisions
-    - tide_automated_listing
 id: node.landing_page.field_landing_page_component
 field_name: field_landing_page_component
 entity_type: node
@@ -61,7 +59,6 @@ settings:
       card_carousel: card_carousel
       timelines: timelines
       news_listing: news_listing
-      automated_card_listing: automated_card_listing
     target_bundles_drag_drop:
       banner:
         weight: -33
@@ -72,9 +69,6 @@ settings:
       accordion:
         enabled: true
         weight: -31
-      automated_card_listing:
-        enabled: true
-        weight: -30
       card_event:
         enabled: true
         weight: -30
