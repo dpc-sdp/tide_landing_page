@@ -229,7 +229,7 @@ Feature: Fields for Landing Page content type
     And I should see an "select#edit-field-landing-page-bg-colour" element
     And I should see an "select#edit-field-landing-page-bg-colour.required" element
 
-  @api @javascript @jsonapi @suggest
+  @api @suggest
   Scenario: Request a landing page with an automated listing component via API
     Given vocabulary "topic" with name "Topic" exists
     And topic terms:
