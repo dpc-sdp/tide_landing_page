@@ -17,7 +17,6 @@ dependencies:
   - dpc-sdp:tide_core
   - dpc-sdp:tide_event
   - dpc-sdp:tide_media
-  - dpc-sdp:tide_automated_listing
   - address:address
   - entity_reference_revisions:entity_reference_revisions
   - field_group:field_group
