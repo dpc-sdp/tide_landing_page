@@ -73,7 +73,7 @@ function tide_landing_page_install() {
         'automated_card_listing' => [
           'enabled' => TRUE,
           'weight' => '-30',
-        ]
+        ],
       ];
       $dependencies_settings['config'][] = 'paragraphs.paragraphs_type.automated_card_listing';
     }
@@ -1303,7 +1303,7 @@ function tide_landing_page_update_8033() {
         'automated_card_listing' => [
           'enabled' => TRUE,
           'weight' => '-30',
-        ]
+        ],
       ];
       $dependencies_settings['config'][] = 'paragraphs.paragraphs_type.automated_card_listing';
     }
