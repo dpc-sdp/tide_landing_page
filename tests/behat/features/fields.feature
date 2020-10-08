@@ -7,7 +7,6 @@ Feature: Fields for Landing Page content type
   Scenario: The content type has the expected fields (and labels where we can use them).
     Given I am logged in as a user with the "create landing_page content" permission
     When I visit "node/add/landing_page"
-    And save screenshot
     Then I see field "Title"
     And I should see an "input#edit-title-0-value.required" element
 
@@ -128,7 +127,6 @@ Feature: Fields for Landing Page content type
   Scenario: The content type has the expected fields (and labels where we can use them) including from suggested modules.
     Given I am logged in as a user with the "create landing_page content" permission
     When I visit "node/add/landing_page"
-    And save screenshot
     Then I see field "Title"
     And I should see an "input#edit-title-0-value.required" element
 
@@ -251,13 +249,12 @@ Feature: Fields for Landing Page content type
     Then I wait for AJAX to finish
 
     Then I fill in "Listing Title" with "Test Automated Listing"
+    And I check the box "Landing Page"
 
     Then I click on the horizontal tab "Display options"
-    And I fill in "Cards shown per page" with "9"
-    And I select "Changed" from "Card Date field mapping"
+    And I fill in "Minimum results to show" with "2"
+    And I fill in "Number of cards shown per page" with "9"
     And I select the radio button "Show 'no results' message"
-    And I check the box "Topic"
-    And I check the box "Location"
     And I select "Changed" from "Sort by"
     And I select "Ascending" from "Sort order"
 
@@ -265,7 +262,7 @@ Feature: Fields for Landing Page content type
     And I press the "Save" button
 
     Given I am an anonymous user
-    When I send a GET request to "api/v1/node/landing_page/99999999-aaaa-bbbb-ccc-000000000000?include=field_landing_page_component"
+    When I send a GET request to "/api/v1/node/landing_page/99999999-aaaa-bbbb-ccc-000000000000?include=field_landing_page_component"
     Then the rest response status code should be 200
     And the response should be in JSON
     And the JSON node "data" should exist
@@ -279,22 +276,16 @@ Feature: Fields for Landing Page content type
     And the JSON node "included[0].attributes.field_paragraph_auto_listing.results.min_not_met" should be equal to "no_results_message"
     And the JSON node "included[0].attributes.field_paragraph_auto_listing.results.no_results_message" should be equal to "There are currently no results"
 
-    And the JSON node "included[0].attributes.field_paragraph_auto_listing.display.type" should be equal to "carousel"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.display.type" should be equal to "grid"
     And the JSON node "included[0].attributes.field_paragraph_auto_listing.display.items" should be equal to "9"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.display.min" should be equal to "2"
 
-    And the JSON node "included[0].attributes.field_paragraph_auto_listing.card_display.date" should be equal to "changed"
-    And the JSON node "included[0].attributes.field_paragraph_auto_listing.card_display.hide.image" should be equal to "false"
-    And the JSON node "included[0].attributes.field_paragraph_auto_listing.card_display.hide.title" should be equal to "false"
-    And the JSON node "included[0].attributes.field_paragraph_auto_listing.card_display.hide.summary" should be equal to "false"
-    And the JSON node "included[0].attributes.field_paragraph_auto_listing.card_display.hide.topic" should be equal to "true"
-    And the JSON node "included[0].attributes.field_paragraph_auto_listing.card_display.hide.location" should be equal to "true"
-
-    And the JSON node "included[0].attributes.field_paragraph_auto_listing.filter_operator" should be equal to "AND"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.filter_operator" should be equal to "OR"
 
     And the JSON node "included[0].attributes.field_paragraph_auto_listing.filter_today.status" should be equal to "false"
 
-    And the JSON node "included[0].attributes.field_paragraph_auto_listing.content_type" should be equal to "event"
-    And the JSON node "included[0].attributes.field_paragraph_auto_listing.filters.type.values" should be equal to "event"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.content_type[0]" should be equal to "landing_page"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.filters.type.values[0]" should be equal to "landing_page"
     And the JSON node "included[0].attributes.field_paragraph_auto_listing.filters.type.operator" should be equal to "OR"
 
     And the JSON node "included[0].attributes.field_paragraph_auto_listing.sort.field" should be equal to "changed"

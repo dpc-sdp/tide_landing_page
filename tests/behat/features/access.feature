@@ -9,7 +9,6 @@ Feature: Access to Landing Page content type
     Given I am logged in as a user with the "<role>" role
     When I go to "node/add/landing_page"
     Then I should get a "<response>" HTTP response
-    And save screenshot
     Examples:
       | role               | response |
       | authenticated user | 404      |
