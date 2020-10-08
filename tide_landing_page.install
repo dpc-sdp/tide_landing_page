@@ -57,6 +57,7 @@ function tide_landing_page_install() {
   $field_config = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
   if ($field_config) {
     $handler_settings = $field_config->getSetting('handler_settings');
+    $dependencies_settings = $field_config->getSetting('dependencies');
     // Add the Featured News paragraph to Landing Page component if exists.
     if ($moduleHandler->moduleExists('tide_news')) {
       $handler_settings['target_bundles']['featured_news'] = 'featured_news';
@@ -65,7 +66,20 @@ function tide_landing_page_install() {
     if ($moduleHandler->moduleExists('tide_webform')) {
       $handler_settings['target_bundles']['embedded_webform'] = 'embedded_webform';
     }
+    // Add the Automated Listing paragraph to Landing Page component if exists.
+    if ($moduleHandler->moduleExists('tide_automated_listing')) {
+      $handler_settings['target_bundles']['automated_card_listing'] = 'automated_card_listing';
+      $handler_settings['target_bundles_drag_drop'][] = [
+        'automated_card_listing' => [
+          'enabled' => TRUE,
+          'weight' => '-30'
+        ]
+      ];
+      $dependencies_settings['config'][] = 'paragraphs.paragraphs_type.automated_card_listing';
+    }
     $field_config->setSetting('handler_settings', $handler_settings);
+    $field_config->setSetting('dependencies', $dependencies_settings);
+
     $field_config->save();
   }
 
@@ -1275,10 +1289,27 @@ function tide_landing_page_update_8033() {
     throw new \Exception(sprintf('Unable to install module %s', 'tide_automated_listing'));
   }
 
-  module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
-  $config_storage = \Drupal::service('config.storage');
+  /** @var \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler */
+  $moduleHandler = \Drupal::service('module_handler');
+  $field_config = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
+  if ($field_config) {
+    $handler_settings = $field_config->getSetting('handler_settings');
+    $dependencies_settings = $field_config->getSetting('dependencies');
 
-  $config_read = _tide_read_config('field.field.node.landing_page.field_landing_page_component', $config_location, TRUE);
-  $config_storage->write('field.field.node.landing_page.field_landing_page_component', $config_read);
+    // Add the Automated Listing paragraph to Landing Page component if exists.
+    if ($moduleHandler->moduleExists('tide_automated_listing')) {
+      $handler_settings['target_bundles']['automated_card_listing'] = 'automated_card_listing';
+      $handler_settings['target_bundles_drag_drop'][] = [
+        'automated_card_listing' => [
+            'enabled' => TRUE,
+            'weight' => '-30'
+        ]
+      ];
+      $dependencies_settings['config'][] = 'paragraphs.paragraphs_type.automated_card_listing';
+    }
+    $field_config->setSetting('handler_settings', $handler_settings);
+    $field_config->setSetting('dependencies', $dependencies_settings);
+
+    $field_config->save();
+  }
 }
