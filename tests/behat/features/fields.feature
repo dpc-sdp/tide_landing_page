@@ -128,9 +128,6 @@ Feature: Fields for Landing Page content type
     Then I see field "Title"
     And I should see an "input#edit-title-0-value.required" element
 
-    And I should see text matching "Content components"
-    And I should see "Card collection" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
-
     And the "#edit-field-featured-image" element should contain "Feature Image"
     And I should see an "input#edit-field-featured-image-entity-browser-entity-browser-open-modal" element
 
@@ -230,7 +227,7 @@ Feature: Fields for Landing Page content type
     And I should see an "select#edit-field-landing-page-bg-colour" element
     And I should see an "select#edit-field-landing-page-bg-colour.required" element
 
-  @api @suggest
+  @api @suggest @javascript
   Scenario: Request a landing page with an automated listing component via API
     Given vocabulary "topic" with name "Topic" exists
     And topic terms:
