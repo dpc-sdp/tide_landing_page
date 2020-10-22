@@ -1265,3 +1265,31 @@ function tide_landing_page_update_8032() {
   $field_config->set('description', $description);
   $field_config->save();
 }
+
+/**
+ * Installs new promotion_card paragraph type.
+ */
+function tide_landing_page_update_8033() {
+  $configs = [
+    'paragraphs.paragraphs_type.promotion_card' => 'paragraphs_type',
+    'field.storage.paragraph.field_card_display_style' => 'field_storage_config',
+    'field.storage.paragraph.field_customise' => 'field_storage_config',
+    'field.field.paragraph.promotion_card.field_paragraph_title' => 'field_config',
+    'field.field.paragraph.promotion_card.field_paragraph_summary' => 'field_config',
+    'field.field.paragraph.promotion_card.field_paragraph_media' => 'field_config',
+    'field.field.paragraph.promotion_card.field_paragraph_link' => 'field_config',
+    'field.field.paragraph.promotion_card.field_customise' => 'field_config',
+    'field.field.paragraph.promotion_card.field_card_display_style' => 'field_config',
+    'core.entity_view_display.paragraph.promotion_card.default' => 'entity_view_display',
+    'core.entity_form_display.paragraph.promotion_card.default' => 'entity_form_display',
+  ];
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  // Check if field already exported to config/sync.
+  foreach ($configs as $config => $type) {
+    $config_read = _tide_read_config($config, $config_location, TRUE);
+    $storage = \Drupal::entityTypeManager()->getStorage($type);
+    $config_entity = $storage->createFromStorageRecord($config_read);
+    $config_entity->save();
+  }
+}
