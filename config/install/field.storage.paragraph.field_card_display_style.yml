@@ -17,14 +17,8 @@ settings:
       value: thumbnail
       label: Thumbnail
     -
-      value: featured
-      label: Featured
-    -
-      value: no_image
-      label: Featured
-    -
       value: profile
-      label: Featured
+      label: Profile
   allowed_values_function: ''
 module: options
 locked: false
