@@ -71,6 +71,7 @@ Feature: Fields for Landing Page content type
     And I should see "Key dates" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Image Gallery" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Complex Image" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
+    And I should see "Promotion card" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
 
     And I see field "Tags"
     And I should see an "input#edit-field-tags-0-target-id" element
@@ -181,6 +182,7 @@ Feature: Fields for Landing Page content type
     And I should see "Key dates" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Timelines" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Complex Image" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
+    And I should see "Promotion card" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
 
     And I should see "Form embed (Drupal)" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Form embed (OpenForms)" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
