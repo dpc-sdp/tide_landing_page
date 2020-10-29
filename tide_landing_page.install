@@ -1312,3 +1312,47 @@ function tide_landing_page_update_8033() {
   $config_read = _tide_read_config($json_field, $config_location, TRUE);
   $config_storage->write($json_field, $config_read);
 }
+
+/**
+ * Installs new navigation_card paragraph type.
+ */
+function tide_landing_page_update_8034() {
+  $configs = [
+    'paragraphs.paragraphs_type.navigation_card' => 'paragraphs_type',
+    'field.field.paragraph.navigation_card.field_paragraph_title' => 'field_config',
+    'field.field.paragraph.navigation_card.field_paragraph_summary' => 'field_config',
+    'field.field.paragraph.navigation_card.field_paragraph_media' => 'field_config',
+    'field.field.paragraph.navigation_card.field_paragraph_link' => 'field_config',
+    'field.field.paragraph.navigation_card.field_customise' => 'field_config',
+    'field.field.paragraph.navigation_card.field_card_display_style' => 'field_config',
+    'core.entity_view_display.paragraph.navigation_card.default' => 'entity_view_display',
+    'core.entity_form_display.paragraph.navigation_card.default' => 'entity_form_display',
+  ];
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  // Check if field already exported to config/sync.
+  foreach ($configs as $config => $type) {
+    $config_read = _tide_read_config($config, $config_location, TRUE);
+    $storage = \Drupal::entityTypeManager()->getStorage($type);
+    $config_entity = $storage->createFromStorageRecord($config_read);
+    $config_entity->save();
+  }
+
+  // Add the new paragraph type to field_landing_page_component.
+  $field = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
+  if ($field) {
+    $handler_settings = $field->getSetting('handler_settings');
+    if (isset($handler_settings['target_bundles']) && !in_array('navigation_card', $handler_settings['target_bundles'])) {
+      $handler_settings['target_bundles']['navigation_card'] = 'navigation_card';
+      $handler_settings['target_bundles_drag_drop']['navigation_card']['enabled'] = TRUE;
+      $field->setSetting('handler_settings', $handler_settings);
+      $field->save();
+    }
+  }
+
+  // Add paragraph type to JSON.
+  $json_field = 'jsonapi_extras.jsonapi_resource_config.paragraph--navigation_card';
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/optional'];
+  $config_read = _tide_read_config($json_field, $config_location, TRUE);
+  $config_storage->write($json_field, $config_read);
+}
