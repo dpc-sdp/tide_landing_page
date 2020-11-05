@@ -1308,6 +1308,7 @@ function tide_landing_page_update_8033() {
   // Add paragraph type to JSON.
   $json_field = 'jsonapi_extras.jsonapi_resource_config.paragraph--promotion_card';
   $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/optional'];
+  $config_storage = \Drupal::service('config.storage');
   $config_read = _tide_read_config($json_field, $config_location, TRUE);
   $config_storage->write($json_field, $config_read);
 }
