@@ -198,7 +198,7 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
           '#title' => 'Page summary will be automatically drawn from the content you have linked to.',
           '#group_name' => 'Page summary message',
           '#attributes' => [
-            'class' => 'summary-message-group'
+            'class' => 'summary-message-group',
           ],
           '#states' => [
             'invisible' => [
@@ -207,7 +207,7 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
                 ['value' => ''],
               ],
             ],
-          ]
+          ],
         ];
       }
       if (isset($element['subform']['field_customise'])) {
@@ -216,7 +216,7 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
           '#title' => 'Customise',
           '#group_name' => 'Page summary message',
           '#attributes' => [
-            'class' => 'customise-field-group'
+            'class' => 'customise-field-group',
           ],
           '#weight' => '20',
           '#states' => [
@@ -226,7 +226,7 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
                 ['value' => ''],
               ],
             ],
-          ]
+          ],
         ];
         $element['subform']['field_customise']['#states'] = [
           'invisible' => [
