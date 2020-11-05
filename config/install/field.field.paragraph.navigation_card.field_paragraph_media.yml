@@ -9,7 +9,7 @@ id: paragraph.navigation_card.field_paragraph_media
 field_name: field_paragraph_media
 entity_type: paragraph
 bundle: navigation_card
-label: 'Thumbnail image'
+label: 'Image'
 description: ''
 required: false
 translatable: true

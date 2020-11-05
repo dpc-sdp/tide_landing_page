@@ -175,4 +175,83 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
       }
     }
   }
+  if ($paragraph_field_name == 'field_landing_page_component') {
+    $widget_state = WidgetBase::getWidgetState($element['#field_parents'], $paragraph_field_name, $form_state);
+    $paragraph = $widget_state['paragraphs'][$element['#delta']]['entity'];
+    $paragraph_type = $paragraph->bundle();
+    // Add states for navigation and promotion card paragraph type fields.
+    if ($paragraph_type == 'navigation_card' || $paragraph_type == 'promotion_card') {
+      $dependee_field_name = 'field_paragraph_link';
+      $selector = sprintf(':input[name^="%s[%d][subform][%s][0][uri]"]', $paragraph_field_name, $element['#delta'], $dependee_field_name);
+      // Dependent fields.
+      if (isset($element['subform']['field_paragraph_summary'])) {
+        $element['subform']['field_paragraph_summary']['widget'][0]['value']['#states'] = [
+          'visible' => [
+            $selector => [
+              ['value' => ['pattern' => '^http']],
+              ['value' => ''],
+            ],
+          ],
+        ];
+        $element['subform']['summary_message_group'] = [
+          '#type' => 'fieldset',
+          '#title' => 'Page summary will be automatically drawn from the content you have linked to.',
+          '#group_name' => 'Page summary message',
+          '#attributes' => [
+            'class' => 'summary-message-group'
+          ],
+          '#states' => [
+            'invisible' => [
+              $selector => [
+                ['value' => ['pattern' => '^http']],
+                ['value' => ''],
+              ],
+            ],
+          ]
+        ];
+      }
+      if (isset($element['subform']['field_customise'])) {
+        $element['subform']['customise_field_group'] = [
+          '#type' => 'fieldset',
+          '#title' => 'Customise',
+          '#group_name' => 'Page summary message',
+          '#attributes' => [
+            'class' => 'customise-field-group'
+          ],
+          '#weight' => '20',
+          '#states' => [
+            'invisible' => [
+              $selector => [
+                ['value' => ['pattern' => '^http']],
+                ['value' => ''],
+              ],
+            ],
+          ]
+        ];
+        $element['subform']['field_customise']['#states'] = [
+          'invisible' => [
+            $selector => [
+              ['value' => ['pattern' => '^http']],
+              ['value' => ''],
+            ],
+          ],
+        ];
+        $element['subform']['customise_field_group']['field_customise'] = $element['subform']['field_customise'];
+        unset($element['subform']['field_customise']);
+      }
+      // Add state for media field.
+      $dependee_field_name = 'field_card_display_style';
+      $selector = sprintf(':input[name^="%s[%d][subform][%s]"]', $paragraph_field_name, $element['#delta'], $dependee_field_name);
+      // Dependent field.
+      if (isset($element['subform']['field_paragraph_media'])) {
+        $element['subform']['field_paragraph_media']['#states'] = [
+          'visible' => [
+            $selector => [
+              ['value' => 'thumbnail'],
+            ],
+          ],
+        ];
+      }
+    }
+  }
 }

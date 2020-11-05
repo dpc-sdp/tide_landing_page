@@ -9,7 +9,7 @@ field_name: field_paragraph_summary
 entity_type: paragraph
 bundle: navigation_card
 label: Summary
-description: ''
+description: 'This optional summary will be shown underneath the title.'
 required: false
 translatable: true
 default_value: {  }
