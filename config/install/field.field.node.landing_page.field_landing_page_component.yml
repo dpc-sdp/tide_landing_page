@@ -21,6 +21,7 @@ dependencies:
     - paragraphs.paragraphs_type.form_embed_openforms
     - paragraphs.paragraphs_type.latest_events
     - paragraphs.paragraphs_type.media_gallery
+    - paragraphs.paragraphs_type.navigation_card
     - paragraphs.paragraphs_type.promotion_card
     - paragraphs.paragraphs_type.timelines
   module:
@@ -60,6 +61,7 @@ settings:
       card_carousel: card_carousel
       timelines: timelines
       news_listing: news_listing
+      navigation_card: navigation_card
       promotion_card: promotion_card
     target_bundles_drag_drop:
       banner:
@@ -128,9 +130,12 @@ settings:
       news_listing:
         enabled: true
         weight: 25
-      media_gallery:
+      navigation_card:
         enabled: true
         weight: 26
+      media_gallery:
+        enabled: true
+        weight: 27
       card_event_auto:
         enabled: true
         weight: 28
