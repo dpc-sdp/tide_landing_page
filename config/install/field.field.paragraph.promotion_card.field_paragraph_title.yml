@@ -9,7 +9,7 @@ field_name: field_paragraph_title
 entity_type: paragraph
 bundle: promotion_card
 label: Title
-description: ''
+description: 'This title will be displayed as the primary call-to-action on the card.'
 required: false
 translatable: true
 default_value: {  }
