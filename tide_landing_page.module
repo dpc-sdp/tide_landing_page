@@ -73,6 +73,10 @@ function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form
   if (in_array($form_id, ['node_landing_page_form', 'node_landing_page_edit_form'])) {
     // Change form layout.
     $form['#attached']['library'][] = 'tide_landing_page/landing_page_form';
+    // Adding custom states from webform js.
+    if (\Drupal::moduleHandler()->moduleExists('webform')) {
+      $form['#attached']['library'][] = 'webform/webform.states';
+    }
 
     // Hide the field Show Acknowledgement to Country if tide_site is missing.
     if (!\Drupal::moduleHandler()->moduleExists('tide_site')) {
