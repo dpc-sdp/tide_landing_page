@@ -2,12 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_card_display_style
+    - field.storage.paragraph.field_navigation_card_display_style
     - paragraphs.paragraphs_type.navigation_card
   module:
     - options
-id: paragraph.navigation_card.field_card_display_style
-field_name: field_card_display_style
+id: paragraph.navigation_card.field_navigation_card_display_style
+field_name: field_navigation_card_display_style
 entity_type: paragraph
 bundle: navigation_card
 label: 'Card Display Style'
