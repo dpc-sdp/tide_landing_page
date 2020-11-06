@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.promotion_card.field_card_display_style
+    - field.field.paragraph.promotion_card.field_promotion_card_display_style
     - field.field.paragraph.promotion_card.field_customise
     - field.field.paragraph.promotion_card.field_paragraph_link
     - field.field.paragraph.promotion_card.field_paragraph_media
@@ -17,7 +17,7 @@ targetEntityType: paragraph
 bundle: promotion_card
 mode: default
 content:
-  field_card_display_style:
+  field_promotion_card_display_style:
     weight: 3
     label: above
     settings: {  }
