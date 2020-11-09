@@ -246,14 +246,14 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
       // Add state for media field.
       $media_dependee_field_name = '';
       $options = '';
-      if (isset($element['subform']['field_promotion_card_display_style'])) {
-        $media_dependee_field_name = 'field_promotion_card_display_style';
+      if (isset($element['subform']['field_promo_card_display_style'])) {
+        $media_dependee_field_name = 'field_promo_card_display_style';
         $options = [
           ['value' => 'thumbnail'],
         ];
       }
-      if (isset($element['subform']['field_navigation_card_display_style'])) {
-        $media_dependee_field_name = 'field_navigation_card_display_style';
+      if (isset($element['subform']['field_nav_card_display_style'])) {
+        $media_dependee_field_name = 'field_nav_card_display_style';
         $options = [
           ['value' => 'thumbnail'],
           ['value' => 'featured'],

@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.tide_image_browser
-    - field.field.paragraph.navigation_card.field_navigation_card_display_style
+    - field.field.paragraph.navigation_card.field_nav_card_display_style
     - field.field.paragraph.navigation_card.field_customise
     - field.field.paragraph.navigation_card.field_paragraph_link
     - field.field.paragraph.navigation_card.field_paragraph_media
@@ -18,7 +18,7 @@ targetEntityType: paragraph
 bundle: navigation_card
 mode: default
 content:
-  field_navigation_card_display_style:
+  field_nav_card_display_style:
     weight: 3
     settings: {  }
     third_party_settings: {  }

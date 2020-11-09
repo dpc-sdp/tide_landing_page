@@ -92,9 +92,9 @@ resourceFields:
     enhancer:
       id: ''
     disabled: false
-  field_navigation_card_display_style:
-    fieldName: field_navigation_card_display_style
-    publicName: field_navigation_card_display_style
+  field_nav_card_display_style:
+    fieldName: field_nav_card_display_style
+    publicName: field_nav_card_display_style
     enhancer:
       id: ''
     disabled: false

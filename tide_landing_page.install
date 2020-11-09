@@ -1319,13 +1319,13 @@ function tide_landing_page_update_8033() {
 function tide_landing_page_update_8034() {
   $configs = [
     'paragraphs.paragraphs_type.navigation_card' => 'paragraphs_type',
-    'field.storage.paragraph.field_navigation_card_display_style' => 'field_storage_config',
+    'field.storage.paragraph.field_nav_card_display_style' => 'field_storage_config',
     'field.field.paragraph.navigation_card.field_paragraph_title' => 'field_config',
     'field.field.paragraph.navigation_card.field_paragraph_summary' => 'field_config',
     'field.field.paragraph.navigation_card.field_paragraph_media' => 'field_config',
     'field.field.paragraph.navigation_card.field_paragraph_link' => 'field_config',
     'field.field.paragraph.navigation_card.field_customise' => 'field_config',
-    'field.field.paragraph.navigation_card.field_navigation_card_display_style' => 'field_config',
+    'field.field.paragraph.navigation_card.field_nav_card_display_style' => 'field_config',
     'core.entity_view_display.paragraph.navigation_card.default' => 'entity_view_display',
     'core.entity_form_display.paragraph.navigation_card.default' => 'entity_form_display',
   ];
