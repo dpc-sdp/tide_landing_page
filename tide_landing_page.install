@@ -1265,3 +1265,35 @@ function tide_landing_page_update_8032() {
   $field_config->set('description', $description);
   $field_config->save();
 }
+
+/**
+ * Import new field configuration for event content type that is dependent on landing page.
+ */
+function tide_landing_page_update_8033() {
+  $configs = [
+    'field.storage.node.field_parent_event' => 'field_storage_config',
+    'field.field.node.event.field_parent_event' => 'field_config',
+  ];
+
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_event') . '/config/install'];
+
+  // Check if field already exported to config/sync.
+  foreach ($configs as $config => $type) {
+    $config_read = _tide_read_config($config, $config_location, TRUE);
+    $storage = \Drupal::entityTypeManager()->getStorage($type);
+
+    $extracted_config_name = $config;
+
+    if (strrpos($config, 'field.storage.') !== FALSE) {
+      $extracted_config_name = str_replace('field.storage.', '', $config);
+    } elseif (strrpos($config, 'field.field.') !== FALSE) {
+      $extracted_config_name = str_replace('field.field.', '', $config);
+    }
+
+    if ($storage->load($extracted_config_name) == NULL) {
+      $config_entity = $storage->createFromStorageRecord($config_read);
+      $config_entity->save();
+    }
+  }
+}
