@@ -250,3 +250,21 @@ Feature: Fields for Landing Page content type
     And I wait for 5 seconds
     And I see field "field_landing_page_component[0][subform][field_customise][value]"
     And save screenshot
+
+  @api @javascript
+  Scenario: The navigation card paragraph type has the expected fields.
+    Given I am logged in as a user with the "create landing_page content" permission
+    When I visit "node/add/landing_page"
+    And I click "Body Content"
+    Then I select "Navigation card" from "edit-field-landing-page-component-add-more-add-more-select"
+    And I press "edit-field-landing-page-component-add-more-add-more-button"
+    And I wait for 5 seconds
+    Then I see field "Link"
+    And I see field "Title"
+    And I see field "Summary"
+    And I see field "field_landing_page_component[0][subform][field_nav_card_display_style]"
+    And save screenshot
+    And I select "thumbnail" from "field_landing_page_component[0][subform][field_nav_card_display_style]"
+    And I wait for 5 seconds
+    And I see field "field_landing_page_component[0][subform][field_customise][value]"
+    And save screenshot
