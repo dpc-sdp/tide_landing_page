@@ -92,9 +92,9 @@ resourceFields:
     enhancer:
       id: ''
     disabled: false
-  field_promotion_card_display_style:
-    fieldName: field_promotion_card_display_style
-    publicName: field_promotion_card_display_style
+  field_promo_card_display_style:
+    fieldName: field_promo_card_display_style
+    publicName: field_promo_card_display_style
     enhancer:
       id: ''
     disabled: false

@@ -4,8 +4,8 @@ dependencies:
   module:
     - options
     - paragraphs
-id: paragraph.field_promotion_card_display_style
-field_name: field_promotion_card_display_style
+id: paragraph.field_promo_card_display_style
+field_name: field_promo_card_display_style
 entity_type: paragraph
 type: list_string
 settings:
