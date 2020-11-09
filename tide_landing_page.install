@@ -1267,8 +1267,7 @@ function tide_landing_page_update_8032() {
 }
 
 /**
- * Import new field configuration for event content type
- * that is dependent on landing page.
+ * Import new field for events related to landing page.
  */
 function tide_landing_page_update_8033() {
   $configs = [
