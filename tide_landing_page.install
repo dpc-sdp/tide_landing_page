@@ -1267,7 +1267,8 @@ function tide_landing_page_update_8032() {
 }
 
 /**
- * Import new field configuration for event content type that is dependent on landing page.
+ * Import new field configuration for event content type
+ * that is dependent on landing page.
  */
 function tide_landing_page_update_8033() {
   $configs = [
@@ -1287,7 +1288,8 @@ function tide_landing_page_update_8033() {
 
     if (strrpos($config, 'field.storage.') !== FALSE) {
       $extracted_config_name = str_replace('field.storage.', '', $config);
-    } elseif (strrpos($config, 'field.field.') !== FALSE) {
+    }
+    elseif (strrpos($config, 'field.field.') !== FALSE) {
       $extracted_config_name = str_replace('field.field.', '', $config);
     }
 
