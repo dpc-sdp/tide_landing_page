@@ -266,6 +266,7 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
         $media_dependee_field_name = 'field_promo_card_display_style';
         $options = [
           ['value' => 'thumbnail'],
+          ['value' => 'profile'],
         ];
       }
       if (isset($element['subform']['field_nav_card_display_style'])) {

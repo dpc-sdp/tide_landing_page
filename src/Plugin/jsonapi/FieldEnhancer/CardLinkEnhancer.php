@@ -5,11 +5,8 @@ namespace Drupal\tide_landing_page\Plugin\jsonapi\FieldEnhancer;
 use Drupal\tide_media\Plugin\jsonapi\FieldEnhancer\ImageEnhancer;
 use Drupal\jsonapi_extras\Plugin\ResourceFieldEnhancerBase;
 use Drupal\paragraphs\Entity\Paragraph;
-use Drupal\media_entity\MediaInterface;
-use Drupal\image\Entity\ImageStyle;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\media\Entity\Media;
-use Drupal\node\Entity\Node;
 use Drupal\file\Entity\File;
 use Shaper\Util\Context;
 
@@ -28,8 +25,8 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
    * {@inheritdoc}
    */
   protected function doUndoTransform($data, Context $context) {
-    if (!empty($data) && (strpos($data['uri'], 'entity:node/') !== false)) {
-      $nid = str_replace("entity:node/","",$data['uri']);
+    if (!empty($data) && (strpos($data['uri'], 'entity:node/') !== FALSE)) {
+      $nid = str_replace("entity:node/", "", $data['uri']);
       $data['url'] = $this->getAlias($nid);
       $data['image'] = $this->getImage($nid);
       $data['internal_node_fields'] = $this->getCardFields($nid);
@@ -66,13 +63,13 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
    * @param string $nid
    *   The node id.
    *
-   * @return string $url
+   * @return string
    *   The alias for node.
    */
   public function getAlias($nid) {
     $url = '';
     if (!empty($nid)) {
-      $aliasByPath = \Drupal::service('path.alias_manager')->getAliasByPath('/node/'.$nid);
+      $aliasByPath = \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $nid);
       $alias_helper = \Drupal::service('tide_site.alias_storage_helper');
       $url = $alias_helper->getPathAliasWithoutSitePrefix(['alias' => $aliasByPath]);
     }
@@ -85,7 +82,7 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
    * @param string $nid
    *   The node id.
    *
-   * @return array $card_fields
+   * @return array
    *   The array of fields value.
    */
   public function getCardFields($nid) {
@@ -103,7 +100,7 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
     if ($module_handler->moduleExists('tide_news')) {
       // Add the summary field for news.
       if ($node->hasField('body')) {
-        $news_summary =  $node->get('body')->getValue() ? $node->get('body')->getValue()[0]['summary'] : '';
+        $news_summary = $node->get('body')->getValue() ? $node->get('body')->getValue()[0]['summary'] : '';
         // If no news summary, will check for landing page summary.
         $card_fields['summary'] = $news_summary ? $news_summary : $card_fields['summary'];
       }
@@ -126,7 +123,7 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
         $paragraph = $paragraph_id ? Paragraph::load($paragraph_id) : '';
         if ($paragraph && $paragraph->field_paragraph_date_range->getValue()) {
           $event_date = $paragraph->field_paragraph_date_range->getValue()[0];
-          $card_fields['date'] =  $event_date ? $event_date : '';
+          $card_fields['date'] = $event_date ? $event_date : '';
         }
         $location = $paragraph->field_paragraph_location->getValue() ? $paragraph->field_paragraph_location->getValue()[0]['locality'] : '';
         if ($location) {
@@ -151,7 +148,7 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
    * @param string $nid
    *   The node id.
    *
-   * @return array $image
+   * @return array
    *   The image data with focal point values.
    */
   public function getImage($nid) {
@@ -160,7 +157,7 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
     if ($node->get('field_featured_image')->getValue()) {
       $image_id = $node->get('field_featured_image')->getValue()[0]['target_id'];
       $media = $image_id ? Media::load($image_id) : '';
-      // Get the ID of the media object image field. My machine name is "image", but yours could be different.
+      // Get the ID of the media object image field.
       $media_field = $media ? $media->get('field_media_image')->getValue() : '';
       if ($media_field) {
         // Image Details.
@@ -178,4 +175,5 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
     }
     return $image;
   }
+
 }

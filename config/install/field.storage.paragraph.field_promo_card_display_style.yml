@@ -11,8 +11,8 @@ type: list_string
 settings:
   allowed_values:
     -
-      value: standard
-      label: Standard
+      value: noImage
+      label: No image
     -
       value: thumbnail
       label: Thumbnail
