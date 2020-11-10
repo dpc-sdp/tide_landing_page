@@ -228,3 +228,9 @@ Feature: Fields for Landing Page content type
     And I see field "Background Colour"
     And I should see an "select#edit-field-landing-page-bg-colour" element
     And I should see an "select#edit-field-landing-page-bg-colour.required" element
+
+  @api @nosuggest
+  Scenario: The content type has the expected fields (and labels where we can use them).
+    Given I am logged in as a user with the "create landing_page content" permission
+    When I visit "node/add/event"
+    Then I see field "Parent event"

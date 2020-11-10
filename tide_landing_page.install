@@ -90,6 +90,10 @@ function tide_landing_page_install() {
       $config->set('bundles', $bundles)->save();
     }
   }
+
+    tide_landing_page_update_8034();
+    tide_landing_page_update_8035();
+    tide_landing_page_update_8036();
 }
 
 /**
@@ -1297,4 +1301,87 @@ function tide_landing_page_update_8033() {
       $config_entity->save();
     }
   }
+}
+
+/**
+ * Add new fields to event default form.
+ */
+function tide_landing_page_update_8034() {
+    $config_factory = \Drupal::configFactory();
+    $config = $config_factory->getEditable('core.entity_form_display.node.event.default');
+
+    $dependencies = $config->get('dependencies.config');
+    if (!in_array('field.field.node.event.field_parent_event', $dependencies)) {
+        $dependencies[] = 'field.field.node.event.field_parent_event';
+    }
+    $config->set('dependencies.config', $dependencies);
+
+    $group_page_header_children = $config->get('third_party_settings.field_group.group_page_header.children');
+    if (!in_array('field_parent_event', $group_page_header_children)) {
+        $group_page_header_children[] = 'field_parent_event';
+    }
+    $config->set('third_party_settings.field_group.group_page_header.children', $group_page_header_children);
+
+    $content = $config->get('content');
+    if (!isset($content['field_parent_event'])) {
+        $content['field_parent_event'] = [
+            'weight' => 6,
+            'settings' => [
+                'match_operator' => 'CONTAINS',
+                'match_limit' => 10,
+                'size' => 60,
+                'placeholder' => '',
+            ],
+            'third_party_settings' => [],
+            'type' => 'entity_reference_autocomplete',
+            'region' => 'content',
+        ];
+    }
+    $config->set('content', $content);
+
+    $config->save();
+}
+
+/**
+ * Add new fields to event default view.
+ */
+function tide_landing_page_update_8035() {
+    $config_factory = \Drupal::configFactory();
+    $config = $config_factory->getEditable('core.entity_view_display.node.event.default');
+
+    $dependencies = $config->get('dependencies.config');
+    if (!in_array('field.field.node.event.field_parent_event', $dependencies)) {
+        $dependencies[] = 'field.field.node.event.field_parent_event';
+    }
+    $config->set('dependencies.config', $dependencies);
+
+    $hidden = $config->get('hidden');
+    if (!isset($hidden['field_parent_event'])) {
+        $hidden['field_parent_event'] = TRUE;
+    }
+    $config->set('hidden', $hidden);
+
+    $config->save();
+}
+
+/**
+ * Add new fields to event teaser.
+ */
+function tide_landing_page_update_8036() {
+    $config_factory = \Drupal::configFactory();
+    $config = $config_factory->getEditable('core.entity_view_display.node.event.teaser');
+
+    $dependencies = $config->get('dependencies.config');
+    if (!in_array('field.field.node.event.field_parent_event', $dependencies)) {
+        $dependencies[] = 'field.field.node.event.field_parent_event';
+    }
+    $config->set('dependencies.config', $dependencies);
+
+    $hidden = $config->get('hidden');
+    if (!isset($hidden['field_parent_event'])) {
+        $hidden['field_parent_event'] = TRUE;
+    }
+    $config->set('hidden', $hidden);
+
+    $config->save();
 }
