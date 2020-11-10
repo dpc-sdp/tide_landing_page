@@ -188,6 +188,22 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
       $dependee_field_name = 'field_paragraph_link';
       $selector = sprintf(':input[name^="%s[%d][subform][%s][0][uri]"]', $paragraph_field_name, $element['#delta'], $dependee_field_name);
       // Dependent fields.
+      if (isset($element['subform']['field_paragraph_title'])) {
+        $element['subform']['field_paragraph_title']['widget'][0]['value']['#states'] = [
+          'visible' => [
+            $selector => [
+              ['value' => ['pattern' => '^http']],
+              ['value' => ''],
+            ],
+          ],
+          'required' => [
+            $selector => [
+              ['value' => ['pattern' => '^http']],
+              ['value' => ''],
+            ],
+          ],
+        ];
+      }
       if (isset($element['subform']['field_paragraph_summary'])) {
         $element['subform']['field_paragraph_summary']['widget'][0]['value']['#states'] = [
           'visible' => [
@@ -199,7 +215,7 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
         ];
         $element['subform']['summary_message_group'] = [
           '#type' => 'fieldset',
-          '#title' => 'Page summary will be automatically drawn from the content you have linked to.',
+          '#title' => 'Page title & summary will be automatically drawn from the content you have linked to.',
           '#group_name' => 'Page summary message',
           '#attributes' => [
             'class' => 'summary-message-group',
@@ -260,12 +276,15 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
         ];
       }
       if (!empty($media_dependee_field_name) && !empty($options)) {
-        $selector = sprintf(':input[name^="%s[%d][subform][%s]"]', $paragraph_field_name, $element['#delta'], $media_dependee_field_name);
+        $media_selector = sprintf(':input[name^="%s[%d][subform][%s]"]', $paragraph_field_name, $element['#delta'], $media_dependee_field_name);
         // Dependent field.
         if (isset($element['subform']['field_paragraph_media'])) {
           $element['subform']['field_paragraph_media']['#states'] = [
             'visible' => [
-              $selector => $options,
+              $media_selector => $options,
+              $selector => [
+                ['value' => ['pattern' => '^http']],
+              ],
             ],
           ];
         }

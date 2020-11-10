@@ -108,7 +108,7 @@ resourceFields:
     fieldName: field_paragraph_link
     publicName: field_paragraph_link
     enhancer:
-      id: ''
+      id: 'card_link_enhancer'
     disabled: false
   field_paragraph_media:
     fieldName: field_paragraph_media
