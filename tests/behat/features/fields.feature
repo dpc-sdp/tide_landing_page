@@ -231,6 +231,6 @@ Feature: Fields for Landing Page content type
 
   @api @nosuggest
   Scenario: The content type has the expected fields (and labels where we can use them).
-    Given I am logged in as a user with the "create landing_page content" permission
+    Given I am logged in as a user with the "create event content" permission
     When I visit "node/add/event"
     Then I see field "Parent event"
