@@ -1280,7 +1280,7 @@ function tide_landing_page_update_8033() {
   ];
 
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_event') . '/config/install'];
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
 
   // Check if field already exported to config/sync.
   foreach ($configs as $config => $type) {
