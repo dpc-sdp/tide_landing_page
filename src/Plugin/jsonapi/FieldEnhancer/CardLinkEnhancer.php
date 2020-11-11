@@ -27,9 +27,11 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
   protected function doUndoTransform($data, Context $context) {
     if (!empty($data) && (strpos($data['uri'], 'entity:node/') !== FALSE)) {
       $nid = str_replace("entity:node/", "", $data['uri']);
-      $data['url'] = $this->getAlias($nid);
-      $data['image'] = $this->getImage($nid);
-      $data['internal_node_fields'] = $this->getCardFields($nid);
+      if (!empty($nid)) {
+        $data['url'] = $this->getAlias($nid);
+        $data['image'] = $this->getImage($nid);
+        $data['internal_node_fields'] = $this->getCardFields($nid);
+      }
     }
     return $data;
   }
@@ -70,8 +72,7 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
     $url = '';
     if (!empty($nid)) {
       $aliasByPath = \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $nid);
-      $alias_helper = \Drupal::service('tide_site.alias_storage_helper');
-      $url = $alias_helper->getPathAliasWithoutSitePrefix(['alias' => $aliasByPath]);
+      $url = $this->getPathAliasWithoutSitePrefix(['alias' => $aliasByPath]);
     }
     return $url;
   }
@@ -174,6 +175,25 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
       }
     }
     return $image;
+  }
+
+  /**
+   * Extract the original alias without site prefix.
+   *
+   * @param array $path
+   *   The path.
+   * @param string $site_base_url
+   *   The site base URL if the path alias is an absolute URL.
+   *
+   * @return string
+   *   The raw internal alias without site prefix.
+   */
+  public function getPathAliasWithoutSitePrefix(array $path, $site_base_url = '') {
+    $pattern = '/^\/site\-(\d+)\//';
+    if ($site_base_url) {
+      $pattern = '/' . preg_quote($site_base_url, '/') . '\/site\-(\d+)\//';
+    }
+    return preg_replace($pattern, $site_base_url . '/', $path['alias']);
   }
 
 }
