@@ -49,12 +49,7 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
   public function getOutputJsonSchema() {
     return [
       'anyOf' => [
-        ['type' => 'array'],
-        ['type' => 'boolean'],
-        ['type' => 'null'],
-        ['type' => 'number'],
         ['type' => 'object'],
-        ['type' => 'string'],
       ],
     ];
   }
