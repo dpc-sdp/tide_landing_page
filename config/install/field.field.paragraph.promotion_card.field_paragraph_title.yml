@@ -10,7 +10,7 @@ entity_type: paragraph
 bundle: promotion_card
 label: Title
 description: 'This title will be displayed as the primary call-to-action on the card.'
-required: true
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
