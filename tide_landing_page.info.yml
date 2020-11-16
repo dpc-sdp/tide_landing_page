@@ -17,6 +17,7 @@ dependencies:
   - dpc-sdp:tide_core
   - dpc-sdp:tide_event
   - dpc-sdp:tide_media
+  - dpc-sdp:tide_news
   - address:address
   - entity_reference_revisions:entity_reference_revisions
   - field_group:field_group
@@ -267,7 +268,6 @@ config_devel:
     - field.storage.paragraph.field_paragraph_topic
     - field.storage.paragraph.field_paragraph_email
     - field.storage.paragraph.field_paragraph_name
-    - field.storage.paragraph.field_paragraph_news_reference
     - field.storage.paragraph.field_paragraph_phone_number
     - field.storage.paragraph.field_paragraph_phone_title
     - field.storage.paragraph.field_paragraph_phones
