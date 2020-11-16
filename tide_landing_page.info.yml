@@ -50,6 +50,8 @@ config_devel:
     - core.entity_form_display.paragraph.key_journeys.default
     - core.entity_form_display.paragraph.keydates.default
     - core.entity_form_display.paragraph.latest_events.default
+    - core.entity_form_display.paragraph.embedded_webform.default
+    - core.entity_form_display.paragraph.featured_news.default
     - core.entity_view_display.paragraph.latest_events.default
     - core.entity_form_display.paragraph.media_gallery.default
     - core.entity_form_display.paragraph.hero_banner_with_cta.default
@@ -89,6 +91,9 @@ config_devel:
     - core.entity_view_display.paragraph.news_listing.default
     - core.entity_view_display.paragraph.phone.default
     - core.entity_view_display.paragraph.social_link.default
+    - core.entity_view_display.paragraph.embedded_webform.default
+    - core.entity_view_display.paragraph.embedded_webform.preview
+    - core.entity_view_display.paragraph.featured_news.default
     - field.field.block_content.campaign.body
     - field.field.block_content.campaign.field_block_cta
     - field.field.block_content.campaign.field_block_image
@@ -196,6 +201,8 @@ config_devel:
     - field.field.paragraph.latest_events.field_paragraph_title
     - field.field.paragraph.media_gallery.field_paragraph_media_gallery
     - field.field.paragraph.news_listing.field_paragraph_title
+    - field.field.paragraph.embedded_webform.field_paragraph_title
+    - field.field.paragraph.embedded_webform.field_paragraph_webform
     - field.field.node.landing_page.field_landing_page_contact
     - field.field.node.landing_page.field_landing_page_show_contact
     - field.field.node.landing_page.field_landing_page_summary
@@ -298,14 +305,8 @@ config_devel:
     - paragraphs.paragraphs_type.phone
     - paragraphs.paragraphs_type.social_link
     - paragraphs.paragraphs_type.timelines
+    - paragraphs.paragraphs_type.news_listing
   optional:
-    - core.entity_form_display.paragraph.embedded_webform.default
-    - core.entity_form_display.paragraph.featured_news.default
-    - core.entity_view_display.paragraph.embedded_webform.default
-    - core.entity_view_display.paragraph.embedded_webform.preview
-    - core.entity_view_display.paragraph.featured_news.default
-    - field.field.paragraph.embedded_webform.field_paragraph_title
-    - field.field.paragraph.embedded_webform.field_paragraph_webform
     - jsonapi_extras.jsonapi_resource_config.node--landing_page
     - jsonapi_extras.jsonapi_resource_config.block_content--campaign
     - jsonapi_extras.jsonapi_resource_config.block_content--media_gallery
@@ -324,4 +325,3 @@ config_devel:
     - jsonapi_extras.jsonapi_resource_config.paragraph--keydates
     - jsonapi_extras.jsonapi_resource_config.paragraph--media_gallery
     - jsonapi_extras.jsonapi_resource_config.paragraph--social_link
-    - paragraphs.paragraphs_type.news_listing
