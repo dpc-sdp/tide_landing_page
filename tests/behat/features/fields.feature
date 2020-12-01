@@ -72,6 +72,7 @@ Feature: Fields for Landing Page content type
     And I should see "Image Gallery" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Complex Image" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Promotion card" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
+    And I should see "Navigation card" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
 
     And I see field "Tags"
     And I should see an "input#edit-field-tags-0-target-id" element
@@ -183,6 +184,7 @@ Feature: Fields for Landing Page content type
     And I should see "Timelines" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Complex Image" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Promotion card" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
+    And I should see "Navigation card" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
 
     And I should see "Form embed (Drupal)" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Form embed (OpenForms)" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
@@ -248,3 +250,88 @@ Feature: Fields for Landing Page content type
     And I wait for 5 seconds
     And I see field "field_landing_page_component[0][subform][field_customise][value]"
     And save screenshot
+
+  @api @javascript
+  Scenario: The navigation card paragraph type has the expected fields.
+    Given I am logged in as a user with the "create landing_page content" permission
+    When I visit "node/add/landing_page"
+    And I click "Body Content"
+    Then I select "Navigation card" from "edit-field-landing-page-component-add-more-add-more-select"
+    And I press "edit-field-landing-page-component-add-more-add-more-button"
+    And I wait for 5 seconds
+    Then I see field "Link"
+    And I see field "Title"
+    And I see field "Summary"
+    And I see field "field_landing_page_component[0][subform][field_nav_card_display_style]"
+    And save screenshot
+    And I select "thumbnail" from "field_landing_page_component[0][subform][field_nav_card_display_style]"
+    And I wait for 5 seconds
+    And I see field "field_landing_page_component[0][subform][field_customise][value]"
+    And save screenshot
+
+  @api @nosuggest
+  Scenario: The content type has the expected fields (and labels where we can use them).
+    Given I am logged in as a user with the "create event content" permission
+    When I visit "node/add/event"
+    Then I see field "Parent event"
+  @api @suggest @javascript
+  Scenario: Request a landing page with an automated listing component via API
+    Given vocabulary "topic" with name "Topic" exists
+    And topic terms:
+      | name       | parent |
+      | Test Topic | 0      |
+
+    Given landing_page content:
+      | title                     | path                     | moderation_state | uuid                                | field_topic | field_node_primary_site | field_landing_page_summary | field_landing_page_bg_colour |
+      | [TEST] Landing Page title | /test-landing-page-alias | published        | 99999999-aaaa-bbbb-ccc-000000000000 | Test Topic  | Test Site               | Test Summary               | White                       |
+
+    Given I am logged in as a user with the "Administrator" role
+    When I edit landing_page "[TEST] Landing Page title"
+    And I click on link with href "#edit-group-components"
+
+    And I select "Card collection" from "edit-field-landing-page-component-add-more-add-more-select"
+    And I press the "edit-field-landing-page-component-add-more-add-more-button" button
+    Then I wait for AJAX to finish
+
+    Then I fill in "Listing Title" with "Test Automated Listing"
+    And I check the box "Landing Page"
+
+    Then I click on the horizontal tab "Display options"
+    And I fill in "Minimum results to show" with "2"
+    And I fill in "Number of cards shown per page" with "9"
+    And I select the radio button "Show 'no results' message"
+    And I select "Changed" from "Sort by"
+    And I select "Ascending" from "Sort order"
+
+    Then I select "Published" from "Change to"
+    And I press the "Save" button
+
+    Given I am an anonymous user
+    When I send a GET request to "/api/v1/node/landing_page/99999999-aaaa-bbbb-ccc-000000000000?include=field_landing_page_component"
+    Then the rest response status code should be 200
+    And the response should be in JSON
+    And the JSON node "data" should exist
+    And the JSON node "included" should exist
+    And the JSON node "included" should have 1 element
+    And the JSON node "included[0].type" should be equal to "paragraph--automated_card_listing"
+    And the JSON node "included[0].attributes" should exist
+    And the JSON node "included[0].attributes.field_paragraph_title" should be equal to "Test Automated Listing"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing" should exist
+
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.results.min_not_met" should be equal to "no_results_message"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.results.no_results_message" should be equal to "There are currently no results"
+
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.display.type" should be equal to "grid"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.display.items" should be equal to "9"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.display.min" should be equal to "2"
+
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.filter_operator" should be equal to "OR"
+
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.filter_today.status" should be equal to "false"
+
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.content_type[0]" should be equal to "landing_page"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.filters.type.values[0]" should be equal to "landing_page"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.filters.type.operator" should be equal to "OR"
+
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.sort.field" should be equal to "changed"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.sort.direction" should be equal to "asc"
