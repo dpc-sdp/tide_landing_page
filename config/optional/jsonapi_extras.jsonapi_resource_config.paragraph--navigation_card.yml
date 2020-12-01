@@ -2,11 +2,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - paragraphs.paragraphs_type.promotion_card
-id: paragraph--promotion_card
+    - paragraphs.paragraphs_type.navigation_card
+id: paragraph--navigation_card
 disabled: false
-path: paragraph/promotion_card
-resourceType: paragraph--promotion_card
+path: paragraph/navigation_card
+resourceType: paragraph--navigation_card
 resourceFields:
   id:
     fieldName: id
@@ -92,9 +92,9 @@ resourceFields:
     enhancer:
       id: ''
     disabled: false
-  field_promo_card_display_style:
-    fieldName: field_promo_card_display_style
-    publicName: field_promo_card_display_style
+  field_nav_card_display_style:
+    fieldName: field_nav_card_display_style
+    publicName: field_nav_card_display_style
     enhancer:
       id: ''
     disabled: false
