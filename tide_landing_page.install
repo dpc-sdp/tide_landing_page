@@ -1332,7 +1332,6 @@ function tide_landing_page_update_8033() {
   $config_storage->write($json_field, $config_read);
 }
 
-
 /**
  * Installs new navigation_card paragraph type.
  */
@@ -1428,7 +1427,7 @@ function tide_landing_page_update_8036() {
       'status' => TRUE,
       'dependencies' => [
         'entity_reference_revisions',
-        'paragraphs'
+        'paragraphs',
       ],
       'id' => 'paragraph.field_individual_cards',
       'field_name' => 'field_individual_cards',
@@ -1673,8 +1672,8 @@ function tide_landing_page_update_8036() {
               'enabled' => FALSE,
             ],
           ],
-        ]
-      ]
+        ],
+      ],
     ];
 
     $field = FieldConfig::loadByName($field_individual_cards['entity_type'], $bundle, $field_individual_cards['field_name']);

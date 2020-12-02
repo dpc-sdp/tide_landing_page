@@ -213,6 +213,13 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
   }
 }
 
+/**
+ * Conditional display for navigation card.
+ *
+ * @param $paragraph_field_name
+ * @param $element
+ * @param $selector
+ */
 function _tide_landing_page_conditional_display_navigation_card($paragraph_field_name, &$element, $selector) {
   // Dependent fields.
   if (isset($element['subform']['field_paragraph_title'])) {
