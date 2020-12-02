@@ -269,11 +269,6 @@ Feature: Fields for Landing Page content type
     And I see field "field_landing_page_component[0][subform][field_customise][value]"
     And save screenshot
 
-  @api @nosuggest
-  Scenario: The content type has the expected fields (and labels where we can use them).
-    Given I am logged in as a user with the "create event content" permission
-    When I visit "node/add/event"
-    Then I see field "Parent event"
   @api @suggest @javascript
   Scenario: Request a landing page with an automated listing component via API
     Given vocabulary "topic" with name "Topic" exists
