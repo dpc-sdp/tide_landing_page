@@ -1753,6 +1753,12 @@ function tide_landing_page_update_8037() {
     }
     $config->set('content', $content);
 
+    $hidden = $config->get('hidden');
+    if (isset($hidden['field_individual_cards'])) {
+      unset($hidden['field_individual_cards']);
+    }
+    $config->set('hidden', $hidden);
+
     $config->save();
   }
 }
