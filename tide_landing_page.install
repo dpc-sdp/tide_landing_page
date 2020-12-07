@@ -13,6 +13,7 @@ use Drupal\search_api\Item\Field;
 use Drupal\workflows\Entity\Workflow;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\Component\Utility\NestedArray;
+use Drupal\node\Entity\Node;
 
 /**
  * Implements hook_install().
@@ -1357,4 +1358,139 @@ function tide_landing_page_update_8034() {
   $config_storage = \Drupal::service('config.storage');
   $config_read = _tide_read_config($json_field, $config_location, TRUE);
   $config_storage->write($json_field, $config_read);
+}
+
+/**
+ * Updates cards.
+ */
+function tide_landing_page_update_8035(&$sandbox) {
+  if (!isset($sandbox['total'])) {
+    $paragraph_query = \Drupal::entityTypeManager()
+      ->getStorage('paragraph')
+      ->getQuery();
+    $paragraph_query->condition('parent_type', 'node')
+      ->condition('parent_field_name', 'field_landing_page_component');
+    $or = $paragraph_query->orConditionGroup()
+      ->condition('type', 'card_navigation')
+      ->condition('type', 'card_navigation_auto')
+      ->condition('type', 'card_navigation_featured')
+      ->condition('type', 'card_navigation_featured_auto')
+      ->condition('type', 'card_promotion')
+      ->condition('type', 'card_promotion_auto');
+    $paragraph_query->condition($or);
+    $count = $paragraph_query->count()->execute();
+    $sandbox['total'] = $count;
+    $sandbox['current'] = 0;
+    $sandbox['processed'] = 0;
+    $sandbox['#finished'] = $count ? 0 : 1;
+  }
+  $batch_size = 50;
+  $paragraph_query = \Drupal::entityTypeManager()
+    ->getStorage('paragraph')
+    ->getQuery();
+  $or = $paragraph_query->orConditionGroup()
+    ->condition('type', 'card_navigation')
+    ->condition('type', 'card_navigation_auto')
+    ->condition('type', 'card_navigation_featured')
+    ->condition('type', 'card_navigation_featured_auto')
+    ->condition('type', 'card_promotion')
+    ->condition('type', 'card_promotion_auto');
+  $paragraph_query->condition($or);
+  $paragraph_query->condition('parent_type', 'node')
+    ->condition('parent_field_name', 'field_landing_page_component')
+    ->condition('id', $sandbox['current'], '>')
+    ->sort('id', 'ASC')
+    ->range(0, $batch_size);
+  $paragraph_ids = $paragraph_query->execute();
+  $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+  $paragraph_type_mapping = [
+    'card_navigation' => 'navigation_card',
+    'card_navigation_auto' => 'navigation_card',
+    'card_navigation_featured' => 'navigation_card',
+    'card_navigation_featured_auto' => 'navigation_card',
+    'card_promotion' => 'promotion_card',
+    'card_promotion_auto' => 'promotion_card',
+  ];
+  $display_field_names = [
+    'navigation_card' => 'field_nav_card_display_style',
+    'promotion_card' => 'field_promo_card_display_style',
+  ];
+  foreach ($paragraph_ids as $paragraph_id) {
+    $sandbox['current'] = $paragraph_id;
+    $paragraph = Paragraph::load($paragraph_id);
+    $nodes = $node_storage->loadByProperties(['field_landing_page_component' => $paragraph->id()]);
+    if (empty($nodes)) {
+      $paragraph->delete();
+      $sandbox['processed']++;
+      continue;
+    }
+    if (count($nodes) > 0) {
+      foreach ($nodes as $node) {
+        $new_paragraph = Paragraph::create([
+          'type' => $paragraph_type_mapping[$paragraph->bundle()],
+          'parent_id' => $node->id(),
+          'parent_type' => 'node',
+          'parent_field_name' => 'field_landing_page_component',
+          'field_paragraph_title' => _tide_card_consolidation_get_value($paragraph, 'title'),
+          'field_paragraph_summary' => _tide_card_consolidation_get_value($paragraph, 'summary'),
+          'field_paragraph_link' => _tide_card_consolidation_get_value($paragraph, 'link'),
+        ]);
+        $field_paragraph_media = _tide_card_consolidation_get_value($paragraph, 'media');
+        if ($field_paragraph_media) {
+          $new_paragraph->field_paragraph_media->target_id = $field_paragraph_media;
+          $new_paragraph->{$display_field_names[$paragraph_type_mapping[$paragraph->bundle()]]}->value = 'thumbnail';
+        }
+        $new_paragraph->save();
+        $values = $node->get('field_landing_page_component')->getValue();
+        $key = array_search($paragraph->id(), array_column($values, 'target_id'));
+        $node->get('field_landing_page_component')->removeItem($key);
+        $node->get('field_landing_page_component')->appendItem([
+          'target_id' => $new_paragraph->id(),
+          'target_revision_id' => $new_paragraph->getRevisionId(),
+        ]);
+        $node->setNewRevision(FALSE);
+        $node->save();
+      }
+      $paragraph->delete();
+    }
+    $sandbox['processed']++;
+  }
+  $sandbox['#finished'] = $sandbox['total'] ? $sandbox['processed'] / $sandbox['total'] : 1;
+  $sandbox['#finished'] = $sandbox['#finished'] > 1 ? 1 : $sandbox['#finished'];
+}
+
+/**
+ * Helper function to get values.
+ */
+function _tide_card_consolidation_get_value(Paragraph $paragraph, $field) {
+  switch ($field) {
+    case "title":
+      if ($paragraph->hasField('field_paragraph_title') && !$paragraph->field_paragraph_title->isEmpty()) {
+        return $paragraph->field_paragraph_title->value;
+      }
+      if ($paragraph->hasField('field_paragraph_cta_text') && !$paragraph->field_paragraph_cta_text->isEmpty()) {
+        return $paragraph->field_paragraph_cta_text->value;
+      }
+      return '';
+    case "summary":
+      if ($paragraph->hasField('field_paragraph_summary') && !$paragraph->field_paragraph_summary->isEmpty()) {
+        return $paragraph->field_paragraph_summary->value;
+      }
+      return '';
+    case "link":
+      if ($paragraph->hasField('field_paragraph_link') && !$paragraph->field_paragraph_link->isEmpty()) {
+        return $paragraph->field_paragraph_link->uri;
+      }
+      if ($paragraph->hasField('field_paragraph_reference') && !$paragraph->field_paragraph_reference->isEmpty()) {
+        if (Node::load($paragraph->field_paragraph_reference->target_id)) {
+          return 'entity:node/' . $paragraph->field_paragraph_reference->target_id;
+        }
+      }
+      return '';
+    case "media":
+      if ($paragraph->hasField('field_paragraph_media') && !$paragraph->field_paragraph_media->isEmpty()) {
+        return $paragraph->field_paragraph_media->target_id;
+      }
+      return NULL;
+  }
 }

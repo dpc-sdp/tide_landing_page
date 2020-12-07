@@ -11,10 +11,6 @@ dependencies:
     - paragraphs.paragraphs_type.card_event
     - paragraphs.paragraphs_type.card_event_auto
     - paragraphs.paragraphs_type.card_keydates
-    - paragraphs.paragraphs_type.card_navigation
-    - paragraphs.paragraphs_type.card_navigation_auto
-    - paragraphs.paragraphs_type.card_navigation_featured
-    - paragraphs.paragraphs_type.card_navigation_featured_auto
     - paragraphs.paragraphs_type.card_promotion
     - paragraphs.paragraphs_type.card_promotion_auto
     - paragraphs.paragraphs_type.complex_image
@@ -46,10 +42,6 @@ settings:
       card_event: card_event
       card_promotion: card_promotion
       card_promotion_auto: card_promotion_auto
-      card_navigation_featured: card_navigation_featured
-      card_navigation_featured_auto: card_navigation_featured_auto
-      card_navigation: card_navigation
-      card_navigation_auto: card_navigation_auto
       card_keydates: card_keydates
       call_to_action: call_to_action
       complex_image: complex_image
@@ -94,18 +86,6 @@ settings:
       links:
         weight: -25
         enabled: false
-      card_navigation_featured:
-        enabled: true
-        weight: -24
-      card_navigation_featured_auto:
-        enabled: true
-        weight: -23
-      card_navigation:
-        enabled: true
-        weight: -22
-      card_navigation_auto:
-        enabled: true
-        weight: -21
       card_keydates:
         enabled: true
         weight: -20
