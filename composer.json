@@ -12,7 +12,7 @@
         "dpc-sdp/tide_api:^1.2.6": "Allows to use Drupal in headless mode",
         "dpc-sdp/tide_webform:^1.2.4": "Allows to use questionnaires",
         "dpc-sdp/tide_news:^1.1.5": "News content type and related configuration for Tide Drupal 8 distribution",
-        "dpc-sdp/tide_automated_listing:dev-feature/TVD-200-Install-card-collection": "Allows to use tide automated listing"
+        "dpc-sdp/tide_automated_listing:1.0.0-beta": "Allows to use tide automated listing"
     },
     "repositories": {
         "drupal": {
