@@ -1472,11 +1472,13 @@ function _tide_card_consolidation_get_value(Paragraph $paragraph, $field) {
         return $paragraph->field_paragraph_cta_text->value;
       }
       return '';
+
     case "summary":
       if ($paragraph->hasField('field_paragraph_summary') && !$paragraph->field_paragraph_summary->isEmpty()) {
         return $paragraph->field_paragraph_summary->value;
       }
       return '';
+
     case "link":
       if ($paragraph->hasField('field_paragraph_link') && !$paragraph->field_paragraph_link->isEmpty()) {
         return $paragraph->field_paragraph_link->uri;
@@ -1487,6 +1489,7 @@ function _tide_card_consolidation_get_value(Paragraph $paragraph, $field) {
         }
       }
       return '';
+      
     case "media":
       if ($paragraph->hasField('field_paragraph_media') && !$paragraph->field_paragraph_media->isEmpty()) {
         return $paragraph->field_paragraph_media->target_id;
