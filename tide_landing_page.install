@@ -1447,7 +1447,7 @@ function tide_landing_page_update_8035(&$sandbox) {
         }
         $field_paragraph_link = _tide_card_consolidation_get_value($paragraph, 'link');
         if ($field_paragraph_link) {
-          $new_paragraph->field_paragraph_link->uri = $field_paragraph_link;
+          $new_paragraph->set('field_paragraph_link', $field_paragraph_link);
         }
         $new_paragraph->save();
         $values = $node->get('field_landing_page_component')->getValue();
@@ -1491,11 +1491,19 @@ function _tide_card_consolidation_get_value(Paragraph $paragraph, $field) {
 
     case "link":
       if ($paragraph->hasField('field_paragraph_link') && !$paragraph->field_paragraph_link->isEmpty()) {
-        $result = $paragraph->field_paragraph_link->uri;
+        $result = [
+          'uri' => $paragraph->field_paragraph_link->uri,
+          'title' => '',
+          'options' => [],
+        ];
       }
       elseif ($paragraph->hasField('field_paragraph_reference') && !$paragraph->field_paragraph_reference->isEmpty()) {
         if (Node::load($paragraph->field_paragraph_reference->target_id)) {
-          $result = 'entity:node/' . $paragraph->field_paragraph_reference->target_id;
+          $result = [
+            'uri' => 'entity:node/' . $paragraph->field_paragraph_reference->target_id,
+            'title' => '',
+            'options' => [],
+          ];
         }
       }
       break;
