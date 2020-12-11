@@ -70,7 +70,7 @@ function tide_landing_page_entity_bundle_create($entity_type_id, $bundle) {
  * Implements hook_form_BASE_FORM_ID_alter().
  */
 function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if (in_array($form_id, ['node_landing_page_form', 'node_landing_page_edit_form'])) {
+  if (in_array($form_id, ['node_landing_page_form', 'node_landing_page_edit_form', 'node_landing_page_quick_node_clone_form'])) {
     // Change form layout.
     $form['#attached']['library'][] = 'tide_landing_page/landing_page_form';
 
