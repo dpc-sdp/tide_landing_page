@@ -246,14 +246,14 @@ Feature: Fields for Landing Page content type
     And I press the "edit-field-landing-page-component-add-more-add-more-button" button
     Then I wait for AJAX to finish
 
-    Then I fill in "Listing Title" with "Test Automated Listing"
+    Then I fill in "Collection title" with "Test Automated Listing"
     And I check the box "Landing Page"
 
-    Then I click on the horizontal tab "Display options"
-    And I fill in "Minimum results to show" with "2"
+    Then I click on the horizontal tab "Layout options"
+    And I fill in "Minimum number of cards to display" with "2"
     And I fill in "Number of cards shown per page" with "9"
     And I select the radio button "Show 'no results' message"
-    And I select "Changed" from "Sort by"
+    And I select "Changed" from "Sort by a date filter"
     And I select "Ascending" from "Sort order"
 
     Then I select "Published" from "Change to"
@@ -273,10 +273,10 @@ Feature: Fields for Landing Page content type
 
     And the JSON node "included[0].attributes.field_paragraph_auto_listing.results.min_not_met" should be equal to "no_results_message"
     And the JSON node "included[0].attributes.field_paragraph_auto_listing.results.no_results_message" should be equal to "There are currently no results"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.results.min" should be equal to "2"
 
     And the JSON node "included[0].attributes.field_paragraph_auto_listing.display.type" should be equal to "grid"
-    And the JSON node "included[0].attributes.field_paragraph_auto_listing.display.items" should be equal to "9"
-    And the JSON node "included[0].attributes.field_paragraph_auto_listing.display.min" should be equal to "2"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.display.items_per_page" should be equal to "9"
 
     And the JSON node "included[0].attributes.field_paragraph_auto_listing.filter_operator" should be equal to "OR"
 
