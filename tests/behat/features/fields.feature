@@ -249,7 +249,7 @@ Feature: Fields for Landing Page content type
     Then I fill in "Collection title" with "Test Automated Listing"
     And I check the box "Landing Page"
 
-    Then I click on the horizontal tab "Display options"
+    Then I click on the horizontal tab "Layout options"
     And I fill in "Minimum results to show" with "2"
     And I fill in "Number of cards shown per page" with "9"
     And I select the radio button "Show 'no results' message"
