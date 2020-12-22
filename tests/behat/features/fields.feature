@@ -246,7 +246,7 @@ Feature: Fields for Landing Page content type
     And I press the "edit-field-landing-page-component-add-more-add-more-button" button
     Then I wait for AJAX to finish
 
-    Then I fill in "Listing Title" with "Test Automated Listing"
+    Then I fill in "Collection title" with "Test Automated Listing"
     And I check the box "Landing Page"
 
     Then I click on the horizontal tab "Display options"

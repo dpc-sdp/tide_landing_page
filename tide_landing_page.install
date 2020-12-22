@@ -66,8 +66,6 @@ function tide_landing_page_install() {
     if ($moduleHandler->moduleExists('tide_webform')) {
       $handler_settings['target_bundles']['embedded_webform'] = 'embedded_webform';
     }
-    // Install tide_automated_listing.
-    \Drupal::service('module_installer')->install(['tide_automated_listing']);
     // Add the Automated Listing paragraph to Landing Page component if exists.
     if ($moduleHandler->moduleExists('tide_automated_listing')) {
       $handler_settings['target_bundles']['automated_card_listing'] = 'automated_card_listing';
