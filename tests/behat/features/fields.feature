@@ -250,10 +250,10 @@ Feature: Fields for Landing Page content type
     And I check the box "Landing Page"
 
     Then I click on the horizontal tab "Layout options"
-    And I fill in "Minimum results to show" with "2"
+    And I fill in "Minimum number of cards to display" with "2"
     And I fill in "Number of cards shown per page" with "9"
     And I select the radio button "Show 'no results' message"
-    And I select "Changed" from "Sort by"
+    And I select "Changed" from "Sort by a date filter"
     And I select "Ascending" from "Sort order"
 
     Then I select "Published" from "Change to"
