@@ -273,10 +273,10 @@ Feature: Fields for Landing Page content type
 
     And the JSON node "included[0].attributes.field_paragraph_auto_listing.results.min_not_met" should be equal to "no_results_message"
     And the JSON node "included[0].attributes.field_paragraph_auto_listing.results.no_results_message" should be equal to "There are currently no results"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.results.min" should be equal to "2"
 
     And the JSON node "included[0].attributes.field_paragraph_auto_listing.display.type" should be equal to "grid"
-    And the JSON node "included[0].attributes.field_paragraph_auto_listing.display.items" should be equal to "9"
-    And the JSON node "included[0].attributes.field_paragraph_auto_listing.display.min" should be equal to "2"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.display.items_per_page" should be equal to "9"
 
     And the JSON node "included[0].attributes.field_paragraph_auto_listing.filter_operator" should be equal to "OR"
 
