@@ -282,21 +282,22 @@ Feature: Fields for Landing Page content type
 
     Given I am logged in as a user with the "Administrator" role
     When I edit landing_page "[TEST] Landing Page title"
-    And I click on link with href "#edit-group-components"
-
-    And I select "Card collection" from "edit-field-landing-page-component-add-more-add-more-select"
+    And I click "Body Content"
+    Then I select "Card collection" from "edit-field-landing-page-component-add-more-add-more-select"
     And I press the "edit-field-landing-page-component-add-more-add-more-button" button
     Then I wait for AJAX to finish
 
-    Then I fill in "Listing Title" with "Test Automated Listing"
+    Then I fill in "Collection title" with "Test Automated Listing"
+    And I fill in "Collection description" with "Test Automated Listing Description"
+    And I click "Automated Cards"
     And I check the box "Landing Page"
+    And I select "Changed" from "Sort by a date filter"
+    And I select "Ascending" from "Sort order"
 
-    Then I click on the horizontal tab "Display options"
-    And I fill in "Minimum results to show" with "2"
+    Then I click "Layout Options"
+    And I fill in "Minimum number of cards to display" with "2"
     And I fill in "Number of cards shown per page" with "9"
     And I select the radio button "Show 'no results' message"
-    And I select "Changed" from "Sort by"
-    And I select "Ascending" from "Sort order"
 
     Then I select "Published" from "Change to"
     And I press the "Save" button
@@ -313,12 +314,12 @@ Feature: Fields for Landing Page content type
     And the JSON node "included[0].attributes.field_paragraph_title" should be equal to "Test Automated Listing"
     And the JSON node "included[0].attributes.field_paragraph_auto_listing" should exist
 
-    And the JSON node "included[0].attributes.field_paragraph_auto_listing.results.min_not_met" should be equal to "no_results_message"
-    And the JSON node "included[0].attributes.field_paragraph_auto_listing.results.no_results_message" should be equal to "There are currently no results"
+    And the JSON node "included[0].attributes.field_no_result_behaviour" should be equal to "no_results_message"
+    And the JSON node "included[0].attributes.field_no_results_message" should be equal to "There are currently no results"
 
-    And the JSON node "included[0].attributes.field_paragraph_auto_listing.display.type" should be equal to "grid"
-    And the JSON node "included[0].attributes.field_paragraph_auto_listing.display.items" should be equal to "9"
-    And the JSON node "included[0].attributes.field_paragraph_auto_listing.display.min" should be equal to "2"
+    And the JSON node "included[0].attributes.field_listing_display_type" should be equal to "grid"
+    And the JSON node "included[0].attributes.field_listings_per_page" should be equal to "9"
+    And the JSON node "included[0].attributes.field_listings_minimum" should be equal to "2"
 
     And the JSON node "included[0].attributes.field_paragraph_auto_listing.filter_operator" should be equal to "OR"
 
