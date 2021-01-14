@@ -87,6 +87,21 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
     // Add title from the node.
     $node_title = $node->get('title')->getValue();
     $card_fields['title'] = $node_title ? $node_title[0]['value'] : '';
+    // Add content type from the node.
+    $node_type = $node->getType();
+    $card_fields['node_type'] = $node_type ? $node_type : '';
+    // Add topic from the node.
+    $topic_id = $node->hasField('field_topic') ? $node->get('field_topic')->getValue()[0]['target_id'] : '';
+    if ($topic_id) {
+      $card_fields['topic'] = Term::load($topic_id)->get('name')->value;
+    }
+    // Add tags from the node.
+    $tag_ids = $node->hasField('field_tags') ? $node->get('field_tags')->getValue() : '';
+    if ($tag_ids) {
+      foreach ($tag_ids as $id) {
+        $card_fields['tags'][] = Term::load($id['target_id'])->get('name')->value;
+      }
+    }
     // Add summary from the node.
     $summary = $node->hasField('field_landing_page_summary') ? $node->get('field_landing_page_summary')->getValue() : '';
     $card_fields['summary'] = $summary ? $summary[0]['value'] : '';
@@ -103,13 +118,6 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
       // Add the date field for news.
       if ($node->hasField('field_news_date')) {
         $card_fields['date'] = $node->get('field_news_date')->getValue()[0];
-        // This will ensure that it only adds topic from news node.
-        if ($card_fields['date']) {
-          $term_id = $node->hasField('field_topic') ? $node->get('field_topic')->getValue()[0]['target_id'] : '';
-          if ($term_id) {
-            $card_fields['topic'] = Term::load($term_id)->get('name')->value;
-          }
-        }
       }
     }
     if ($module_handler->moduleExists('tide_event')) {
@@ -129,10 +137,6 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
         $card_fields['event_status'] = $event_author ? $event_author[0]['value'] : '';
         $event_status = $node->hasField('field_status') ? $node->get('field_status')->getValue() : '';
         $card_fields['event_status'] = $event_status ? $event_status[0]['value'] : '';
-        $term_id = $node->hasField('field_topic') ? $node->get('field_topic')->getValue()[0]['target_id'] : '';
-        if ($term_id) {
-          $card_fields['topic'] = Term::load($term_id)->get('name')->value;
-        }
       }
     }
     return $card_fields;
