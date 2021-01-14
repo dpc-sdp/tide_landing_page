@@ -17,6 +17,6 @@ default_value:
     value: 0
 default_value_callback: ''
 settings:
-  on_label: 'Show topic and category'
+  on_label: 'Show supplemental info'
   off_label: 'Off'
 field_type: boolean
