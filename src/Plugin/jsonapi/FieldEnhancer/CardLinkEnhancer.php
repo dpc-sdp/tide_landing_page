@@ -87,8 +87,8 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
     // Add title from the node.
     $node_title = $node->get('title')->getValue();
     $card_fields['title'] = $node_title ? $node_title[0]['value'] : '';
-    // Add content type from the node.
-    $node_type = $node->getType();
+    // Add content type label from the node.
+    $node_type = $node->type->entity->label();
     $card_fields['node_type'] = $node_type ? $node_type : '';
     // Add topic from the node.
     $topic_id = $node->hasField('field_topic') ? $node->get('field_topic')->getValue()[0]['target_id'] : '';

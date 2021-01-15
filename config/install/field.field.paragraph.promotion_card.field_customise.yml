@@ -9,7 +9,7 @@ field_name: field_customise
 entity_type: paragraph
 bundle: promotion_card
 label: Customise
-description: ''
+description: 'Supplemental info will automatically display topic, date, or content type (depending on content being linked to).'
 required: false
 translatable: false
 default_value:
