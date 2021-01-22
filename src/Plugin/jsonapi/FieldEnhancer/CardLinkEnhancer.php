@@ -139,6 +139,25 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
         $card_fields['event_status'] = $event_status ? $event_status[0]['value'] : '';
       }
     }
+    if ($module_handler->moduleExists('tide_grant')) {
+      // Add the date field for grants.
+      if ($node->hasField('field_node_dates')) {
+        $card_fields['date'] = $node->get('field_node_dates')->getValue()[0];
+      }
+      // Add the ongoing field for grants.
+      if ($node->hasField('field_node_on_going')) {
+        $card_fields['ongoing'] = $node->get('field_node_on_going')->getValue()[0]['value'];
+      }
+    }
+    if ($module_handler->moduleExists('tide_publication')) {
+      // Add the authors field for publication.
+      $author_ids = $node->hasField('field_publication_authors') ? $node->get('field_publication_authors')->getValue() : '';
+      if ($author_ids) {
+        foreach ($author_ids as $id) {
+          $card_fields['publication_authors'][] = Term::load($id['target_id'])->get('name')->value;
+        }
+      }
+    }
     return $card_fields;
   }
 
