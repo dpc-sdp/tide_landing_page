@@ -331,7 +331,7 @@ content:
       edit_mode: closed
       closed_mode: summary
       autocollapse: none
-      add_mode: select
+      add_mode: modal
       form_display_mode: default
       default_paragraph_type: _none
       closed_mode_threshold: 0
@@ -360,7 +360,7 @@ content:
       edit_mode: closed
       closed_mode: summary
       autocollapse: none
-      add_mode: select
+      add_mode: modal
       form_display_mode: default
       default_paragraph_type: _none
       closed_mode_threshold: 0

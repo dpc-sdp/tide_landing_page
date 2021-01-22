@@ -29,7 +29,7 @@ field_name: field_landing_page_component
 entity_type: node
 bundle: landing_page
 label: 'Content components'
-description: ''
+description: '<p>Add text, links, media and cards to build your page.</p>'
 required: false
 translatable: true
 default_value: {  }

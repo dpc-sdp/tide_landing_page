@@ -75,8 +75,25 @@ function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form
     'node_landing_page_edit_form',
     'node_landing_page_quick_node_clone_form',
   ])) {
-    // Change form layout..
+    // Change form layout.
     $form['#attached']['library'][] = 'tide_landing_page/landing_page_form';
+    $form['#attributes']['class'][] = 'node-form-landing-page';
+
+    // Change the styling of paragraph widgets.
+    $paragraph_fields = [
+      'field_landing_page_header' => t('top page feature'),
+      'field_landing_page_component' => t('page content'),
+      'field_related_links' => t('related links'),
+    ];
+    foreach ($paragraph_fields as $paragraph_field => $component_name) {
+      $form[$paragraph_field]['widget']['#attributes']['class'][] = 'node-landing-page-alternative-paragraph';
+      if (isset($form[$paragraph_field]['widget']['#max_delta'])) {
+        $max_delta = $form[$paragraph_field]['widget']['#max_delta'];
+        if ($max_delta < 0 || !isset($form[$paragraph_field]['widget'][$max_delta])) {
+          $form[$paragraph_field]['widget']['#description'] = t('<h4><strong>No @component_name yet.</strong></strong></h4>', ['@component_name' => $component_name]) . $form[$paragraph_field]['widget']['#description'];
+        }
+      }
+    }
 
     // Hide the field Show Acknowledgement to Country if tide_site is missing.
     if (!\Drupal::moduleHandler()->moduleExists('tide_site')) {
@@ -89,6 +106,7 @@ function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form
       unset($form['field_show_hero_image_caption']);
     }
 
+    // @todo: the below block needs to be in a proper widget alter.
     if (isset($form['field_landing_page_component']['widget'][0])) {
       foreach ($form['field_landing_page_component']['widget'] as $key => $item) {
         if (is_numeric($key)) {
@@ -135,9 +153,12 @@ function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form
  * Implements hook_field_widget_WIDGET_TYPE_form_alter().
  */
 function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormStateInterface $form_state, $context) {
+  /** @var \Drupal\Core\Field\FieldItemListInterface $items */
+  $items = $context['items'];
+  $field_definition = $items->getFieldDefinition();
+  $paragraph_field_name = $field_definition->getName();
+
   if (!empty($element['#paragraph_type']) && $element['#paragraph_type'] == 'embedded_search_form') {
-    /** @var \Drupal\entity_reference_revisions\EntityReferenceRevisionsFieldItemList $items */
-    $items = $context['items'];
     $parent_field = $items->getName();
     $condition = [
       ':input[name="' . $parent_field . '[' . $context['delta'] . '][subform][field_paragraph_search_block]"]' => ['value' => 'custom'],
@@ -155,8 +176,6 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
   }
 
   // Displaying field_call_to_action_title depends on field_banner_display_type.
-  $field_definition = $context['items']->getFieldDefinition();
-  $paragraph_field_name = $field_definition->getName();
   if ($paragraph_field_name == 'field_landing_page_header') {
     $widget_state = WidgetBase::getWidgetState($element['#field_parents'], $paragraph_field_name, $form_state);
     $paragraph = $widget_state['paragraphs'][$element['#delta']]['entity'];

@@ -1,4 +1,35 @@
-.js .paragraph-type-title {
+/**
+ * @file
+ * Styling changes to the Landing page node form.
+ */
+
+.node-form-landing-page .js .paragraph-type-title {
   -webkit-flex-basis: 350px !important;;
   flex-basis: 350px !important;;
+}
+
+.node-form-landing-page .layout-region-node-main .form-radios .form-item {
+  display: inline-block;
+  margin-right: 2em;
+}
+
+.node-form-landing-page .field--widget-paragraphs .node-landing-page-alternative-paragraph  > .description,
+.node-form-landing-page .field--widget-paragraphs .node-landing-page-alternative-paragraph > .clearfix .paragraphs-add-wrapper.form-wrapper {
+  text-align: center;
+}
+.node-form-landing-page .field--widget-paragraphs .node-landing-page-alternative-paragraph > .clearfix .paragraphs-add-wrapper.form-wrapper .paragraphs-add-suffix {
+  display:none;
+}
+
+.paragraphs-add-dialog {
+  max-height: 600px !important;
+  width: 800px !important;
+  max-width: 800px !important;
+  overflow: scroll;
+}
+
+.paragraphs-add-dialog .paragraphs-add-dialog-list {
+  display: flex;
+  flex-flow: column wrap;
+  height: 600px;
 }

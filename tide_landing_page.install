@@ -1265,3 +1265,30 @@ function tide_landing_page_update_8032() {
   $field_config->set('description', $description);
   $field_config->save();
 }
+
+/**
+ * Change widget type of header/body field.
+ */
+function tide_landing_page_update_8033() {
+  $fields = [
+    'field_landing_page_header',
+    'field_landing_page_component',
+  ];
+  /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $form_display */
+  $form_display = EntityFormDisplay::load('node.landing_page.default');
+  if ($form_display) {
+    foreach ($fields as $field) {
+      $component = $form_display->getComponent($field);
+      $component['settings']['add_mode'] = 'modal';
+      $form_display->setComponent($field, $component);
+    }
+    $form_display->save();
+  }
+
+  /** @var \Drupal\Core\Field\FieldConfigInterface $field_config */
+  $field_config = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
+  if ($field_config) {
+    $field_config->setDescription(t('<p>Add text, links, media and cards to build your page.</p>'));
+    $field_config->save();
+  }
+}
