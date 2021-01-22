@@ -18,10 +18,10 @@ function tide_landing_page_post_update_remove_old_paragraph_types() {
     'card_navigation',
   ];
   foreach ($paragraph_types as $paragraph_type) {
-      $paragraph_type_entity = ParagraphsType::load($paragraph_type);
-      \Drupal::entityTypeManager()
-          ->getStorage('paragraphs_type')
-          ->delete([$paragraph_type_entity]);
+    $paragraph_type_entity = ParagraphsType::load($paragraph_type);
+    \Drupal::entityTypeManager()
+      ->getStorage('paragraphs_type')
+      ->delete([$paragraph_type_entity]);
   }
 
   // Currently, we don't delete card_promotion and card_promotion_auto.
