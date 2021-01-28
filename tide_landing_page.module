@@ -193,7 +193,7 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
       }
       break;
 
-    // Displaying field_call_to_action_title depends on field_banner_display_type.
+    // Displaying field_call_to_action_title depends on banner display type.
     case 'introduction_banner':
       if ($paragraph_field_name === 'field_landing_page_header') {
         $selector = sprintf('input[name="%s[%d][subform][%s]"]', $paragraph_field_name, $element['#delta'], 'field_banner_display_type');
@@ -304,7 +304,6 @@ function _tide_landing_page_form_node_form_process(array $form, FormStateInterfa
   return $form;
 }
 
-
 /**
  * Node form #after_build callback.
  *
@@ -318,14 +317,30 @@ function _tide_landing_page_form_node_form_process(array $form, FormStateInterfa
  */
 function _tide_landing_page_form_node_form_after_build(array $form, FormStateInterface $form_state) {
   // Determine the state of Add separate intro checkbox.
-  $form_intro_text_empty = empty($form_state->getValue(['field_landing_page_intro_text', 0, 'value']));
+  $form_intro_text_empty = empty($form_state->getValue([
+    'field_landing_page_intro_text',
+    0,
+    'value',
+  ]));
   $form['_add_separate_intro']['#checked'] = !$form_intro_text_empty;
 
   // Determine the current value of Header style.
-  $form_hero_image_empty = empty($form_state->getValue(['field_landing_page_hero_image', 'target_id']));
-  $form_hero_banner_empty = empty($form_state->getValue(['field_landing_page_hero_banner', 0]));
-  $form_hero_top_graphical_empty = empty($form_state->getValue(['field_graphical_image', 'target_id']));
-  $form_hero_bottom_graphical_empty = empty($form_state->getValue(['field_bottom_graphical_image', 'target_id']));
+  $form_hero_image_empty = empty($form_state->getValue([
+    'field_landing_page_hero_image',
+    'target_id',
+  ]));
+  $form_hero_banner_empty = empty($form_state->getValue([
+    'field_landing_page_hero_banner',
+    0,
+  ]));
+  $form_hero_top_graphical_empty = empty($form_state->getValue([
+    'field_graphical_image',
+    'target_id',
+  ]));
+  $form_hero_bottom_graphical_empty = empty($form_state->getValue([
+    'field_bottom_graphical_image',
+    'target_id',
+  ]));
   $header_style = 'default';
   if (!$form_hero_image_empty) {
     $header_style = 'cta';
