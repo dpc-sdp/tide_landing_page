@@ -9,7 +9,7 @@ id: node.landing_page.field_featured_image
 field_name: field_featured_image
 entity_type: node
 bundle: landing_page
-label: 'Feature Image'
+label: 'Feature image'
 description: ''
 required: false
 translatable: true

@@ -1,4 +1,3 @@
-uuid: fe97adb6-c8c7-4718-aa45-6df73030e7f1
 langcode: en
 status: true
 dependencies:
@@ -10,8 +9,8 @@ id: node.landing_page.field_graphical_image
 field_name: field_graphical_image
 entity_type: node
 bundle: landing_page
-label: 'Top Graphical Image'
-description: 'The graphical image will not be displayed when a hero image is added.'
+label: 'Top corner graphic'
+description: 'This can only be changed by administrators. The graphical image will not be displayed when a hero image is added.'
 required: false
 translatable: true
 default_value: {  }

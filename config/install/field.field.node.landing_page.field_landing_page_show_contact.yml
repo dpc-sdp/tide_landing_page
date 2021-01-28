@@ -8,7 +8,7 @@ id: node.landing_page.field_landing_page_show_contact
 field_name: field_landing_page_show_contact
 entity_type: node
 bundle: landing_page
-label: 'Show Contact Us?'
+label: 'Show contact details'
 description: ''
 required: false
 translatable: false

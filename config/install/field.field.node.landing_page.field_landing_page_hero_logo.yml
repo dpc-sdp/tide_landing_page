@@ -10,7 +10,7 @@ field_name: field_landing_page_hero_logo
 entity_type: node
 bundle: landing_page
 label: Logo
-description: 'A small logo can be added above the page title. This will not appear if ‘Full-width background image’ header style is selected.'
+description: 'A hero logo displays at the top of the page, just about the page title. Hero logos can only be used with admin approval.'
 required: false
 translatable: false
 default_value: {  }
