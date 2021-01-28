@@ -113,7 +113,7 @@ Feature: Fields for Landing Page content type
 
     And I should see text matching "Contact us"
     And I should see text matching "No Contact Us block added yet."
-    And I should see the button "Add Contact us" in the "content" region
+    And I should see the button "Add Contact Us" in the "content" region
 
     And I see field "Tags"
     And I should see an "input#edit-field-tags-0-target-id" element
@@ -136,9 +136,9 @@ Feature: Fields for Landing Page content type
     And I should see the text "Menu settings"
     And I see field "Provide a menu link"
 
-  @api @suggest @javascript @wip
+  @api @suggest @javascript
   Scenario: The content type has the expected fields (and labels where we can use them) including from suggested modules.
-    # Given I am logged in as a user with the "create landing_page content" permission
+    Given I am logged in as a user with the "create landing_page content" permission
     # Given I am logged in as a user with the "editor" role
     When I visit "node/add/landing_page"
     And save screenshot
@@ -251,7 +251,7 @@ Feature: Fields for Landing Page content type
 
     And I should see text matching "Contact us"
     And I should see text matching "No Contact Us block added yet."
-    And I should see the button "Add Contact us" in the "content" region
+    And I should see the button "Add Contact Us" in the "content" region
 
     And I see field "Tags"
     And I should see an "input#edit-field-tags-0-target-id" element
