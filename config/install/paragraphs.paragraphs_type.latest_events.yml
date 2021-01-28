@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: latest_events
-label: 'Latest Events'
+label: 'Latest events'
 icon_uuid: null
 description: 'Paragraph type to allow users to fetch latest events, with the option of having a CTA as last sixth card '
 behavior_plugins: {  }

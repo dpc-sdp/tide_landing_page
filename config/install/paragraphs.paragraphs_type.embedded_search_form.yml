@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: embedded_search_form
-label: 'Embedded Search Form'
+label: 'Embedded search form'
 icon_uuid: null
 description: ''
 behavior_plugins: {  }

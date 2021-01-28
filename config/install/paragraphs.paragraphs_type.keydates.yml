@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: keydates
-label: Keydates
+label: Key dates
 icon_uuid: null
 description: ''
 behavior_plugins: {  }
