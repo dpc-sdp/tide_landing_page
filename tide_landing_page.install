@@ -1376,7 +1376,9 @@ function tide_landing_page_update_8035(&$sandbox) {
       ->condition('type', 'card_navigation_featured')
       ->condition('type', 'card_navigation_featured_auto')
       ->condition('type', 'card_promotion')
-      ->condition('type', 'card_promotion_auto');
+      ->condition('type', 'card_promotion_auto')
+      ->condition('type', 'card_event')
+      ->condition('type', 'card_event_auto');
     $paragraph_query->condition($or);
     $count = $paragraph_query->count()->execute();
     $sandbox['total'] = $count;
@@ -1394,7 +1396,9 @@ function tide_landing_page_update_8035(&$sandbox) {
     ->condition('type', 'card_navigation_featured')
     ->condition('type', 'card_navigation_featured_auto')
     ->condition('type', 'card_promotion')
-    ->condition('type', 'card_promotion_auto');
+    ->condition('type', 'card_promotion_auto')
+    ->condition('type', 'card_event')
+    ->condition('type', 'card_event_auto');
   $paragraph_query->condition($or);
   $paragraph_query->condition('parent_type', 'node')
     ->condition('parent_field_name', 'field_landing_page_component')
@@ -1410,6 +1414,8 @@ function tide_landing_page_update_8035(&$sandbox) {
     'card_navigation_featured_auto' => 'navigation_card',
     'card_promotion' => 'promotion_card',
     'card_promotion_auto' => 'promotion_card',
+    'card_event' => 'promotion_card',
+    'card_event_auto' => 'promotion_card',
   ];
   $display_field_names = [
     'navigation_card' => 'field_nav_card_display_style',
