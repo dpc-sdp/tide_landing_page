@@ -16,6 +16,9 @@ function tide_landing_page_post_update_remove_old_paragraph_types() {
     'card_navigation_featured',
     'card_navigation_auto',
     'card_navigation',
+    'card_event',
+    'card_event_auto',
+    'call_to_action'
   ];
   foreach ($paragraph_types as $paragraph_type) {
     $paragraph_type_entity = ParagraphsType::load($paragraph_type);
