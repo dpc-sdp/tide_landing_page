@@ -199,6 +199,15 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
     $paragraph_type = $paragraph->bundle();
 
     if ($paragraph_type == 'automated_card_listing') {
+      $listing_display_type_selector = sprintf(':input[name^="%s[%d][subform][field_listing_display_type]"]', $paragraph_field_name, $element['#delta']);
+      if (isset($element['subform']['field_listings_minimum'])) {
+        $element['subform']['field_listings_minimum']['#states'] = [
+          'visible' => [
+            $listing_display_type_selector => ['value' => 'grid'],
+          ],
+        ];
+      }
+
       foreach ($element['subform']['field_individual_cards']['widget'] as $key => $value) {
         if (is_numeric($key)) {
           $dependee_field_name = 'field_paragraph_link';
