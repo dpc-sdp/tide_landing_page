@@ -29,11 +29,11 @@ function tide_landing_page_post_update_remove_old_paragraph_types() {
     ->getEditable('field.field.node.landing_page.field_landing_page_component');
   $settings = $config->get('settings');
   $card_and_CTA = [
-   'card_promotion',
-   'card_promotion_auto',
-   'call_to_action',
-   'card_event',
-   'card_event_auto',
+    'card_promotion',
+    'card_promotion_auto',
+    'call_to_action',
+    'card_event',
+    'card_event_auto',
   ];
   foreach ($card_and_CTA as $item) {
     if (isset($settings['handler_settings']['target_bundles'][$item])) {
