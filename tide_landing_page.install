@@ -1458,11 +1458,9 @@ function tide_landing_page_update_8035(&$sandbox) {
         $new_paragraph->save();
         $values = $node->get('field_landing_page_component')->getValue();
         $key = array_search($paragraph->id(), array_column($values, 'target_id'));
-        $node->get('field_landing_page_component')->removeItem($key);
-        $node->get('field_landing_page_component')->appendItem([
-          'target_id' => $new_paragraph->id(),
-          'target_revision_id' => $new_paragraph->getRevisionId(),
-        ]);
+        $values[$key]['target_id'] = $new_paragraph->id();
+        $values[$key]['target_revision_id'] = $new_paragraph->getRevisionId();
+        $node->set('field_landing_page_component', $values);
         $node->setNewRevision(FALSE);
         $node->save();
       }
@@ -1558,11 +1556,9 @@ function tide_landing_page_update_8036(&$sandbox) {
         $new_paragraph->save();
         $values = $node->get('field_landing_page_component')->getValue();
         $key = array_search($paragraph->id(), array_column($values, 'target_id'));
-        $node->get('field_landing_page_component')->removeItem($key);
-        $node->get('field_landing_page_component')->appendItem([
-          'target_id' => $new_paragraph->id(),
-          'target_revision_id' => $new_paragraph->getRevisionId(),
-        ]);
+        $values[$key]['target_id'] = $new_paragraph->id();
+        $values[$key]['target_revision_id'] = $new_paragraph->getRevisionId();
+        $node->set('field_landing_page_component', $values);
         $node->setNewRevision(FALSE);
         $node->save();
       }
