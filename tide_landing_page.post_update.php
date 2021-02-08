@@ -33,7 +33,7 @@ function tide_landing_page_post_update_remove_old_paragraph_types() {
    'card_promotion_auto',
    'call_to_action',
    'card_event',
-   'card_event_auto'
+   'card_event_auto',
   ];
   foreach ($card_and_CTA as $item) {
     if (isset($settings['handler_settings']['target_bundles'][$item])) {
