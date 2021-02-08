@@ -18,4 +18,5 @@
 .paragraph-type--promotion-card .summary-message-group .fieldset-legend,
 .paragraph-type--promotion-card .customise-field-group .fieldset-legend {
   text-transform: none;
+  letter-spacing: normal;
 }

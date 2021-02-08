@@ -173,8 +173,9 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
   public function getImage($nid) {
     $image = [];
     $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
-    if ($node->get('field_featured_image')->getValue()) {
-      $image_id = $node->get('field_featured_image')->getValue()[0]['target_id'];
+    $feature_image = $node->hasField('field_featured_image') ? $node->get('field_featured_image')->getValue() : '';
+    if (!empty($feature_image)) {
+      $image_id = $feature_image[0]['target_id'];
       $media = $image_id ? Media::load($image_id) : '';
       // Get the ID of the media object image field.
       $media_field = $media ? $media->get('field_media_image')->getValue() : '';
