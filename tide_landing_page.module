@@ -206,6 +206,12 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
             $listing_display_type_selector => ['value' => 'grid'],
           ],
         ];
+
+        $element['subform']['field_listings_minimum']['widget'][0]['value']['#states'] = [
+          'required' => [
+            $listing_display_type_selector => ['value' => 'grid'],
+          ],
+        ];
       }
 
       foreach ($element['subform']['field_individual_cards']['widget'] as $key => $value) {
