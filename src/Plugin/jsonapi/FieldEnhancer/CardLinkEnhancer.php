@@ -33,6 +33,8 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
         $data['internal_node_fields'] = $this->getCardFields($nid);
       }
     }
+
+    \Drupal::moduleHandler()->alter('tide_card_link_enhancer_undo_transform', $data, $context);
     return $data;
   }
 
@@ -156,6 +158,12 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
         foreach ($author_ids as $id) {
           $card_fields['publication_authors'][] = Term::load($id['target_id'])->get('name')->value;
         }
+      }
+    }
+    if ($module_handler->moduleExists('tide_profile')) {
+      // Add the induction year field for profile.
+      if ($node->hasField('field_year') && $node->get('field_year')->getValue()) {
+        $card_fields['induction_year'] = $node->get('field_year')->getValue()[0]['value'];
       }
     }
     return $card_fields;
