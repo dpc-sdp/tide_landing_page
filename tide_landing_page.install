@@ -1364,14 +1364,20 @@ function _tide_landing_page_new_field_group_tab(string $label, string $parent, a
  * Update the node form of Landing Page.
  */
 function tide_landing_page_update_8033() {
-  // Rename Key journeys to Header links.
-  /** @var \Drupal\paragraphs\ParagraphsTypeInterface $type */
-  $type = ParagraphsType::load('key_journeys');
-  if ($type) {
-    $entity_type = $type->getEntityType();
-    $label_key = $entity_type->getKey('label');
-    $type->set($label_key, 'Header links');
-    $type->save();
+  // Rename paragraph bundles.
+  $update_paragraph_labels = [
+    'key_journeys' => t('Header links'),
+    'embedded_search_form' => t('Search banner'),
+  ];
+  foreach ($update_paragraph_labels as $bundle => $label) {
+    /** @var \Drupal\paragraphs\ParagraphsTypeInterface $type */
+    $type = ParagraphsType::load($bundle);
+    if ($type) {
+      $entity_type = $type->getEntityType();
+      $label_key = $entity_type->getKey('label');
+      $type->set($label_key, $label);
+      $type->save();
+    }
   }
 
   // Rename label of allowed values of Display Headings field.
@@ -1397,6 +1403,12 @@ function tide_landing_page_update_8033() {
     'field_landing_page_hero_logo' => [
       'label' => t('Logo'),
       'description' => t('A small logo can be added above the page title. This will not appear if ‘Full-width background image’ header style is selected.'),
+    ],
+    'field_landing_page_c_primary' => [
+      'description' => '',
+    ],
+    'field_landing_page_c_secondary' => [
+      'description' => '',
     ],
     'field_landing_page_component' => [
       'description' => t('<p>Add text, links, media and cards to build your page.</p>'),
@@ -1465,20 +1477,35 @@ function tide_landing_page_update_8033() {
       'settings' => ['open' => TRUE],
       'weight' => 50,
     ],
+    // Header addon.
+    'field_landing_page_header' => [
+      'settings' => ['add_mode' => 'modal'],
+    ],
+    // Page Campaign.
+    'field_landing_page_c_primary' => ['weight' => -89],
+    'field_show_c_primary_caption' => ['weight' => -88],
+    'field_landing_page_c_secondary' => ['weight' => -85],
     // Featured image.
     'field_featured_image' => [
       'settings' => ['open' => TRUE],
-      'weight' => -90,
+      'weight' => -80,
     ],
     // Content.
     'field_landing_page_component' => [
       'settings' => ['add_mode' => 'modal'],
     ],
-    // Content - Top page feature.
-    'field_landing_page_header' => [
-      'settings' => ['add_mode' => 'modal'],
-    ],
     // Sidebar.
+    'field_related_links' => [
+      'type' => 'entity_reference_paragraphs',
+      'settings' => [
+        'title' => t('Link'),
+        'title_plural' => t('Links'),
+        'edit_mode' => 'closed',
+        'add_mode' => 'button',
+        'form_display_mode' => 'default',
+        'default_paragraph_type' => '_none',
+      ],
+    ],
     'field_show_social_sharing' => [
       'type' => 'options_buttons',
       'weight' => 40,
@@ -1489,6 +1516,9 @@ function tide_landing_page_update_8033() {
     'field_landing_page_bg_colour' => ['weight' => 3],
   ];
   foreach ($update_field_widgets as $field => $replacements) {
+    if (!is_array($replacements)) {
+      $replacements = ['weight' => $replacements];
+    }
     $component = $form_display->getComponent($field);
     if ($component) {
       $component = array_replace_recursive($component, $replacements);
@@ -1499,12 +1529,15 @@ function tide_landing_page_update_8033() {
   // Update the field groups.
   $field_group = $form_display->getThirdPartySettings('field_group');
 
+  // Header section.
   $field_group['group_section_header'] = _tide_landing_page_new_field_group_tabs('Header Section', 'horizontal', 'node-form-group-header-section', '', 'content', -100);
   $field_group['group_section_header']['children'] = [
     'group_header',
     'group_customised_header',
+    'group_header_addon',
   ];
 
+  // Header - Header tab.
   $field_group['group_header'] = _tide_landing_page_new_field_group_tab('Header', 'group_section_header', [], 'content', -99);
   $field_group['group_header']['children'] = [
     'title',
@@ -1513,6 +1546,7 @@ function tide_landing_page_update_8033() {
     'field_landing_page_key_journeys',
   ];
 
+  // Header - Customised header tab.
   $field_group['group_customised_header'] = _tide_landing_page_new_field_group_tab('Customised Header', 'group_section_header', [], 'content', -98);
   $field_group['group_customised_header']['children'] = [
     'field_landing_page_hero_image',
@@ -1523,12 +1557,50 @@ function tide_landing_page_update_8033() {
     'field_landing_page_hero_banner',
   ];
 
-  $field_group['group_section_content'] = _tide_landing_page_new_field_group_tabs('Content Section', 'horizontal', 'node-form-group-content-section', '', 'content', -80);
+  // Header - Header add-on tab.
+  $field_group['group_header_addon'] = _tide_landing_page_new_field_group_tab('Header add-on', 'group_section_header', [], 'content', -97);
+  $field_group['group_header_addon']['children'] = [
+    'field_landing_page_header',
+    'field_show_ack_of_country',
+  ];
+
+  // Campaign section.
+  $field_group['group_section_campaign'] = _tide_landing_page_new_field_group_tabs('Campaign Section', 'horizontal', 'node-form-group-page-campaign', '', 'content', -90);
+  $field_group['group_section_campaign']['children'] = [
+    'group_campaign',
+  ];
+
+  // Campaign - Page campaign tab.
+  $field_group['group_campaign'] = _tide_landing_page_new_field_group_tab('Page campaign', 'group_section_campaign', [], 'content', -89);
+  $field_group['group_campaign']['children'] = [
+    'group_primary_campaign',
+    'group_secondary_campaign',
+  ];
+
+  // Campaign - Page campaign tab - Primary campaign.
+  $field_group['group_primary_campaign'] = _tide_landing_page_new_field_group('Primary campaign', 'details', [
+    'open' => TRUE,
+    'description' => t('Primary campaigns display at the top of the page between the header section and the body content section. They span the full width of the content area. Start typing the name of your custom block component to display your campaign.'),
+  ], 'content', 0, 'group_campaign', [
+    'field_landing_page_c_primary',
+    'field_show_c_primary_caption',
+  ]);
+  // Campaign - Page campaign tab - Secondary campaign.
+  $field_group['group_secondary_campaign'] = _tide_landing_page_new_field_group('Secondary campaign', 'details', [
+    'open' => TRUE,
+    'description' => t('Secondary campaign displays after the content area, just above the page footer. They span the full width of the content area. Start typing the name of your custom block component to display your campaign'),
+  ], 'content', 10, 'group_campaign', [
+    'field_landing_page_c_secondary',
+  ]);
+
+  // Content section.
+  $field_group['group_section_content'] = _tide_landing_page_new_field_group_tabs('Content Section', 'horizontal', 'node-form-group-content-section', '', 'content', -70);
   $field_group['group_section_content']['children'] = [
     'group_components',
     'group_header_content',
     'group_bottom_feature',
   ];
+  // Content - Page content tab.
   if (isset($field_group['group_components'])) {
     $field_group['group_components'] = array_replace_recursive($field_group['group_components'], [
       'label' => 'Page content',
@@ -1538,31 +1610,11 @@ function tide_landing_page_update_8033() {
       'weight' => -79,
     ]);
   }
-  if (isset($field_group['group_header_content'])) {
-    $field_group['group_header_content'] = array_replace_recursive($field_group['group_header_content'], [
-      'label' => 'Top page feature',
-      'format_type' => 'tab',
-      'parent_name' => 'group_section_content',
-      'region' => 'content',
-      'weight' => -78,
-    ]);
-  }
-  if (isset($field_group['group_top_banner'])) {
-    $field_group['group_top_banner'] = array_replace_recursive($field_group['group_top_banner'], [
-      'format_type' => 'fieldset',
-      'format_settings' => ['open' => TRUE],
-      'parent_name' => 'group_header_content',
-      'region' => 'content',
-      'weight' => 100,
-    ]);
-    $field_group['group_header_content']['children'][] = 'group_top_banner';
-  }
 
-  $field_group['group_bottom_feature'] = _tide_landing_page_new_field_group_tab('Bottom page feature', 'group_section_content', [], 'content', -76);
-  $field_group['group_bottom_feature']['children'] = ['field_landing_page_c_secondary'];
-
+  // Sidebar section.
   $field_group['group_section_sidebar'] = _tide_landing_page_new_field_group_tabs('Sidebar Section', 'horizontal', 'node-form-group-sidebar-section', '', 'content', -60, '', ['group_sidebar']);
-  $field_group['group_sidebar'] = _tide_landing_page_new_field_group_tab('Side bar', 'group_section_sidebar', [], 'content', -61);
+  // Sidebar - Sidebar tab.
+  $field_group['group_sidebar'] = _tide_landing_page_new_field_group_tab('Sidebar', 'group_section_sidebar', [], 'content', -61);
   $field_group['group_sidebar']['children'] = [
     'group_site_section_navigation',
     'group_site_section_navigation',
@@ -1573,8 +1625,11 @@ function tide_landing_page_update_8033() {
   ];
   if (isset($field_group['group_site_section_navigation'])) {
     $field_group['group_site_section_navigation'] = array_replace_recursive($field_group['group_site_section_navigation'], [
-      'format_type' => 'fieldset',
-      'format_settings' => ['open' => TRUE],
+      'format_type' => 'details',
+      'format_settings' => [
+        'open' => FALSE,
+        'description' => t('Add a site-section navigation on the right-hand side of your site.'),
+      ],
       'parent_name' => 'group_sidebar',
       'region' => 'content',
       'weight' => 0,
@@ -1582,8 +1637,11 @@ function tide_landing_page_update_8033() {
   }
   if (isset($field_group['group_related_links'])) {
     $field_group['group_related_links'] = array_replace_recursive($field_group['group_related_links'], [
-      'format_type' => 'fieldset',
-      'format_settings' => ['open' => TRUE],
+      'format_type' => 'details',
+      'format_settings' => [
+        'open' => FALSE,
+        'description' => t('Related pages can be linked from this sidebar.'),
+      ],
       'parent_name' => 'group_sidebar',
       'region' => 'content',
       'weight' => 10,
@@ -1591,8 +1649,8 @@ function tide_landing_page_update_8033() {
   }
   if (isset($field_group['group_whats_next'])) {
     $field_group['group_whats_next'] = array_replace_recursive($field_group['group_whats_next'], [
-      'format_type' => 'fieldset',
-      'format_settings' => ['open' => TRUE],
+      'format_type' => 'details',
+      'format_settings' => ['open' => FALSE],
       'parent_name' => 'group_sidebar',
       'region' => 'content',
       'weight' => 20,
@@ -1600,8 +1658,11 @@ function tide_landing_page_update_8033() {
   }
   if (isset($field_group['group_contact_us'])) {
     $field_group['group_contact_us'] = array_replace_recursive($field_group['group_contact_us'], [
-      'format_type' => 'fieldset',
-      'format_settings' => ['open' => TRUE],
+      'format_type' => 'details',
+      'format_settings' => [
+        'open' => FALSE,
+        'description' => t('Specific contact details - name, address, phone, email can be added in a block to the sidebar.'),
+      ],
       'parent_name' => 'group_sidebar',
       'region' => 'content',
       'weight' => 30,
@@ -1616,6 +1677,8 @@ function tide_landing_page_update_8033() {
   $unused_groups = [
     'group_key_journeys',
     'group_content',
+    'group_header_content',
+    'group_top_banner',
     'group_bottom_',
     'group_right_column',
     'group_blocks',

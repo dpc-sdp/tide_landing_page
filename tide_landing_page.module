@@ -83,9 +83,8 @@ function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form
 
     // Change the styling of paragraph widgets.
     $paragraph_fields = [
-      'field_landing_page_header' => t('top page feature'),
+      'field_landing_page_header' => t('header add-on'),
       'field_landing_page_component' => t('page content'),
-      'field_related_links' => t('related links'),
     ];
     foreach ($paragraph_fields as $paragraph_field => $component_name) {
       $form[$paragraph_field]['widget']['#attributes']['class'][] = 'node-landing-page-alternative-paragraph';
@@ -242,6 +241,11 @@ function _tide_landing_page_form_node_form_process(array $form, FormStateInterfa
     '#group' => 'group_header',
     '#checked' => !$node_intro_text_empty,
     '#weight' => isset($form['field_landing_page_intro_text']['#weight']) ? ($form['field_landing_page_intro_text']['#weight'] - 1) : 19,
+    '#states' => [
+      'enabled' => [
+        'textarea[name="field_landing_page_intro_text[0][value]"]' => ['empty' => TRUE],
+      ],
+    ],
   ];
 
   $form['field_landing_page_intro_text']['#states']['visible'] = [

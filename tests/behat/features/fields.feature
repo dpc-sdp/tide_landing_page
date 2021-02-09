@@ -36,6 +36,22 @@ Feature: Fields for Landing Page content type
     And the "#edit-field-bottom-graphical-image" element should contain "Bottom Corner Graphic"
     And I should see an "input#edit-field-bottom-graphical-image-entity-browser-target" element
 
+    And I click on the horizontal tab "Header add-on"
+    And I should see text matching "HEADER COMPONENTS"
+    And I press the "edit-field-landing-page-header-add-more-add-modal-form-area-add-more" button
+    And I should see the button "Introduction banner"
+    And I should see the button "Search banner"
+    And I press the "Close" button
+
+    And I click on the horizontal tab "Page campaign"
+    And I should see text matching "Primary Campaign"
+    And I should see an "input#edit-field-landing-page-c-primary-0-target-id" element
+    And I should not see an "input#edit-field-landing-page-c-primary-0-target-id.required" element
+
+    And I should see text matching "Secondary campaign"
+    And I should see an "input#edit-field-landing-page-c-secondary-0-target-id" element
+    And I should not see an "input#edit-field-landing-page-c-secondary-0-target-id.required" element
+
     And I scroll selector "#edit-field-featured-image" into view
     And the "#edit-field-featured-image" element should contain "Feature Image"
     And I should see an "input#edit-field-featured-image-entity-browser-entity-browser-open-modal" element
@@ -69,51 +85,36 @@ Feature: Fields for Landing Page content type
     And I should see the button "Complex image"
     And I press the "Close" button
 
-    And I click on the horizontal tab "Top page feature"
-    And I should see text matching "Primary Campaign"
-    And I should see an "input#edit-field-landing-page-c-primary-0-target-id" element
-    And I should not see an "input#edit-field-landing-page-c-primary-0-target-id.required" element
-
-    And I should see text matching "HEADER COMPONENTS"
-    And I press the "edit-field-landing-page-header-add-more-add-modal-form-area-add-more" button
-    And I should see the button "Introduction banner"
-    And I should see the button "Embedded search form"
-    And I press the "Close" button
-
-    And I click on the horizontal tab "Bottom page feature"
-    And I should see text matching "Secondary campaign"
-    And I should see an "input#edit-field-landing-page-c-secondary-0-target-id" element
-    And I should not see an "input#edit-field-landing-page-c-secondary-0-target-id.required" element
-
-    And I click on the horizontal tab "Side bar"
+    And I scroll selector "#edit-group-sidebar" into view
+    And I click on the horizontal tab "Sidebar"
     And I see field "Show Site-section Navigation?"
     And I should see an "input#edit-field-landing-page-nav-title-0-value" element
     And I should not see an "input#edit-field-landing-page-nav-title-0-value.required" element
 
+    And I click on the detail "Related links"
     And I see field "Show Related Content?"
     And I should see an "input#edit-field-show-related-content-value" element
     And I should not see an "input#edit-field-show-related-content-value.required" element
-
     And I should see text matching "Related links"
     And I should see the button "Add Related links" in the "content" region
 
-    And I should see text matching "Social sharing"
-
-    And I should see text matching "What's Next"
-    And I should see text matching "No What's Next block added yet."
-    And I should see the button "Add Link" in the "content" region
-
+    And I click on the detail "What's next"
     And I see field "Show what's next?"
     And I should see an "input#edit-field-show-whats-next-value" element
     And I should not see an "input#edit-field-show-whats-next-value.required" element
+    And I should see text matching "What's next"
+    And I should see text matching "No What's Next block added yet."
+    And I should see the button "Add Link" in the "content" region
 
+    And I click on the detail "Contact"
     And I see field "Show contact details"
     And I should see an "input#edit-field-landing-page-show-contact-value" element
     And I should not see an "input#edit-field-landing-page-show-contact-value.required" element
-
     And I should see text matching "Contact us"
     And I should see text matching "No Contact Us block added yet."
     And I should see the button "Add Contact Us" in the "content" region
+
+    And I should see text matching "Social sharing"
 
     And I see field "Tags"
     And I should see an "input#edit-field-tags-0-target-id" element
@@ -169,6 +170,22 @@ Feature: Fields for Landing Page content type
     And the "#edit-field-bottom-graphical-image" element should contain "Bottom Corner Graphic"
     And I should see an "input#edit-field-bottom-graphical-image-entity-browser-target" element
 
+    And I click on the horizontal tab "Header add-on"
+    And I should see text matching "HEADER COMPONENTS"
+    And I press the "edit-field-landing-page-header-add-more-add-modal-form-area-add-more" button
+    And I should see the button "Introduction banner"
+    And I should see the button "Search banner"
+    And I press the "Close" button
+
+    And I click on the horizontal tab "Page campaign"
+    And I should see text matching "Primary Campaign"
+    And I should see an "input#edit-field-landing-page-c-primary-0-target-id" element
+    And I should not see an "input#edit-field-landing-page-c-primary-0-target-id.required" element
+
+    And I should see text matching "Secondary campaign"
+    And I should see an "input#edit-field-landing-page-c-secondary-0-target-id" element
+    And I should not see an "input#edit-field-landing-page-c-secondary-0-target-id.required" element
+
     And I scroll selector "#edit-field-featured-image" into view
     And the "#edit-field-featured-image" element should contain "Feature Image"
     And I should see an "input#edit-field-featured-image-entity-browser-entity-browser-open-modal" element
@@ -207,51 +224,36 @@ Feature: Fields for Landing Page content type
 
     And I press the "Close" button
 
-    And I click on the horizontal tab "Top page feature"
-    And I should see text matching "Primary Campaign"
-    And I should see an "input#edit-field-landing-page-c-primary-0-target-id" element
-    And I should not see an "input#edit-field-landing-page-c-primary-0-target-id.required" element
-
-    And I should see text matching "HEADER COMPONENTS"
-    And I press the "edit-field-landing-page-header-add-more-add-modal-form-area-add-more" button
-    And I should see the button "Introduction banner"
-    And I should see the button "Embedded search form"
-    And I press the "Close" button
-
-    And I click on the horizontal tab "Bottom page feature"
-    And I should see text matching "Secondary campaign"
-    And I should see an "input#edit-field-landing-page-c-secondary-0-target-id" element
-    And I should not see an "input#edit-field-landing-page-c-secondary-0-target-id.required" element
-
-    And I click on the horizontal tab "Side bar"
+    And I scroll selector "#edit-group-sidebar" into view
+    And I click on the horizontal tab "Sidebar"
     And I see field "Show Site-section Navigation?"
     And I should see an "input#edit-field-landing-page-nav-title-0-value" element
     And I should not see an "input#edit-field-landing-page-nav-title-0-value.required" element
 
+    And I click on the detail "Related links"
     And I see field "Show Related Content?"
     And I should see an "input#edit-field-show-related-content-value" element
     And I should not see an "input#edit-field-show-related-content-value.required" element
-
     And I should see text matching "Related links"
     And I should see the button "Add Related links" in the "content" region
 
-    And I should see text matching "Social sharing"
-
-    And I should see text matching "What's Next"
-    And I should see text matching "No What's Next block added yet."
-    And I should see the button "Add Link" in the "content" region
-
+    And I click on the detail "What's next"
     And I see field "Show what's next?"
     And I should see an "input#edit-field-show-whats-next-value" element
     And I should not see an "input#edit-field-show-whats-next-value.required" element
+    And I should see text matching "What's next"
+    And I should see text matching "No What's Next block added yet."
+    And I should see the button "Add Link" in the "content" region
 
+    And I click on the detail "Contact"
     And I see field "Show contact details"
     And I should see an "input#edit-field-landing-page-show-contact-value" element
     And I should not see an "input#edit-field-landing-page-show-contact-value.required" element
-
     And I should see text matching "Contact us"
     And I should see text matching "No Contact Us block added yet."
     And I should see the button "Add Contact Us" in the "content" region
+
+    And I should see text matching "Social sharing"
 
     And I see field "Tags"
     And I should see an "input#edit-field-tags-0-target-id" element
