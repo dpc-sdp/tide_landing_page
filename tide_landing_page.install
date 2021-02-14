@@ -8,6 +8,7 @@
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\paragraphs\Entity\ParagraphsType;
 use Drupal\search_api\Item\Field;
@@ -103,6 +104,7 @@ function tide_landing_page_update_dependencies() {
   $dependencies['tide_landing_page'][8015] = ['system' => 8805];
   $dependencies['tide_landing_page'][8016] = ['system' => 8805];
   $dependencies['tide_landing_page'][8032] = ['tide_core' => 8037];
+  $dependencies['tide_landing_page'][8033] = ['tide_core' => 8044];
 
   return $dependencies;
 }
@@ -1268,6 +1270,99 @@ function tide_landing_page_update_8032() {
 }
 
 /**
+ * Add Show Intro text field.
+ */
+function tide_landing_page_update_8033() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $form_display = EntityFormDisplay::load('node.landing_page.default');
+  if (!$form_display) {
+    return;
+  }
+
+  $field_name = 'field_show_introduction_text';
+  $field_config = FieldConfig::loadByName('node', 'landing_page', $field_name);
+  if (!$field_config) {
+    $field_config = FieldConfig::create([
+      'field_name' => $field_name,
+      'entity_type' => 'node',
+      'bundle' => 'landing_page',
+      'label' => t('Introduction text'),
+      'description' => t('Introduction text is a brief summary of the page and displays under the page title. It is defaulted to be the same as the summary text. You can have a different introduction text if preferred.'),
+      'required' => TRUE,
+      'default_value' => [
+        ['value' => 1],
+      ],
+      'settings' => [
+        'on_label' => t('Display Introduction text'),
+        'off_label' => t('Turn off Introduction text'),
+      ],
+      'field_type' => 'boolean',
+    ]);
+
+    $uuid = _tide_retrieve_config_uuid($field_config->getConfigDependencyName());
+    if ($uuid) {
+      $field_config->set('uuid', $uuid);
+    }
+    $field_config->save();
+
+    if ($field_config && !$field_config->isNew()) {
+      $form_display->setComponent($field_name, [
+        'weight' => 15,
+        'settings' => [],
+        'third_party_settings' => [],
+        'type' => 'options_buttons',
+        'region' => 'content',
+      ]);
+      $form_display->save();
+    }
+  }
+}
+
+/**
+ * Set default value of Show Intro text field for existing news.
+ */
+function tide_landing_page_update_8034(&$sandbox) {
+  if (!isset($sandbox['total'])) {
+    $count = \Drupal::entityQuery('node')
+      ->condition('type', 'landing_page')
+      ->notExists('field_show_introduction_text')
+      ->count()
+      ->execute();
+    $sandbox['total'] = $count;
+    $sandbox['current'] = 0;
+    $sandbox['processed'] = 0;
+    $sandbox['#finished'] = $count ? 0 : 1;
+  }
+
+  $batch_size = 10;
+  $nids = \Drupal::entityQuery('node')
+    ->condition('type', 'landing_page')
+    ->condition('nid', $sandbox['current'], '>')
+    ->notExists('field_show_introduction_text')
+    ->sort('nid', 'ASC')
+    ->range(0, $batch_size)
+    ->execute();
+  foreach ($nids as $nid) {
+    $sandbox['current'] = $nid;
+    try {
+      /** @var \Drupal\node\NodeInterface $node */
+      $node = Node::load($nid);
+      if ($node) {
+        $has_intro = $node->hasField('field_landing_page_intro_text') && !($node->get('field_landing_page_intro_text')->isEmpty());
+        $node->set('field_show_introduction_text', $has_intro);
+        $node->setNewRevision(FALSE);
+        $node->save();
+      }
+    }
+    catch (Exception $exception) {
+      watchdog_exception('tide_landing_page', $exception);
+    }
+    $sandbox['processed']++;
+  }
+  $sandbox['#finished'] = $sandbox['total'] ? ($sandbox['processed'] / $sandbox['total']) : 1;
+}
+
+/**
  * Create a new field group.
  *
  * @param string $label
@@ -1363,7 +1458,7 @@ function _tide_landing_page_new_field_group_tab(string $label, string $parent, a
 /**
  * Update the node form of Landing Page.
  */
-function tide_landing_page_update_8033() {
+function tide_landing_page_update_8035() {
   // Rename paragraph bundles.
   $update_paragraph_labels = [
     'key_journeys' => t('Header links'),
@@ -1444,6 +1539,7 @@ function tide_landing_page_update_8033() {
     // Header.
     'title' => ['weight' => 0],
     'field_landing_page_summary' => ['weight' => 10],
+    'field_show_introduction_text' => ['weight' => 15],
     'field_landing_page_intro_text' => ['weight' => 20],
     'field_landing_page_key_journeys' => [
       'settings' => [
@@ -1542,6 +1638,7 @@ function tide_landing_page_update_8033() {
   $field_group['group_header']['children'] = [
     'title',
     'field_landing_page_summary',
+    'field_show_introduction_text',
     'field_landing_page_intro_text',
     'field_landing_page_key_journeys',
   ];

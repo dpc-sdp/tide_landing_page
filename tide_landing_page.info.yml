@@ -201,6 +201,7 @@ config_devel:
     - field.field.node.landing_page.field_landing_page_summary
     - field.field.node.landing_page.field_landing_page_summary
     - field.field.node.landing_page.field_show_content_rating
+    - field.field.node.landing_page.field_show_introduction_text
     - field.field.paragraph.contact_us.field_paragraph_body
     - field.field.paragraph.contact_us.field_paragraph_email
     - field.field.paragraph.contact_us.field_paragraph_location
