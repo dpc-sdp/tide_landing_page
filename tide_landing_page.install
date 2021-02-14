@@ -1440,7 +1440,7 @@ function tide_landing_page_update_8035(&$sandbox) {
         // If the link is empty, delete the paragraph.
         $link_details = _get_link_value($paragraph);
         $values = $node->get('field_landing_page_component')->getValue();
-        if ($link_details == FALSE) {
+        if (empty($link_details)) {
           $key = array_search($paragraph->id(), array_column($values, 'target_id'));
           $node->get('field_landing_page_component')->removeItem($key);
           $node->setNewRevision(FALSE);
@@ -1475,7 +1475,9 @@ function tide_landing_page_update_8035(&$sandbox) {
             $new_paragraph->{$display_field_names[$paragraph_type_mapping[$paragraph->bundle()]]}->value = _get_card_display_style($paragraph);
           }
         }
-
+        if ($link_details[1] == 'internal') {
+          $new_paragraph->{$display_field_names[$paragraph_type_mapping[$paragraph->bundle()]]}->value = _get_card_display_style($paragraph);
+        }
         $field_paragraph_title = _tide_card_consolidation_get_value($paragraph, 'title');
         if ($field_paragraph_title) {
           $new_paragraph->field_paragraph_title->value = $field_paragraph_title;
@@ -1534,32 +1536,38 @@ function _tide_card_consolidation_get_value(Paragraph $paragraph, $field) {
  *  Gets card display style value.
  */
 function _get_card_display_style(Paragraph $paragraph) {
+  $result = 'noImage';
   switch ($paragraph->bundle()) {
     case 'card_navigation_featured':
     case 'card_navigation_featured_auto':
-      return 'featured';
+      $result = 'featured';
+      break;
     case 'card_promotion':
     case 'card_promotion_auto':
     case 'card_event':
     case 'card_event_auto':
-      return 'thumbnail';
+      $result = 'thumbnail';
+      break;
     case 'call_to_action':
       if ($paragraph->field_paragraph_cta_style->isEmpty()) {
-        return 'noImage';
+        $result = 'noImage';
       }
-      if ($paragraph->field_paragraph_cta_style->value == 'card') {
-        return 'profile';
+      elseif ($paragraph->field_paragraph_cta_style->value == 'card') {
+        $result = 'profile';
       }
-      return 'featured';
-    default:
-      return 'noImage';
+      else {
+        $result = 'featured';
+      }
+      break;
   }
+  return $result;
 }
 
 /**
  * Gets link related values.
  */
 function _get_link_value(Paragraph $paragraph) {
+  $path_details = [];
   switch ($paragraph->bundle()) {
     case 'card_navigation':
     case 'card_navigation_featured':
@@ -1575,9 +1583,8 @@ function _get_link_value(Paragraph $paragraph) {
         }
         $path_details[1] = UrlHelper::isExternal($uri) ? 'external' : 'internal';
         $path_details[2] = 'field_paragraph_link';
-        return $path_details;
       }
-      return FALSE;
+      break;
     case 'card_navigation_auto':
     case 'card_navigation_featured_auto':
     case 'card_promotion_auto':
@@ -1593,10 +1600,9 @@ function _get_link_value(Paragraph $paragraph) {
             'internal',
             'field_paragraph_reference',
           ];
-          return $path_details;
         }
       }
-      return FALSE;
+      break;
     default:
       if (!$paragraph->field_paragraph_cta->isEmpty()) {
         $uri = $paragraph->field_paragraph_cta->uri;
@@ -1609,8 +1615,8 @@ function _get_link_value(Paragraph $paragraph) {
         }
         $path_details[1] = UrlHelper::isExternal($uri) ? 'external' : 'internal';
         $path_details[2] = 'field_paragraph_cta';
-        return $path_details;
       }
-      return FALSE;
+      break;
   }
+  return $path_details;
 }
