@@ -1521,6 +1521,9 @@ function _tide_card_consolidation_get_value(Paragraph $paragraph, $field) {
       if ($paragraph->hasField('field_paragraph_summary') && !$paragraph->field_paragraph_summary->isEmpty()) {
         $result = $paragraph->field_paragraph_summary->value;
       }
+      elseif ($paragraph->hasField('field_paragraph_body') && !$paragraph->field_paragraph_body->isEmpty()) {
+        $result = $paragraph->field_paragraph_body->value;
+      }
       break;
 
     case "media":
