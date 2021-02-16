@@ -159,6 +159,10 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
           $card_fields['publication_authors'][] = Term::load($id['target_id'])->get('name')->value;
         }
       }
+      // Add the date field for publication.
+      if ($node->hasField('field_publication_date')) {
+        $card_fields['date'] = $node->get('field_publication_date')->getValue()[0];
+      }
     }
     if ($module_handler->moduleExists('tide_profile')) {
       // Add the induction year field for profile.
