@@ -1427,7 +1427,6 @@ function tide_landing_page_update_8035(&$sandbox) {
   ];
   foreach ($paragraph_ids as $paragraph_id) {
     $sandbox['current'] = $paragraph_id;
-    /** @var Paragraph $paragraph */
     $paragraph = Paragraph::load($paragraph_id);
     $nodes = $node_storage->loadByProperties(['field_landing_page_component' => $paragraph->id()]);
     if (empty($nodes)) {
@@ -1536,7 +1535,7 @@ function _tide_card_consolidation_get_value(Paragraph $paragraph, $field) {
 }
 
 /**
- *  Gets card display style value.
+ * Gets card display style value.
  */
 function _get_card_display_style(Paragraph $paragraph) {
   $result = 'noImage';
@@ -1545,12 +1544,14 @@ function _get_card_display_style(Paragraph $paragraph) {
     case 'card_navigation_featured_auto':
       $result = 'featured';
       break;
+
     case 'card_promotion':
     case 'card_promotion_auto':
     case 'card_event':
     case 'card_event_auto':
       $result = 'thumbnail';
       break;
+
     case 'call_to_action':
       if ($paragraph->field_paragraph_cta_style->isEmpty()) {
         $result = 'noImage';
@@ -1588,6 +1589,7 @@ function _get_link_value(Paragraph $paragraph) {
         $path_details[2] = 'field_paragraph_link';
       }
       break;
+
     case 'card_navigation_auto':
     case 'card_navigation_featured_auto':
     case 'card_promotion_auto':
@@ -1606,6 +1608,7 @@ function _get_link_value(Paragraph $paragraph) {
         }
       }
       break;
+
     default:
       if (!$paragraph->field_paragraph_cta->isEmpty()) {
         $uri = $paragraph->field_paragraph_cta->uri;
