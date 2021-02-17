@@ -1429,7 +1429,12 @@ function tide_landing_page_update_8035(&$sandbox) {
     $sandbox['current'] = $paragraph_id;
     $paragraph = Paragraph::load($paragraph_id);
     $nodes = $node_storage->loadByProperties(['field_landing_page_component' => $paragraph->id()]);
-    if (empty($nodes)) {
+    if (empty($nodes) && in_array($paragraph->bundle(), [
+      'card_navigation_featured_auto',
+      'card_navigation_featured',
+      'card_navigation_auto',
+      'card_navigation',
+    ])) {
       $paragraph->delete();
       $sandbox['processed']++;
       continue;
