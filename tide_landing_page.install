@@ -1294,7 +1294,7 @@ function tide_landing_page_update_8033() {
       ],
       'settings' => [
         'on_label' => t('Display Introduction text'),
-        'off_label' => t('Turn off Introduction text'),
+        'off_label' => t('Hide Introduction text'),
       ],
       'field_type' => 'boolean',
     ]);
@@ -1577,15 +1577,16 @@ function tide_landing_page_update_8035() {
     'field_landing_page_header' => [
       'settings' => ['add_mode' => 'modal'],
     ],
-    // Page Campaign.
-    'field_landing_page_c_primary' => ['weight' => -89],
-    'field_show_c_primary_caption' => ['weight' => -88],
-    'field_landing_page_c_secondary' => ['weight' => -85],
     // Featured image.
     'field_featured_image' => [
       'settings' => ['open' => TRUE],
-      'weight' => -80,
+      'weight' => -90,
     ],
+    // Page Campaign.
+    'field_landing_page_c_primary' => ['weight' => -79],
+    'field_show_c_primary_caption'
+    => ['weight' => -78],
+    'field_landing_page_c_secondary' => ['weight' => -75],
     // Content.
     'field_landing_page_component' => [
       'settings' => ['add_mode' => 'modal'],
@@ -1662,13 +1663,13 @@ function tide_landing_page_update_8035() {
   ];
 
   // Campaign section.
-  $field_group['group_section_campaign'] = _tide_landing_page_new_field_group_tabs('Campaign Section', 'horizontal', 'node-form-group-page-campaign', '', 'content', -90);
+  $field_group['group_section_campaign'] = _tide_landing_page_new_field_group_tabs('Campaign Section', 'horizontal', 'node-form-group-page-campaign', '', 'content', -80);
   $field_group['group_section_campaign']['children'] = [
     'group_campaign',
   ];
 
   // Campaign - Page campaign tab.
-  $field_group['group_campaign'] = _tide_landing_page_new_field_group_tab('Page campaign', 'group_section_campaign', [], 'content', -89);
+  $field_group['group_campaign'] = _tide_landing_page_new_field_group_tab('Page campaign', 'group_section_campaign', [], 'content', -79);
   $field_group['group_campaign']['children'] = [
     'group_primary_campaign',
     'group_secondary_campaign',
@@ -1676,7 +1677,7 @@ function tide_landing_page_update_8035() {
 
   // Campaign - Page campaign tab - Primary campaign.
   $field_group['group_primary_campaign'] = _tide_landing_page_new_field_group('Primary campaign', 'details', [
-    'open' => TRUE,
+    'open' => FALSE,
     'description' => t('Primary campaigns display at the top of the page between the header section and the body content section. They span the full width of the content area. Start typing the name of your custom block component to display your campaign.'),
   ], 'content', 0, 'group_campaign', [
     'field_landing_page_c_primary',
@@ -1684,7 +1685,7 @@ function tide_landing_page_update_8035() {
   ]);
   // Campaign - Page campaign tab - Secondary campaign.
   $field_group['group_secondary_campaign'] = _tide_landing_page_new_field_group('Secondary campaign', 'details', [
-    'open' => TRUE,
+    'open' => FALSE,
     'description' => t('Secondary campaign displays after the content area, just above the page footer. They span the full width of the content area. Start typing the name of your custom block component to display your campaign'),
   ], 'content', 10, 'group_campaign', [
     'field_landing_page_c_secondary',

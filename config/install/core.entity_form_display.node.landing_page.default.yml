@@ -264,7 +264,7 @@ third_party_settings:
         id: node-form-group-page-campaign
         classes: ''
       region: content
-      weight: -90
+      weight: -80
     group_campaign:
       label: 'Page campaign'
       parent_name: group_section_campaign
@@ -279,7 +279,7 @@ third_party_settings:
         id: ''
         classes: ''
       region: content
-      weight: -89
+      weight: -79
     group_primary_campaign:
       label: 'Primary campaign'
       parent_name: group_campaign
@@ -288,7 +288,7 @@ third_party_settings:
         - field_show_c_primary_caption
       format_type: details
       format_settings:
-        open: true
+        open: false
         description: 'Primary campaigns display at the top of the page between the header section and the body content section. They span the full width of the content area. Start typing the name of your custom block component to display your campaign.'
       region: content
       weight: 0
@@ -299,7 +299,7 @@ third_party_settings:
         - field_landing_page_c_secondary
       format_type: details
       format_settings:
-        open: true
+        open: false
         description: 'Secondary campaign displays after the content area, just above the page footer. They span the full width of the content area. Start typing the name of your custom block component to display your campaign'
       region: content
       weight: 10
@@ -338,7 +338,7 @@ content:
     type: entity_browser_entity_reference
     region: content
   field_featured_image:
-    weight: -80
+    weight: -90
     settings:
       entity_browser: tide_image_browser
       field_widget_display: rendered_entity
@@ -374,7 +374,7 @@ content:
     type: options_select
     region: content
   field_landing_page_c_primary:
-    weight: -89
+    weight: -79
     settings:
       match_operator: CONTAINS
       size: 60
@@ -385,7 +385,7 @@ content:
     region: content
     description: 'Primary campaigns display at the top of the page between the header section and the body content section. They span the full width of the content area. Start typing the name of your custom block component to display your campaign.'
   field_landing_page_c_secondary:
-    weight: -85
+    weight: -75
     settings:
       match_operator: CONTAINS
       size: 60
@@ -571,7 +571,7 @@ content:
     type: boolean_checkbox
     region: content
   field_show_c_primary_caption:
-    weight: -88
+    weight: -78
     settings:
       display_label: true
     third_party_settings: {  }
