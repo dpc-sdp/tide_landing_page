@@ -180,10 +180,12 @@ Feature: Fields for Landing Page content type
     And I press the "Close" button
 
     And I click on the horizontal tab "Page campaign"
+    And I click on the detail "Primary campaign"
     And I should see text matching "Primary Campaign"
     And I should see an "input#edit-field-landing-page-c-primary-0-target-id" element
     And I should not see an "input#edit-field-landing-page-c-primary-0-target-id.required" element
 
+    And I click on the detail "Secondary campaign"
     And I should see text matching "Secondary campaign"
     And I should see an "input#edit-field-landing-page-c-secondary-0-target-id" element
     And I should not see an "input#edit-field-landing-page-c-secondary-0-target-id.required" element
