@@ -3,14 +3,14 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_paragraph_summary
-    - paragraphs.paragraphs_type.card_navigation_featured
-id: paragraph.card_navigation_featured.field_paragraph_summary
+    - paragraphs.paragraphs_type.navigation_card
+id: paragraph.navigation_card.field_paragraph_summary
 field_name: field_paragraph_summary
 entity_type: paragraph
-bundle: card_navigation_featured
+bundle: navigation_card
 label: Summary
-description: ''
-required: true
+description: 'This optional summary will be shown underneath the title.'
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''

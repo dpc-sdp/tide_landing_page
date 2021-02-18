@@ -4,8 +4,8 @@ dependencies:
   module:
     - options
     - paragraphs
-id: paragraph.field_promo_card_display_style
-field_name: field_promo_card_display_style
+id: paragraph.field_nav_card_display_style
+field_name: field_nav_card_display_style
 entity_type: paragraph
 type: list_string
 settings:
@@ -17,8 +17,8 @@ settings:
       value: thumbnail
       label: Thumbnail
     -
-      value: profile
-      label: Profile
+      value: featured
+      label: Featured
   allowed_values_function: ''
 module: options
 locked: false

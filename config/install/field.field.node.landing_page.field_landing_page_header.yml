@@ -53,18 +53,6 @@ settings:
       card_keydates:
         weight: 32
         enabled: false
-      card_navigation:
-        weight: 33
-        enabled: false
-      card_navigation_auto:
-        weight: 34
-        enabled: false
-      card_navigation_featured:
-        weight: 35
-        enabled: false
-      card_navigation_featured_auto:
-        weight: 36
-        enabled: false
       card_promotion:
         weight: 37
         enabled: false

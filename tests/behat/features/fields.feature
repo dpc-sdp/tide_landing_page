@@ -64,14 +64,11 @@ Feature: Fields for Landing Page content type
     And I should see "Card Event Automated" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Latest Events" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Promotion" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
-    And I should see "Navigation featured" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
-    And I should see "Navigation featured Automated" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
-    And I should see "Navigation" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
-    And I should see "Navigation Automated" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Key dates" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Image Gallery" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Complex Image" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Promotion card" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
+    And I should see "Navigation card" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
 
     And I see field "Tags"
     And I should see an "input#edit-field-tags-0-target-id" element
@@ -175,14 +172,11 @@ Feature: Fields for Landing Page content type
     And I should see "Call to Action" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Card Event" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Promotion" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
-    And I should see "Navigation featured" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
-    And I should see "Navigation featured Automated" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
-    And I should see "Navigation" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
-    And I should see "Navigation Automated" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Key dates" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Timelines" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Complex Image" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Promotion card" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
+    And I should see "Navigation card" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
 
     And I should see "Form embed (Drupal)" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
     And I should see "Form embed (OpenForms)" in the "select[name='field_landing_page_component[add_more][add_more_select]']" element
@@ -245,6 +239,24 @@ Feature: Fields for Landing Page content type
     And I see field "field_landing_page_component[0][subform][field_promo_card_display_style]"
     And save screenshot
     And I select "thumbnail" from "field_landing_page_component[0][subform][field_promo_card_display_style]"
+    And I wait for 5 seconds
+    And I see field "field_landing_page_component[0][subform][field_customise][value]"
+    And save screenshot
+
+  @api @javascript
+  Scenario: The navigation card paragraph type has the expected fields.
+    Given I am logged in as a user with the "create landing_page content" permission
+    When I visit "node/add/landing_page"
+    And I click "Body Content"
+    Then I select "Navigation card" from "edit-field-landing-page-component-add-more-add-more-select"
+    And I press "edit-field-landing-page-component-add-more-add-more-button"
+    And I wait for 5 seconds
+    Then I see field "Link"
+    And I see field "Title"
+    And I see field "Summary"
+    And I see field "field_landing_page_component[0][subform][field_nav_card_display_style]"
+    And save screenshot
+    And I select "thumbnail" from "field_landing_page_component[0][subform][field_nav_card_display_style]"
     And I wait for 5 seconds
     And I see field "field_landing_page_component[0][subform][field_customise][value]"
     And save screenshot
