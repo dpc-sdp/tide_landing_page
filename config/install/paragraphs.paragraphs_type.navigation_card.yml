@@ -1,8 +1,9 @@
 langcode: en
 status: true
 dependencies: {  }
-id: card_navigation_auto
-label: 'Navigation Automated'
+id: navigation_card
+label: 'Navigation card'
 icon_uuid: null
+icon_default: null
 description: ''
 behavior_plugins: {  }
