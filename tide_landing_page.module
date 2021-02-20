@@ -57,7 +57,9 @@ function tide_landing_page_entity_bundle_create($entity_type_id, $bundle) {
 
       $is_featured_news = ($bundle == 'featured_news' && $moduleHandler->moduleExists('tide_news'));
       $is_embedded_webform = ($bundle == 'embedded_webform' && $moduleHandler->moduleExists('tide_webform'));
-      if ($is_featured_news || $is_embedded_webform) {
+      $is_automated_listing = ($bundle == 'automated_card_listing' && $moduleHandler->moduleExists('tide_automated_listing'));
+
+      if ($is_featured_news || $is_embedded_webform || $is_automated_listing) {
         $handler_settings['target_bundles'][$bundle] = $bundle;
         $field_config->setSetting('handler_settings', $handler_settings);
         $field_config->save();

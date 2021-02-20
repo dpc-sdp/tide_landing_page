@@ -59,6 +59,7 @@ function tide_landing_page_install() {
   $field_config = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
   if ($field_config) {
     $handler_settings = $field_config->getSetting('handler_settings');
+    $dependencies_settings = $field_config->getSetting('dependencies');
     // Add the Featured News paragraph to Landing Page component if exists.
     if ($moduleHandler->moduleExists('tide_news')) {
       $handler_settings['target_bundles']['featured_news'] = 'featured_news';
@@ -67,7 +68,20 @@ function tide_landing_page_install() {
     if ($moduleHandler->moduleExists('tide_webform')) {
       $handler_settings['target_bundles']['embedded_webform'] = 'embedded_webform';
     }
+    // Add the Automated Listing paragraph to Landing Page component if exists.
+    if ($moduleHandler->moduleExists('tide_automated_listing')) {
+      $handler_settings['target_bundles']['automated_card_listing'] = 'automated_card_listing';
+      $handler_settings['target_bundles_drag_drop'][] = [
+        'automated_card_listing' => [
+          'enabled' => TRUE,
+          'weight' => '-30',
+        ],
+      ];
+      $dependencies_settings['config'][] = 'paragraphs.paragraphs_type.automated_card_listing';
+    }
     $field_config->setSetting('handler_settings', $handler_settings);
+    $field_config->setSetting('dependencies', $dependencies_settings);
+
     $field_config->save();
   }
 
@@ -1269,9 +1283,43 @@ function tide_landing_page_update_8032() {
 }
 
 /**
- * Installs new promotion_card paragraph type.
+ * Add the new paragraph type tide_automated_listing.
  */
 function tide_landing_page_update_8033() {
+  $result = \Drupal::service('module_installer')->install(['tide_automated_listing']);
+  if (!$result) {
+    throw new \Exception(sprintf('Unable to install module %s', 'tide_automated_listing'));
+  }
+
+  /** @var \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler */
+  $moduleHandler = \Drupal::service('module_handler');
+  $field_config = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
+  if ($field_config) {
+    $handler_settings = $field_config->getSetting('handler_settings');
+    $dependencies_settings = $field_config->getSetting('dependencies');
+
+    // Add the Automated Listing paragraph to Landing Page component if exists.
+    if ($moduleHandler->moduleExists('tide_automated_listing')) {
+      $handler_settings['target_bundles']['automated_card_listing'] = 'automated_card_listing';
+      $handler_settings['target_bundles_drag_drop'][] = [
+        'automated_card_listing' => [
+          'enabled' => TRUE,
+          'weight' => '-30',
+        ],
+      ];
+      $dependencies_settings['config'][] = 'paragraphs.paragraphs_type.automated_card_listing';
+    }
+    $field_config->setSetting('handler_settings', $handler_settings);
+    $field_config->setSetting('dependencies', $dependencies_settings);
+
+    $field_config->save();
+  }
+}
+
+/**
+ * Installs new promotion_card paragraph type.
+ */
+function tide_landing_page_update_8034() {
   $configs = [
     'paragraphs.paragraphs_type.promotion_card' => 'paragraphs_type',
     'field.storage.paragraph.field_promo_card_display_style' => 'field_storage_config',
@@ -1318,7 +1366,7 @@ function tide_landing_page_update_8033() {
 /**
  * Installs new navigation_card paragraph type.
  */
-function tide_landing_page_update_8034() {
+function tide_landing_page_update_8035() {
   $configs = [
     'paragraphs.paragraphs_type.navigation_card' => 'paragraphs_type',
     'field.storage.paragraph.field_nav_card_display_style' => 'field_storage_config',
@@ -1364,7 +1412,7 @@ function tide_landing_page_update_8034() {
 /**
  * Updates cards.
  */
-function tide_landing_page_update_8035(&$sandbox) {
+function tide_landing_page_update_8036(&$sandbox) {
   if (!isset($sandbox['total'])) {
     $paragraph_query = \Drupal::entityTypeManager()
       ->getStorage('paragraph')
