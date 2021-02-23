@@ -84,8 +84,13 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
    *   The array of fields value.
    */
   public function getCardFields($nid) {
-    $card_fields = [];
     $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
+
+    if (!$node) {
+      return;
+    }
+
+    $card_fields = [];
     // Add title from the node.
     $node_title = $node->get('title')->getValue();
     $card_fields['title'] = $node_title ? $node_title[0]['value'] : '';
@@ -94,14 +99,16 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
     $card_fields['node_type'] = $node_type ? $node_type : '';
     // Add topic from the node.
     $topic_id = $node->hasField('field_topic') ? $node->get('field_topic')->getValue()[0]['target_id'] : '';
-    if ($topic_id) {
+    if ($topic_id && Term::load($topic_id)) {
       $card_fields['topic'] = Term::load($topic_id)->get('name')->value;
     }
     // Add tags from the node.
     $tag_ids = $node->hasField('field_tags') ? $node->get('field_tags')->getValue() : '';
     if ($tag_ids) {
       foreach ($tag_ids as $id) {
-        $card_fields['tags'][] = Term::load($id['target_id'])->get('name')->value;
+        if (!empty($id['target_id']) && Term::load($id['target_id'])) {
+          $card_fields['tags'][] = Term::load($id['target_id'])->get('name')->value;
+        }
       }
     }
     // Add summary from the node.
@@ -182,9 +189,14 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
    * @return array
    *   The image data with focal point values.
    */
-  public function getImage($nid) {
-    $image = [];
+  public static function getImage($nid) {
     $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
+
+    if (!$node) {
+      return;
+    }
+
+    $image = [];
     $feature_image = $node->hasField('field_featured_image') ? $node->get('field_featured_image')->getValue() : '';
     if (!empty($feature_image)) {
       $image_id = $feature_image[0]['target_id'];
