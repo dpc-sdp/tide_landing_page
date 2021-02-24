@@ -4,6 +4,7 @@ namespace Drupal\tide_landing_page\Plugin\jsonapi\FieldEnhancer;
 
 use Drupal\tide_media\Plugin\jsonapi\FieldEnhancer\ImageEnhancer;
 use Drupal\jsonapi_extras\Plugin\ResourceFieldEnhancerBase;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\media\Entity\Media;
@@ -27,10 +28,11 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
   protected function doUndoTransform($data, Context $context) {
     if (!empty($data) && (strpos($data['uri'], 'entity:node/') !== FALSE)) {
       $nid = str_replace("entity:node/", "", $data['uri']);
-      if (!empty($nid)) {
+      $node = !empty($nid) ? \Drupal::entityTypeManager()->getStorage('node')->load($nid) : '';
+      if ($node) {
         $data['url'] = $this->getAlias($nid);
-        $data['image'] = $this->getImage($nid);
-        $data['internal_node_fields'] = $this->getCardFields($nid);
+        $data['image'] = $this->getImage($node);
+        $data['internal_node_fields'] = $this->getCardFields($node);
       }
     }
 
@@ -77,15 +79,14 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
   /**
    * Helper function to get all the necessary node fields.
    *
-   * @param string $nid
-   *   The node id.
+   * @param \Drupal\Core\Entity\EntityInterface $node
+   *   The node entity.
    *
    * @return array
    *   The array of fields value.
    */
-  public function getCardFields($nid) {
+  public function getCardFields(EntityInterface $node) {
     $card_fields = [];
-    $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
     // Add title from the node.
     $node_title = $node->get('title')->getValue();
     $card_fields['title'] = $node_title ? $node_title[0]['value'] : '';
@@ -93,80 +94,83 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
     $node_type = $node->type->entity->label();
     $card_fields['node_type'] = $node_type ? $node_type : '';
     // Add topic from the node.
-    $topic_id = $node->hasField('field_topic') ? $node->get('field_topic')->getValue()[0]['target_id'] : '';
-    if ($topic_id) {
-      $card_fields['topic'] = Term::load($topic_id)->get('name')->value;
+    if ($node->hasField('field_topic') && !$node->field_topic->isEmpty()) {
+      $topic = Term::load($node->get('field_topic')->getValue()[0]['target_id']);
+      if ($topic) {
+        $card_fields['topic'] = $topic->get('name')->value;
+      }
     }
     // Add tags from the node.
-    $tag_ids = $node->hasField('field_tags') ? $node->get('field_tags')->getValue() : '';
-    if ($tag_ids) {
+    if ($node->hasField('field_tags') && !$node->field_tags->isEmpty()) {
+      $tag_ids = $node->get('field_tags')->getValue();
       foreach ($tag_ids as $id) {
-        $card_fields['tags'][] = Term::load($id['target_id'])->get('name')->value;
+        $tag = !empty($id['target_id']) ? Term::load($id['target_id']) : '';
+        if ($tag) {
+          $card_fields['tags'][] = $tag->get('name')->value;
+        }
       }
     }
     // Add summary from the node.
-    $summary = $node->hasField('field_landing_page_summary') ? $node->get('field_landing_page_summary')->getValue() : '';
-    $card_fields['summary'] = $summary ? $summary[0]['value'] : '';
-    // Add feature image from the node.
-    $feature_image = $node->hasField('field_featured_image') ? $node->get('field_featured_image')->getValue() : '';
+    if ($node->hasField('field_landing_page_summary') && !$node->field_landing_page_summary->isEmpty()) {
+      $summary = $node->get('field_landing_page_summary')->getValue();
+      $card_fields['summary'] = $summary ? $summary[0]['value'] : '';
+    }
     $module_handler = \Drupal::moduleHandler();
     if ($module_handler->moduleExists('tide_news')) {
       // Add the summary field for news.
-      if ($node->hasField('body')) {
-        $news_summary = $node->get('body')->getValue() ? $node->get('body')->getValue()[0]['summary'] : '';
+      // This needs to be updated with the CMS improvement changes in tide_news.
+      if ($node->hasField('body') && !$node->body->isEmpty()) {
+        $news_summary = $node->get('body')->getValue()[0]['summary'];
         // If no news summary, will check for landing page summary.
-        $card_fields['summary'] = $news_summary ? $news_summary : $card_fields['summary'];
+        $card_fields['summary'] = $news_summary ? $news_summary : '';
       }
       // Add the date field for news.
-      if ($node->hasField('field_news_date')) {
+      if ($node->hasField('field_news_date') && !$node->field_news_date->isEmpty()) {
         $card_fields['date'] = $node->get('field_news_date')->getValue()[0];
       }
     }
     if ($module_handler->moduleExists('tide_event')) {
       // Add event fields.
-      if ($node->hasField('field_event_details')) {
+      if ($node->hasField('field_event_details') && !$node->field_event_details->isEmpty()) {
         $paragraph_id = $node->get('field_event_details')->getValue()[0]['target_id'];
         $paragraph = $paragraph_id ? Paragraph::load($paragraph_id) : '';
         if ($paragraph && $paragraph->field_paragraph_date_range->getValue()) {
           $event_date = $paragraph->field_paragraph_date_range->getValue()[0];
           $card_fields['date'] = $event_date ? $event_date : '';
         }
-        $location = $paragraph->field_paragraph_location->getValue() ? $paragraph->field_paragraph_location->getValue()[0]['locality'] : '';
-        if ($location) {
-          $card_fields['location'] = $location;
-        }
-        $event_author = $node->hasField('field_node_author') ? $node->get('field_node_author')->getValue() : '';
-        $card_fields['event_status'] = $event_author ? $event_author[0]['value'] : '';
-        $event_status = $node->hasField('field_status') ? $node->get('field_status')->getValue() : '';
-        $card_fields['event_status'] = $event_status ? $event_status[0]['value'] : '';
       }
     }
     if ($module_handler->moduleExists('tide_grant')) {
       // Add the date field for grants.
-      if ($node->hasField('field_node_dates')) {
+      if ($node->hasField('field_node_dates') && !$node->field_node_dates->isEmpty()) {
         $card_fields['date'] = $node->get('field_node_dates')->getValue()[0];
       }
       // Add the ongoing field for grants.
-      if ($node->hasField('field_node_on_going')) {
+      if ($node->hasField('field_node_on_going') && !$node->field_node_on_going->isEmpty()) {
         $card_fields['ongoing'] = $node->get('field_node_on_going')->getValue()[0]['value'];
       }
     }
     if ($module_handler->moduleExists('tide_publication')) {
       // Add the authors field for publication.
-      $author_ids = $node->hasField('field_publication_authors') ? $node->get('field_publication_authors')->getValue() : '';
-      if ($author_ids) {
-        foreach ($author_ids as $id) {
-          $card_fields['publication_authors'][] = Term::load($id['target_id'])->get('name')->value;
+      if ($node->hasField('field_publication_authors') && !$node->field_publication_authors->isEmpty()) {
+        $author_ids = $node->get('field_publication_authors')->getValue();
+        if ($author_ids) {
+          foreach ($author_ids as $id) {
+            $author = !empty($id['target_id']) ? Term::load($id['target_id']) : '';
+            if ($author) {
+              $card_fields['publication_authors'][] = $author->get('name')->value;
+            }
+          }
         }
       }
       // Add the date field for publication.
-      if ($node->hasField('field_publication_date')) {
+      if ($node->hasField('field_publication_date') && !$node->field_publication_date->isEmpty()) {
         $card_fields['date'] = $node->get('field_publication_date')->getValue()[0];
       }
     }
     if ($module_handler->moduleExists('tide_profile')) {
       // Add the induction year field for profile.
-      if ($node->hasField('field_year') && $node->get('field_year')->getValue()) {
+      if ($node->hasField('field_year') && !$node->field_year->isEmpty()) {
         $card_fields['induction_year'] = $node->get('field_year')->getValue()[0]['value'];
       }
     }
@@ -176,32 +180,33 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
   /**
    * Helper function to add image field details.
    *
-   * @param string $nid
-   *   The node id.
+   * @param \Drupal\Core\Entity\EntityInterface $node
+   *   The node entity.
    *
    * @return array
    *   The image data with focal point values.
    */
-  public function getImage($nid) {
+  public static function getImage(EntityInterface $node) {
     $image = [];
-    $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
-    $feature_image = $node->hasField('field_featured_image') ? $node->get('field_featured_image')->getValue() : '';
-    if (!empty($feature_image)) {
-      $image_id = $feature_image[0]['target_id'];
-      $media = $image_id ? Media::load($image_id) : '';
-      // Get the ID of the media object image field.
-      $media_field = $media ? $media->get('field_media_image')->getValue() : '';
-      if ($media_field) {
-        // Image Details.
-        $image['data'] = $media_field;
-        $file = $media_field[0]['target_id'] ? File::load($media_field[0]['target_id']) : '';
-        if ($file) {
-          // Get URL of the image file.
-          $image['url'] = $file->url();
-          // Get image crop values.
-          $crop = !empty($file) ? ImageEnhancer::getCropEntity($file, 'focal_point') : '';
-          $focal_point = !empty($crop) ? $crop->position() : '';
-          $image['meta']['focal_point'] = $focal_point;
+    if ($node->hasField('field_featured_image') && !$node->field_featured_image->isEmpty()) {
+      $feature_image = $node->get('field_featured_image')->getValue();
+      if (!empty($feature_image)) {
+        $image_id = $feature_image[0]['target_id'];
+        $media = $image_id ? Media::load($image_id) : '';
+        // Get the ID of the media object image field.
+        $media_field = $media ? $media->get('field_media_image')->getValue() : '';
+        if ($media_field) {
+          // Image Details.
+          $image['data'] = $media_field;
+          $file = $media_field[0]['target_id'] ? File::load($media_field[0]['target_id']) : '';
+          if ($file) {
+            // Get URL of the image file.
+            $image['url'] = $file->url();
+            // Get image crop values.
+            $crop = !empty($file) ? ImageEnhancer::getCropEntity($file, 'focal_point') : '';
+            $focal_point = !empty($crop) ? $crop->position() : '';
+            $image['meta']['focal_point'] = $focal_point;
+          }
         }
       }
     }
