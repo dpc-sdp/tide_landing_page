@@ -79,8 +79,8 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
   /**
    * Helper function to get all the necessary node fields.
    *
-   * @param EntityInterface $node
-   *   The node id.
+   * @param \Drupal\Core\Entity\EntityInterface $node
+   *   The node entity.
    *
    * @return array
    *   The array of fields value.
@@ -180,8 +180,8 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
   /**
    * Helper function to add image field details.
    *
-   * @param EntityInterface $node
-   *   The node id.
+   * @param \Drupal\Core\Entity\EntityInterface $node
+   *   The node entity.
    *
    * @return array
    *   The image data with focal point values.
