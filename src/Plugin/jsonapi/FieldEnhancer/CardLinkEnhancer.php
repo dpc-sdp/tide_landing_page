@@ -186,7 +186,7 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
    * @return array
    *   The image data with focal point values.
    */
-  public static function getImage(EntityInterface $node) {
+  public function getImage(EntityInterface $node) {
     $image = [];
     if ($node->hasField('field_featured_image') && !$node->field_featured_image->isEmpty()) {
       $feature_image = $node->get('field_featured_image')->getValue();
