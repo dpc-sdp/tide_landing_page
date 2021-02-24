@@ -4,6 +4,7 @@ namespace Drupal\tide_landing_page\Plugin\jsonapi\FieldEnhancer;
 
 use Drupal\tide_media\Plugin\jsonapi\FieldEnhancer\ImageEnhancer;
 use Drupal\jsonapi_extras\Plugin\ResourceFieldEnhancerBase;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\media\Entity\Media;
@@ -78,13 +79,13 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
   /**
    * Helper function to get all the necessary node fields.
    *
-   * @param string $nid
+   * @param EntityInterface $node
    *   The node id.
    *
    * @return array
    *   The array of fields value.
    */
-  public function getCardFields($node) {
+  public function getCardFields(EntityInterface $node) {
     $card_fields = [];
     // Add title from the node.
     $node_title = $node->get('title')->getValue();
@@ -179,13 +180,13 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
   /**
    * Helper function to add image field details.
    *
-   * @param string $nid
+   * @param EntityInterface $node
    *   The node id.
    *
    * @return array
    *   The image data with focal point values.
    */
-  public static function getImage($node) {
+  public static function getImage(EntityInterface $node) {
     $image = [];
     if ($node->hasField('field_featured_image') && !$node->field_featured_image->isEmpty()) {
       $feature_image = $node->get('field_featured_image')->getValue();
