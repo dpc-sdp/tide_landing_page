@@ -232,26 +232,6 @@ function _tide_landing_page_form_node_form_process(array $form, FormStateInterfa
   /** @var \Drupal\node\NodeInterface $node */
   $node = $form_state->getFormObject()->getEntity();
 
-  // Add a pseudo checkbox Add separate intro text.
-  $node_intro_text_empty = $node->get('field_landing_page_intro_text')->isEmpty();
-  $form['_add_separate_intro'] = [
-    '#title' => t('Add separate introduction text'),
-    '#description' => t('Introduction text is a brief summary of the page and displays under the page title. You can have a different introduction text if preferred.'),
-    '#type' => 'checkbox',
-    '#group' => 'group_header',
-    '#checked' => !$node_intro_text_empty,
-    '#weight' => isset($form['field_landing_page_intro_text']['#weight']) ? ($form['field_landing_page_intro_text']['#weight'] - 1) : 19,
-    '#states' => [
-      'enabled' => [
-        'textarea[name="field_landing_page_intro_text[0][value]"]' => ['empty' => TRUE],
-      ],
-    ],
-  ];
-
-  $form['field_landing_page_intro_text']['#states']['visible'] = [
-    ':input[name="_add_separate_intro"]' => ['checked' => TRUE],
-  ];
-
   // Add pseudo radio buttons for Header style.
   $form['_header_style'] = [
     '#type' => 'container',
@@ -320,14 +300,6 @@ function _tide_landing_page_form_node_form_process(array $form, FormStateInterfa
  *   The processed form.
  */
 function _tide_landing_page_form_node_form_after_build(array $form, FormStateInterface $form_state) {
-  // Determine the state of Add separate intro checkbox.
-  $form_intro_text_empty = empty($form_state->getValue([
-    'field_landing_page_intro_text',
-    0,
-    'value',
-  ]));
-  $form['_add_separate_intro']['#checked'] = !$form_intro_text_empty;
-
   // Determine the current value of Header style.
   $form_hero_image_empty = empty($form_state->getValue([
     'field_landing_page_hero_image',

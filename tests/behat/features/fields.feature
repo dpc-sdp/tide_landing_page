@@ -13,7 +13,6 @@ Feature: Fields for Landing Page content type
     And I should see an "input#edit-title-0-value.required" element
 
     And I click on the horizontal tab "Header"
-    And I check the box "Add separate introduction text"
     And I see field "Introduction text"
     And I should see an "textarea#edit-field-landing-page-intro-text-0-value" element
     And I should not see an "textarea#edit-field-landing-page-intro-text-0-value.required" element
@@ -149,7 +148,6 @@ Feature: Fields for Landing Page content type
     And I should see an "input#edit-title-0-value.required" element
 
     And I click on the horizontal tab "Header"
-    And I check the box "Add separate introduction text"
     And I see field "Introduction text"
     And I should see an "textarea#edit-field-landing-page-intro-text-0-value" element
     And I should not see an "textarea#edit-field-landing-page-intro-text-0-value.required" element
