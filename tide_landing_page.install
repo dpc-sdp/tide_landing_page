@@ -15,6 +15,7 @@ use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\node\Entity\Node;
 use Drupal\Component\Utility\UrlHelper;
+use Drupal\Component\Utility\Html;
 
 /**
  * Implements hook_install().
@@ -1529,6 +1530,7 @@ function _tide_card_consolidation_get_value(Paragraph $paragraph, $field) {
       }
       elseif ($paragraph->hasField('field_paragraph_body') && !$paragraph->field_paragraph_body->isEmpty()) {
         $result = strip_tags($paragraph->field_paragraph_body->value);
+        $result = Html::decodeEntities($result);
       }
       break;
 
