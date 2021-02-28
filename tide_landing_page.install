@@ -1613,6 +1613,9 @@ function _get_card_display_style(Paragraph $paragraph) {
       if ($paragraph->field_paragraph_cta_style->value == 'card') {
         $result = 'profile';
       }
+      elseif ($paragraph->field_paragraph_media->isEmpty() && $paragraph->field_paragraph_cta_style->value == 'banner') {
+        $result = 'noImage';
+      }
       elseif (!$paragraph->field_paragraph_media->isEmpty() && $paragraph->field_paragraph_cta_style->value == 'banner') {
         $result = 'thumbnail';
       }
