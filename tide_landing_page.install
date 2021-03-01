@@ -1379,8 +1379,7 @@ function tide_landing_page_update_8035(&$sandbox) {
       ->condition('type', 'card_promotion')
       ->condition('type', 'card_promotion_auto')
       ->condition('type', 'card_event')
-      ->condition('type', 'card_event_auto')
-      ->condition('type', 'call_to_action');
+      ->condition('type', 'card_event_auto');
     $paragraph_query->condition($or);
     $count = $paragraph_query->count()->execute();
     $sandbox['total'] = $count;
@@ -1400,8 +1399,7 @@ function tide_landing_page_update_8035(&$sandbox) {
     ->condition('type', 'card_promotion')
     ->condition('type', 'card_promotion_auto')
     ->condition('type', 'card_event')
-    ->condition('type', 'card_event_auto')
-    ->condition('type', 'call_to_action');
+    ->condition('type', 'card_event_auto');
   $paragraph_query->condition($or);
   $paragraph_query->condition('parent_type', 'node')
     ->condition('parent_field_name', 'field_landing_page_component')
@@ -1419,7 +1417,6 @@ function tide_landing_page_update_8035(&$sandbox) {
     'card_promotion_auto' => 'promotion_card',
     'card_event' => 'promotion_card',
     'card_event_auto' => 'promotion_card',
-    'call_to_action' => 'navigation_card',
   ];
   $display_field_names = [
     'navigation_card' => 'field_nav_card_display_style',
@@ -1451,17 +1448,6 @@ function tide_landing_page_update_8035(&$sandbox) {
           $node->save();
           continue;
         }
-        if ($paragraph->bundle() == 'call_to_action') {
-          if ($paragraph->field_paragraph_cta_style->isEmpty()) {
-            continue;
-          }
-          if ($paragraph->field_paragraph_cta_style->value == 'card') {
-            $paragraph_type_mapping['call_to_action'] = 'promotion_card';
-          }
-          if ($paragraph->field_paragraph_cta_style->value == 'banner') {
-            $paragraph_type_mapping['call_to_action'] = 'navigation_card';
-          }
-        }
         $new_paragraph = Paragraph::create([
           'type' => $paragraph_type_mapping[$paragraph->bundle()],
           'parent_id' => $node->id(),
@@ -1469,13 +1455,15 @@ function tide_landing_page_update_8035(&$sandbox) {
           'parent_field_name' => 'field_landing_page_component',
         ]);
         $new_paragraph->set('field_paragraph_link', $link_details[0]);
+        $field_paragraph_media = _tide_card_consolidation_get_value($paragraph, 'media');
+        if ($field_paragraph_media != NULL) {
+          $new_paragraph->field_paragraph_media->target_id = $field_paragraph_media;
+        }
         if ($link_details[1] == 'external') {
-          $field_paragraph_media = _tide_card_consolidation_get_value($paragraph, 'media');
           if ($field_paragraph_media == NULL) {
             $new_paragraph->{$display_field_names[$paragraph_type_mapping[$paragraph->bundle()]]}->value = 'noImage';
           }
           else {
-            $new_paragraph->field_paragraph_media->target_id = $field_paragraph_media;
             $new_paragraph->{$display_field_names[$paragraph_type_mapping[$paragraph->bundle()]]}->value = _get_card_display_style($paragraph);
           }
         }
@@ -1525,9 +1513,6 @@ function _tide_card_consolidation_get_value(Paragraph $paragraph, $field) {
       if ($paragraph->hasField('field_paragraph_summary') && !$paragraph->field_paragraph_summary->isEmpty()) {
         $result = $paragraph->field_paragraph_summary->value;
       }
-      elseif ($paragraph->hasField('field_paragraph_body') && !$paragraph->field_paragraph_body->isEmpty()) {
-        $result = $paragraph->field_paragraph_body->value;
-      }
       break;
 
     case "media":
@@ -1555,18 +1540,6 @@ function _get_card_display_style(Paragraph $paragraph) {
     case 'card_event':
     case 'card_event_auto':
       $result = 'thumbnail';
-      break;
-
-    case 'call_to_action':
-      if ($paragraph->field_paragraph_cta_style->isEmpty()) {
-        $result = 'noImage';
-      }
-      elseif ($paragraph->field_paragraph_cta_style->value == 'card') {
-        $result = 'profile';
-      }
-      else {
-        $result = 'featured';
-      }
       break;
   }
   return $result;

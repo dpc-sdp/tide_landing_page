@@ -31,7 +31,6 @@ function tide_landing_page_post_update_remove_old_paragraph_types() {
   $card_and_CTA = [
     'card_promotion',
     'card_promotion_auto',
-    'call_to_action',
     'card_event',
     'card_event_auto',
   ];
