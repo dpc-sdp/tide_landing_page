@@ -281,10 +281,11 @@ Feature: Fields for Landing Page content type
     And save screenshot
     And I select "thumbnail" from "field_landing_page_component[0][subform][field_promo_card_display_style]"
     And I wait for 5 seconds
+    # This field can be "seen" but not visible.
     And I see field "field_landing_page_component[0][subform][field_customise][value]"
     And save screenshot
 
-  @api @javascript @skippep
+  @api @javascript @skipped
   # TODO: This test must be rewritten to work with the new form UI.
   Scenario: The navigation card paragraph type has the expected fields.
     Given I am logged in as a user with the "create landing_page content" permission
@@ -300,5 +301,6 @@ Feature: Fields for Landing Page content type
     And save screenshot
     And I select "thumbnail" from "field_landing_page_component[0][subform][field_nav_card_display_style]"
     And I wait for 5 seconds
+    # This field can be "seen" but not visible.
     And I see field "field_landing_page_component[0][subform][field_customise][value]"
     And save screenshot
