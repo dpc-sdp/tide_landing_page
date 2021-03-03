@@ -219,15 +219,15 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
       }
       break;
   }
-  if ($paragraph_field_name == 'field_landing_page_component') {
+  if ($paragraph_field_name === 'field_landing_page_component') {
     $widget_state = WidgetBase::getWidgetState($element['#field_parents'], $paragraph_field_name, $form_state);
     $paragraph = $widget_state['paragraphs'][$element['#delta']]['entity'];
     $paragraph_type = $paragraph->bundle();
     // Add states for navigation and promotion card paragraph type fields.
-    if ($paragraph_type == 'navigation_card' || $paragraph_type == 'promotion_card') {
+    if ($paragraph_type === 'navigation_card' || $paragraph_type === 'promotion_card') {
       if (isset($element['subform']['field_paragraph_link'])) {
         // Custom description for link field.
-        $element['subform']['field_paragraph_link']['widget'][0]['uri']['#description'] = new TranslatableMarkup("Start typing the title of a piece of content to select it. You can also enter an internal path such as /node/add or an external URL such as http://example.com.");
+        $element['subform']['field_paragraph_link']['widget'][0]['uri']['#description'] = t("Start typing the title of a piece of content to select it. You can also enter an internal path such as /node/add or an external URL such as http://example.com.");
         // Custom validation based on the link field description.
         $element['subform']['field_paragraph_link']['widget'][0]['uri']['#element_validate'][] = [
           'Drupal\tide_landing_page\Validate\CardLink',
