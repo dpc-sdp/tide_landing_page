@@ -1691,12 +1691,12 @@ function _tide_landing_page_new_field_group_tabs(string $label, string $directio
  */
 function _tide_landing_page_new_field_group_tab(string $label, string $parent, array $settings = [], string $region = 'content', int $weight = 0, array $children = []) : array {
   return _tide_landing_page_new_field_group($label, 'tab', [
-      'description' => '',
-      'formatter' => 'closed',
-      'required_fields' => TRUE,
-      'id' => '',
-      'classes' => '',
-    ] + $settings, $region, $weight, $parent, $children);
+    'description' => '',
+    'formatter' => 'closed',
+    'required_fields' => TRUE,
+    'id' => '',
+    'classes' => '',
+  ] + $settings, $region, $weight, $parent, $children);
 }
 
 /**
