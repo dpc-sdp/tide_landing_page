@@ -8,7 +8,7 @@ id: node.landing_page.field_show_related_content
 field_name: field_show_related_content
 entity_type: node
 bundle: landing_page
-label: 'Show Related Content?'
+label: 'Show related content?'
 description: 'Check this box if you want to show Related Content for this page.'
 required: false
 translatable: false

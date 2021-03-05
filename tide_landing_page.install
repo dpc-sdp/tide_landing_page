@@ -1704,17 +1704,55 @@ function _tide_landing_page_new_field_group_tab(string $label, string $parent, a
  */
 function tide_landing_page_update_8036() {
   // Rename paragraph bundles.
-  $update_paragraph_labels = [
+  $paragraph_updates = [
+    'accordion' => [
+      'description' => t('Add a list of headings that can be clicked to show or hide content.'),
+    ],
+    'basic_text' => [
+      'description' => t('Use this block to add text and media to your page. Content sits in the middle of your page between header and footer elements.'),
+    ],
+    'call_to_action' => [
+      'description' => t('Prompt users to take action, like register for an e-newsletter. Add a title, description, image, link and call to action button.'),
+    ],
+    'card_keydates' => [
+      'description' => t('Add this card to feature important dates. Add a date, title, summary and link.'),
+    ],
+    'card_carousel' => [
+      'description' => t('Feature up to 9 recent news or events in a scrollable carousel. It allows you to add a title, date, summary and link.'),
+    ],
+    'complex_image' => [
+      'description' => t('Embed a complex image within a content page so users can access information in different formats. Users can access accessible data, view image in full screen or download the image.'),
+    ],
     'key_journeys' => t('Header links'),
+    'media_gallery' => [
+      'description' => t('Embed a scrollable carousel of images within a content page, once built in the Custom block library. Images can be viewed in full screen. Add a title and summary to each image.'),
+    ],
+    'navigation_card' => [
+      'description' => t('Create a tiled link to a page that allows users to navigate deeper into a topic. This is best used on a 2-column page layout.'),
+    ],
+    'promotion_card' => [
+      'description' => t('This card is best used on a 3-column page layout. Add a title, image, summary and link to an internal or external page.'),
+    ],
     'embedded_search_form' => t('Search banner'),
+    'embedded_webform' => [
+      'description' => t('Embed a Drupal form within a content page. Users can populate fields and submit their information.'),
+    ],
   ];
-  foreach ($update_paragraph_labels as $bundle => $label) {
+  foreach ($paragraph_updates as $bundle => $update) {
+    if (!is_array($update)) {
+      $update = ['label' => $update];
+    }
     /** @var \Drupal\paragraphs\ParagraphsTypeInterface $type */
     $type = ParagraphsType::load($bundle);
     if ($type) {
       $entity_type = $type->getEntityType();
-      $label_key = $entity_type->getKey('label');
-      $type->set($label_key, $label);
+      if (isset($update['label'])) {
+        $label_key = $entity_type->getKey('label');
+        $type->set($label_key, $update['label']);
+      }
+      if (isset($update['description'])) {
+        $type->set('description', $update['description']);
+      }
       $type->save();
     }
   }
@@ -1734,6 +1772,18 @@ function tide_landing_page_update_8036() {
       'label' => t('Header links'),
       'description' => t('Header links are displayed alongside the page title on introduction banner. They link to other critical pages.'),
     ],
+    'field_landing_page_hero_image' => [
+      'description' => t("Full-width background images display at the top of the page behind the page title. One image can be added and must be 1600px wide x 600px high. If a hero image is used, header links will not display."),
+    ],
+    'field_show_hero_image_caption' => [
+      'label' => t('Show Full-with background image caption'),
+    ],
+    'field_landing_page_hero_banner' => [
+      'label' => t('Call to action banner'),
+    ],
+    'field_featured_image' => [
+      'description' => t("Feature images don't display on this page. They display in featured card or navigation links to this page. Must be 496px high x 818px wide."),
+    ],
     'field_graphical_image' => [
       'label' => t('Top corner graphic'),
     ],
@@ -1752,6 +1802,15 @@ function tide_landing_page_update_8036() {
     ],
     'field_landing_page_component' => [
       'description' => t('<p>Add text, links, media and cards to build your page.</p>'),
+    ],
+    'field_show_table_of_content' => [
+      'label' => t('Show table of contents?'),
+    ],
+    'field_show_whats_next' => [
+      'label' => t("Show What's next?"),
+    ],
+    'field_show_site_section_nav' => [
+      'label' => t('Show Site-section navigation?'),
     ],
     'field_show_social_sharing' => [
       'label' => t('Social sharing'),
@@ -1829,8 +1888,7 @@ function tide_landing_page_update_8036() {
     ],
     // Page Campaign.
     'field_landing_page_c_primary' => ['weight' => -79],
-    'field_show_c_primary_caption'
-    => ['weight' => -78],
+    'field_show_c_primary_caption' => ['weight' => -78],
     'field_landing_page_c_secondary' => ['weight' => -75],
     // Content.
     'field_landing_page_component' => [
@@ -1903,7 +1961,7 @@ function tide_landing_page_update_8036() {
   ];
 
   // Header - Header add-on tab.
-  $field_group['group_header_addon'] = _tide_landing_page_new_field_group_tab('Header add-on',
+  $field_group['group_header_addon'] = _tide_landing_page_new_field_group_tab('Header extras',
     'group_section_header', [], 'content', -97);
   $field_group['group_header_addon']['children'] = [
     'field_landing_page_header',

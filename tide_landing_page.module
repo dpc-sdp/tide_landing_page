@@ -75,6 +75,9 @@ function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form
     'node_landing_page_edit_form',
     'node_landing_page_quick_node_clone_form',
   ])) {
+    if (isset($form['title']['widget'][0]['value']['#description'])) {
+      $form['title']['widget'][0]['value']['#description'] = t('Include a short unique title for your page and keywords.');
+    }
     // Change form layout.
     $form['#attached']['library'][] = 'tide_landing_page/landing_page_form';
     $form['#attributes']['class'][] = 'node-form-landing-page';
@@ -83,16 +86,16 @@ function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form
 
     // Change the styling of paragraph widgets.
     $paragraph_fields = [
-      'field_landing_page_header' => t('header add-on'),
-      'field_landing_page_component' => t('page content'),
+      'field_landing_page_header' => t('Header extra is currently blank.'),
+      'field_landing_page_component' => t('Page content is currently blank.'),
     ];
     foreach ($paragraph_fields as $paragraph_field => $component_name) {
       $form[$paragraph_field]['widget']['#attributes']['class'][] = 'node-landing-page-alternative-paragraph';
       if (isset($form[$paragraph_field]['widget']['#max_delta'])) {
         $max_delta = $form[$paragraph_field]['widget']['#max_delta'];
         if ($max_delta < 0 || !isset($form[$paragraph_field]['widget'][$max_delta])) {
-          $form[$paragraph_field]['widget']['#description'] = t('<h4><strong>No @component_name yet.</strong></strong></h4>',
-              ['@component_name' => $component_name]) . $form[$paragraph_field]['widget']['#description'];
+          $form[$paragraph_field]['widget']['#description'] = t('<h4><strong>@empty_component</strong></h4>',
+              ['@empty_component' => $component_name]) . $form[$paragraph_field]['widget']['#description'];
         }
       }
     }

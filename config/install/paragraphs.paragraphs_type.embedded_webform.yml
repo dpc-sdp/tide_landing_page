@@ -4,5 +4,5 @@ dependencies: {  }
 id: embedded_webform
 label: 'Form embed (Drupal)'
 icon_uuid: null
-description: ''
+description: 'Embed a Drupal form within a content page. Users can populate fields and submit their information.'
 behavior_plugins: {  }

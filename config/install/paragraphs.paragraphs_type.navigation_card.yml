@@ -5,5 +5,5 @@ id: navigation_card
 label: 'Navigation card'
 icon_uuid: null
 icon_default: null
-description: ''
+description: 'Create a tiled link to a page that allows users to navigate deeper into a topic. This is best used on a 2-column page layout. '
 behavior_plugins: {  }

@@ -24,7 +24,7 @@ Feature: Fields for Landing Page content type
     And I click on the horizontal tab "Customised Header"
 
     And I select the radio button "Call to action banner"
-    And I should see text matching "Hero banner"
+    And I should see text matching "Call to action banner"
     And I should see text matching "No Hero Banner with CTA added yet."
     And I should see the button "Add Hero banner with CTA" in the "content" region
 
@@ -35,7 +35,7 @@ Feature: Fields for Landing Page content type
     And the "#edit-field-bottom-graphical-image" element should contain "Bottom Corner Graphic"
     And I should see an "input#edit-field-bottom-graphical-image-entity-browser-target" element
 
-    And I click on the horizontal tab "Header add-on"
+    And I click on the horizontal tab "Header extras"
     And I should see text matching "HEADER COMPONENTS"
     And I press the "edit-field-landing-page-header-add-more-add-modal-form-area-add-more" button
     And I should see the button "Introduction banner"
@@ -58,7 +58,7 @@ Feature: Fields for Landing Page content type
     And I should see an "input#edit-field-featured-image-entity-browser-entity-browser-open-modal" element
 
     And I click on the horizontal tab "Page content"
-    And I see field "Show Table of Content?"
+    And I see field "Show table of contents?"
     And I should see an "input#edit-field-show-table-of-content-value" element
     And I should not see an "input#edit-field-show-table-of-content.required" element
 
@@ -85,19 +85,19 @@ Feature: Fields for Landing Page content type
 
     And I scroll selector "#edit-group-sidebar" into view
     And I click on the horizontal tab "Sidebar"
-    And I see field "Show Site-section Navigation?"
+    And I see field "Show Site-section navigation?"
     And I should see an "input#edit-field-landing-page-nav-title-0-value" element
     And I should not see an "input#edit-field-landing-page-nav-title-0-value.required" element
 
     And I click on the detail "Related links"
-    And I see field "Show Related Content?"
+    And I see field "Show related content?"
     And I should see an "input#edit-field-show-related-content-value" element
     And I should not see an "input#edit-field-show-related-content-value.required" element
     And I should see text matching "Related links"
     And I should see the button "Add Related links" in the "content" region
 
     And I click on the detail "What's next"
-    And I see field "Show what's next?"
+    And I see field "Show What's next?"
     And I should see an "input#edit-field-show-whats-next-value" element
     And I should not see an "input#edit-field-show-whats-next-value.required" element
     And I should see text matching "What's next"
@@ -156,7 +156,7 @@ Feature: Fields for Landing Page content type
     And I click on the horizontal tab "Customised Header"
 
     And I select the radio button "Call to action banner"
-    And I should see text matching "Hero banner"
+    And I should see text matching "Call to action banner"
     And I should see text matching "No Hero Banner with CTA added yet."
     And I should see the button "Add Hero banner with CTA" in the "content" region
 
@@ -167,7 +167,7 @@ Feature: Fields for Landing Page content type
     And the "#edit-field-bottom-graphical-image" element should contain "Bottom Corner Graphic"
     And I should see an "input#edit-field-bottom-graphical-image-entity-browser-target" element
 
-    And I click on the horizontal tab "Header add-on"
+    And I click on the horizontal tab "Header extras"
     And I should see text matching "HEADER COMPONENTS"
     And I press the "edit-field-landing-page-header-add-more-add-modal-form-area-add-more" button
     And I should see the button "Introduction banner"
@@ -189,8 +189,9 @@ Feature: Fields for Landing Page content type
     And the "#edit-field-featured-image" element should contain "Feature Image"
     And I should see an "input#edit-field-featured-image-entity-browser-entity-browser-open-modal" element
 
+    And I scroll selector "#edit-group-components" into view
     And I click on the horizontal tab "Page content"
-    And I see field "Show Table of Content?"
+    And I see field "Show table of contents?"
     And I should see an "input#edit-field-show-table-of-content-value" element
     And I should not see an "input#edit-field-show-table-of-content.required" element
 
@@ -222,19 +223,19 @@ Feature: Fields for Landing Page content type
 
     And I scroll selector "#edit-group-sidebar" into view
     And I click on the horizontal tab "Sidebar"
-    And I see field "Show Site-section Navigation?"
+    And I see field "Show Site-section navigation?"
     And I should see an "input#edit-field-landing-page-nav-title-0-value" element
     And I should not see an "input#edit-field-landing-page-nav-title-0-value.required" element
 
     And I click on the detail "Related links"
-    And I see field "Show Related Content?"
+    And I see field "Show related content?"
     And I should see an "input#edit-field-show-related-content-value" element
     And I should not see an "input#edit-field-show-related-content-value.required" element
     And I should see text matching "Related links"
     And I should see the button "Add Related links" in the "content" region
 
     And I click on the detail "What's next"
-    And I see field "Show what's next?"
+    And I see field "Show What's next?"
     And I should see an "input#edit-field-show-whats-next-value" element
     And I should not see an "input#edit-field-show-whats-next-value.required" element
     And I should see text matching "What's next"

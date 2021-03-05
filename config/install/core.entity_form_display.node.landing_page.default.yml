@@ -237,7 +237,7 @@ third_party_settings:
       region: content
       weight: -98
     group_header_addon:
-      label: 'Header add-on'
+      label: 'Header extras'
       parent_name: group_section_header
       children:
         - field_landing_page_header

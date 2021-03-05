@@ -10,7 +10,7 @@ field_name: field_featured_image
 entity_type: node
 bundle: landing_page
 label: 'Feature image'
-description: ''
+description: 'Feature images don''t display on this page. They display in promotion card or navigation card and links to this page. One image can be added and must be 496px high x 818px wide.'
 required: false
 translatable: true
 default_value: {  }

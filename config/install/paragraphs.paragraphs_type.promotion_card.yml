@@ -5,5 +5,5 @@ id: promotion_card
 label: 'Promotion card'
 icon_uuid: null
 icon_default: null
-description: ''
+description: 'This card is best used on a 3-column page layout. Add a title, image, summary and link to an internal or external page.'
 behavior_plugins: {  }

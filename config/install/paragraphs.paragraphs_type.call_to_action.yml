@@ -4,5 +4,5 @@ dependencies: {  }
 id: call_to_action
 label: 'Call to action'
 icon_uuid: null
-description: ''
+description: 'Prompt users to take action, like register for an e-newsletter. Add a title, description, image, link and call to action button.'
 behavior_plugins: {  }

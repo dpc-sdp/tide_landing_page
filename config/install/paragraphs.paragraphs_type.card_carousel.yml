@@ -4,5 +4,5 @@ dependencies: {  }
 id: card_carousel
 label: 'Card carousel'
 icon_uuid: null
-description: 'Featured cards for news and upcoming events.'
+description: 'Feature up to 9 recent news or events in a scrollable carousel. It allows you to add a title, date, summary and link.'
 behavior_plugins: {  }

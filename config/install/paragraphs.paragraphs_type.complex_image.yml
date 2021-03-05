@@ -4,5 +4,5 @@ dependencies: {  }
 id: complex_image
 label: 'Complex image'
 icon_uuid: null
-description: 'Provides images with source, caption, and data table.'
+description: 'Embed a complex image within a content page so users can access information in different formats. Users can access accessible data, view image in full screen or download the image.'
 behavior_plugins: {  }

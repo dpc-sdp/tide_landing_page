@@ -4,5 +4,5 @@ dependencies: {  }
 id: media_gallery
 label: 'Image gallery'
 icon_uuid: null
-description: ''
+description: 'Embed a scrollable carousel of images within a content page, once built in the Custom block library. Images can be viewed in full screen. Add a title and summary to each image.'
 behavior_plugins: {  }

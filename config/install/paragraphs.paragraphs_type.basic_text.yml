@@ -4,5 +4,5 @@ dependencies: {  }
 id: basic_text
 label: 'Basic text'
 icon_uuid: null
-description: 'A paragraph type with a WYSIWYG body.'
+description: 'Use this block to add text and media to your page. Content sits in the middle of your page between header and footer elements.'
 behavior_plugins: {  }
