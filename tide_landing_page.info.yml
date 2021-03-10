@@ -15,7 +15,6 @@ dependencies:
   - drupal:telephone
   - drupal:user
   - dpc-sdp:tide_core
-  - dpc-sdp:tide_event
   - dpc-sdp:tide_media
   - address:address
   - entity_reference_revisions:entity_reference_revisions
