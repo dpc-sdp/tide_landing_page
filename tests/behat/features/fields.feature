@@ -295,7 +295,6 @@ Feature: Fields for Landing Page content type
     And I select "Ascending" from "Sort order"
 
     Then I click "Layout Options"
-    And I fill in "Minimum number of cards to display" with "2"
     And I fill in "Number of cards shown per page" with "9"
     And I select the radio button "Show 'no results' message"
 
@@ -317,9 +316,8 @@ Feature: Fields for Landing Page content type
     And the JSON node "included[0].attributes.field_no_result_behaviour" should be equal to "no_results_message"
     And the JSON node "included[0].attributes.field_no_results_message" should be equal to "There are currently no results"
 
-    And the JSON node "included[0].attributes.field_listing_display_type" should be equal to "grid"
+    And the JSON node "included[0].attributes.field_listing_display_type" should be equal to "carousel"
     And the JSON node "included[0].attributes.field_listings_per_page" should be equal to "9"
-    And the JSON node "included[0].attributes.field_listings_minimum" should be equal to "2"
 
     And the JSON node "included[0].attributes.field_paragraph_auto_listing.filter_operator" should be equal to "OR"
 
