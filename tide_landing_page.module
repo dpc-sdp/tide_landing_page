@@ -214,11 +214,13 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
         ];
       }
 
-      foreach ($element['subform']['field_individual_cards']['widget'] as $key => $value) {
-        if (is_numeric($key)) {
-          $dependee_field_name = 'field_paragraph_link';
-          $selector = sprintf(':input[name^="%s[%d][subform][field_individual_cards][%d][subform][%s][0][uri]"]', $paragraph_field_name, $element['#delta'], $key, $dependee_field_name);
-          _tide_landing_page_conditional_display_navigation_card($paragraph_field_name, $element['subform']['field_individual_cards']['widget'][$key], $selector);
+      if (isset($element['subform']['field_individual_cards']) && is_array($element['subform']['field_individual_cards'])) {
+        foreach ($element['subform']['field_individual_cards']['widget'] as $key => $value) {
+          if (is_numeric($key)) {
+            $dependee_field_name = 'field_paragraph_link';
+            $selector = sprintf(':input[name^="%s[%d][subform][field_individual_cards][%d][subform][%s][0][uri]"]', $paragraph_field_name, $element['#delta'], $key, $dependee_field_name);
+            _tide_landing_page_conditional_display_navigation_card($paragraph_field_name, $element['subform']['field_individual_cards']['widget'][$key], $selector);
+          }
         }
       }
     }
