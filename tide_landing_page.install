@@ -1366,48 +1366,50 @@ function tide_landing_page_update_8034() {
  */
 function tide_landing_page_update_8035(&$sandbox) {
   if (!isset($sandbox['total'])) {
-    $paragraph_query = \Drupal::entityTypeManager()
-      ->getStorage('paragraph')
-      ->getQuery();
-    $paragraph_query->condition('parent_type', 'node')
-      ->condition('parent_field_name', 'field_landing_page_component');
-    $or = $paragraph_query->orConditionGroup()
-      ->condition('type', 'card_navigation')
-      ->condition('type', 'card_navigation_auto')
-      ->condition('type', 'card_navigation_featured')
-      ->condition('type', 'card_navigation_featured_auto')
-      ->condition('type', 'card_promotion')
-      ->condition('type', 'card_promotion_auto')
-      ->condition('type', 'card_event')
-      ->condition('type', 'card_event_auto');
-    $paragraph_query->condition($or);
-    $count = $paragraph_query->count()->execute();
+    $query = \Drupal::database()->select('node_field_data', 'n');
+    $query->distinct();
+    $query->innerJoin('paragraphs_item_field_data', 'p', 'p.parent_id = n.nid');
+    $query->condition('p.parent_type', 'node', '=');
+    $query->condition('p.parent_field_name', 'field_landing_page_component', '=');
+    $or = $query->orConditionGroup();
+    $or->condition('p.type', 'card_navigation', '=');
+    $or->condition('p.type', 'card_navigation_auto', '=');
+    $or->condition('p.type', 'card_navigation_featured', '=');
+    $or->condition('p.type', 'card_navigation_featured_auto', '=');
+    $or->condition('p.type', 'card_promotion', '=');
+    $or->condition('p.type', 'card_promotion_auto', '=');
+    $or->condition('p.type', 'card_event', '=');
+    $or->condition('p.type', 'card_event_auto', '=');
+    $query->condition($or);
+    $query->fields('n', ['nid']);
+    $count = $query->countQuery()->execute()->fetchField();
     $sandbox['total'] = $count;
     $sandbox['current'] = 0;
     $sandbox['processed'] = 0;
     $sandbox['#finished'] = $count ? 0 : 1;
   }
+
   $batch_size = 50;
-  $paragraph_query = \Drupal::entityTypeManager()
-    ->getStorage('paragraph')
-    ->getQuery();
-  $or = $paragraph_query->orConditionGroup()
-    ->condition('type', 'card_navigation')
-    ->condition('type', 'card_navigation_auto')
-    ->condition('type', 'card_navigation_featured')
-    ->condition('type', 'card_navigation_featured_auto')
-    ->condition('type', 'card_promotion')
-    ->condition('type', 'card_promotion_auto')
-    ->condition('type', 'card_event')
-    ->condition('type', 'card_event_auto');
-  $paragraph_query->condition($or);
-  $paragraph_query->condition('parent_type', 'node')
-    ->condition('parent_field_name', 'field_landing_page_component')
-    ->condition('id', $sandbox['current'], '>')
-    ->sort('id', 'ASC')
+  $query = \Drupal::database()->select('node_field_data', 'n');
+  $query->distinct();
+  $query->innerJoin('paragraphs_item_field_data', 'p', 'p.parent_id = n.nid');
+  $query->condition('p.parent_type', 'node', '=');
+  $query->condition('p.parent_field_name', 'field_landing_page_component', '=');
+  $or = $query->orConditionGroup();
+  $or->condition('p.type', 'card_navigation', '=');
+  $or->condition('p.type', 'card_navigation_auto', '=');
+  $or->condition('p.type', 'card_navigation_featured', '=');
+  $or->condition('p.type', 'card_navigation_featured_auto', '=');
+  $or->condition('p.type', 'card_promotion', '=');
+  $or->condition('p.type', 'card_promotion_auto', '=');
+  $or->condition('p.type', 'card_event', '=');
+  $or->condition('p.type', 'card_event_auto', '=');
+  $query->condition($or);
+  $query->fields('n', ['nid']);
+  $query = $query->condition('nid', $sandbox['current'], '>')
+    ->orderBy('nid', 'ASC')
     ->range(0, $batch_size);
-  $paragraph_ids = $paragraph_query->execute();
-  $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+  $node_ids = $query->execute()->fetchAll();
   $paragraph_type_mapping = [
     'card_navigation' => 'navigation_card',
     'card_navigation_auto' => 'navigation_card',
@@ -1418,74 +1420,80 @@ function tide_landing_page_update_8035(&$sandbox) {
     'card_event' => 'promotion_card',
     'card_event_auto' => 'promotion_card',
   ];
+  $old_paragraphs_types = [
+    'card_navigation',
+    'card_navigation_auto',
+    'card_navigation_featured',
+    'card_navigation_featured_auto',
+    'card_promotion',
+    'card_promotion_auto',
+    'card_event',
+    'card_event_auto',
+  ];
   $display_field_names = [
     'navigation_card' => 'field_nav_card_display_style',
     'promotion_card' => 'field_promo_card_display_style',
   ];
-  foreach ($paragraph_ids as $paragraph_id) {
-    $sandbox['current'] = $paragraph_id;
-    $paragraph = Paragraph::load($paragraph_id);
-    $nodes = $node_storage->loadByProperties(['field_landing_page_component' => $paragraph->id()]);
-    if (empty($nodes) && in_array($paragraph->bundle(), [
-      'card_navigation_featured_auto',
-      'card_navigation_featured',
-      'card_navigation_auto',
-      'card_navigation',
-    ])) {
-      $paragraph->delete();
-      $sandbox['processed']++;
-      continue;
-    }
-    if (count($nodes) > 0) {
-      foreach ($nodes as $node) {
-        // If the link is empty, delete the paragraph.
-        $link_details = _get_link_value($paragraph);
-        $values = $node->get('field_landing_page_component')->getValue();
-        if (empty($link_details)) {
-          $key = array_search($paragraph->id(), array_column($values, 'target_id'));
-          $node->get('field_landing_page_component')->removeItem($key);
-          $node->setNewRevision(FALSE);
-          $node->save();
+  foreach ($node_ids as $node_id) {
+    $nid = (int) $node_id->nid;
+    $sandbox['current'] = $nid;
+    $node = Node::load($nid);
+    $paragraphs = $node->get('field_landing_page_component')
+      ->referencedEntities();
+    /** @var Paragraph $paragraph */
+    foreach ($paragraphs as $paragraph) {
+      $node_values = $node->get('field_landing_page_component')->getValue();
+      if (!in_array($paragraph->bundle(), $old_paragraphs_types)) {
+        continue;
+      }
+      $link_details = _get_link_value($paragraph);
+      if (empty($link_details)) {
+        $key = array_search($paragraph->id(), array_column($node_values, 'target_id'));
+        if (!$key) {
           continue;
         }
-        $new_paragraph = Paragraph::create([
-          'type' => $paragraph_type_mapping[$paragraph->bundle()],
-          'parent_id' => $node->id(),
-          'parent_type' => 'node',
-          'parent_field_name' => 'field_landing_page_component',
-        ]);
-        $new_paragraph->set('field_paragraph_link', $link_details[0]);
-        $field_paragraph_media = _tide_card_consolidation_get_value($paragraph, 'media');
-        if ($field_paragraph_media != NULL) {
-          $new_paragraph->field_paragraph_media->target_id = $field_paragraph_media;
-        }
-        if ($link_details[1] == 'external') {
-          if ($field_paragraph_media == NULL) {
-            $new_paragraph->{$display_field_names[$paragraph_type_mapping[$paragraph->bundle()]]}->value = 'noImage';
-          }
-          else {
-            $new_paragraph->{$display_field_names[$paragraph_type_mapping[$paragraph->bundle()]]}->value = _get_card_display_style($paragraph);
-          }
-        }
-        if ($link_details[1] == 'internal') {
-          $new_paragraph->{$display_field_names[$paragraph_type_mapping[$paragraph->bundle()]]}->value = _get_card_display_style($paragraph);
-        }
-        $field_paragraph_title = _tide_card_consolidation_get_value($paragraph, 'title');
-        if ($field_paragraph_title) {
-          $new_paragraph->field_paragraph_title->value = $field_paragraph_title;
-        }
-        $field_paragraph_summary = _tide_card_consolidation_get_value($paragraph, 'summary');
-        if ($field_paragraph_summary) {
-          $new_paragraph->field_paragraph_summary->value = $field_paragraph_summary;
-        }
-        $new_paragraph->save();
-        $key = array_search($paragraph->id(), array_column($values, 'target_id'));
-        $values[$key]['target_id'] = $new_paragraph->id();
-        $values[$key]['target_revision_id'] = $new_paragraph->getRevisionId();
-        $node->set('field_landing_page_component', $values);
+        $node->get('field_landing_page_component')->removeItem($key);
         $node->setNewRevision(FALSE);
         $node->save();
+        continue;
       }
+      $new_paragraph = Paragraph::create([
+        'type' => $paragraph_type_mapping[$paragraph->bundle()],
+        'parent_id' => $node->id(),
+        'parent_type' => 'node',
+        'parent_field_name' => 'field_landing_page_component',
+      ]);
+      $new_paragraph->set('field_paragraph_link', $link_details[0]);
+      $field_paragraph_media = _tide_card_consolidation_get_value($paragraph, 'media');
+      if ($field_paragraph_media != NULL) {
+        $new_paragraph->field_paragraph_media->target_id = $field_paragraph_media;
+      }
+      if ($link_details[1] == 'external') {
+        if ($field_paragraph_media == NULL) {
+          $new_paragraph->{$display_field_names[$paragraph_type_mapping[$paragraph->bundle()]]}->value = 'noImage';
+        }
+        else {
+          $new_paragraph->{$display_field_names[$paragraph_type_mapping[$paragraph->bundle()]]}->value = _get_card_display_style($paragraph);
+        }
+      }
+      if ($link_details[1] == 'internal') {
+        $new_paragraph->{$display_field_names[$paragraph_type_mapping[$paragraph->bundle()]]}->value = _get_card_display_style($paragraph);
+      }
+      $field_paragraph_title = _tide_card_consolidation_get_value($paragraph, 'title');
+      if ($field_paragraph_title) {
+        $new_paragraph->field_paragraph_title->value = $field_paragraph_title;
+      }
+      $field_paragraph_summary = _tide_card_consolidation_get_value($paragraph, 'summary');
+      if ($field_paragraph_summary) {
+        $new_paragraph->field_paragraph_summary->value = $field_paragraph_summary;
+      }
+      $new_paragraph->save();
+      $key = array_search($paragraph->id(), array_column($node_values, 'target_id'));
+      $values[$key]['target_id'] = $new_paragraph->id();
+      $values[$key]['target_revision_id'] = $new_paragraph->getRevisionId();
+      $node->set('field_landing_page_component', $values);
+      $node->setNewRevision(FALSE);
+      $node->save();
       $paragraph->delete();
     }
     $sandbox['processed']++;
@@ -1558,7 +1566,7 @@ function _get_link_value(Paragraph $paragraph) {
         $uri = $paragraph->field_paragraph_link->uri;
         $path_details = $paragraph->get('field_paragraph_link')->getValue();
         if (!UrlHelper::isExternal($uri)) {
-          if (str_contains($uri, 'internal:/')) {
+          if (strpos($uri, 'internal:/node/') !== FALSE) {
             $uri = str_replace('internal:/', 'entity:', $uri);
             $path_details[0]['uri'] = $uri;
           }
@@ -1592,7 +1600,7 @@ function _get_link_value(Paragraph $paragraph) {
         $uri = $paragraph->field_paragraph_cta->uri;
         $path_details = $paragraph->get('field_paragraph_cta')->getValue();
         if (!UrlHelper::isExternal($uri)) {
-          if (str_contains($uri, 'internal:/')) {
+          if (strpos($uri, 'internal:/node/') !== FALSE) {
             $uri = str_replace('internal:/', 'entity:', $uri);
             $path_details[0]['uri'] = $uri;
           }
