@@ -1503,6 +1503,62 @@ function tide_landing_page_update_8035(&$sandbox) {
 }
 
 /**
+ * Deletes all old cards.
+ */
+function tide_landing_page_update_8036(&$sandbox) {
+  if (!isset($sandbox['total'])) {
+    $paragraph_query = \Drupal::entityTypeManager()
+      ->getStorage('paragraph')
+      ->getQuery();
+    $paragraph_query->condition('parent_type', 'node')
+      ->condition('parent_field_name', 'field_landing_page_component');
+    $or = $paragraph_query->orConditionGroup()
+      ->condition('type', 'card_navigation')
+      ->condition('type', 'card_navigation_auto')
+      ->condition('type', 'card_navigation_featured')
+      ->condition('type', 'card_navigation_featured_auto')
+      ->condition('type', 'card_promotion')
+      ->condition('type', 'card_promotion_auto')
+      ->condition('type', 'card_event')
+      ->condition('type', 'card_event_auto');
+    $paragraph_query->condition($or);
+    $count = $paragraph_query->count()->execute();
+    $sandbox['total'] = $count;
+    $sandbox['current'] = 0;
+    $sandbox['processed'] = 0;
+    $sandbox['#finished'] = $count ? 0 : 1;
+  }
+  $batch_size = 50;
+  $paragraphStorage = \Drupal::entityTypeManager()
+    ->getStorage('paragraph');
+  $paragraph_query = $paragraphStorage->getQuery();
+  $or = $paragraph_query->orConditionGroup()
+    ->condition('type', 'card_navigation')
+    ->condition('type', 'card_navigation_auto')
+    ->condition('type', 'card_navigation_featured')
+    ->condition('type', 'card_navigation_featured_auto')
+    ->condition('type', 'card_promotion')
+    ->condition('type', 'card_promotion_auto')
+    ->condition('type', 'card_event')
+    ->condition('type', 'card_event_auto');
+  $paragraph_query->condition($or);
+  $paragraph_query->condition('parent_type', 'node')
+    ->condition('parent_field_name', 'field_landing_page_component')
+    ->condition('id', $sandbox['current'], '>')
+    ->sort('id', 'ASC')
+    ->range(0, $batch_size);
+  $paragraph_ids = $paragraph_query->execute();
+  if ($paragraph_ids) {
+    foreach ($paragraph_ids as $paragraph_id) {
+      Paragraph::load($paragraph_id)->delete();
+      $sandbox['processed']++;
+    }
+  }
+  $sandbox['#finished'] = $sandbox['total'] ? $sandbox['processed'] / $sandbox['total'] : 1;
+  $sandbox['#finished'] = $sandbox['#finished'] > 1 ? 1 : $sandbox['#finished'];
+}
+
+/**
  * Helper function to get values.
  */
 function _tide_card_consolidation_get_value(Paragraph $paragraph, $field) {
