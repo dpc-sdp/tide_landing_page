@@ -1389,7 +1389,6 @@ function tide_landing_page_update_8035(&$sandbox) {
     $sandbox['#finished'] = $count ? 0 : 1;
   }
   _tide_landing_page_cli_print(sprintf("completed %d of %d", $count, $sandbox['total']));
-  
   $batch_size = 50;
   $paragraph_query = \Drupal::entityTypeManager()
     ->getStorage('paragraph')
@@ -1493,7 +1492,7 @@ function tide_landing_page_update_8035(&$sandbox) {
         $node->save();
         _tide_landing_page_cli_print(sprintf(" - added new paragraph to node %d", $node->id()));
       }
-        _tide_landing_page_cli_print(sprintf(" - deleting obsolete paragraph %d", $paragraph->id()));
+      _tide_landing_page_cli_print(sprintf(" - deleting obsolete paragraph %d", $paragraph->id()));
       $paragraph->delete();
     }
     $sandbox['processed']++;
