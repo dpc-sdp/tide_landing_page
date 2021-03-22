@@ -1387,7 +1387,7 @@ function tide_landing_page_update_8035(&$sandbox) {
     $sandbox['processed'] = 0;
     $sandbox['#finished'] = $count ? 0 : 1;
   }
-  $batch_size = 50;
+  $batch_size = 100;
   $paragraph_query = \Drupal::entityTypeManager()
     ->getStorage('paragraph')
     ->getQuery();
