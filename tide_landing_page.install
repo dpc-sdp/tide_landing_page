@@ -1365,6 +1365,7 @@ function tide_landing_page_update_8034() {
  * Updates cards.
  */
 function tide_landing_page_update_8035(&$sandbox) {
+  _tide_landing_page_cli_print("starting iteration");
   if (!isset($sandbox['total'])) {
     $paragraph_query = \Drupal::entityTypeManager()
       ->getStorage('paragraph')
@@ -1387,6 +1388,8 @@ function tide_landing_page_update_8035(&$sandbox) {
     $sandbox['processed'] = 0;
     $sandbox['#finished'] = $count ? 0 : 1;
   }
+  _tide_landing_page_cli_print(sprintf("completed %d of %d", $count, $sandbox['total']));
+  
   $batch_size = 50;
   $paragraph_query = \Drupal::entityTypeManager()
     ->getStorage('paragraph')
@@ -1432,6 +1435,7 @@ function tide_landing_page_update_8035(&$sandbox) {
       'card_navigation_auto',
       'card_navigation',
     ])) {
+      _tide_landing_page_cli_print(sprintf(" - deleting paragraph %d", $paragraph->id()));
       $paragraph->delete();
       $sandbox['processed']++;
       continue;
@@ -1445,6 +1449,7 @@ function tide_landing_page_update_8035(&$sandbox) {
           $key = array_search($paragraph->id(), array_column($values, 'target_id'));
           $node->get('field_landing_page_component')->removeItem($key);
           $node->setNewRevision(FALSE);
+          _tide_landing_page_cli_print(sprintf(" - removing empty paragraph from node %d", $node->id()));
           $node->save();
           continue;
         }
@@ -1479,13 +1484,16 @@ function tide_landing_page_update_8035(&$sandbox) {
           $new_paragraph->field_paragraph_summary->value = $field_paragraph_summary;
         }
         $new_paragraph->save();
+        _tide_landing_page_cli_print(sprintf(" - created paragraph %d", $new_paragraph->id()));
         $key = array_search($paragraph->id(), array_column($values, 'target_id'));
         $values[$key]['target_id'] = $new_paragraph->id();
         $values[$key]['target_revision_id'] = $new_paragraph->getRevisionId();
         $node->set('field_landing_page_component', $values);
         $node->setNewRevision(FALSE);
         $node->save();
+        _tide_landing_page_cli_print(sprintf(" - added new paragraph to node %d", $node->id()));
       }
+        _tide_landing_page_cli_print(sprintf(" - deleting obsolete paragraph %d", $paragraph->id()));
       $paragraph->delete();
     }
     $sandbox['processed']++;
@@ -1603,4 +1611,13 @@ function _get_link_value(Paragraph $paragraph) {
       break;
   }
   return $path_details;
+}
+
+/**
+ * Helper function to print output to the CLI during update hooks.
+ */
+function _tide_landing_page_cli_print($message) {
+  if (function_exists('drush_print')) {
+    drush_print($message);
+  }
 }
