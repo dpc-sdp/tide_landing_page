@@ -11,11 +11,10 @@
  */
 
 /**
- * Alter the card_link_enhancer doUndoTransform provided in \Drupal\tide_landing_page\Plugin\jsonapi\FieldEnhancer.
+ * Alter the card_link_enhancer doUndoTransform.
  *
  * @param object $data
  *   The JSON data.
- * 
  * @param Shaper\Util\Context $context
  *   To manage contextual conditions.
  */
