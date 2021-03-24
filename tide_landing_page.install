@@ -1365,6 +1365,9 @@ function tide_landing_page_update_8034() {
  * Updates cards.
  */
 function tide_landing_page_update_8035(&$sandbox) {
+  if (!getenv("TIDE_LANDING_PAGE_RUN_8035")) {
+    return;
+  }
   if (!isset($sandbox['total'])) {
     $paragraph_query = \Drupal::entityTypeManager()
       ->getStorage('paragraph')
