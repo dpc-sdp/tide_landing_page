@@ -11,6 +11,9 @@ use Drupal\paragraphs\Entity\ParagraphsType;
  * Removes old paragraph types.
  */
 function tide_landing_page_post_update_remove_old_paragraph_types() {
+  if (getenv("LAGOON_ENVIRONMENT_TYPE") != 'production') {
+    return;
+  }
   $paragraph_types = [
     'card_navigation_featured_auto',
     'card_navigation_featured',
