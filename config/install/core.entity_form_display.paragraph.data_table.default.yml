@@ -1,0 +1,37 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.data_table.field_number_of_columns
+    - field.field.paragraph.data_table.field_number_of_rows
+    - field.field.paragraph.data_table.field_row_oriented_table
+    - paragraphs.paragraphs_type.data_table
+id: paragraph.data_table.default
+targetEntityType: paragraph
+bundle: data_table
+mode: default
+content:
+  field_number_of_columns:
+    weight: 2
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_number_of_rows:
+    weight: 1
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_row_oriented_table:
+    weight: 0
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_row_oriented_table
+    - paragraphs.paragraphs_type.data_table
+id: paragraph.data_table.field_row_oriented_table
+field_name: field_row_oriented_table
+entity_type: paragraph
+bundle: data_table
+label: 'Row oriented'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
