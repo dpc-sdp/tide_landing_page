@@ -92,15 +92,9 @@ resourceFields:
     enhancer:
       id: ''
     disabled: false
-  field_number_of_columns:
-    fieldName: field_number_of_columns
-    publicName: field_number_of_columns
-    enhancer:
-      id: ''
-    disabled: false
-  field_number_of_rows:
-    fieldName: field_number_of_rows
-    publicName: field_number_of_rows
+  field_data_table_content:
+    fieldName: field_data_table_content
+    publicName: field_data_table_content
     enhancer:
       id: ''
     disabled: false

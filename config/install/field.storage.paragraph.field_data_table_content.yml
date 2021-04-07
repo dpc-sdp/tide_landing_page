@@ -3,14 +3,13 @@ status: true
 dependencies:
   module:
     - paragraphs
-id: paragraph.field_number_of_rows
-field_name: field_number_of_rows
+    - tablefield
+id: paragraph.field_data_table_content
+field_name: field_data_table_content
 entity_type: paragraph
-type: integer
-settings:
-  unsigned: false
-  size: normal
-module: core
+type: tablefield
+settings: {  }
+module: tablefield
 locked: false
 cardinality: 1
 translatable: true

@@ -104,6 +104,7 @@ function tide_landing_page_update_dependencies() {
   $dependencies['tide_landing_page'][8015] = ['system' => 8805];
   $dependencies['tide_landing_page'][8016] = ['system' => 8805];
   $dependencies['tide_landing_page'][8032] = ['tide_core' => 8037];
+  $dependencies['tide_landing_page'][8036] = ['tide_core' => 8045];
 
   return $dependencies;
 }
@@ -1614,11 +1615,9 @@ function _get_link_value(Paragraph $paragraph) {
 function tide_landing_page_update_8036() {
   $configs = [
     'paragraphs.paragraphs_type.data_table' => 'paragraphs_type',
-    'field.storage.paragraph.field_number_of_columns' => 'field_storage_config',
-    'field.storage.paragraph.field_number_of_rows' => 'field_storage_config',
+    'field.storage.paragraph.field_data_table_content' => 'field_storage_config',
     'field.storage.paragraph.field_row_oriented_table' => 'field_storage_config',
-    'field.field.paragraph.data_table.field_number_of_columns' => 'field_config',
-    'field.field.paragraph.data_table.field_number_of_rows' => 'field_config',
+    'field.field.paragraph.data_table.field_data_table_content' => 'field_config',
     'field.field.paragraph.data_table.field_row_oriented_table' => 'field_config',
     'core.entity_view_display.paragraph.data_table.default' => 'entity_view_display',
     'core.entity_form_display.paragraph.data_table.default' => 'entity_form_display',
