@@ -1828,9 +1828,6 @@ function tide_landing_page_update_8039() {
  * Updates cards.
  */
 function tide_landing_page_update_8040(&$sandbox) {
-  if (getenv("LAGOON_ENVIRONMENT_TYPE") != 'production') {
-    return;
-  }
   if (!isset($sandbox['total'])) {
     $paragraph_query = \Drupal::entityTypeManager()
       ->getStorage('paragraph')
