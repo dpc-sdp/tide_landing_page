@@ -1366,6 +1366,9 @@ function tide_landing_page_update_8034() {
  * Updates cards.
  */
 function tide_landing_page_update_8035(&$sandbox) {
+  if (getenv("LAGOON_ENVIRONMENT_TYPE") != 'production') {
+    return;
+  }
   if (!isset($sandbox['total'])) {
     $paragraph_query = \Drupal::entityTypeManager()
       ->getStorage('paragraph')
@@ -1559,7 +1562,7 @@ function _get_link_value(Paragraph $paragraph) {
         $uri = $paragraph->field_paragraph_link->uri;
         $path_details = $paragraph->get('field_paragraph_link')->getValue();
         if (!UrlHelper::isExternal($uri)) {
-          if (str_contains($uri, 'internal:/')) {
+          if (strpos($uri, 'internal:/node/') !== FALSE) {
             $uri = str_replace('internal:/', 'entity:', $uri);
             $path_details[0]['uri'] = $uri;
           }
@@ -1593,7 +1596,7 @@ function _get_link_value(Paragraph $paragraph) {
         $uri = $paragraph->field_paragraph_cta->uri;
         $path_details = $paragraph->get('field_paragraph_cta')->getValue();
         if (!UrlHelper::isExternal($uri)) {
-          if (str_contains($uri, 'internal:/')) {
+          if (strpos($uri, 'internal:/node/') !== FALSE) {
             $uri = str_replace('internal:/', 'entity:', $uri);
             $path_details[0]['uri'] = $uri;
           }
