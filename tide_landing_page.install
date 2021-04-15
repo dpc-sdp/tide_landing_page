@@ -93,6 +93,8 @@ function tide_landing_page_install() {
       $config->set('bundles', $bundles)->save();
     }
   }
+
+  tide_landing_page_update_8037();
 }
 
 /**
@@ -1708,9 +1710,6 @@ function _tide_landing_page_new_field_group_tab(string $label, string $parent, a
 function tide_landing_page_update_8036() {
   // Rename paragraph bundles.
   $paragraph_updates = [
-    'accordion' => [
-      'description' => t('Add a list of headings that can be clicked to show or hide content.'),
-    ],
     'basic_text' => [
       'description' => t('Use this block to add text and media to your page. Content sits in the middle of your page between header and footer elements.'),
     ],
@@ -1739,6 +1738,9 @@ function tide_landing_page_update_8036() {
     'embedded_search_form' => t('Search banner'),
     'embedded_webform' => [
       'description' => t('Embed a Drupal form within a content page. Users can populate fields and submit their information.'),
+    ],
+    'form_embed_openforms' => [
+      'description' => t('Embed an OpenForms form within a content page. Users can populate fields and submit their information.'),
     ],
   ];
   foreach ($paragraph_updates as $bundle => $update) {
@@ -2110,4 +2112,28 @@ function tide_landing_page_update_8036() {
   }
 
   $form_display->save();
+}
+
+/**
+ * Change icon of paragraph types.
+ */
+function tide_landing_page_update_8037() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $icon_dir = drupal_get_path('module', 'tide_landing_page') . DIRECTORY_SEPARATOR . 'icons';
+
+  $paragraphs = [
+    'basic_text',
+    'card_carousel',
+    'card_keydates',
+    'complex_image',
+    'embedded_webform',
+    'form_embed_openforms',
+    'media_gallery',
+    'navigation_card',
+    'promotion_card',
+  ];
+  foreach ($paragraphs as $paragraph_type_id) {
+    $icon_filename = $icon_dir . DIRECTORY_SEPARATOR . $paragraph_type_id . '.svg';
+    _tide_set_paragraph_type_icon($paragraph_type_id, $icon_filename);
+  }
 }

@@ -1,8 +1,8 @@
 langcode: en
 status: true
-dependencies: {  }
 id: media_gallery
 label: 'Image gallery'
-icon_uuid: null
+icon_uuid: a6e63df6-95f1-4f26-a0b4-87f9ad96d0cb
+icon_default: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjgiIGhlaWdodD0iNzciIHZpZXdCb3g9IjAgMCA2OCA3NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3LjM3MTkiIGhlaWdodD0iNzYuOTA1NyIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeD0iMTQuOTk4OCIgeT0iNyIgd2lkdGg9IjM4IiBoZWlnaHQ9IjM1IiBmaWxsPSIjRTBFMEUwIi8+CjxwYXRoIGQ9Ik0xMC43MTczIDI5TDYuOTk5OTQgMjUuNUwxMC43MTczIDIyIiBzdHJva2U9IiNFMEUwRTAiIHN0cm9rZS13aWR0aD0iMiIvPgo8cGF0aCBkPSJNNTUuOTk5NSAyMkw1OS43MTY5IDI1LjVMNTUuOTk5NSAyOSIgc3Ryb2tlPSIjRTBFMEUwIiBzdHJva2Utd2lkdGg9IjIiLz4KPHBhdGggZD0iTTQzIDEyVjE1SDQ2IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiLz4KPHBhdGggZD0iTTQ5IDEzTDQ5IDEwTDQ2IDEwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+Cg=='
 description: 'Embed a scrollable carousel of images within a content page, once built in the Custom block library. Images can be viewed in full screen. Add a title and summary to each image.'
 behavior_plugins: {  }

@@ -21,19 +21,6 @@
   display:none;
 }
 
-.paragraphs-add-dialog {
-  max-height: 600px !important;
-  width: 800px !important;
-  max-width: 800px !important;
-  overflow: scroll;
-}
-
-.paragraphs-add-dialog .paragraphs-add-dialog-list {
-  display: flex;
-  flex-flow: column wrap;
-  height: 600px;
-}
-
 /* Custom css for navigation and promotion card paragraph type fields. */
 .paragraph-type--navigation-card .summary-message-group,
 .paragraph-type--navigation-card .customise-field-group,

@@ -1,8 +1,8 @@
 langcode: en
 status: true
-dependencies: {  }
 id: card_carousel
 label: 'Card carousel'
-icon_uuid: null
+icon_uuid: 9531c799-6f87-497c-9447-727ad4afdc9b
+icon_default: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjgiIGhlaWdodD0iNzciIHZpZXdCb3g9IjAgMCA2OCA3NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3LjM3MTkiIGhlaWdodD0iNzYuOTA1NyIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeD0iMTUiIHk9IjEwIiB3aWR0aD0iMzgiIGhlaWdodD0iMjkiIGZpbGw9IiNFMEUwRTAiLz4KPHBhdGggZD0iTTEwLjcxODggMjhMNy4wMDE0MSAyNC41TDEwLjcxODggMjEiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxwYXRoIGQ9Ik01NiAyMUw1OS43MTczIDI0LjVMNTYgMjgiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxsaW5lIHgxPSIxNSIgeTE9IjQ5LjUiIHgyPSI1MyIgeTI9IjQ5LjUiIHN0cm9rZT0iI0UwRTBFMCIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjwvc3ZnPgo='
 description: 'Feature up to 9 recent news or events in a scrollable carousel. It allows you to add a title, date, summary and link.'
 behavior_plugins: {  }

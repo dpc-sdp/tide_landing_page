@@ -1,8 +1,8 @@
 langcode: en
 status: true
-dependencies: {  }
 id: complex_image
 label: 'Complex image'
-icon_uuid: null
+icon_uuid: cadf6fdf-d873-458b-b371-106b5b7134dd
+icon_default: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjgiIGhlaWdodD0iNzciIHZpZXdCb3g9IjAgMCA2OCA3NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3LjM3MTkiIGhlaWdodD0iNzYuOTA1NyIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeD0iMTEiIHk9IjEyIiB3aWR0aD0iNDUiIGhlaWdodD0iNDciIGZpbGw9IiNFMEUwRTAiLz4KPC9zdmc+Cg=='
 description: 'Embed a complex image within a content page so users can access information in different formats. Users can access accessible data, view image in full screen or download the image.'
 behavior_plugins: {  }
