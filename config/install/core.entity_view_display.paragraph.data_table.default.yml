@@ -3,7 +3,9 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.data_table.field_data_table_content
-    - field.field.paragraph.data_table.field_row_oriented_table
+    - field.field.paragraph.data_table.field_first_column_table_header
+    - field.field.paragraph.data_table.field_first_row_table_header
+    - field.field.paragraph.data_table.field_table_orientation
     - paragraphs.paragraphs_type.data_table
   module:
     - tablefield
@@ -21,8 +23,28 @@ content:
     third_party_settings: {  }
     type: tablefield
     region: content
-  field_row_oriented_table:
-    weight: 0
+  field_first_column_table_header:
+    weight: 3
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_first_row_table_header:
+    weight: 4
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_table_orientation:
+    weight: 2
     label: above
     settings:
       format: default

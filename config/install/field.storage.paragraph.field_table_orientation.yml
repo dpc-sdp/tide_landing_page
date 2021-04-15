@@ -3,8 +3,8 @@ status: true
 dependencies:
   module:
     - paragraphs
-id: paragraph.field_row_oriented_table
-field_name: field_row_oriented_table
+id: paragraph.field_table_orientation
+field_name: field_table_orientation
 entity_type: paragraph
 type: boolean
 settings: {  }

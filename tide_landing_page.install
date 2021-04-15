@@ -1616,9 +1616,13 @@ function tide_landing_page_update_8036() {
   $configs = [
     'paragraphs.paragraphs_type.data_table' => 'paragraphs_type',
     'field.storage.paragraph.field_data_table_content' => 'field_storage_config',
-    'field.storage.paragraph.field_row_oriented_table' => 'field_storage_config',
+    'field.storage.paragraph.field_first_column_table_header' => 'field_storage_config',
+    'field.storage.paragraph.field_first_row_table_header' => 'field_storage_config',
+    'field.storage.paragraph.field_table_orientation' => 'field_storage_config',
     'field.field.paragraph.data_table.field_data_table_content' => 'field_config',
-    'field.field.paragraph.data_table.field_row_oriented_table' => 'field_config',
+    'field.field.paragraph.data_table.field_first_column_table_header' => 'field_config',
+    'field.field.paragraph.data_table.field_first_row_table_header' => 'field_config',
+    'field.field.paragraph.data_table.field_table_orientation' => 'field_config',
     'core.entity_view_display.paragraph.data_table.default' => 'entity_view_display',
     'core.entity_form_display.paragraph.data_table.default' => 'entity_form_display',
   ];
