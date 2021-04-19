@@ -192,7 +192,7 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
       unset($element['subform']['field_data_table_content']['widget'][0]['caption']);
       $element['subform']['field_data_table_content']['widget'][0]['caption'] = [
         '#type' => 'textfield',
-        '#default_value' => null,
+        '#default_value' => NULL,
         '#size' => 60,
         '#attributes' => ['style' => 'display: none;'],
       ];
