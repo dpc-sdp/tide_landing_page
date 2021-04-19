@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: data_table
+label: 'Data table'
+icon_uuid: null
+icon_default: null
+description: 'Add row-oriented or column-oriented tables'
+behavior_plugins: {  }
