@@ -98,9 +98,21 @@ resourceFields:
     enhancer:
       id: ''
     disabled: false
-  field_row_oriented_table:
-    fieldName: field_row_oriented_table
-    publicName: field_row_oriented_table
+  field_first_column_table_header:
+    fieldName: field_first_column_table_header
+    publicName: field_first_column_table_header
+    enhancer:
+      id: ''
+    disabled: false
+  field_first_row_table_header:
+    fieldName: field_first_row_table_header
+    publicName: field_first_row_table_header
+    enhancer:
+      id: ''
+    disabled: false
+  field_table_orientation:
+    fieldName: field_table_orientation
+    publicName: field_table_orientation
     enhancer:
       id: ''
     disabled: false
