@@ -239,8 +239,6 @@ third_party_settings:
         classes: ''
       label: 'Header Content'
       region: content
-_core:
-  default_config_hash: pN7fy_ZaJVA-sEQWPZUCiV_-5V5W_ZSuZ7Rbql6y5kg
 id: node.landing_page.default
 targetEntityType: node
 bundle: landing_page
