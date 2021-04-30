@@ -226,6 +226,16 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
     $widget_state = WidgetBase::getWidgetState($element['#field_parents'], $paragraph_field_name, $form_state);
     $paragraph = $widget_state['paragraphs'][$element['#delta']]['entity'];
     $paragraph_type = $paragraph->bundle();
+    // Hide table caption field in Data table component.
+    if ($paragraph_type == 'data_table') {
+      unset($element['subform']['field_data_table_content']['widget'][0]['caption']);
+      $element['subform']['field_data_table_content']['widget'][0]['caption'] = [
+        '#type' => 'textfield',
+        '#default_value' => NULL,
+        '#size' => 60,
+        '#attributes' => ['style' => 'display: none;'],
+      ];
+    }
     // Add states for navigation and promotion card paragraph type fields.
     if ($paragraph_type === 'navigation_card' || $paragraph_type === 'promotion_card') {
       if (isset($element['subform']['field_paragraph_link'])) {

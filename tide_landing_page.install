@@ -107,6 +107,7 @@ function tide_landing_page_update_dependencies() {
   $dependencies['tide_landing_page'][8015] = ['system' => 8805];
   $dependencies['tide_landing_page'][8016] = ['system' => 8805];
   $dependencies['tide_landing_page'][8032] = ['tide_core' => 8037];
+  $dependencies['tide_landing_page'][8036] = ['tide_core' => 8045];
 
   return $dependencies;
 }
@@ -1612,6 +1613,53 @@ function _get_link_value(Paragraph $paragraph) {
 }
 
 /**
+ * Installs new data_table paragraph type.
+ */
+function tide_landing_page_update_8036() {
+  $configs = [
+    'paragraphs.paragraphs_type.data_table' => 'paragraphs_type',
+    'field.storage.paragraph.field_data_table_content' => 'field_storage_config',
+    'field.storage.paragraph.field_first_column_table_header' => 'field_storage_config',
+    'field.storage.paragraph.field_first_row_table_header' => 'field_storage_config',
+    'field.storage.paragraph.field_table_orientation' => 'field_storage_config',
+    'field.field.paragraph.data_table.field_data_table_content' => 'field_config',
+    'field.field.paragraph.data_table.field_first_column_table_header' => 'field_config',
+    'field.field.paragraph.data_table.field_first_row_table_header' => 'field_config',
+    'field.field.paragraph.data_table.field_table_orientation' => 'field_config',
+    'core.entity_view_display.paragraph.data_table.default' => 'entity_view_display',
+    'core.entity_form_display.paragraph.data_table.default' => 'entity_form_display',
+  ];
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  // Check if field already exported to config/sync.
+  foreach ($configs as $config => $type) {
+    $config_read = _tide_read_config($config, $config_location, TRUE);
+    $storage = \Drupal::entityTypeManager()->getStorage($type);
+    $config_entity = $storage->createFromStorageRecord($config_read);
+    $config_entity->save();
+  }
+
+  // Add the new paragraph type to field_landing_page_component.
+  $field = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
+  if ($field) {
+    $handler_settings = $field->getSetting('handler_settings');
+    if (isset($handler_settings['target_bundles']) && !in_array('data_table', $handler_settings['target_bundles'])) {
+      $handler_settings['target_bundles']['data_table'] = 'data_table';
+      $handler_settings['target_bundles_drag_drop']['data_table']['enabled'] = TRUE;
+      $field->setSetting('handler_settings', $handler_settings);
+      $field->save();
+    }
+  }
+
+  // Add paragraph type to JSON.
+  $json_field = 'jsonapi_extras.jsonapi_resource_config.paragraph--data_table';
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/optional'];
+  $config_storage = \Drupal::service('config.storage');
+  $config_read = _tide_read_config($json_field, $config_location, TRUE);
+  $config_storage->write($json_field, $config_read);
+}
+
+/**
  * Create a new field group.
  *
  * @param string $label
@@ -1707,7 +1755,7 @@ function _tide_landing_page_new_field_group_tab(string $label, string $parent, a
 /**
  * Update the node form of Landing Page.
  */
-function tide_landing_page_update_8036() {
+function tide_landing_page_update_8037() {
   // Rename paragraph bundles.
   $paragraph_updates = [
     'basic_text' => [
@@ -2117,9 +2165,10 @@ function tide_landing_page_update_8036() {
 /**
  * Change icon of paragraph types.
  */
-function tide_landing_page_update_8037() {
+function tide_landing_page_update_8038() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $icon_dir = drupal_get_path('module', 'tide_landing_page') . DIRECTORY_SEPARATOR . 'icons';
+  $icon_dir = drupal_get_path('module',
+      'tide_landing_page') . DIRECTORY_SEPARATOR . 'icons';
 
   $paragraphs = [
     'basic_text',
