@@ -1759,36 +1759,63 @@ function tide_landing_page_update_8037() {
   // Rename paragraph bundles.
   $paragraph_updates = [
     'basic_text' => [
-      'description' => t('Use this block to add text and media to your page. Content sits in the middle of your page between header and footer elements.'),
+      'label' => t('Basic text'),
+      'description' => t('Add text, headings, media and tables to your page.'),
     ],
     'call_to_action' => [
-      'description' => t('Prompt users to take action, like register for an e-newsletter. Add a title, description, image, link and call to action button.'),
+      'label' => t('Call to action'),
+      'description' => t('Add a large card or banner with a prominent button to prompt users to take action.'),
     ],
     'card_keydates' => [
-      'description' => t('Add this card to feature important dates. Add a date, title, summary and link.'),
+      'label' => t('Key dates'),
+      'description' => t('Add a clickable card that contains a collection of important dates.'),
     ],
     'card_carousel' => [
-      'description' => t('Feature up to 9 recent news or events in a scrollable carousel. It allows you to add a title, date, summary and link.'),
+      'label' => t('Card carousel'),
+      'description' => t('Feature up to 9 promotion cards in a scrollable carousel. News or events items can be automatically populated.'),
     ],
     'complex_image' => [
-      'description' => t('Embed a complex image within a content page so users can access information in different formats. Users can access accessible data, view image in full screen or download the image.'),
+      'description' => t('Display a complex image that users have the option to view in full screen, view in alternate format, or download.'),
+    ],
+    'data_table' => [
+      'description' => t('Embed a complex table of data that can display in a stacked format on small devices.'),
+    ],
+    'featured_news' => [
+      'label' => t('Featured news'),
+      'description' => t('Display prominent cards linking to three recent news items.'),
+    ],
+    'introduction_banner' => [
+      'label' => t('Introduction banner'),
+      'description' => t('Display prominent introductory text and links under the header of your page.'),
     ],
     'key_journeys' => t('Header links'),
+    'latest_events' => [
+      'label' => t('Latest events'),
+      'description' => t('Display a grid of up to 6 cards linking to recent events.'),
+    ],
     'media_gallery' => [
-      'description' => t('Embed a scrollable carousel of images within a content page, once built in the Custom block library. Images can be viewed in full screen. Add a title and summary to each image.'),
+      'description' => t('Embed a scrollable carousel of images (content must first be created in the Custom block library).'),
     ],
     'navigation_card' => [
-      'description' => t('Create a tiled link to a page that allows users to navigate deeper into a topic. This is best used on a 2-column page layout.'),
+      'description' => t('Add a wide card that links to internal or external content. Multiple cards will stack vertically.'),
+    ],
+    'news_listing' => [
+      'description' => t('Display a list of links to 6 recent news items based on a specific topic.'),
     ],
     'promotion_card' => [
-      'description' => t('This card is best used on a 3-column page layout. Add a title, image, summary and link to an internal or external page.'),
+      'description' => t('Add a narrow card that links to internal or external content. Multiple cards will automatically be arranged in a 2 or 3 column grid.'),
     ],
-    'embedded_search_form' => t('Search banner'),
+    'embedded_search_form' => [
+      'label' => t('Search banner'),
+      'description' => t('Display a full-width search bar under the header of your page.'),
+    ],
     'embedded_webform' => [
-      'description' => t('Embed a Drupal form within a content page. Users can populate fields and submit their information.'),
+      'label' => t('Form embed (Drupal)'),
+      'description' => t('Embed a Drupal form on your page. Users can populate fields and submit their information.'),
     ],
     'form_embed_openforms' => [
-      'description' => t('Embed an OpenForms form within a content page. Users can populate fields and submit their information.'),
+      'label' => t('Form embed (OpenForms)'),
+      'description' => t('Embed an OpenForms form on your page. Users can populate fields and submit their information.'),
     ],
   ];
   foreach ($paragraph_updates as $bundle => $update) {
@@ -2167,18 +2194,24 @@ function tide_landing_page_update_8037() {
  */
 function tide_landing_page_update_8038() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $icon_dir = drupal_get_path('module',
-      'tide_landing_page') . DIRECTORY_SEPARATOR . 'icons';
+  $icon_dir = drupal_get_path('module', 'tide_landing_page') . DIRECTORY_SEPARATOR . 'icons';
 
   $paragraphs = [
     'basic_text',
+    'call_to_action',
     'card_carousel',
     'card_keydates',
     'complex_image',
+    'data_table',
+    'embedded_search_form',
     'embedded_webform',
+    'featured_news',
     'form_embed_openforms',
+    'introduction_banner',
+    'latest_events',
     'media_gallery',
     'navigation_card',
+    'news_listing',
     'promotion_card',
   ];
   foreach ($paragraphs as $paragraph_type_id) {
