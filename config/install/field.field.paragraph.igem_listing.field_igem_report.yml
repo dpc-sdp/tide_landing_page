@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_igem_report
+    - paragraphs.paragraphs_type.igem_listing
+    - taxonomy.vocabulary.reports_igem_reports
+id: paragraph.igem_listing.field_igem_report
+field_name: field_igem_report
+entity_type: paragraph
+bundle: igem_listing
+label: 'IGEM report'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      reports_igem_reports: reports_igem_reports
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
