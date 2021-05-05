@@ -107,10 +107,10 @@ function tide_landing_page_install() {
     }
   }
 
-  tide_landing_page_update_8036();
-  tide_landing_page_update_8037();
   tide_landing_page_update_8038();
   tide_landing_page_update_8039();
+  tide_landing_page_update_8040();
+  tide_landing_page_update_8041();
 }
 
 /**
@@ -1383,7 +1383,7 @@ function tide_landing_page_update_8034() {
 /**
  * Add the new paragraph type tide_automated_listing.
  */
-function tide_landing_page_update_8035() {
+function tide_landing_page_update_8037() {
   $result = \Drupal::service('module_installer')->install(['tide_automated_listing']);
   if (!$result) {
     throw new \Exception(sprintf('Unable to install module %s', 'tide_automated_listing'));
@@ -1417,7 +1417,7 @@ function tide_landing_page_update_8035() {
 /**
  * Add the new field to paragraph type tide_automated_listing.
  */
-function tide_landing_page_update_8036() {
+function tide_landing_page_update_8038() {
   /** @var \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler */
   $moduleHandler = \Drupal::service('module_handler');
 
@@ -1688,7 +1688,7 @@ function tide_landing_page_update_8036() {
 /**
  * Add individual cards to tide_automated_listing to entity form default.
  */
-function tide_landing_page_update_8037() {
+function tide_landing_page_update_8039() {
   /** @var \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler */
   $moduleHandler = \Drupal::service('module_handler');
 
@@ -1768,7 +1768,7 @@ function tide_landing_page_update_8037() {
 /**
  * Add individual cards to tide_automated_listing to entity view default.
  */
-function tide_landing_page_update_8038() {
+function tide_landing_page_update_8040() {
   /** @var \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler */
   $moduleHandler = \Drupal::service('module_handler');
 
@@ -1799,7 +1799,7 @@ function tide_landing_page_update_8038() {
 /**
  * Add individual cards to tide_automated_listing to entity view preview.
  */
-function tide_landing_page_update_8039() {
+function tide_landing_page_update_8041() {
   /** @var \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler */
   $moduleHandler = \Drupal::service('module_handler');
 
@@ -1827,7 +1827,7 @@ function tide_landing_page_update_8039() {
 /**
  * Updates cards.
  */
-function tide_landing_page_update_8040(&$sandbox) {
+function tide_landing_page_update_8035(&$sandbox) {
   if (!isset($sandbox['total'])) {
     $paragraph_query = \Drupal::entityTypeManager()
       ->getStorage('paragraph')
