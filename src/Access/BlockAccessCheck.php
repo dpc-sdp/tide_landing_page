@@ -43,4 +43,5 @@ class BlockAccessCheck implements AccessInterface {
     }
     return AccessResult::allowedIfHasPermission($account, 'administer content types');
   }
+
 }
