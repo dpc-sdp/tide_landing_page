@@ -27,23 +27,20 @@ class BlockAccessCheck implements AccessInterface {
       'site_admin',
     ];
 
-    $roleFound = FALSE;
+    $isRestricted = FALSE;
 
     $roles = $account->getRoles();
     if (!empty($roles)) {
       foreach ($roles as $role) {
         if (in_array($role, $rolesWithAccessRestricted)) {
-          $roleFound = TRUE;
+          $isRestricted = TRUE;
           break;
         }
       }
     }
-
-    if ($roleFound) {
+    if ($isRestricted) {
       return AccessResult::forbidden();
     }
-
-    return AccessResult::neutral();
+    return AccessResult::allowedIfHasPermission($account, 'administer content types');
   }
-
 }
