@@ -11,6 +11,15 @@ use Drupal\Core\Routing\Access\AccessInterface;
  */
 class BlockAccessCheck implements AccessInterface {
 
+  /**
+   * Checks access.
+   *
+   * @param Drupal\Core\Session\AccountInterface $account
+   *   The currently logged in account.
+   *
+   * @return bool
+   *   A \Drupal\Core\Access\AccessInterface constant value.
+   */
   public function access(AccountInterface $account) {
     return AccessResult::allowedIfHasPermission($account, 'administer content types');
   }
