@@ -10,6 +10,6 @@ Feature: Check access to block layout
     Examples:
       | role               | response |
       | administrator      | 200      |
-      | editor             | 403      |
-      | approver           | 403      |
-      | site_admin         | 403      |
+      | editor             | 404      |
+      | approver           | 404      |
+      | site_admin         | 404      |
