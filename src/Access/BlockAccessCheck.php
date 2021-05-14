@@ -11,36 +11,7 @@ use Drupal\Core\Routing\Access\AccessInterface;
  */
 class BlockAccessCheck implements AccessInterface {
 
-  /**
-   * Checks access.
-   *
-   * @param Drupal\Core\Session\AccountInterface $account
-   *   The currently logged in account.
-   *
-   * @return bool
-   *   A \Drupal\Core\Access\AccessInterface constant value.
-   */
   public function access(AccountInterface $account) {
-    $rolesWithAccessRestricted = [
-      'editor',
-      'approver',
-      'site_admin',
-    ];
-
-    $isRestricted = FALSE;
-
-    $roles = $account->getRoles();
-    if (!empty($roles)) {
-      foreach ($roles as $role) {
-        if (in_array($role, $rolesWithAccessRestricted)) {
-          $isRestricted = TRUE;
-          break;
-        }
-      }
-    }
-    if ($isRestricted) {
-      return AccessResult::forbidden();
-    }
     return AccessResult::allowedIfHasPermission($account, 'administer content types');
   }
 
