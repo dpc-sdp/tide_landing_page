@@ -1991,6 +1991,7 @@ function tide_landing_page_update_8037() {
       'weight' => 40,
     ],
     // General.
+    'field_topic' => ['weight' => 0],
     'field_show_topic_term_and_tags' => ['weight' => 1],
     'field_show_content_rating' => ['weight' => 2],
     'field_landing_page_bg_colour' => ['weight' => 3],
