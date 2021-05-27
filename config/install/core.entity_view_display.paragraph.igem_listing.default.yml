@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.igem_listing.field_igem_report
+    - paragraphs.paragraphs_type.igem_listing
+id: paragraph.igem_listing.default
+targetEntityType: paragraph
+bundle: igem_listing
+mode: default
+content:
+  field_igem_report:
+    weight: 0
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -1655,3 +1655,44 @@ function tide_landing_page_update_8036() {
   $config_read = _tide_read_config($json_field, $config_location, TRUE);
   $config_storage->write($json_field, $config_read);
 }
+
+/**
+ * Installs new IGEM paragraph type.
+ */
+function tide_landing_page_update_8037() {
+  $configs = [
+    'paragraphs.paragraphs_type.igem_listing' => 'paragraphs_type',
+    'field.storage.paragraph.field_igem_report' => 'field_storage_config',
+    'field.field.paragraph.igem_listing.field_igem_report' => 'field_config',
+    'core.entity_view_display.paragraph.igem_listing.default' => 'entity_view_display',
+    'core.entity_form_display.paragraph.igem_listing.default' => 'entity_form_display',
+  ];
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  // Check if field already exported to config/sync.
+  foreach ($configs as $config => $type) {
+    $config_read = _tide_read_config($config, $config_location, TRUE);
+    $storage = \Drupal::entityTypeManager()->getStorage($type);
+    $config_entity = $storage->createFromStorageRecord($config_read);
+    $config_entity->save();
+  }
+
+  // Add the new paragraph type to field_landing_page_component.
+  $field = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
+  if ($field) {
+    $handler_settings = $field->getSetting('handler_settings');
+    if (isset($handler_settings['target_bundles']) && !in_array('igem_listing', $handler_settings['target_bundles'])) {
+      $handler_settings['target_bundles']['igem_listing'] = 'igem_listing';
+      $handler_settings['target_bundles_drag_drop']['igem_listing']['enabled'] = TRUE;
+      $field->setSetting('handler_settings', $handler_settings);
+      $field->save();
+    }
+  }
+
+  // Add paragraph type to JSON.
+  $json_field = 'jsonapi_extras.jsonapi_resource_config.paragraph--igem_listing';
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/optional'];
+  $config_storage = \Drupal::service('config.storage');
+  $config_read = _tide_read_config($json_field, $config_location, TRUE);
+  $config_storage->write($json_field, $config_read);
+}
