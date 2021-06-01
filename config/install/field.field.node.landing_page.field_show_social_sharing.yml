@@ -8,9 +8,9 @@ id: node.landing_page.field_show_social_sharing
 field_name: field_show_social_sharing
 entity_type: node
 bundle: landing_page
-label: 'Show Social Sharing?'
-description: 'Check this box if you want to show Social Sharing block on this page.'
-required: false
+label: 'Social sharing'
+description: 'The social sharing box can be hidden in special circumstances.'
+required: true
 translatable: false
 default_value:
   -

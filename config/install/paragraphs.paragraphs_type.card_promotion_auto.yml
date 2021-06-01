@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: card_promotion_auto
-label: 'Card Promotion Automated'
+label: 'Card promotion automated'
 icon_uuid: null
 description: ''
 behavior_plugins: {  }
