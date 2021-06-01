@@ -11,7 +11,7 @@ id: node.landing_page.field_landing_page_hero_banner
 field_name: field_landing_page_hero_banner
 entity_type: node
 bundle: landing_page
-label: 'Hero Banner'
+label: 'Call to action banner'
 description: ''
 required: false
 translatable: false
