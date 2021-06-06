@@ -36,18 +36,6 @@ settings:
       card_event:
         weight: 17
         enabled: false
-      card_navigation:
-        weight: 18
-        enabled: false
-      card_navigation_auto:
-        weight: 19
-        enabled: false
-      card_navigation_featured:
-        weight: 20
-        enabled: false
-      card_navigation_featured_auto:
-        weight: 21
-        enabled: false
       card_promotion:
         weight: 22
         enabled: false

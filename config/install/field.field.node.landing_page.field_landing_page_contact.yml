@@ -11,7 +11,7 @@ id: node.landing_page.field_landing_page_contact
 field_name: field_landing_page_contact
 entity_type: node
 bundle: landing_page
-label: 'Contact Us'
+label: 'Contact us'
 description: ''
 required: false
 translatable: false
@@ -44,18 +44,6 @@ settings:
         enabled: false
       card_keydates:
         weight: 26
-        enabled: false
-      card_navigation:
-        weight: 27
-        enabled: false
-      card_navigation_auto:
-        weight: 28
-        enabled: false
-      card_navigation_featured:
-        weight: 29
-        enabled: false
-      card_navigation_featured_auto:
-        weight: 30
         enabled: false
       card_promotion:
         weight: 31

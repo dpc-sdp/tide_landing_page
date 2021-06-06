@@ -11,16 +11,14 @@ dependencies:
     - paragraphs.paragraphs_type.card_event
     - paragraphs.paragraphs_type.card_event_auto
     - paragraphs.paragraphs_type.card_keydates
-    - paragraphs.paragraphs_type.card_navigation
-    - paragraphs.paragraphs_type.card_navigation_auto
-    - paragraphs.paragraphs_type.card_navigation_featured
-    - paragraphs.paragraphs_type.card_navigation_featured_auto
     - paragraphs.paragraphs_type.card_promotion
     - paragraphs.paragraphs_type.card_promotion_auto
     - paragraphs.paragraphs_type.complex_image
     - paragraphs.paragraphs_type.form_embed_openforms
     - paragraphs.paragraphs_type.latest_events
     - paragraphs.paragraphs_type.media_gallery
+    - paragraphs.paragraphs_type.navigation_card
+    - paragraphs.paragraphs_type.promotion_card
     - paragraphs.paragraphs_type.timelines
     - paragraphs.paragraphs_type.featured_news
   module:
@@ -30,7 +28,7 @@ field_name: field_landing_page_component
 entity_type: node
 bundle: landing_page
 label: 'Content components'
-description: ''
+description: '<p>Add text, links, media and cards to build your page.</p>'
 required: false
 translatable: true
 default_value: {  }
@@ -43,12 +41,6 @@ settings:
       basic_text: basic_text
       accordion: accordion
       card_event: card_event
-      card_promotion: card_promotion
-      card_promotion_auto: card_promotion_auto
-      card_navigation_featured: card_navigation_featured
-      card_navigation_featured_auto: card_navigation_featured_auto
-      card_navigation: card_navigation
-      card_navigation_auto: card_navigation_auto
       card_keydates: card_keydates
       call_to_action: call_to_action
       complex_image: complex_image
@@ -60,6 +52,8 @@ settings:
       card_carousel: card_carousel
       timelines: timelines
       news_listing: news_listing
+      navigation_card: navigation_card
+      promotion_card: promotion_card
       featured_news: featured_news
     target_bundles_drag_drop:
       banner:
@@ -75,10 +69,10 @@ settings:
         enabled: true
         weight: -30
       card_promotion:
-        enabled: true
+        enabled: false
         weight: -29
       card_promotion_auto:
-        enabled: true
+        enabled: false
         weight: -28
       complex_image:
         enabled: true
@@ -92,18 +86,6 @@ settings:
       links:
         weight: -25
         enabled: false
-      card_navigation_featured:
-        enabled: true
-        weight: -24
-      card_navigation_featured_auto:
-        enabled: true
-        weight: -23
-      card_navigation:
-        enabled: true
-        weight: -22
-      card_navigation_auto:
-        enabled: true
-        weight: -21
       card_keydates:
         enabled: true
         weight: -20
@@ -128,9 +110,12 @@ settings:
       news_listing:
         enabled: true
         weight: 25
-      media_gallery:
+      navigation_card:
         enabled: true
         weight: 26
+      media_gallery:
+        enabled: true
+        weight: 27
       card_event_auto:
         enabled: true
         weight: 28
@@ -149,6 +134,9 @@ settings:
       phone:
         weight: 38
         enabled: false
+      promotion_card:
+        enabled: true
+        weight: 39
       social_link:
         weight: 40
         enabled: false

@@ -9,10 +9,13 @@ use Drupal\Core\Entity\Entity\EntityFormDisplay;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\paragraphs\Entity\ParagraphsType;
 use Drupal\search_api\Item\Field;
 use Drupal\workflows\Entity\Workflow;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\Component\Utility\NestedArray;
+use Drupal\node\Entity\Node;
+use Drupal\Component\Utility\UrlHelper;
 
 /**
  * Implements hook_install().
@@ -90,6 +93,8 @@ function tide_landing_page_install() {
       $config->set('bundles', $bundles)->save();
     }
   }
+
+  tide_landing_page_update_8037();
 }
 
 /**
@@ -102,6 +107,7 @@ function tide_landing_page_update_dependencies() {
   $dependencies['tide_landing_page'][8015] = ['system' => 8805];
   $dependencies['tide_landing_page'][8016] = ['system' => 8805];
   $dependencies['tide_landing_page'][8032] = ['tide_core' => 8037];
+  $dependencies['tide_landing_page'][8036] = ['tide_core' => 8045];
 
   return $dependencies;
 }
@@ -1264,4 +1270,953 @@ function tide_landing_page_update_8032() {
   $description = 'The table of contents is automatically built from the heading structure of your page.';
   $field_config->set('description', $description);
   $field_config->save();
+}
+
+/**
+ * Installs new promotion_card paragraph type.
+ */
+function tide_landing_page_update_8033() {
+  $configs = [
+    'paragraphs.paragraphs_type.promotion_card' => 'paragraphs_type',
+    'field.storage.paragraph.field_promo_card_display_style' => 'field_storage_config',
+    'field.storage.paragraph.field_customise' => 'field_storage_config',
+    'field.field.paragraph.promotion_card.field_paragraph_title' => 'field_config',
+    'field.field.paragraph.promotion_card.field_paragraph_summary' => 'field_config',
+    'field.field.paragraph.promotion_card.field_paragraph_media' => 'field_config',
+    'field.field.paragraph.promotion_card.field_paragraph_link' => 'field_config',
+    'field.field.paragraph.promotion_card.field_customise' => 'field_config',
+    'field.field.paragraph.promotion_card.field_promo_card_display_style' => 'field_config',
+    'core.entity_view_display.paragraph.promotion_card.default' => 'entity_view_display',
+    'core.entity_form_display.paragraph.promotion_card.default' => 'entity_form_display',
+  ];
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  // Check if field already exported to config/sync.
+  foreach ($configs as $config => $type) {
+    $config_read = _tide_read_config($config, $config_location, TRUE);
+    $storage = \Drupal::entityTypeManager()->getStorage($type);
+    $config_entity = $storage->createFromStorageRecord($config_read);
+    $config_entity->save();
+  }
+
+  // Add the new paragraph type to field_landing_page_component.
+  $field = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
+  if ($field) {
+    $handler_settings = $field->getSetting('handler_settings');
+    if (isset($handler_settings['target_bundles']) && !in_array('promotion_card', $handler_settings['target_bundles'])) {
+      $handler_settings['target_bundles']['promotion_card'] = 'promotion_card';
+      $handler_settings['target_bundles_drag_drop']['promotion_card']['enabled'] = TRUE;
+      $field->setSetting('handler_settings', $handler_settings);
+      $field->save();
+    }
+  }
+
+  // Add paragraph type to JSON.
+  $json_field = 'jsonapi_extras.jsonapi_resource_config.paragraph--promotion_card';
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/optional'];
+  $config_storage = \Drupal::service('config.storage');
+  $config_read = _tide_read_config($json_field, $config_location, TRUE);
+  $config_storage->write($json_field, $config_read);
+}
+
+/**
+ * Installs new navigation_card paragraph type.
+ */
+function tide_landing_page_update_8034() {
+  $configs = [
+    'paragraphs.paragraphs_type.navigation_card' => 'paragraphs_type',
+    'field.storage.paragraph.field_nav_card_display_style' => 'field_storage_config',
+    'field.field.paragraph.navigation_card.field_paragraph_title' => 'field_config',
+    'field.field.paragraph.navigation_card.field_paragraph_summary' => 'field_config',
+    'field.field.paragraph.navigation_card.field_paragraph_media' => 'field_config',
+    'field.field.paragraph.navigation_card.field_paragraph_link' => 'field_config',
+    'field.field.paragraph.navigation_card.field_customise' => 'field_config',
+    'field.field.paragraph.navigation_card.field_nav_card_display_style' => 'field_config',
+    'core.entity_view_display.paragraph.navigation_card.default' => 'entity_view_display',
+    'core.entity_form_display.paragraph.navigation_card.default' => 'entity_form_display',
+  ];
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  // Check if field already exported to config/sync.
+  foreach ($configs as $config => $type) {
+    $config_read = _tide_read_config($config, $config_location, TRUE);
+    $storage = \Drupal::entityTypeManager()->getStorage($type);
+    $config_entity = $storage->createFromStorageRecord($config_read);
+    $config_entity->save();
+  }
+
+  // Add the new paragraph type to field_landing_page_component.
+  $field = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
+  if ($field) {
+    $handler_settings = $field->getSetting('handler_settings');
+    if (isset($handler_settings['target_bundles']) && !in_array('navigation_card', $handler_settings['target_bundles'])) {
+      $handler_settings['target_bundles']['navigation_card'] = 'navigation_card';
+      $handler_settings['target_bundles_drag_drop']['navigation_card']['enabled'] = TRUE;
+      $field->setSetting('handler_settings', $handler_settings);
+      $field->save();
+    }
+  }
+
+  // Add paragraph type to JSON.
+  $json_field = 'jsonapi_extras.jsonapi_resource_config.paragraph--navigation_card';
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/optional'];
+  $config_storage = \Drupal::service('config.storage');
+  $config_read = _tide_read_config($json_field, $config_location, TRUE);
+  $config_storage->write($json_field, $config_read);
+}
+
+/**
+ * Updates cards.
+ */
+function tide_landing_page_update_8035(&$sandbox) {
+  if (getenv("LAGOON_ENVIRONMENT_TYPE") != 'production') {
+    return;
+  }
+  if (!isset($sandbox['total'])) {
+    $paragraph_query = \Drupal::entityTypeManager()
+      ->getStorage('paragraph')
+      ->getQuery();
+    $paragraph_query->condition('parent_type', 'node')
+      ->condition('parent_field_name', 'field_landing_page_component');
+    $or = $paragraph_query->orConditionGroup()
+      ->condition('type', 'card_navigation')
+      ->condition('type', 'card_navigation_auto')
+      ->condition('type', 'card_navigation_featured')
+      ->condition('type', 'card_navigation_featured_auto')
+      ->condition('type', 'card_promotion')
+      ->condition('type', 'card_promotion_auto')
+      ->condition('type', 'card_event')
+      ->condition('type', 'card_event_auto');
+    $paragraph_query->condition($or);
+    $count = $paragraph_query->count()->execute();
+    $sandbox['total'] = $count;
+    $sandbox['current'] = 0;
+    $sandbox['processed'] = 0;
+    $sandbox['#finished'] = $count ? 0 : 1;
+  }
+  $batch_size = 50;
+  $paragraph_query = \Drupal::entityTypeManager()
+    ->getStorage('paragraph')
+    ->getQuery();
+  $or = $paragraph_query->orConditionGroup()
+    ->condition('type', 'card_navigation')
+    ->condition('type', 'card_navigation_auto')
+    ->condition('type', 'card_navigation_featured')
+    ->condition('type', 'card_navigation_featured_auto')
+    ->condition('type', 'card_promotion')
+    ->condition('type', 'card_promotion_auto')
+    ->condition('type', 'card_event')
+    ->condition('type', 'card_event_auto');
+  $paragraph_query->condition($or);
+  $paragraph_query->condition('parent_type', 'node')
+    ->condition('parent_field_name', 'field_landing_page_component')
+    ->condition('id', $sandbox['current'], '>')
+    ->sort('id', 'ASC')
+    ->range(0, $batch_size);
+  $paragraph_ids = $paragraph_query->execute();
+  $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+  $paragraph_type_mapping = [
+    'card_navigation' => 'navigation_card',
+    'card_navigation_auto' => 'navigation_card',
+    'card_navigation_featured' => 'navigation_card',
+    'card_navigation_featured_auto' => 'navigation_card',
+    'card_promotion' => 'promotion_card',
+    'card_promotion_auto' => 'promotion_card',
+    'card_event' => 'promotion_card',
+    'card_event_auto' => 'promotion_card',
+  ];
+  $display_field_names = [
+    'navigation_card' => 'field_nav_card_display_style',
+    'promotion_card' => 'field_promo_card_display_style',
+  ];
+  foreach ($paragraph_ids as $paragraph_id) {
+    $sandbox['current'] = $paragraph_id;
+    $paragraph = Paragraph::load($paragraph_id);
+    $nodes = $node_storage->loadByProperties(['field_landing_page_component' => $paragraph->id()]);
+    if (empty($nodes) && in_array($paragraph->bundle(), [
+      'card_navigation_featured_auto',
+      'card_navigation_featured',
+      'card_navigation_auto',
+      'card_navigation',
+    ])) {
+      $paragraph->delete();
+      $sandbox['processed']++;
+      continue;
+    }
+    if (count($nodes) > 0) {
+      foreach ($nodes as $node) {
+        // If the link is empty, delete the paragraph.
+        $link_details = _get_link_value($paragraph);
+        $values = $node->get('field_landing_page_component')->getValue();
+        if (empty($link_details)) {
+          $key = array_search($paragraph->id(), array_column($values, 'target_id'));
+          $node->get('field_landing_page_component')->removeItem($key);
+          $node->setNewRevision(FALSE);
+          $node->save();
+          continue;
+        }
+        $new_paragraph = Paragraph::create([
+          'type' => $paragraph_type_mapping[$paragraph->bundle()],
+          'parent_id' => $node->id(),
+          'parent_type' => 'node',
+          'parent_field_name' => 'field_landing_page_component',
+        ]);
+        $new_paragraph->set('field_paragraph_link', $link_details[0]);
+        $field_paragraph_media = _tide_card_consolidation_get_value($paragraph, 'media');
+        if ($field_paragraph_media != NULL) {
+          $new_paragraph->field_paragraph_media->target_id = $field_paragraph_media;
+        }
+        if ($link_details[1] == 'external') {
+          if ($field_paragraph_media == NULL) {
+            $new_paragraph->{$display_field_names[$paragraph_type_mapping[$paragraph->bundle()]]}->value = 'noImage';
+          }
+          else {
+            $new_paragraph->{$display_field_names[$paragraph_type_mapping[$paragraph->bundle()]]}->value = _get_card_display_style($paragraph);
+          }
+        }
+        if ($link_details[1] == 'internal') {
+          $new_paragraph->{$display_field_names[$paragraph_type_mapping[$paragraph->bundle()]]}->value = _get_card_display_style($paragraph);
+        }
+        $field_paragraph_title = _tide_card_consolidation_get_value($paragraph, 'title');
+        if ($field_paragraph_title) {
+          $new_paragraph->field_paragraph_title->value = $field_paragraph_title;
+        }
+        $field_paragraph_summary = _tide_card_consolidation_get_value($paragraph, 'summary');
+        if ($field_paragraph_summary) {
+          $new_paragraph->field_paragraph_summary->value = $field_paragraph_summary;
+        }
+        $new_paragraph->save();
+        $key = array_search($paragraph->id(), array_column($values, 'target_id'));
+        $values[$key]['target_id'] = $new_paragraph->id();
+        $values[$key]['target_revision_id'] = $new_paragraph->getRevisionId();
+        $node->set('field_landing_page_component', $values);
+        $node->setNewRevision(FALSE);
+        $node->save();
+      }
+      $paragraph->delete();
+    }
+    $sandbox['processed']++;
+  }
+  $sandbox['#finished'] = $sandbox['total'] ? $sandbox['processed'] / $sandbox['total'] : 1;
+  $sandbox['#finished'] = $sandbox['#finished'] > 1 ? 1 : $sandbox['#finished'];
+}
+
+/**
+ * Helper function to get values.
+ */
+function _tide_card_consolidation_get_value(Paragraph $paragraph, $field) {
+  $result = NULL;
+  switch ($field) {
+    case "title":
+      if ($paragraph->hasField('field_paragraph_title') && !$paragraph->field_paragraph_title->isEmpty()) {
+        $result = $paragraph->field_paragraph_title->value;
+      }
+      elseif ($paragraph->hasField('field_paragraph_cta_text') && !$paragraph->field_paragraph_cta_text->isEmpty()) {
+        $result = $paragraph->field_paragraph_cta_text->value;
+      }
+      break;
+
+    case "summary":
+      if ($paragraph->hasField('field_paragraph_summary') && !$paragraph->field_paragraph_summary->isEmpty()) {
+        $result = $paragraph->field_paragraph_summary->value;
+      }
+      break;
+
+    case "media":
+      if ($paragraph->hasField('field_paragraph_media') && !$paragraph->field_paragraph_media->isEmpty()) {
+        $result = $paragraph->field_paragraph_media->target_id;
+      }
+      break;
+  }
+  return $result;
+}
+
+/**
+ * Gets card display style value.
+ */
+function _get_card_display_style(Paragraph $paragraph) {
+  $result = 'noImage';
+  switch ($paragraph->bundle()) {
+    case 'card_navigation_featured':
+    case 'card_navigation_featured_auto':
+      $result = 'featured';
+      break;
+
+    case 'card_promotion':
+    case 'card_promotion_auto':
+    case 'card_event':
+    case 'card_event_auto':
+      $result = 'thumbnail';
+      break;
+  }
+  return $result;
+}
+
+/**
+ * Gets link related values.
+ */
+function _get_link_value(Paragraph $paragraph) {
+  $path_details = [];
+  switch ($paragraph->bundle()) {
+    case 'card_navigation':
+    case 'card_navigation_featured':
+    case 'card_promotion':
+      if (!$paragraph->field_paragraph_link->isEmpty()) {
+        $uri = $paragraph->field_paragraph_link->uri;
+        $path_details = $paragraph->get('field_paragraph_link')->getValue();
+        if (!UrlHelper::isExternal($uri)) {
+          if (strpos($uri, 'internal:/node/') !== FALSE) {
+            $uri = str_replace('internal:/', 'entity:', $uri);
+            $path_details[0]['uri'] = $uri;
+          }
+        }
+        $path_details[1] = UrlHelper::isExternal($uri) ? 'external' : 'internal';
+        $path_details[2] = 'field_paragraph_link';
+      }
+      break;
+
+    case 'card_navigation_auto':
+    case 'card_navigation_featured_auto':
+    case 'card_promotion_auto':
+    case 'card_event_auto':
+      if (!$paragraph->field_paragraph_reference->isEmpty()) {
+        if (Node::load($paragraph->field_paragraph_reference->target_id)) {
+          $path_details = [
+            [
+              'uri' => 'entity:node/' . $paragraph->field_paragraph_reference->target_id,
+              'title' => '',
+              'options' => [],
+            ],
+            'internal',
+            'field_paragraph_reference',
+          ];
+        }
+      }
+      break;
+
+    default:
+      if (!$paragraph->field_paragraph_cta->isEmpty()) {
+        $uri = $paragraph->field_paragraph_cta->uri;
+        $path_details = $paragraph->get('field_paragraph_cta')->getValue();
+        if (!UrlHelper::isExternal($uri)) {
+          if (strpos($uri, 'internal:/node/') !== FALSE) {
+            $uri = str_replace('internal:/', 'entity:', $uri);
+            $path_details[0]['uri'] = $uri;
+          }
+        }
+        $path_details[1] = UrlHelper::isExternal($uri) ? 'external' : 'internal';
+        $path_details[2] = 'field_paragraph_cta';
+      }
+      break;
+  }
+  return $path_details;
+}
+
+/**
+ * Installs new data_table paragraph type.
+ */
+function tide_landing_page_update_8036() {
+  $configs = [
+    'paragraphs.paragraphs_type.data_table' => 'paragraphs_type',
+    'field.storage.paragraph.field_data_table_content' => 'field_storage_config',
+    'field.storage.paragraph.field_first_column_table_header' => 'field_storage_config',
+    'field.storage.paragraph.field_first_row_table_header' => 'field_storage_config',
+    'field.storage.paragraph.field_table_orientation' => 'field_storage_config',
+    'field.field.paragraph.data_table.field_data_table_content' => 'field_config',
+    'field.field.paragraph.data_table.field_first_column_table_header' => 'field_config',
+    'field.field.paragraph.data_table.field_first_row_table_header' => 'field_config',
+    'field.field.paragraph.data_table.field_table_orientation' => 'field_config',
+    'core.entity_view_display.paragraph.data_table.default' => 'entity_view_display',
+    'core.entity_form_display.paragraph.data_table.default' => 'entity_form_display',
+  ];
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  // Check if field already exported to config/sync.
+  foreach ($configs as $config => $type) {
+    $config_read = _tide_read_config($config, $config_location, TRUE);
+    $storage = \Drupal::entityTypeManager()->getStorage($type);
+    $config_entity = $storage->createFromStorageRecord($config_read);
+    $config_entity->save();
+  }
+
+  // Add the new paragraph type to field_landing_page_component.
+  $field = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
+  if ($field) {
+    $handler_settings = $field->getSetting('handler_settings');
+    if (isset($handler_settings['target_bundles']) && !in_array('data_table', $handler_settings['target_bundles'])) {
+      $handler_settings['target_bundles']['data_table'] = 'data_table';
+      $handler_settings['target_bundles_drag_drop']['data_table']['enabled'] = TRUE;
+      $field->setSetting('handler_settings', $handler_settings);
+      $field->save();
+    }
+  }
+
+  // Add paragraph type to JSON.
+  $json_field = 'jsonapi_extras.jsonapi_resource_config.paragraph--data_table';
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/optional'];
+  $config_storage = \Drupal::service('config.storage');
+  $config_read = _tide_read_config($json_field, $config_location, TRUE);
+  $config_storage->write($json_field, $config_read);
+}
+
+/**
+ * Create a new field group.
+ *
+ * @param string $label
+ *   The label.
+ * @param string $type
+ *   The format type (tabs, tab, etc.).
+ * @param array $settings
+ *   The format settings.
+ * @param string $region
+ *   The form region.
+ * @param int $weight
+ *   The weight.
+ * @param string $parent
+ *   The parent name.
+ * @param array $children
+ *   The list of child components.
+ *
+ * @return array
+ *   The field group array.
+ */
+function _tide_landing_page_new_field_group(string $label, string $type, array $settings, string $region = 'content', int $weight = 0, string $parent = '', array $children = []) : array {
+  return [
+    'label' => $label,
+    'parent_name' => $parent,
+    'children' => $children,
+    'format_type' => $type,
+    'format_settings' => $settings,
+    'region' => $region,
+    'weight' => $weight,
+  ];
+}
+
+/**
+ * Create a new tabs field group.
+ *
+ * @param string $label
+ *   The label.
+ * @param string $direction
+ *   The tabs direction (horizontal or vertical).
+ * @param string $id
+ *   The CSS ID.
+ * @param string $classes
+ *   The CSS classes.
+ * @param string $region
+ *   The form region.
+ * @param int $weight
+ *   The form weight.
+ * @param string $parent
+ *   The parent name.
+ * @param array $children
+ *   The list of child components.
+ *
+ * @return array
+ *   The field group array.
+ */
+function _tide_landing_page_new_field_group_tabs(string $label, string $direction = 'horizontal', string $id = '', string $classes = '', string $region = 'content', int $weight = 0, string $parent = '', array $children = []) : array {
+  return _tide_landing_page_new_field_group($label, 'tabs', [
+    'direction' => $direction,
+    'id' => $id,
+    'classes' => $classes,
+  ], $region, $weight, $parent, $children);
+}
+
+/**
+ * Create a new tab field group.
+ *
+ * @param string $label
+ *   The label.
+ * @param string $parent
+ *   The parent name.
+ * @param array $settings
+ *   The format settings.
+ * @param string $region
+ *   The form region.
+ * @param int $weight
+ *   The form weight.
+ * @param array $children
+ *   The list of child components.
+ *
+ * @return array
+ *   The field group array.
+ */
+function _tide_landing_page_new_field_group_tab(string $label, string $parent, array $settings = [], string $region = 'content', int $weight = 0, array $children = []) : array {
+  return _tide_landing_page_new_field_group($label, 'tab', [
+    'description' => '',
+    'formatter' => 'closed',
+    'required_fields' => TRUE,
+    'id' => '',
+    'classes' => '',
+  ] + $settings, $region, $weight, $parent, $children);
+}
+
+/**
+ * Update the node form of Landing Page.
+ */
+function tide_landing_page_update_8037() {
+  // Rename paragraph bundles.
+  $paragraph_updates = [
+    'basic_text' => [
+      'label' => t('Basic text'),
+      'description' => t('Add text, headings, media and tables to your page.'),
+    ],
+    'call_to_action' => [
+      'label' => t('Call to action'),
+      'description' => t('Add a large card or banner with a prominent button to prompt users to take action.'),
+    ],
+    'card_keydates' => [
+      'label' => t('Key dates'),
+      'description' => t('Add a clickable card that contains a collection of important dates.'),
+    ],
+    'card_carousel' => [
+      'label' => t('Card carousel'),
+      'description' => t('Feature up to 9 promotion cards in a scrollable carousel. News or events items can be automatically populated.'),
+    ],
+    'complex_image' => [
+      'description' => t('Display a complex image that users have the option to view in full screen, view in alternate format, or download.'),
+    ],
+    'data_table' => [
+      'description' => t('Embed a complex table of data that can display in a stacked format on small devices.'),
+    ],
+    'featured_news' => [
+      'label' => t('Featured news'),
+      'description' => t('Display prominent cards linking to three recent news items.'),
+    ],
+    'introduction_banner' => [
+      'label' => t('Introduction banner'),
+      'description' => t('Display prominent introductory text and links under the header of your page.'),
+    ],
+    'key_journeys' => t('Header links'),
+    'latest_events' => [
+      'label' => t('Latest events'),
+      'description' => t('Display a grid of up to 6 cards linking to recent events.'),
+    ],
+    'media_gallery' => [
+      'description' => t('Embed a scrollable carousel of images (content must first be created in the Custom block library).'),
+    ],
+    'navigation_card' => [
+      'description' => t('Add a wide card that links to internal or external content. Multiple cards will stack vertically.'),
+    ],
+    'news_listing' => [
+      'description' => t('Display a list of links to 6 recent news items based on a specific topic.'),
+    ],
+    'promotion_card' => [
+      'description' => t('Add a narrow card that links to internal or external content. Multiple cards will automatically be arranged in a 2 or 3 column grid.'),
+    ],
+    'embedded_search_form' => [
+      'label' => t('Search banner'),
+      'description' => t('Display a full-width search bar under the header of your page.'),
+    ],
+    'embedded_webform' => [
+      'label' => t('Form embed (Drupal)'),
+      'description' => t('Embed a Drupal form on your page. Users can populate fields and submit their information.'),
+    ],
+    'form_embed_openforms' => [
+      'label' => t('Form embed (OpenForms)'),
+      'description' => t('Embed an OpenForms form on your page. Users can populate fields and submit their information.'),
+    ],
+  ];
+  foreach ($paragraph_updates as $bundle => $update) {
+    if (!is_array($update)) {
+      $update = ['label' => $update];
+    }
+    /** @var \Drupal\paragraphs\ParagraphsTypeInterface $type */
+    $type = ParagraphsType::load($bundle);
+    if ($type) {
+      $entity_type = $type->getEntityType();
+      if (isset($update['label'])) {
+        $label_key = $entity_type->getKey('label');
+        $type->set($label_key, $update['label']);
+      }
+      if (isset($update['description'])) {
+        $type->set('description', $update['description']);
+      }
+      $type->save();
+    }
+  }
+
+  // Rename label of allowed values of Display Headings field.
+  $field_storage = FieldStorageConfig::loadByName('node',
+    'field_node_display_headings');
+  $allowed_values = $field_storage->getSettings()['allowed_values'];
+  $allowed_values['showH2'] = t('Show headings. H2 headings are automatically shown as default.');
+  $allowed_values['showH2AndH3'] = t('Show headings and subheadings. H2 and H3 headings are shown.');
+  $field_storage->setSetting('allowed_values', $allowed_values);
+  $field_storage->save();
+
+  // Update the field instances.
+  $update_field_config = [
+    'field_landing_page_key_journeys' => [
+      'label' => t('Header links'),
+      'description' => t('Header links are displayed alongside the page title on introduction banner. They link to other critical pages.'),
+    ],
+    'field_landing_page_hero_image' => [
+      'description' => t("Full-width background images display at the top of the page behind the page title. One image can be added and must be 1600px wide x 600px high. If a hero image is used, header links will not display."),
+    ],
+    'field_show_hero_image_caption' => [
+      'label' => t('Show Full-with background image caption'),
+    ],
+    'field_landing_page_hero_banner' => [
+      'label' => t('Call to action banner'),
+    ],
+    'field_featured_image' => [
+      'description' => t("Feature images don't display on this page. They display in featured card or navigation links to this page. Must be 496px high x 818px wide."),
+    ],
+    'field_graphical_image' => [
+      'label' => t('Top corner graphic'),
+    ],
+    'field_bottom_graphical_image' => [
+      'label' => t('Bottom corner graphic'),
+    ],
+    'field_landing_page_hero_logo' => [
+      'label' => t('Logo'),
+      'description' => t('A small logo can be added above the page title. This will not appear if ‘Full-width background image’ header style is selected.'),
+    ],
+    'field_landing_page_c_primary' => [
+      'description' => '',
+    ],
+    'field_landing_page_c_secondary' => [
+      'description' => '',
+    ],
+    'field_landing_page_component' => [
+      'description' => t('<p>Add text, links, media and cards to build your page.</p>'),
+    ],
+    'field_show_table_of_content' => [
+      'label' => t('Show table of contents?'),
+    ],
+    'field_show_whats_next' => [
+      'label' => t("Show What's next?"),
+    ],
+    'field_show_site_section_nav' => [
+      'label' => t('Show Site-section navigation?'),
+    ],
+    'field_show_social_sharing' => [
+      'label' => t('Social sharing'),
+      'required' => TRUE,
+      'description' => t('The social sharing box can be hidden in special circumstances.'),
+    ],
+  ];
+  foreach ($update_field_config as $field_name => $replacements) {
+    /** @var \Drupal\Core\Field\FieldConfigInterface $field_config */
+    $field_config = FieldConfig::loadByName('node', 'landing_page',
+      $field_name);
+    if ($field_config) {
+      $config = $field_config->toArray();
+      $config = array_replace_recursive($config, $replacements);
+      /** @var \Drupal\Core\Field\FieldConfigInterface $new_field_config */
+      $new_field_config = FieldConfig::create($config);
+      $new_field_config->original = $field_config;
+      $new_field_config->enforceIsNew(FALSE);
+      $new_field_config->save();
+    }
+  }
+
+  /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $form_display */
+  $form_display = EntityFormDisplay::load('node.landing_page.default');
+  if (!$form_display) {
+    return;
+  }
+
+  // Update field widgets.
+  $update_field_widgets = [
+    // Header.
+    'title' => ['weight' => 0],
+    'field_landing_page_summary' => ['weight' => 10],
+    'field_landing_page_intro_text' => ['weight' => 20],
+    'field_landing_page_key_journeys' => [
+      'settings' => [
+        'title' => t('Header link'),
+        'title_plural' => t('Header links'),
+      ],
+      'weight' => 30,
+    ],
+    // Customised Header.
+    'field_landing_page_hero_banner' => [
+      'settings' => ['edit_mode' => 'open'],
+      'weight' => 10,
+    ],
+    'field_landing_page_hero_image' => [
+      'settings' => ['open' => TRUE],
+      'weight' => 20,
+    ],
+    'field_landing_page_hero_theme' => [
+      'settings' => ['open' => TRUE],
+      'weight' => 25,
+    ],
+    'field_graphical_image' => [
+      'settings' => ['open' => TRUE],
+      'weight' => 30,
+    ],
+    'field_bottom_graphical_image' => [
+      'settings' => ['open' => TRUE],
+      'weight' => 40,
+    ],
+    'field_landing_page_hero_logo' => [
+      'settings' => ['open' => TRUE],
+      'weight' => 50,
+    ],
+    // Header addon.
+    'field_landing_page_header' => [
+      'settings' => ['add_mode' => 'modal'],
+    ],
+    // Featured image.
+    'field_featured_image' => [
+      'settings' => ['open' => TRUE],
+      'weight' => -90,
+    ],
+    // Page Campaign.
+    'field_landing_page_c_primary' => ['weight' => -79],
+    'field_show_c_primary_caption' => ['weight' => -78],
+    'field_landing_page_c_secondary' => ['weight' => -75],
+    // Content.
+    'field_landing_page_component' => [
+      'settings' => ['add_mode' => 'modal'],
+    ],
+    // Sidebar.
+    'field_related_links' => [
+      'type' => 'entity_reference_paragraphs',
+      'settings' => [
+        'title' => t('Link'),
+        'title_plural' => t('Links'),
+        'edit_mode' => 'closed',
+        'add_mode' => 'button',
+        'form_display_mode' => 'default',
+        'default_paragraph_type' => '_none',
+      ],
+    ],
+    'field_show_social_sharing' => [
+      'type' => 'options_buttons',
+      'weight' => 40,
+    ],
+    // General.
+    'field_topic' => ['weight' => 0],
+    'field_show_topic_term_and_tags' => ['weight' => 1],
+    'field_show_content_rating' => ['weight' => 2],
+    'field_landing_page_bg_colour' => ['weight' => 3],
+  ];
+  foreach ($update_field_widgets as $field => $replacements) {
+    if (!is_array($replacements)) {
+      $replacements = ['weight' => $replacements];
+    }
+    $component = $form_display->getComponent($field);
+    if ($component) {
+      $component = array_replace_recursive($component, $replacements);
+      $form_display->setComponent($field, $component);
+    }
+  }
+
+  // Update the field groups.
+  $field_group = $form_display->getThirdPartySettings('field_group');
+
+  // Header section.
+  $field_group['group_section_header'] = _tide_landing_page_new_field_group_tabs('Header Section',
+    'horizontal', 'node-form-group-header-section', '', 'content', -100);
+  $field_group['group_section_header']['children'] = [
+    'group_header',
+    'group_customised_header',
+    'group_header_addon',
+  ];
+
+  // Header - Header tab.
+  $field_group['group_header'] = _tide_landing_page_new_field_group_tab('Header',
+    'group_section_header', [], 'content', -99);
+  $field_group['group_header']['children'] = [
+    'title',
+    'field_landing_page_summary',
+    'field_landing_page_intro_text',
+    'field_landing_page_key_journeys',
+  ];
+
+  // Header - Customised header tab.
+  $field_group['group_customised_header'] = _tide_landing_page_new_field_group_tab('Customised Header',
+    'group_section_header', [], 'content', -98);
+  $field_group['group_customised_header']['children'] = [
+    'field_landing_page_hero_image',
+    'field_landing_page_hero_theme',
+    'field_landing_page_hero_logo',
+    'field_graphical_image',
+    'field_bottom_graphical_image',
+    'field_landing_page_hero_banner',
+  ];
+
+  // Header - Header add-on tab.
+  $field_group['group_header_addon'] = _tide_landing_page_new_field_group_tab('Header extras',
+    'group_section_header', [], 'content', -97);
+  $field_group['group_header_addon']['children'] = [
+    'field_landing_page_header',
+    'field_show_ack_of_country',
+  ];
+
+  // Campaign section.
+  $field_group['group_section_campaign'] = _tide_landing_page_new_field_group_tabs('Campaign Section',
+    'horizontal', 'node-form-group-page-campaign', '', 'content', -80);
+  $field_group['group_section_campaign']['children'] = [
+    'group_campaign',
+  ];
+
+  // Campaign - Page campaign tab.
+  $field_group['group_campaign'] = _tide_landing_page_new_field_group_tab('Page campaign',
+    'group_section_campaign', [], 'content', -79);
+  $field_group['group_campaign']['children'] = [
+    'group_primary_campaign',
+    'group_secondary_campaign',
+  ];
+
+  // Campaign - Page campaign tab - Primary campaign.
+  $field_group['group_primary_campaign'] = _tide_landing_page_new_field_group('Primary campaign',
+    'details', [
+      'open' => FALSE,
+      'description' => t('Primary campaigns display at the top of the page between the header section and the body content section. They span the full width of the content area. Start typing the name of your custom block component to display your campaign.'),
+    ], 'content', 0, 'group_campaign', [
+      'field_landing_page_c_primary',
+      'field_show_c_primary_caption',
+    ]);
+  // Campaign - Page campaign tab - Secondary campaign.
+  $field_group['group_secondary_campaign'] = _tide_landing_page_new_field_group('Secondary campaign',
+    'details', [
+      'open' => FALSE,
+      'description' => t('Secondary campaign displays after the content area, just above the page footer. They span the full width of the content area. Start typing the name of your custom block component to display your campaign'),
+    ], 'content', 10, 'group_campaign', [
+      'field_landing_page_c_secondary',
+    ]);
+
+  // Content section.
+  $field_group['group_section_content'] = _tide_landing_page_new_field_group_tabs('Content Section',
+    'horizontal', 'node-form-group-content-section', '', 'content', -70);
+  $field_group['group_section_content']['children'] = [
+    'group_components',
+    'group_header_content',
+    'group_bottom_feature',
+  ];
+  // Content - Page content tab.
+  if (isset($field_group['group_components'])) {
+    $field_group['group_components'] = array_replace_recursive($field_group['group_components'],
+      [
+        'label' => 'Page content',
+        'format_type' => 'tab',
+        'parent_name' => 'group_section_content',
+        'region' => 'content',
+        'weight' => -79,
+      ]);
+  }
+
+  // Sidebar section.
+  $field_group['group_section_sidebar'] = _tide_landing_page_new_field_group_tabs('Sidebar Section',
+    'horizontal', 'node-form-group-sidebar-section', '', 'content', -60, '',
+    ['group_sidebar']);
+  // Sidebar - Sidebar tab.
+  $field_group['group_sidebar'] = _tide_landing_page_new_field_group_tab('Sidebar',
+    'group_section_sidebar', [], 'content', -61);
+  $field_group['group_sidebar']['children'] = [
+    'group_site_section_navigation',
+    'group_site_section_navigation',
+    'group_related_links',
+    'group_whats_next',
+    'group_contact_us',
+    'field_show_social_sharing',
+  ];
+  if (isset($field_group['group_site_section_navigation'])) {
+    $field_group['group_site_section_navigation'] = array_replace_recursive($field_group['group_site_section_navigation'],
+      [
+        'format_type' => 'details',
+        'format_settings' => [
+          'open' => FALSE,
+          'description' => t('Add a site-section navigation on the right-hand side of your site.'),
+        ],
+        'parent_name' => 'group_sidebar',
+        'region' => 'content',
+        'weight' => 0,
+      ]);
+  }
+  if (isset($field_group['group_related_links'])) {
+    $field_group['group_related_links'] = array_replace_recursive($field_group['group_related_links'],
+      [
+        'format_type' => 'details',
+        'format_settings' => [
+          'open' => FALSE,
+          'description' => t('Related pages can be linked from this sidebar.'),
+        ],
+        'parent_name' => 'group_sidebar',
+        'region' => 'content',
+        'weight' => 10,
+      ]);
+  }
+  if (isset($field_group['group_whats_next'])) {
+    $field_group['group_whats_next'] = array_replace_recursive($field_group['group_whats_next'],
+      [
+        'format_type' => 'details',
+        'format_settings' => ['open' => FALSE],
+        'parent_name' => 'group_sidebar',
+        'region' => 'content',
+        'weight' => 20,
+      ]);
+  }
+  if (isset($field_group['group_contact_us'])) {
+    $field_group['group_contact_us'] = array_replace_recursive($field_group['group_contact_us'],
+      [
+        'format_type' => 'details',
+        'format_settings' => [
+          'open' => FALSE,
+          'description' => t('Specific contact details - name, address, phone, email can be added in a block to the sidebar.'),
+        ],
+        'parent_name' => 'group_sidebar',
+        'region' => 'content',
+        'weight' => 30,
+      ]);
+  }
+
+  foreach ($field_group as $group_name => $group_settings) {
+    $form_display->setThirdPartySetting('field_group', $group_name,
+      $group_settings);
+  }
+
+  // Removes unused groups.
+  $unused_groups = [
+    'group_key_journeys',
+    'group_content',
+    'group_header_content',
+    'group_top_banner',
+    'group_bottom_',
+    'group_right_column',
+    'group_blocks',
+  ];
+  foreach ($unused_groups as $group_name) {
+    unset($field_group[$group_name]);
+    $form_display->unsetThirdPartySetting('field_group', $group_name);
+  }
+
+  $form_display->save();
+}
+
+/**
+ * Change icon of paragraph types.
+ */
+function tide_landing_page_update_8038() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $icon_dir = drupal_get_path('module', 'tide_landing_page') . DIRECTORY_SEPARATOR . 'icons';
+
+  $paragraphs = [
+    'basic_text',
+    'call_to_action',
+    'card_carousel',
+    'card_keydates',
+    'complex_image',
+    'data_table',
+    'embedded_search_form',
+    'embedded_webform',
+    'featured_news',
+    'form_embed_openforms',
+    'introduction_banner',
+    'latest_events',
+    'media_gallery',
+    'navigation_card',
+    'news_listing',
+    'promotion_card',
+  ];
+  foreach ($paragraphs as $paragraph_type_id) {
+    $icon_filename = $icon_dir . DIRECTORY_SEPARATOR . $paragraph_type_id . '.svg';
+    _tide_set_paragraph_type_icon($paragraph_type_id, $icon_filename);
+  }
 }
