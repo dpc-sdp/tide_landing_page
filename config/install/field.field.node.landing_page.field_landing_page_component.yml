@@ -20,6 +20,7 @@ dependencies:
     - paragraphs.paragraphs_type.navigation_card
     - paragraphs.paragraphs_type.promotion_card
     - paragraphs.paragraphs_type.timelines
+    - paragraphs.paragraphs_type.featured_news
   module:
     - entity_reference_revisions
 id: node.landing_page.field_landing_page_component
@@ -53,6 +54,7 @@ settings:
       news_listing: news_listing
       navigation_card: navigation_card
       promotion_card: promotion_card
+      featured_news: featured_news
     target_bundles_drag_drop:
       banner:
         weight: -33
