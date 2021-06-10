@@ -2191,13 +2191,20 @@ function tide_landing_page_update_8037() {
 }
 
 /**
- * Change icon of paragraph types.
+ * Change icon  and weight of paragraph types.
  */
 function tide_landing_page_update_8038() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config = 'field.field.node.landing_page.field_landing_page_component';
+  // Read only from /config/install.
+  $config_read = _tide_read_config($config, $config_location, FALSE);
+  // Get the sync file to update.
+  $config_factory = \Drupal::configFactory();
+  $config_sync = $config_factory->getEditable($config);
   $icon_dir = drupal_get_path('module', 'tide_landing_page') . DIRECTORY_SEPARATOR . 'icons';
-
   $paragraphs = [
+    'accordion',
     'basic_text',
     'call_to_action',
     'card_carousel',
@@ -2214,9 +2221,14 @@ function tide_landing_page_update_8038() {
     'navigation_card',
     'news_listing',
     'promotion_card',
+    'timelines',
   ];
   foreach ($paragraphs as $paragraph_type_id) {
+    // Changing icons.
     $icon_filename = $icon_dir . DIRECTORY_SEPARATOR . $paragraph_type_id . '.svg';
     _tide_set_paragraph_type_icon($paragraph_type_id, $icon_filename);
+    // Changing weight.
+    $new_weight = $config_read['settings']['handler_settings']['target_bundles_drag_drop'][$paragraph_type_id]['weight'];
+    $config_sync->set('settings.handler_settings.target_bundles_drag_drop.'.$paragraph_type_id.'.weight', $new_weight)->save();
   }
 }
