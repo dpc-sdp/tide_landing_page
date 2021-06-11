@@ -2229,6 +2229,6 @@ function tide_landing_page_update_8038() {
     _tide_set_paragraph_type_icon($paragraph_type_id, $icon_filename);
     // Changing weight.
     $new_weight = $config_read['settings']['handler_settings']['target_bundles_drag_drop'][$paragraph_type_id]['weight'];
-    $config_sync->set('settings.handler_settings.target_bundles_drag_drop.'.$paragraph_type_id.'.weight', $new_weight)->save();
+    $config_sync->set('settings.handler_settings.target_bundles_drag_drop.' . $paragraph_type_id . '.weight', $new_weight)->save();
   }
 }
