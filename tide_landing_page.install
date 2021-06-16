@@ -16,7 +16,6 @@ use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\node\Entity\Node;
 use Drupal\Component\Utility\UrlHelper;
-use Drupal\Component\Utility\Html;
 
 /**
  * Implements hook_install().
@@ -1288,8 +1287,7 @@ function tide_landing_page_update_8032() {
 }
 
 /**
- * Add the new paragraph type tide_automated_listing.
- * Installs new promotion_card paragraph type.
+ * Add the new paragraph types tide_automated_listing and promotion_card.
  */
 function tide_landing_page_update_8033() {
   $result = \Drupal::service('module_installer')->install(['tide_automated_listing']);
