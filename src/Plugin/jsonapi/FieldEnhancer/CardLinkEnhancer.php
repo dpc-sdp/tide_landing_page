@@ -30,6 +30,10 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
       $nid = str_replace("entity:node/", "", $data['uri']);
       $node = !empty($nid) ? \Drupal::entityTypeManager()->getStorage('node')->load($nid) : '';
       if ($node) {
+        if (!empty($node->toArray()['path'][0])) {
+          $data['pid'] = !empty($node->toArray()['path'][0]['pid']) ? $node->toArray()['path'][0]['pid'] : '';
+        }
+        $data['alias'] = $this->getAlias($nid);
         $data['url'] = $this->getAlias($nid);
         $data['image'] = $this->getImage($node);
         $data['internal_node_fields'] = $this->getCardFields($node);
@@ -70,8 +74,7 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
   public function getAlias($nid) {
     $url = '';
     if (!empty($nid)) {
-      $aliasByPath = \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $nid);
-      $url = $this->getPathAliasWithoutSitePrefix(['alias' => $aliasByPath]);
+      $url = \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $nid);
     }
     return $url;
   }

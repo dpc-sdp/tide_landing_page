@@ -8,7 +8,7 @@ id: node.landing_page.field_show_table_of_content
 field_name: field_show_table_of_content
 entity_type: node
 bundle: landing_page
-label: 'Show Table of Content?'
+label: 'Show table of contents?'
 description: 'The table of contents is automatically built from the heading structure of your page.'
 required: false
 translatable: true
