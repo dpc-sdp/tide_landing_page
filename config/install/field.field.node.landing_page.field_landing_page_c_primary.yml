@@ -9,7 +9,7 @@ id: node.landing_page.field_landing_page_c_primary
 field_name: field_landing_page_c_primary
 entity_type: node
 bundle: landing_page
-label: 'Primary Campaign'
+label: 'Primary campaign'
 description: ''
 required: false
 translatable: false
