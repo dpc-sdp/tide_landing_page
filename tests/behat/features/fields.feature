@@ -319,7 +319,7 @@ Feature: Fields for Landing Page content type
 
     Given I am logged in as a user with the "Administrator" role
     When I edit landing_page "[TEST] Landing Page title"
-    And I click "Body Content"
+    And I click on link with href "#edit-group-components"
     Then I select "Card collection" from "edit-field-landing-page-component-add-more-add-more-select"
     And I press the "edit-field-landing-page-component-add-more-add-more-button" button
     Then I wait for AJAX to finish
