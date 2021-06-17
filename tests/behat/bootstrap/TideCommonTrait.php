@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Trait TideTrait.
+ * Common test trait for Tide.
  *
- * @todo: Review this trait and try using BehatSteps trait instead.
+ * @todo Review this trait and try using BehatSteps trait instead.
  */
 trait TideCommonTrait {
 
@@ -32,7 +32,7 @@ trait TideCommonTrait {
     // actually creating a user with role. By default,
     // assertAuthenticatedByRole() will create a user with 'authenticated role'
     // even if 'anonymous user' role is provided.
-    if ($role == 'anonymous user') {
+    if ($role === 'anonymous user') {
       if (!empty($this->loggedInUser)) {
         $this->logout();
       }
@@ -58,22 +58,17 @@ trait TideCommonTrait {
    */
   public function iWaitForAjaxToFinish($timeout) {
     $condition = <<<JS
-    (function() {
-      function isAjaxing(instance) {
-        return instance && instance.ajaxing === true;
-      }
-      var d7_not_ajaxing = true;
-      if (typeof Drupal !== 'undefined' && typeof Drupal.ajax !== 'undefined' && typeof Drupal.ajax.instances === 'undefined') {
-        for(var i in Drupal.ajax) { if (isAjaxing(Drupal.ajax[i])) { d7_not_ajaxing = false; } }
-      }
-      var d8_not_ajaxing = (typeof Drupal === 'undefined' || typeof Drupal.ajax === 'undefined' || typeof Drupal.ajax.instances === 'undefined' || !Drupal.ajax.instances.some(isAjaxing))
-      return (
-        // Assert no AJAX request is running (via jQuery or Drupal) and no
-        // animation is running.
-        (typeof jQuery === 'undefined' || (jQuery.active === 0 && jQuery(':animated').length === 0)) &&
-        d7_not_ajaxing && d8_not_ajaxing
-      );
-    }());
+      (function() {
+        function isAjaxing(instance) {
+          return instance && instance.ajaxing === true;
+        }
+        return (
+          // Assert no AJAX request is running (via jQuery or Drupal) and no
+          // animation is running.
+          (typeof jQuery === 'undefined' || (jQuery.active === 0 && jQuery(':animated').length === 0)) &&
+          (typeof Drupal === 'undefined' || typeof Drupal.ajax === 'undefined' || !Drupal.ajax.instances.some(isAjaxing))
+        );
+      }());
 JS;
     $result = $this->getSession()->wait($timeout * 1000, $condition);
     if (!$result) {
@@ -85,16 +80,43 @@ JS;
    * @Given no :type content type
    */
   public function removeContentType($type) {
-    $content_type_entity = \Drupal::entityManager()->getStorage('node_type')->load($type);
+    $content_type_entity = \Drupal::entityTypeManager()->getStorage('node_type')->load($type);
     if ($content_type_entity) {
       $content_type_entity->delete();
     }
   }
 
   /**
-   * @Then /^I click on link with href "([^"]*)"$/
+   * @When I scroll :selector into view
+   * @When I scroll selector :selector into view
+   *
+   * @param string $selector
+   *   Allowed selectors: #id, .className, //xpath.
+   *
+   * @throws \Exception
    */
-  public function clickOnLinkWithHref($href) {
+  public function scrollIntoView($selector) {
+    $function = <<<JS
+      (function() {
+        jQuery("$selector").get(0).scrollIntoView(false);
+      }());
+JS;
+    try {
+      $this->getSession()->executeScript($function);
+    }
+    catch (Exception $e) {
+      throw new \Exception(__METHOD__ . ' failed');
+    }
+  }
+
+  /**
+   * @Then /^I click on link with href "([^"]*)"$/
+   * @Then /^I click on link with href value "([^"]*)"$/
+   *
+   * @param string $href
+   *   The href value.
+   */
+  public function clickOnLinkWithHref(string $href) {
     $page = $this->getSession()->getPage();
     $link = $page->find('xpath', '//a[@href="' . $href . '"]');
     if ($link === NULL) {
@@ -105,8 +127,12 @@ JS;
 
   /**
    * @Then /^I click on the horizontal tab "([^"]*)"$/
+   * @Then /^I click on the horizontal tab with text "([^"]*)"$/
+   *
+   * @param string $text
+   *   The text.
    */
-  public function clickOnHorzTab($text) {
+  public function clickOnHorzTab(string $text) {
     $page = $this->getSession()->getPage();
     $link = $page->find('xpath', '//ul[contains(@class, "horizontal-tabs-list")]/li[contains(@class, "horizontal-tab-button")]/a/strong[text()="' . $text . '"]');
     if ($link === NULL) {
@@ -117,12 +143,19 @@ JS;
 
   /**
    * @Then /^I click on the detail "([^"]*)"$/
+   * @Then /^I click on the detail with text "([^"]*)"$/
+   *
+   * @param string $text
+   *   The text.
    */
-  public function clickOnDetail($text) {
+  public function clickOnDetail(string $text) {
     $page = $this->getSession()->getPage();
     $link = $page->find('xpath', '//div[contains(@class, "details-wrapper")]/details/summary[text()="' . $text . '"]');
     if ($link === NULL) {
-      throw new \Exception('The detail with text "' . $text . '" not found.');
+      $link = $page->find('xpath', '//div[contains(@class, "details-wrapper")]/details/summary/span[text()="' . $text . '"]');
+      if ($link === NULL) {
+        throw new \Exception('The detail with text "' . $text . '" not found.');
+      }
     }
     $link->click();
   }

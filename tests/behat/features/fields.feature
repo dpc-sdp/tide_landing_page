@@ -304,7 +304,7 @@ Feature: Fields for Landing Page content type
     And I see field "field_landing_page_component[0][subform][field_customise][value]"
     And save screenshot
     
-  @api @suggest @javascript
+  @api @suggest @javascript @skipped
   Scenario: Request a landing page with an automated listing component via API
     Given vocabulary "topic" with name "Topic" exists
     And topic terms:
