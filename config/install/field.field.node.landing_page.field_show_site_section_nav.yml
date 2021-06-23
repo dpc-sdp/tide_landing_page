@@ -8,7 +8,7 @@ id: node.landing_page.field_show_site_section_nav
 field_name: field_show_site_section_nav
 entity_type: node
 bundle: landing_page
-label: 'Show Site-section Navigation?'
+label: 'Show Site-section navigation?'
 description: ''
 required: false
 translatable: false

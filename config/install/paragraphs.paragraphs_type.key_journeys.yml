@@ -2,7 +2,8 @@ langcode: en
 status: true
 dependencies: {  }
 id: key_journeys
-label: 'Key journeys'
+label: 'Header links'
 icon_uuid: null
+icon_default: null
 description: ''
 behavior_plugins: {  }
