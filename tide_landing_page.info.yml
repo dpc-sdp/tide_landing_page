@@ -296,6 +296,7 @@ config_devel:
     - paragraphs.paragraphs_type.latest_events
     - paragraphs.paragraphs_type.media_gallery
     - paragraphs.paragraphs_type.contact_us
+    - paragraphs.paragraphs_type.news_listing
     - paragraphs.paragraphs_type.phone
     - paragraphs.paragraphs_type.social_link
     - paragraphs.paragraphs_type.timelines
@@ -325,4 +326,3 @@ config_devel:
     - jsonapi_extras.jsonapi_resource_config.paragraph--keydates
     - jsonapi_extras.jsonapi_resource_config.paragraph--media_gallery
     - jsonapi_extras.jsonapi_resource_config.paragraph--social_link
-    - paragraphs.paragraphs_type.news_listing
