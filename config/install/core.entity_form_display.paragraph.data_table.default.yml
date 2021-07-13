@@ -5,6 +5,7 @@ dependencies:
     - field.field.paragraph.data_table.field_data_table_content
     - field.field.paragraph.data_table.field_first_column_table_header
     - field.field.paragraph.data_table.field_first_row_table_header
+    - field.field.paragraph.data_table.field_item_description
     - field.field.paragraph.data_table.field_table_orientation
     - paragraphs.paragraphs_type.data_table
   module:
@@ -52,8 +53,16 @@ content:
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
-  field_table_orientation:
+  field_item_description:
     weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_table_orientation:
+    weight: 1
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
