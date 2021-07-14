@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_item_description
+    - paragraphs.paragraphs_type.data_table
+id: paragraph.data_table.field_item_description
+field_name: field_item_description
+entity_type: paragraph
+bundle: data_table
+label: 'Table description'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
