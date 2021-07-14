@@ -2237,13 +2237,22 @@ function tide_landing_page_update_8038() {
  * Installs field_item_description field to data_table.
  */
 function tide_landing_page_update_8039() {
-  // Installs field.
+  // Install configs.
+  $configs = [
+    'field.storage.paragraph.field_item_description' => 'field_storage_config/paragraph.field_item_description',
+    'field.field.paragraph.data_table.field_item_description' => 'field_config/paragraph.data_table.field_item_description',
+  ];
   module_load_include('inc', 'tide_core', 'includes/helpers');
   $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
-  $config_read = _tide_read_config('field.field.paragraph.data_table.field_item_description', $config_location, TRUE);
-  $storage = \Drupal::entityTypeManager()->getStorage('field_config');
-  $config_entity = $storage->createFromStorageRecord($config_read);
-  $config_entity->save();
+  foreach ($configs as $config => $type) {
+    list($storage_type, $id) = explode('/',$type);
+    $config_read = _tide_read_config($config, $config_location, TRUE);
+    $storage = \Drupal::entityTypeManager()->getStorage($storage_type);
+    if ($storage->load($id) == NULL) {
+      $config_entity = $storage->createFromStorageRecord($config_read);
+      $config_entity->save();
+    }
+  }
 
   // Updates entity_form_display.
   $entity_form_display = \Drupal::entityTypeManager()
