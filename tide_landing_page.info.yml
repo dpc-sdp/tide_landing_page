@@ -23,6 +23,7 @@ dependencies:
   - maxlength:maxlength
   - paragraphs:paragraphs
   - smart_trim:smart_trim
+  - tablefield:tablefield
 config_devel:
   install:
     - block_content.type.campaign
