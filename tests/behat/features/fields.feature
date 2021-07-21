@@ -305,3 +305,66 @@ Feature: Fields for Landing Page content type
     # This field can be "seen" but not visible.
     And I see field "field_landing_page_component[0][subform][field_customise][value]"
     And save screenshot
+
+  @api @suggest @javascript @skipped
+  # TODO: This test must be rewritten to work with the new form UI.
+  Scenario: Request a landing page with an automated listing component via API
+    Given vocabulary "topic" with name "Topic" exists
+    And topic terms:
+      | name       | parent |
+      | Test Topic | 0      |
+
+    Given landing_page content:
+      | title                     | path                     | moderation_state | uuid                                | field_topic | field_node_primary_site | field_landing_page_summary | field_landing_page_bg_colour |
+      | [TEST] Landing Page title | /test-landing-page-alias | published        | 99999999-aaaa-bbbb-ccc-000000000000 | Test Topic  | Test Site               | Test Summary               | White                       |
+
+    Given I am logged in as a user with the "Administrator" role
+    When I edit landing_page "[TEST] Landing Page title"
+    And I click on link with href "#edit-group-components"
+    Then I select "Card collection" from "edit-field-landing-page-component-add-more-add-more-select"
+    And I press the "edit-field-landing-page-component-add-more-add-more-button" button
+    Then I wait for AJAX to finish
+
+    Then I fill in "Collection title" with "Test Automated Listing"
+    And I fill in "Collection description" with "Test Automated Listing Description"
+    And I click "Automated Cards"
+    And I check the box "Landing Page"
+    And I select "Changed" from "Sort by a date filter"
+    And I select "Ascending" from "Sort order"
+
+    Then I click "Layout Options"
+    And I fill in "Number of cards shown per page" with "9"
+    And I select the radio button "Show 'no results' message"
+
+    Then I select "Published" from "Change to"
+    And I press the "Save" button
+
+    Given I am an anonymous user
+    When I send a GET request to "/api/v1/node/landing_page/99999999-aaaa-bbbb-ccc-000000000000?include=field_landing_page_component"
+    Then the rest response status code should be 200
+    And the response should be in JSON
+    And the JSON node "data" should exist
+    And the JSON node "included" should exist
+    And the JSON node "included" should have 1 element
+    And the JSON node "included[0].type" should be equal to "paragraph--automated_card_listing"
+    And the JSON node "included[0].attributes" should exist
+    And the JSON node "included[0].attributes.field_paragraph_title" should be equal to "Test Automated Listing"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing" should exist
+
+    And the JSON node "included[0].attributes.field_no_result_behaviour" should be equal to "no_results_message"
+    And the JSON node "included[0].attributes.field_no_results_message" should be equal to "There are currently no results"
+
+    And the JSON node "included[0].attributes.field_listing_display_type" should be equal to "carousel"
+    And the JSON node "included[0].attributes.field_listings_per_page" should be equal to "9"
+
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.filter_operator" should be equal to "OR"
+
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.filter_today.status" should be equal to "false"
+
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.content_type[0]" should be equal to "landing_page"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.filters.type.values[0]" should be equal to "landing_page"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.filters.type.operator" should be equal to "OR"
+
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.sort.field" should be equal to "changed"
+    And the JSON node "included[0].attributes.field_paragraph_auto_listing.sort.direction" should be equal to "asc"
+
