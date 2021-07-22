@@ -519,7 +519,7 @@ function _tide_landing_page_get_all_ref_nodes(NodeInterface $node) {
 function tide_landing_page_node_presave(NodeInterface $node) {
   if (!$node->isNew()) {
     $cids = _tide_landing_page_get_all_ref_nodes($node);
-    if(!empty($cids)) {
+    if (!empty($cids)) {
       Cache::invalidateTags($cids);
     }
   }
