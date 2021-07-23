@@ -485,30 +485,23 @@ function _tide_landing_page_form_node_form_after_build(array $form, FormStateInt
  *   The node ids.
  */
 function _tide_landing_page_get_all_ref_nodes(NodeInterface $node) {
-  try {
-    $query = \Drupal::entityTypeManager()->getStorage('paragraph')->getQuery();
-    $query->condition('field_paragraph_link', 'entity:node/' . $node->id());
+  if ($node->id()) {
+    $query = \Drupal::database()->select('paragraphs_item_field_data', 'p');
+    $query->fields('p', ['parent_id']);
+    $query->fields('pl', ['field_paragraph_link_uri']);
+    $query->leftJoin('paragraph__field_paragraph_link', 'pl', 'pl.entity_id = p.id');
+    $query->condition('pl.field_paragraph_link_uri', 'entity:node/' . $node->id());
     $or = $query->orConditionGroup();
     $or->condition('type', 'navigation_card');
     $or->condition('type', 'promotion_card');
-    $result = $query->condition($or)->execute();
-    if ($result) {
-      $node_ids = \Drupal::database()
-        ->select('paragraphs_item_field_data', 'para')
-        ->fields('para', ['parent_id'])
-        ->condition('id', $result, 'IN')
-        ->execute()->fetchCol();
-      if ($node_ids) {
-        $cids = [];
-        foreach ($node_ids as $node_id) {
-          $cids[] = 'node:' . $node_id;
-        }
-        return $cids;
+    $node_ids = $query->condition($or)->execute()->fetchCol();
+    if ($node_ids) {
+      $cids = [];
+      foreach ($node_ids as $node_id) {
+        $cids[] = 'node:' . $node_id;
       }
+      return $cids;
     }
-  }
-  catch (\Exception $exception) {
-    watchdog_exception('tide_landing_page_get_all_ref_nodes', $exception);
   }
   return NULL;
 }
