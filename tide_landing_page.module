@@ -181,7 +181,7 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
   $paragraph_field_name = $field_definition->getName();
   $widget_state = WidgetBase::getWidgetState($element['#field_parents'], $paragraph_field_name, $form_state);
   $paragraph = $widget_state['paragraphs'][$element['#delta']]['entity'];
-  $paragraph_type = $paragraph->bundle();
+  $paragraph_type = $paragraph ? $paragraph->bundle() : '';
 
   switch ($paragraph_type) {
     case 'embedded_search_form':
@@ -225,7 +225,7 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
   if ($paragraph_field_name === 'field_landing_page_component') {
     $widget_state = WidgetBase::getWidgetState($element['#field_parents'], $paragraph_field_name, $form_state);
     $paragraph = $widget_state['paragraphs'][$element['#delta']]['entity'];
-    $paragraph_type = $paragraph->bundle();
+    $paragraph_type = $paragraph ? $paragraph->bundle() : '';
     // Hide table caption field in Data table component.
     if ($paragraph_type == 'data_table') {
       unset($element['subform']['field_data_table_content']['widget'][0]['caption']);
