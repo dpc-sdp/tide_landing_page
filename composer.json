@@ -11,12 +11,18 @@
     "suggest": {
         "dpc-sdp/tide_api:^1.2.6": "Allows to use Drupal in headless mode",
         "dpc-sdp/tide_webform:^1.2.4": "Allows to use questionnaires",
-        "dpc-sdp/tide_news:^1.1.5": "News content type and related configuration for Tide Drupal 8 distribution"
+        "dpc-sdp/tide_news:^1.1.5": "News content type and related configuration for Tide Drupal 8 distribution",
+        "dpc-sdp/tide_automated_listing:^1.0@beta": "Allows to use tide automated listing"
     },
     "repositories": {
         "drupal": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        "dpc-sdp/tide_automated_listing": {
+            "type": "vcs",
+            "no-api": true,
+            "url": "https://github.com/dpc-sdp/tide_automated_listing.git"
         }
     }
 }

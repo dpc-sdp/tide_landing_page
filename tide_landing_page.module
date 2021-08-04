@@ -59,7 +59,8 @@ function tide_landing_page_entity_bundle_create($entity_type_id, $bundle) {
 
       $is_featured_news = ($bundle == 'featured_news' && $moduleHandler->moduleExists('tide_news'));
       $is_embedded_webform = ($bundle == 'embedded_webform' && $moduleHandler->moduleExists('tide_webform'));
-      if ($is_featured_news || $is_embedded_webform) {
+      $is_automated_listing = ($bundle == 'automated_card_listing' && $moduleHandler->moduleExists('tide_automated_listing'));
+      if ($is_featured_news || $is_embedded_webform || $is_automated_listing) {
         $handler_settings['target_bundles'][$bundle] = $bundle;
         $field_config->setSetting('handler_settings', $handler_settings);
         $field_config->save();
@@ -153,6 +154,14 @@ function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form
           foreach (Element::children($form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_keydates']['widget']) as $delta) {
             $form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_keydates']['widget'][$delta]['top']['type']['label']['#markup'] = '<span class="paragraph-type-label"></span>';
           }
+          if (isset($form['field_landing_page_component']['widget'][$key]['subform']['field_no_results_message'])) {
+            $form['field_landing_page_component']['widget'][$key]['subform']['field_no_results_message']['#states'] = [];
+            $form['field_landing_page_component']['widget'][$key]['subform']['field_no_results_message']['#states'] = [
+              'invisible' => [
+                ':input[name="field_landing_page_component[' . $key . '][subform][field_no_result_behaviour]"]' => ['value' => 'hide'],
+              ],
+            ];
+          }
         }
       }
     }
@@ -228,6 +237,32 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
     $widget_state = WidgetBase::getWidgetState($element['#field_parents'], $paragraph_field_name, $form_state);
     $paragraph = $widget_state['paragraphs'][$element['#delta']]['entity'];
     $paragraph_type = $paragraph->bundle();
+    if ($paragraph_type == 'automated_card_listing') {
+      $listing_display_type_selector = sprintf(':input[name^="%s[%d][subform][field_listing_display_type]"]', $paragraph_field_name, $element['#delta']);
+      if (isset($element['subform']['field_listings_minimum'])) {
+        $element['subform']['field_listings_minimum']['#states'] = [
+          'visible' => [
+            $listing_display_type_selector => ['value' => 'grid'],
+          ],
+        ];
+
+        $element['subform']['field_listings_minimum']['widget'][0]['value']['#states'] = [
+          'required' => [
+            $listing_display_type_selector => ['value' => 'grid'],
+          ],
+        ];
+      }
+
+      if (isset($element['subform']['field_individual_cards']) && is_array($element['subform']['field_individual_cards'])) {
+        foreach ($element['subform']['field_individual_cards']['widget'] as $key => $value) {
+          if (is_numeric($key)) {
+            $dependee_field_name = 'field_paragraph_link';
+            $selector = sprintf(':input[name^="%s[%d][subform][field_individual_cards][%d][subform][%s][0][uri]"]', $paragraph_field_name, $element['#delta'], $key, $dependee_field_name);
+            _tide_landing_page_conditional_display_navigation_card($paragraph_field_name, $element['subform']['field_individual_cards']['widget'][$key], $selector);
+          }
+        }
+      }
+    }
     // Hide table caption field in Data table component.
     if ($paragraph_type == 'data_table') {
       unset($element['subform']['field_data_table_content']['widget'][0]['caption']);
@@ -354,6 +389,115 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
           ];
         }
       }
+    }
+  }
+}
+
+/**
+ * Conditional display for navigation card.
+ */
+function _tide_landing_page_conditional_display_navigation_card($paragraph_field_name, &$element, $selector) {
+  // Dependent fields.
+  if (isset($element['subform']['field_paragraph_title'])) {
+    $element['subform']['field_paragraph_title']['widget'][0]['value']['#states'] = [
+      'visible' => [
+        $selector => [
+          ['value' => ['pattern' => '^http']],
+          ['value' => ''],
+        ],
+      ],
+      'required' => [
+        $selector => [
+          ['value' => ['pattern' => '^http']],
+          ['value' => ''],
+        ],
+      ],
+    ];
+  }
+  if (isset($element['subform']['field_paragraph_summary'])) {
+    $element['subform']['field_paragraph_summary']['widget'][0]['value']['#states'] = [
+      'visible' => [
+        $selector => [
+          ['value' => ['pattern' => '^http']],
+          ['value' => ''],
+        ],
+      ],
+    ];
+    $element['subform']['summary_message_group'] = [
+      '#type' => 'fieldset',
+      '#title' => 'Page title & summary will be automatically drawn from the content you have linked to.',
+      '#group_name' => 'Page summary message',
+      '#attributes' => [
+        'class' => 'summary-message-group',
+      ],
+      '#states' => [
+        'invisible' => [
+          $selector => [
+            ['value' => ['pattern' => '^http']],
+            ['value' => ''],
+          ],
+        ],
+      ],
+    ];
+  }
+  if (isset($element['subform']['field_customise'])) {
+    $element['subform']['customise_field_group'] = [
+      '#type' => 'fieldset',
+      '#title' => 'Customise',
+      '#group_name' => 'Page summary message',
+      '#attributes' => [
+        'class' => 'customise-field-group',
+      ],
+      '#weight' => '20',
+      '#states' => [
+        'invisible' => [
+          $selector => [
+            ['value' => ['pattern' => '^http']],
+            ['value' => ''],
+          ],
+        ],
+      ],
+    ];
+    $element['subform']['field_customise']['#states'] = [
+      'invisible' => [
+        $selector => [
+          ['value' => ['pattern' => '^http']],
+          ['value' => ''],
+        ],
+      ],
+    ];
+    $element['subform']['customise_field_group']['field_customise'] = $element['subform']['field_customise'];
+    unset($element['subform']['field_customise']);
+  }
+  // Add state for media field.
+  $media_dependee_field_name = '';
+  $options = '';
+  if (isset($element['subform']['field_promo_card_display_style'])) {
+    $media_dependee_field_name = 'field_promo_card_display_style';
+    $options = [
+      ['value' => 'thumbnail'],
+      ['value' => 'profile'],
+    ];
+  }
+  if (isset($element['subform']['field_nav_card_display_style'])) {
+    $media_dependee_field_name = 'field_nav_card_display_style';
+    $options = [
+      ['value' => 'thumbnail'],
+      ['value' => 'featured'],
+    ];
+  }
+  if (!empty($media_dependee_field_name) && !empty($options)) {
+    $media_selector = sprintf(':input[name^="%s[%d][subform][%s]"]', $paragraph_field_name, $element['#delta'], $media_dependee_field_name);
+    // Dependent field.
+    if (isset($element['subform']['field_paragraph_media'])) {
+      $element['subform']['field_paragraph_media']['#states'] = [
+        'visible' => [
+          $media_selector => $options,
+          $selector => [
+            ['value' => ['pattern' => '^http']],
+          ],
+        ],
+      ];
     }
   }
 }
