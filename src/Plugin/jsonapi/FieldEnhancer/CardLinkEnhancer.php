@@ -120,13 +120,6 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
     }
     $module_handler = \Drupal::moduleHandler();
     if ($module_handler->moduleExists('tide_news')) {
-      // Add the summary field for news.
-      // This needs to be updated with the CMS improvement changes in tide_news.
-      if ($node->hasField('body') && !$node->body->isEmpty()) {
-        $news_summary = $node->get('body')->getValue()[0]['summary'];
-        // If no news summary, will check for landing page summary.
-        $card_fields['summary'] = $news_summary ? $news_summary : '';
-      }
       // Add the date field for news.
       if ($node->hasField('field_news_date') && !$node->field_news_date->isEmpty()) {
         $card_fields['date'] = $node->get('field_news_date')->getValue()[0];
