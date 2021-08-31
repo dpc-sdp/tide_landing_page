@@ -74,7 +74,7 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
   public function getAlias($nid) {
     $url = '';
     if (!empty($nid)) {
-      $url = \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $nid);
+      $url = \Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $nid);
     }
     return $url;
   }
