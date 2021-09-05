@@ -2276,3 +2276,118 @@ function tide_landing_page_update_8038() {
     $config_sync->set('settings.handler_settings.target_bundles_drag_drop.' . $paragraph_type_id . '.weight', $new_weight)->save();
   }
 }
+
+/**
+ * Replace featured_news with navigation card.
+ */
+function tide_landing_page_update_8039() {
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('tide_news')) {
+    return;
+  }
+  $paragraphQuery = \Drupal::entityTypeManager()
+    ->getStorage('paragraph')
+    ->getQuery();
+  $paragraphQuery->condition('parent_type', 'node')
+    ->condition('parent_field_name', 'field_landing_page_component')
+    ->condition('type', 'featured_news');
+  $paragraph_ids = $paragraphQuery->execute();
+  if ($paragraph_ids) {
+    foreach ($paragraph_ids as $paragraph_id) {
+      $paragraph = Paragraph::load($paragraph_id);
+      $nodes = \Drupal::entityTypeManager()
+        ->getStorage('node')
+        ->loadByProperties(['field_landing_page_component' => $paragraph->id()]);
+      if (empty($nodes)) {
+        $paragraph->delete();
+        continue;
+      }
+      $news_reference_values = $paragraph->get('field_paragraph_news_reference')
+        ->getValue();
+      foreach ($nodes as $node) {
+        $page_component_values = $node->get('field_landing_page_component')
+          ->getValue();
+        $new_page_component = [];
+        $key = array_search($paragraph->id(), array_column($page_component_values, 'target_id'));
+        $_key = $key;
+        foreach ($news_reference_values as $news_index => $news_reference_value) {
+          $nav_paragraph = _creates_nav_cards($news_reference_value['target_id'], $node, $news_index);
+          if (!$nav_paragraph) {
+            continue;
+          }
+          $new_page_component[$_key] = [
+            'target_id' => $nav_paragraph->id(),
+            'target_revision_id' => $nav_paragraph->getRevisionId(),
+          ];
+          $_key++;
+        }
+        foreach ($page_component_values as $page_component_key => $page_component_value) {
+          if ($page_component_key > $key) {
+            $new_page_component[$page_component_key + 100] = $page_component_value;
+          }
+          if ($page_component_key < $key) {
+            $new_page_component[$page_component_key] = $page_component_value;
+          }
+        }
+        ksort($new_page_component);
+        $new_page_component = array_values($new_page_component);
+        $node->set('field_landing_page_component', $new_page_component);
+        $node->setNewRevision(FALSE);
+        $node->save();
+      }
+      $paragraph->delete();
+    }
+  }
+}
+
+/**
+ * Helper function to create nav cards for replacement of featured_news.
+ */
+function _creates_nav_cards(int $news_node_id, Node $host_node, int $news_index) {
+  $news_node = Node::load($news_node_id);
+  if (!$news_node) {
+    return NULL;
+  }
+  $title = $news_node->getTitle();
+  $link = [
+    'uri' => 'entity:node/' . $news_node->id(),
+    'title' => '',
+    'options' => [],
+  ];
+  $display = 'featured';
+  if ($news_index > 0) {
+    $display = 'thumbnail';
+  }
+  $nav_paragraph = Paragraph::create([
+    'type' => 'navigation_card',
+    'parent_id' => $host_node->id(),
+    'parent_type' => 'node',
+    'parent_field_name' => 'field_landing_page_component',
+    'field_paragraph_link' => $link,
+    'field_nav_card_display_style' => $display,
+    'field_paragraph_title' => $title,
+    'field_customise' => TRUE,
+  ]);
+  $nav_paragraph->save();
+  return $nav_paragraph;
+}
+
+/**
+ * Removed featured_news option from the landing_page widget.
+ */
+function tide_landing_page_update_8040() {
+  $field = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
+  if ($field) {
+    $handler_settings = $field->getSetting('handler_settings');
+    if (isset($handler_settings['target_bundles'])) {
+      if (isset($handler_settings['target_bundles']['featured_news'])) {
+        unset($handler_settings['target_bundles']['featured_news']);
+      }
+      if (isset($handler_settings['target_bundles_drag_drop']['featured_news'])) {
+        unset($handler_settings['target_bundles_drag_drop']['featured_news']);
+      }
+      $field->setSetting('handler_settings', $handler_settings);
+      $field->save();
+    }
+  }
+}

@@ -5,9 +5,11 @@
  * Tide Landing Page module functionality.
  */
 
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\node\NodeInterface;
 use Drupal\workflows\Entity\Workflow;
 use Drupal\Core\Field\WidgetBase;
 
@@ -183,7 +185,7 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
   $paragraph_field_name = $field_definition->getName();
   $widget_state = WidgetBase::getWidgetState($element['#field_parents'], $paragraph_field_name, $form_state);
   $paragraph = $widget_state['paragraphs'][$element['#delta']]['entity'];
-  $paragraph_type = $paragraph->bundle();
+  $paragraph_type = $paragraph ? $paragraph->bundle() : '';
 
   switch ($paragraph_type) {
     case 'embedded_search_form':
@@ -227,7 +229,7 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
   if ($paragraph_field_name === 'field_landing_page_component') {
     $widget_state = WidgetBase::getWidgetState($element['#field_parents'], $paragraph_field_name, $form_state);
     $paragraph = $widget_state['paragraphs'][$element['#delta']]['entity'];
-    $paragraph_type = $paragraph->bundle();
+    $paragraph_type = $paragraph ? $paragraph->bundle() : '';
     // Hide table caption field in Data table component.
     if ($paragraph_type == 'data_table') {
       unset($element['subform']['field_data_table_content']['widget'][0]['caption']);
@@ -473,4 +475,47 @@ function _tide_landing_page_form_node_form_after_build(array $form, FormStateInt
   $form['_header_style']['_header_style_options']['#default_value'] = $header_style;
 
   return $form;
+}
+
+/**
+ * Get all referenced nodes for a node in promotion & navigation card paragraph.
+ *
+ * @param \Drupal\node\NodeInterface $node
+ *   The node context.
+ *
+ * @return null|array
+ *   The node ids.
+ */
+function _tide_landing_page_get_all_ref_nodes(NodeInterface $node) {
+  if ($node->id()) {
+    $query = \Drupal::database()->select('paragraphs_item_field_data', 'p');
+    $query->fields('p', ['parent_id']);
+    $query->fields('pl', ['field_paragraph_link_uri']);
+    $query->leftJoin('paragraph__field_paragraph_link', 'pl', 'pl.entity_id = p.id');
+    $query->condition('pl.field_paragraph_link_uri', 'entity:node/' . $node->id());
+    $or = $query->orConditionGroup();
+    $or->condition('type', 'navigation_card');
+    $or->condition('type', 'promotion_card');
+    $node_ids = $query->condition($or)->execute()->fetchCol();
+    if ($node_ids) {
+      $cids = [];
+      foreach ($node_ids as $node_id) {
+        $cids[] = 'node:' . $node_id;
+      }
+      return $cids;
+    }
+  }
+  return NULL;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function tide_landing_page_node_presave(NodeInterface $node) {
+  if (!$node->isNew()) {
+    $cids = _tide_landing_page_get_all_ref_nodes($node);
+    if (!empty($cids)) {
+      Cache::invalidateTags($cids);
+    }
+  }
 }
