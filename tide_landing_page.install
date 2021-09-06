@@ -2694,7 +2694,7 @@ function tide_landing_page_update_8043() {
 /**
  * Replace featured_news with navigation card.
  */
-function tide_landing_page_update_8039() {
+function tide_landing_page_update_8044() {
   $moduleHandler = \Drupal::service('module_handler');
   if (!$moduleHandler->moduleExists('tide_news')) {
     return;
@@ -2789,7 +2789,7 @@ function _creates_nav_cards(int $news_node_id, Node $host_node, int $news_index)
 /**
  * Removed featured_news option from the landing_page widget.
  */
-function tide_landing_page_update_8040() {
+function tide_landing_page_update_8045() {
   $field = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
   if ($field) {
     $handler_settings = $field->getSetting('handler_settings');
