@@ -106,10 +106,7 @@ settings:
         weight: -20
       form_embed_openforms:
         enabled: true
-        weight: -19
-      featured_news:
-        enabled: true
-        weight: 24
+        weight: 23
       news_listing:
         enabled: true
         weight: -10

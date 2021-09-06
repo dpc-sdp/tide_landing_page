@@ -46,3 +46,22 @@ function tide_landing_page_post_update_remove_old_paragraph_types() {
   }
   $config->set('settings', $settings)->save();
 }
+
+/**
+ * Removes featured_news paragraph type.
+ */
+function tide_landing_page_post_update_remove_featured_news() {
+  $paragraph_query = \Drupal::entityTypeManager()
+    ->getStorage('paragraph')
+    ->getQuery();
+  $paragraph_query->condition('type', 'featured_news');
+  $count = $paragraph_query->count()->execute();
+  $paragraph_type_entity = ParagraphsType::load('featured_news');
+  if (!$count && $paragraph_type_entity) {
+    if ($paragraph_type_entity) {
+      \Drupal::entityTypeManager()
+        ->getStorage('paragraphs_type')
+        ->delete([$paragraph_type_entity]);
+    }
+  }
+}
