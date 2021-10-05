@@ -197,7 +197,7 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
           $file = $media_field[0]['target_id'] ? File::load($media_field[0]['target_id']) : '';
           if ($file) {
             // Get URL of the image file.
-            $image['url'] = $file->url();
+            $image['url'] = $file->createFileUrl();
             // Get image crop values.
             $crop = !empty($file) ? ImageEnhancer::getCropEntity($file, 'focal_point') : '';
             $focal_point = !empty($crop) ? $crop->position() : '';
