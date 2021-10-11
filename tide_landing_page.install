@@ -2347,3 +2347,124 @@ function tide_landing_page_update_8040() {
     }
   }
 }
+
+/**
+ * Installs field_paragraph_summary and field_paragraph_title fields to data_table.
+ */
+function tide_landing_page_update_8041() {
+  // Install configs.
+  $configs = [
+    'field.field.paragraph.data_table.field_paragraph_summary' => 'field_config/paragraph.data_table.field_paragraph_summary',
+    'field.field.paragraph.data_table.field_paragraph_title' => 'field_config/paragraph.data_table.field_paragraph_title',
+  ];
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  foreach ($configs as $config => $type) {
+    list($storage_type, $id) = explode('/',$type);
+    $config_read = _tide_read_config($config, $config_location, TRUE);
+    $storage = \Drupal::entityTypeManager()->getStorage($storage_type);
+    if ($storage->load($id) == NULL) {
+      $config_entity = $storage->createFromStorageRecord($config_read);
+      $config_entity->save();
+    }
+  }
+
+  // Updates entity_form_display.
+
+  $entity_form_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('paragraph.data_table.default');
+  if ($entity_form_display) {
+    $entity_form_display->setComponent('field_data_table_content', [
+      'weight' => 5,
+    ]);
+    $entity_form_display->setComponent('field_paragraph_summary', [
+      'weight' => 4,
+      'settings' => ['rows' => 5, 'placeholder' => ''],
+      'third_party_settings' => [],
+      'type' => 'string_textarea',
+      'region' => 'content',
+    ]);
+    $entity_form_display->setComponent('field_paragraph_title', [
+      'weight' => 3,
+      'settings' => ['size' => 60, 'placeholder' => ''],
+      'third_party_settings' => [],
+      'type' => 'string_textfield',
+      'region' => 'content',
+    ]);
+    // Header section.
+    $field_group['group_content'] = [
+      'children' => [
+        'field_paragraph_title',
+        'field_paragraph_summary',
+        'field_data_table_content',
+      ],
+      'label' => 'Content',
+      'weight' => 2,
+      'format_type' => 'fieldset',
+      'region' => 'content',
+      'format_settings' => ['show_empty_fields' => FALSE, 'required_fields' => TRUE],
+    ];
+    $entity_form_display->setThirdPartySetting('field_group', 'group_content', $field_group['group_content']);
+  }
+  $entity_form_display->save();
+
+  // Updates entity_view_display.
+  $entity_view_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_view_display')
+    ->load('paragraph.data_table.default');
+  if ($entity_view_display) {
+    $entity_view_display->setComponent('field_paragraph_summary', [
+      'weight' => 7,
+      'label' => 'above',
+      'settings' => [],
+      'third_party_settings' => [],
+      'type' => 'basic_string',
+      'region' => 'content',
+    ]);
+    $entity_view_display->setComponent('field_paragraph_title', [
+      'weight' => 5,
+      'label' => 'above',
+      'settings' => ['link_to_entity' => FALSE],
+      'third_party_settings' => [],
+      'type' => 'string',
+      'region' => 'content',
+    ]);
+  }
+  $entity_view_display->save();
+  // Add field_paragraph_title and field_paragraph_summary fields to json output.
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('jsonapi_extras.jsonapi_resource_config.paragraph--data_table');
+
+  $content = $config->get('resourceFields');
+  if (!isset($content['field_paragraph_summary'])) {
+    $content['field_paragraph_summary'] = [
+      'fieldName' => 'field_paragraph_summary',
+      'publicName' => 'field_paragraph_summary',
+      'enhancer' => [
+        'id' => '',
+      ],
+      'disabled' => FALSE,
+      'advancedOptionsIcon' => '',
+      'enhancer_label' => '',
+    ];
+
+    $config->set('resourceFields', $content);
+  }
+  if (!isset($content['field_paragraph_title'])) {
+    $content['field_paragraph_title'] = [
+      'fieldName' => 'field_paragraph_title',
+      'publicName' => 'field_paragraph_title',
+      'enhancer' => [
+        'id' => '',
+      ],
+      'disabled' => FALSE,
+      'advancedOptionsIcon' => '',
+      'enhancer_label' => '',
+    ];
+
+    $config->set('resourceFields', $content);
+  }
+
+  $config->save();
+}

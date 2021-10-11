@@ -5,6 +5,8 @@ dependencies:
     - field.field.paragraph.data_table.field_data_table_content
     - field.field.paragraph.data_table.field_first_column_table_header
     - field.field.paragraph.data_table.field_first_row_table_header
+    - field.field.paragraph.data_table.field_paragraph_summary
+    - field.field.paragraph.data_table.field_paragraph_title
     - field.field.paragraph.data_table.field_table_orientation
     - paragraphs.paragraphs_type.data_table
   module:
@@ -42,6 +44,21 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     type: boolean
+    region: content
+  field_paragraph_summary:
+    weight: 7
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_paragraph_title:
+    weight: 5
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
     region: content
   field_table_orientation:
     weight: 2
