@@ -361,7 +361,7 @@ function tide_landing_page_update_8005() {
  * Remove Show News Search Block? field [SDPA-1159].
  */
 function tide_landing_page_update_8006() {
-  /* @var $entityFieldManager Drupal\Core\Entity\EntityFieldManager */
+  /** @var Drupal\Core\Entity\EntityFieldManager $entityFieldManager */
   $entityFieldManager = Drupal::service('entity_field.manager');
 
   $fields = $entityFieldManager->getFieldDefinitions('node', 'landing_page');
@@ -2349,7 +2349,7 @@ function tide_landing_page_update_8040() {
 }
 
 /**
- * Installs field_paragraph_summary and field_paragraph_title fields to data_table.
+ * Install field_paragraph_summary & field_paragraph_title fields to data_table.
  */
 function tide_landing_page_update_8041() {
   // Install configs.
@@ -2360,7 +2360,7 @@ function tide_landing_page_update_8041() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
   $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
   foreach ($configs as $config => $type) {
-    list($storage_type, $id) = explode('/',$type);
+    list($storage_type, $id) = explode('/', $type);
     $config_read = _tide_read_config($config, $config_location, TRUE);
     $storage = \Drupal::entityTypeManager()->getStorage($storage_type);
     if ($storage->load($id) == NULL) {
@@ -2370,7 +2370,6 @@ function tide_landing_page_update_8041() {
   }
 
   // Updates entity_form_display.
-
   $entity_form_display = \Drupal::entityTypeManager()
     ->getStorage('entity_form_display')
     ->load('paragraph.data_table.default');
@@ -2403,7 +2402,10 @@ function tide_landing_page_update_8041() {
       'weight' => 2,
       'format_type' => 'fieldset',
       'region' => 'content',
-      'format_settings' => ['show_empty_fields' => FALSE, 'required_fields' => TRUE],
+      'format_settings' => [
+        'show_empty_fields' => FALSE,
+        'required_fields' => TRUE,
+      ],
     ];
     $entity_form_display->setThirdPartySetting('field_group', 'group_content', $field_group['group_content']);
   }
@@ -2432,7 +2434,7 @@ function tide_landing_page_update_8041() {
     ]);
   }
   $entity_view_display->save();
-  // Add field_paragraph_title and field_paragraph_summary fields to json output.
+  // Add field_paragraph_title & field_paragraph_summary fields to json output.
   $config_factory = \Drupal::configFactory();
   $config = $config_factory->getEditable('jsonapi_extras.jsonapi_resource_config.paragraph--data_table');
 
