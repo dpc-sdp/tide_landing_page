@@ -4,14 +4,14 @@
     "type": "drupal-module",
     "license": "GPL-2.0-or-later",
     "require": {
-        "dpc-sdp/tide_core": "dev-feature/SDPA-5396-drupalcore-9 as 2.0.14",
-        "dpc-sdp/tide_event": "dev-compatible-with-drupal-9 as 1.3.7",
-        "dpc-sdp/tide_media": "dev-compatible-with-drupal-9 as 1.7.10"
+        "dpc-sdp/tide_core": "^3.0.0",
+        "dpc-sdp/tide_event": "^3.0.0",
+        "dpc-sdp/tide_media": "^3.0.0"
     },
     "suggest": {
-        "dpc-sdp/tide_api:dev-compatible-with-drupal-9": "Allows to use Drupal in headless mode",
-        "dpc-sdp/tide_webform:dev-compatible-with-drupal-9": "Allows to use questionnaires",
-        "dpc-sdp/tide_news:dev-compatible-with-drupal-9": "News content type and related configuration for Tide Drupal 8 distribution"
+        "dpc-sdp/tide_api:^3.0.0": "Allows to use Drupal in headless mode",
+        "dpc-sdp/tide_webform:^3.0.0": "Allows to use questionnaires",
+        "dpc-sdp/tide_news:^3.0.0": "News content type and related configuration for Tide Drupal 8 distribution"
     },
     "repositories": {
         "drupal": {
