@@ -2351,10 +2351,8 @@ function tide_landing_page_update_8040() {
   }
 }
 
-
-
 /**
- * Install field_paragraph_short_desc & field_paragraph_website fields to contact_us.
+ * Install field_paragraph_short_desc & field_paragraph_website to contact_us.
  */
 function tide_landing_page_update_8041() {
   // Install configs.
@@ -2439,7 +2437,7 @@ function tide_landing_page_update_8041() {
     ]);
   }
   $entity_view_display->save();
-  // Add field_paragraph_short_desc & field_paragraph_website fields to json output.
+  // Add field_paragraph_short_desc & field_paragraph_website to json output.
   $config_factory = \Drupal::configFactory();
   $config = $config_factory->getEditable('jsonapi_extras.jsonapi_resource_config.paragraph--contact_us');
 
