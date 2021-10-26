@@ -2350,3 +2350,128 @@ function tide_landing_page_update_8040() {
     }
   }
 }
+
+
+
+/**
+ * Install field_paragraph_short_desc & field_paragraph_website fields to contact_us.
+ */
+function tide_landing_page_update_8041() {
+  // Install configs.
+  $configs = [
+    'field.storage.paragraph.field_paragraph_short_desc' => 'field_storage_config',
+    'field.storage.paragraph.field_paragraph_website' => 'field_storage_config',
+    'field.field.paragraph.contact_us.field_paragraph_short_desc' => 'field_config',
+    'field.field.paragraph.contact_us.field_paragraph_website' => 'field_config',
+  ];
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  // Check if field already exported to config/sync.
+  foreach ($configs as $config => $type) {
+    $config_read = _tide_read_config($config, $config_location, TRUE);
+    $storage = \Drupal::entityTypeManager()->getStorage($type);
+    $config_entity = $storage->createFromStorageRecord($config_read);
+    $config_entity->save();
+  }
+
+  // Updates entity_form_display.
+  $entity_form_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('paragraph.contact_us.default');
+  if ($entity_form_display) {
+    $setWeight = [
+      'field_paragraph_title' => 0,
+      'field_paragraph_name' => 1,
+      'field_paragraph_department_name' => 2,
+      'field_paragraph_location' => 6,
+      'field_paragraph_postal_address' => 7,
+      'field_paragraph_phones' => 8,
+      'field_paragraph_social_media' => 9,
+    ];
+    foreach ($setWeight as $field => $weight) {
+      $entity_form_display->setComponent($field, [
+        'weight' => $weight,
+      ]);
+    }
+    $entity_form_display->setComponent('field_paragraph_short_desc', [
+      'weight' => 3,
+      'settings' => ['size' => 60, 'placeholder' => ''],
+      'third_party_settings' => [],
+      'type' => 'string_textfield',
+      'region' => 'content',
+    ]);
+    $entity_form_display->setComponent('field_paragraph_website', [
+      'weight' => 5,
+      'settings' => ['placeholder_url' => '', 'placeholder_title' => ''],
+      'third_party_settings' => [],
+      'type' => 'link_default',
+      'region' => 'content',
+    ]);
+  }
+  $entity_form_display->save();
+
+  // Updates entity_view_display.
+  $entity_view_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_view_display')
+    ->load('paragraph.contact_us.default');
+  if ($entity_view_display) {
+    $entity_view_display->setComponent('field_paragraph_short_desc', [
+      'weight' => 11,
+      'label' => 'above',
+      'settings' => ['link_to_entity' => FALSE],
+      'third_party_settings' => [],
+      'type' => 'string',
+      'region' => 'content',
+    ]);
+    $entity_view_display->setComponent('field_paragraph_website', [
+      'weight' => 12,
+      'label' => 'above',
+      'settings' => [
+        'trim_length' => 80,
+        'url_only' => FALSE,
+        'url_plain' => FALSE,
+        'rel' => '',
+        'target' => '',
+      ],
+      'third_party_settings' => [],
+      'type' => 'link',
+      'region' => 'content',
+    ]);
+  }
+  $entity_view_display->save();
+  // Add field_paragraph_short_desc & field_paragraph_website fields to json output.
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('jsonapi_extras.jsonapi_resource_config.paragraph--contact_us');
+
+  $content = $config->get('resourceFields');
+  if (!isset($content['field_paragraph_short_desc'])) {
+    $content['field_paragraph_short_desc'] = [
+      'fieldName' => 'field_paragraph_short_desc',
+      'publicName' => 'field_paragraph_short_desc',
+      'enhancer' => [
+        'id' => '',
+      ],
+      'disabled' => FALSE,
+      'advancedOptionsIcon' => '',
+      'enhancer_label' => '',
+    ];
+
+    $config->set('resourceFields', $content);
+  }
+  if (!isset($content['field_paragraph_website'])) {
+    $content['field_paragraph_website'] = [
+      'fieldName' => 'field_paragraph_website',
+      'publicName' => 'field_paragraph_website',
+      'enhancer' => [
+        'id' => 'link_enhancer',
+      ],
+      'disabled' => FALSE,
+      'advancedOptionsIcon' => '',
+      'enhancer_label' => '',
+    ];
+
+    $config->set('resourceFields', $content);
+  }
+
+  $config->save();
+}

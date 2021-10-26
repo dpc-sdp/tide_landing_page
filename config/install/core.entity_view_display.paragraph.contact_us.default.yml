@@ -8,12 +8,15 @@ dependencies:
     - field.field.paragraph.contact_us.field_paragraph_name
     - field.field.paragraph.contact_us.field_paragraph_phones
     - field.field.paragraph.contact_us.field_paragraph_postal_address
+    - field.field.paragraph.contact_us.field_paragraph_short_desc
     - field.field.paragraph.contact_us.field_paragraph_social_media
     - field.field.paragraph.contact_us.field_paragraph_title
+    - field.field.paragraph.contact_us.field_paragraph_website
     - paragraphs.paragraphs_type.contact_us
   module:
     - address
     - entity_reference_revisions
+    - link
 id: paragraph.contact_us.default
 targetEntityType: paragraph
 bundle: contact_us
@@ -65,6 +68,14 @@ content:
     third_party_settings: {  }
     type: address_default
     region: content
+  field_paragraph_short_desc:
+    weight: 11
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_paragraph_social_media:
     type: entity_reference_revisions_entity_view
     weight: 6
@@ -81,5 +92,17 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_paragraph_website:
+    weight: 12
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
     region: content
 hidden: {  }
