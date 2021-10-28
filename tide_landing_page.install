@@ -2407,7 +2407,7 @@ function tide_landing_page_update_8041() {
       'type' => 'preset_paragraphs',
       'region' => 'content',
     ]);
-    // Header section.
+    $field_group = [];
     $field_group['group_side_bar_links'] = [
       'children' => [
         'field_side_bar_links',
