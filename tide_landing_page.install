@@ -2359,6 +2359,7 @@ function tide_landing_page_update_8041() {
     'paragraphs.paragraphs_type.side_bar_links' => 'paragraphs_type',
     'field.storage.paragraph.field_paragraph_bg_colour' => 'field_storage_config',
     'field.storage.paragraph.field_paragraph_reference_links' => 'field_storage_config',
+    'field.field.node.landing_page.field_side_bar_links' => 'field_config',
     'field.field.paragraph.side_bar_links.field_paragraph_bg_colour' => 'field_config',
     'field.field.paragraph.side_bar_links.field_paragraph_reference_links' => 'field_config',
     'field.field.paragraph.side_bar_links.field_paragraph_title' => 'field_config',
