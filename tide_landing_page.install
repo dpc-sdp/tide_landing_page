@@ -2350,3 +2350,135 @@ function tide_landing_page_update_8040() {
     }
   }
 }
+
+/**
+ * Installs new side_bar_links paragraph type.
+ */
+function tide_landing_page_update_8041() {
+  $configs = [
+    'paragraphs.paragraphs_type.side_bar_links' => 'paragraphs_type',
+    'field.storage.paragraph.field_paragraph_bg_colour' => 'field_storage_config',
+    'field.storage.paragraph.field_paragraph_reference_links' => 'field_storage_config',
+    'field.field.paragraph.side_bar_links.field_paragraph_bg_colour' => 'field_config',
+    'field.field.paragraph.side_bar_links.field_paragraph_reference_links' => 'field_config',
+    'field.field.paragraph.side_bar_links.field_paragraph_title' => 'field_config',
+    'core.entity_view_display.paragraph.side_bar_links.default' => 'entity_view_display',
+    'core.entity_form_display.paragraph.side_bar_links.default' => 'entity_form_display',
+  ];
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  // Check if field already exported to config/sync.
+  foreach ($configs as $config => $type) {
+    $config_read = _tide_read_config($config, $config_location, TRUE);
+    $storage = \Drupal::entityTypeManager()->getStorage($type);
+    $config_entity = $storage->createFromStorageRecord($config_read);
+    $config_entity->save();
+  }
+
+  // Updates entity_form_display.
+  $entity_form_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('paragraph.landing_page.default');
+  if ($entity_form_display) {
+    $entity_form_display->setComponent('field_show_content_rating', [
+      'weight' => 2,
+    ]);
+    $entity_form_display->setComponent('field_side_bar_links', [
+      'weight' => 4,
+      'settings' => [
+        'title' => 'Side bar link',
+        'title_plural' => 'Side bar links',
+        'edit_mode' => 'closed',
+        'add_mode' => 'button',
+        'form_display_mode' => 'default',
+        'default_paragraph_type' => '_none',
+        'preset_number' => '',
+        'closed_mode' => 'summary',
+        'autocollapse' => 'none',
+        'closed_mode_threshold' => '0',
+        'features' => [
+          'duplicate' => 'duplicate',
+          'collapse_edit_all' => 'collapse_edit_all',
+        ],
+      ],
+      'third_party_settings' => [],
+      'type' => 'preset_paragraphs',
+      'region' => 'content',
+    ]);
+    // Header section.
+    $field_group['group_side_bar_links'] = [
+      'children' => [
+        'field_side_bar_links',
+      ],
+      'parent_name' => 'group_sidebar',
+      'label' => 'Links',
+      'weight' => 1,
+      'format_type' => 'details',
+      'region' => 'content',
+      'format_settings' => [
+        'show_empty_fields' => FALSE,
+        'required_fields' => TRUE,
+        'id' => '',
+        'classes' => '',
+        'description' => '',
+        'open' => FALSE,
+      ],
+    ];
+    $entity_form_display->setThirdPartySetting('field_group', 'group_side_bar_links', $field_group['group_side_bar_links']);
+    $components = $entity_form_display->getComponents();
+    if (isset($components['group_sidebar'])) {
+      $group_sidebar = $entity_form_display->get('group_sidebar');
+      $group_sidebar['group_sidebar']['children'][] = 'group_side_bar_links';
+      $entity_form_display->setThirdPartySetting('field_group', 'group_content', $group_sidebar['group_sidebar']);
+    }
+  }
+  $entity_form_display->save();
+
+  // Updates entity_view_display.
+  $entity_view_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_view_display')
+    ->load('node.landing_page.default');
+  if ($entity_view_display) {
+    $entity_view_display->setComponent('field_side_bar_links', [
+      'weight' => 27,
+      'label' => 'above',
+      'settings' => [
+        'view_mode' => 'default',
+        'link' => '',
+      ],
+      'third_party_settings' => [],
+      'type' => 'entity_reference_revisions_entity_view',
+      'region' => 'content',
+    ]);
+  }
+  $entity_view_display->save();
+
+  $entity_view_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_view_display')
+    ->load('node.landing_page.card');
+  if ($entity_view_display) {
+    $components = $entity_form_display->getComponents();
+    $hidden = $entity_view_display->get('hidden');
+    $hidden['field_side_bar_links'] = TRUE;
+    $entity_view_display->set('hidden', $hidden);
+    $entity_view_display->save();
+  }
+
+  $entity_view_display = \Drupal::entityTypeManager()
+    ->getStorage('entity_view_display')
+    ->load('node.landing_page.featured_card');
+  if ($entity_view_display) {
+    $components = $entity_form_display->getComponents();
+    $hidden = $entity_view_display->get('hidden');
+    $hidden['field_side_bar_links'] = TRUE;
+    $entity_view_display->set('hidden', $hidden);
+    $entity_view_display->save();
+  }
+
+  // Add paragraph type to JSON.
+  $json_field = 'jsonapi_extras.jsonapi_resource_config.paragraph--side_bar_links';
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/optional'];
+  $config_storage = \Drupal::service('config.storage');
+  $config_read = _tide_read_config($json_field, $config_location, TRUE);
+  $config_storage->write($json_field, $config_read);
+}

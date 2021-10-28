@@ -418,3 +418,11 @@ resourceFields:
     disabled: false
     advancedOptionsIcon: ''
     enhancer_label: ''
+  field_side_bar_links:
+    fieldName: field_side_bar_links
+    publicName: field_side_bar_links
+    enhancer:
+      id: ''
+    disabled: false
+    advancedOptionsIcon: ''
+    enhancer_label: ''

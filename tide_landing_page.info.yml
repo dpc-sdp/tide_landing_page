@@ -45,6 +45,7 @@ config_devel:
     - core.entity_form_display.paragraph.card_navigation_featured_auto.default
     - core.entity_form_display.paragraph.card_promotion.default
     - core.entity_form_display.paragraph.card_promotion_auto.default
+    - core.entity_form_display.paragraph.side_bar_links.default
     - core.entity_form_display.paragraph.complex_image.default
     - core.entity_form_display.paragraph.embedded_search_form.default
     - core.entity_form_display.paragraph.form_embed_openforms.default
@@ -74,6 +75,7 @@ config_devel:
     - core.entity_view_display.paragraph.card_promotion.default
     - core.entity_view_display.paragraph.card_promotion_auto.default
     - core.entity_view_display.paragraph.card_promotion.default
+    - core.entity_view_display.paragraph.side_bar_links.default
     - core.entity_view_display.paragraph.complex_image.default
     - core.entity_view_display.paragraph.embedded_search_form.default
     - core.entity_view_display.paragraph.form_embed_openforms.default
@@ -213,6 +215,9 @@ config_devel:
     - field.field.paragraph.featured_news.field_paragraph_news_reference
     - field.field.paragraph.phone.field_paragraph_phone_number
     - field.field.paragraph.phone.field_paragraph_phone_title
+    - field.field.paragraph.side_bar_links.field_paragraph_bg_colour
+    - field.field.paragraph.side_bar_links.field_paragraph_reference_links
+    - field.field.paragraph.side_bar_links.field_paragraph_title
     - field.field.paragraph.social_link.field_paragraph_link
     - field.field.paragraph.social_link.field_paragraph_social_list
     - field.storage.block_content.field_block_cta
@@ -238,6 +243,7 @@ config_devel:
     - field.storage.node.field_show_c_primary_caption
     - field.storage.node.field_show_hero_image_caption
     - field.storage.paragraph.field_paragraph_background_image
+    - field.storage.paragraph.field_paragraph_bg_colour
     - field.storage.paragraph.field_paragraph_body
     - field.storage.paragraph.field_paragraph_cta_card_event
     - field.storage.paragraph.field_paragraph_cta_style
@@ -266,6 +272,7 @@ config_devel:
     - field.storage.paragraph.field_paragraph_phone_number
     - field.storage.paragraph.field_paragraph_phone_title
     - field.storage.paragraph.field_paragraph_phones
+    - field.storage.paragraph.field_paragraph_reference_links
     - field.storage.paragraph.field_paragraph_search_block
     - field.storage.paragraph.field_paragraph_search_ph
     - field.storage.paragraph.field_paragraph_search_target
@@ -299,6 +306,7 @@ config_devel:
     - paragraphs.paragraphs_type.contact_us
     - paragraphs.paragraphs_type.news_listing
     - paragraphs.paragraphs_type.phone
+    - paragraphs.paragraphs_type.side_bar_links
     - paragraphs.paragraphs_type.social_link
     - paragraphs.paragraphs_type.timelines
   optional:
@@ -319,6 +327,7 @@ config_devel:
     - jsonapi_extras.jsonapi_resource_config.paragraph--card_navigation
     - jsonapi_extras.jsonapi_resource_config.paragraph--card_navigation_featured
     - jsonapi_extras.jsonapi_resource_config.paragraph--card_promotion
+    - jsonapi_extras.jsonapi_resource_config.paragraph--side_bar_links
     - jsonapi_extras.jsonapi_resource_config.paragraph--featured_news
     - jsonapi_extras.jsonapi_resource_config.paragraph--form_embed_openforms
     - jsonapi_extras.jsonapi_resource_config.paragraph-.hero_banner_with_cta
