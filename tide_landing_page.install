@@ -2410,7 +2410,7 @@ function tide_landing_page_update_8041() {
       'type' => 'preset_paragraphs',
       'region' => 'content',
     ]);
-    $field_group = [];
+    $field_group = $entity_form_display->getThirdPartySettings('field_group');
     $field_group['group_side_bar_links'] = [
       'children' => [
         'field_side_bar_links',
