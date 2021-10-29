@@ -250,6 +250,11 @@ Feature: Fields for Landing Page content type
     And I should see text matching "No Contact Us block added yet."
     And I should see the button "Add Contact Us" in the "content" region
 
+    And I click on the detail "Links"
+    And I should see text matching "Side bar links"
+    And I should see text matching "No Side bar link added yet."
+    And I should see the button "Add Side bar links" in the "content" region
+
     And I should see text matching "Social sharing"
 
     And I see field "Tags"

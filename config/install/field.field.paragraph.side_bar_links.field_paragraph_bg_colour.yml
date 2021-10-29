@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_paragraph_bg_colour
+    - paragraphs.paragraphs_type.side_bar_links
+  module:
+    - options
+id: paragraph.side_bar_links.field_paragraph_bg_colour
+field_name: field_paragraph_bg_colour
+entity_type: paragraph
+bundle: side_bar_links
+label: 'Background colour'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 'Primary colour'
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,48 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.side_bar_links.field_paragraph_bg_colour
+    - field.field.paragraph.side_bar_links.field_paragraph_reference_links
+    - field.field.paragraph.side_bar_links.field_paragraph_title
+    - paragraphs.paragraphs_type.side_bar_links
+  module:
+    - maxlength
+    - paragraphs
+id: paragraph.side_bar_links.default
+targetEntityType: paragraph
+bundle: side_bar_links
+mode: default
+content:
+  field_paragraph_bg_colour:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_paragraph_reference_links:
+    type: entity_reference_paragraphs
+    weight: 2
+    settings:
+      title: Link
+      title_plural: Links
+      edit_mode: closed
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: links
+    third_party_settings: {  }
+    region: content
+  field_paragraph_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      maxlength:
+        maxlength_js: 120
+        maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true

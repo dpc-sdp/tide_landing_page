@@ -34,6 +34,7 @@ dependencies:
     - field.field.node.landing_page.field_show_table_of_content
     - field.field.node.landing_page.field_show_topic_term_and_tags
     - field.field.node.landing_page.field_show_whats_next
+    - field.field.node.landing_page.field_side_bar_links
     - field.field.node.landing_page.field_tags
     - field.field.node.landing_page.field_topic
     - field.field.node.landing_page.field_whats_next
@@ -204,6 +205,7 @@ third_party_settings:
       children:
         - group_site_section_navigation
         - group_site_section_navigation
+        - group_side_bar_links
         - group_related_links
         - group_whats_next
         - group_contact_us
@@ -301,6 +303,20 @@ third_party_settings:
         description: 'Secondary campaign displays after the content area, just above the page footer. They span the full width of the content area. Start typing the name of your custom block component to display your campaign'
       region: content
       weight: 10
+    group_side_bar_links:
+      children:
+        - field_side_bar_links
+      parent_name: group_sidebar
+      weight: 1
+      format_type: details
+      region: content
+      format_settings:
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+        open: false
+      label: Links
 _core:
   default_config_hash: pN7fy_ZaJVA-sEQWPZUCiV_-5V5W_ZSuZ7Rbql6y5kg
 id: node.landing_page.default
@@ -624,6 +640,25 @@ content:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
+    region: content
+  field_side_bar_links:
+    type: preset_paragraphs
+    weight: 4
+    settings:
+      title: 'Side bar link'
+      title_plural: 'Side bar links'
+      edit_mode: closed
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      preset_number: ''
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      features:
+        duplicate: duplicate
+        collapse_edit_all: collapse_edit_all
+    third_party_settings: {  }
     region: content
   field_show_whats_next:
     type: boolean_checkbox
