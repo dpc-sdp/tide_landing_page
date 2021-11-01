@@ -1,0 +1,10 @@
+uuid: e82518d1-950b-4d20-bb88-cfeaadade7b7
+langcode: en
+status: true
+dependencies: {  }
+id: custom_component
+label: 'Custom component'
+icon_uuid: null
+icon_default: null
+description: 'Used to embedded custom component on the front end.'
+behavior_plugins: {  }

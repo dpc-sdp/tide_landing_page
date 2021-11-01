@@ -14,6 +14,7 @@ dependencies:
     - paragraphs.paragraphs_type.card_promotion
     - paragraphs.paragraphs_type.card_promotion_auto
     - paragraphs.paragraphs_type.complex_image
+    - paragraphs.paragraphs_type.custom_component
     - paragraphs.paragraphs_type.data_table
     - paragraphs.paragraphs_type.form_embed_openforms
     - paragraphs.paragraphs_type.latest_events
@@ -55,6 +56,7 @@ settings:
       data_table: data_table
       card_event: card_event
       card_event_auto: card_event_auto
+      custom_component: custom_component
     target_bundles_drag_drop:
       banner:
         weight: -33
@@ -128,6 +130,9 @@ settings:
       contact_us:
         weight: 34
         enabled: false
+      custom_component:
+        enabled: true
+        weight: 75
       call_to_action_image:
         weight: 35
         enabled: false

@@ -1,0 +1,8 @@
+uuid: 6f37d308-eb62-4b4d-beac-a610a3be06da
+langcode: en
+status: true
+dependencies: {  }
+name: 'Custom components'
+vid: custom_components
+description: ''
+weight: 0
