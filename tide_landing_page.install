@@ -2356,7 +2356,7 @@ function tide_landing_page_update_8040() {
  */
 function tide_landing_page_update_8041() {
   $configEntity = \Drupal::entityTypeManager()
-    ->getStorage('node')
+    ->getStorage('node_type')
     ->load('landing_page');
   if (!$configEntity) {
     return NULL;
