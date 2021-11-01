@@ -2350,3 +2350,18 @@ function tide_landing_page_update_8040() {
     }
   }
 }
+
+/**
+ * Relabel Landing Page to Standard Page.
+ */
+function tide_landing_page_update_8041() {
+  $configEntity = \Drupal::entityTypeManager()
+    ->getStorage('node')
+    ->load('landing_page');
+  if (!$configEntity) {
+    return NULL;
+  }
+  $configEntity->set('name', 'Standard Page');
+  $configEntity->set('description', 'Use <em>Standard Page</em> content type for custom standard pages.');
+  $configEntity->save();
+}

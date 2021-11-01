@@ -305,3 +305,14 @@ Feature: Fields for Landing Page content type
     # This field can be "seen" but not visible.
     And I see field "field_landing_page_component[0][subform][field_customise][value]"
     And save screenshot
+
+  @api @nosuggest
+  Scenario: Ensure that Landing Page is relabelled to Standard Page and Appropriate description has been added.
+    Given I am logged in as a user with the "editor" role
+    When I visit "node/add"
+    Then I see the text 'Standard Page'
+    And I see the text 'Use <em>Standard Page</em> content type for custom standard pages.'
+    When I visit "admin/content"
+    Then I select "Standard Page" from "edit-type"
+    And I press "Filter"
+    And the ".menu-item [class$=node-add-landing-page]" element should contain "Standard Page"
