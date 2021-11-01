@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: custom_component
+label: 'Custom component'
+icon_uuid: null
+icon_default: null
+description: 'Used to embedded custom component on the front end.'
+behavior_plugins: {  }

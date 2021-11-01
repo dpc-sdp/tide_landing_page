@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.custom_component.field_paragraph_custom_component
+    - field.field.paragraph.custom_component.field_paragraph_options
+    - paragraphs.paragraphs_type.custom_component
+id: paragraph.custom_component.default
+targetEntityType: paragraph
+bundle: custom_component
+mode: default
+content:
+  field_paragraph_custom_component:
+    weight: 0
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_paragraph_options:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+hidden:
+  created: true
+  status: true

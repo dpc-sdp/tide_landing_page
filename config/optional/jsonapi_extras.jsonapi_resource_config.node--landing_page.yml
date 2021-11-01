@@ -224,7 +224,7 @@ resourceFields:
     fieldName: field_landing_page_component
     publicName: field_landing_page_component
     enhancer:
-      id: ''
+      id: page_components_enhancer
     disabled: false
     advancedOptionsIcon: ''
     enhancer_label: ''

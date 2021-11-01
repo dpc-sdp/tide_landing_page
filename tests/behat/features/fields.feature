@@ -305,3 +305,72 @@ Feature: Fields for Landing Page content type
     # This field can be "seen" but not visible.
     And I see field "field_landing_page_component[0][subform][field_customise][value]"
     And save screenshot
+
+  @api @nosuggest
+  Scenario: The content type has the expected valid fields (Custom Component).
+    Given custom_components terms:
+      | name             | field_machine_name:value | field_default_options:value         |
+      | Test Component 1 | test_machine_name        | [{"user_id":13,"username":"stack"}] |
+    Given sites terms:
+      | name        |
+      | Test Site 1 |
+    Given topic terms:
+      | name         |
+      | Test Topic 1 |
+    Given department terms:
+      | name              | tid    |
+      | Test Department 1 | 300001 |
+    Given I am logged in as a user with the "site_admin" role
+    When I visit "node/add/landing_page"
+    And I press the "edit-field-landing-page-component-add-more-add-modal-form-area-add-more" button
+    And I should see the button "Custom component"
+    And I wait for 5 seconds
+    And I press the "Custom component" button
+    And I wait for 5 seconds
+    And I see field "Custom component"
+    And I should see an "input[id$=edit-field-landing-page-component-0-subform-field-paragraph-custom-component-0-target-id]" element
+    And I should see an "input[id$=edit-field-landing-page-component-0-subform-field-paragraph-custom-component-0-target-id].required" element
+    And I see field "Options"
+    And I should see an "textarea[id$=edit-field-landing-page-component-0-subform-field-paragraph-options-0-value]" element
+    And I should not see an "textarea[id$=edit-field-landing-page-component-0-subform-field-paragraph-options-0-value].required" element
+    And I fill in the following:
+      | title[0][value]                                                                          | Testing title                                                        |
+      | field_landing_page_summary[0][value]                                                     | Test summary                                                         |
+      | field_landing_page_component[0][subform][field_paragraph_options][0][value]              | [{"user_id":13,"username":"stack"},{"user_id":14,"username":"over"}] |
+      | field_landing_page_component[0][subform][field_paragraph_custom_component][0][target_id] | Test Component 1                                                     |
+      | field_topic[0][target_id]                                                                | Test Topic 1                                                         |
+    And I select "Published" from "edit-moderation-state-0-state"
+    And I press "Save"
+    And I wait for 2 seconds
+    And I should see text matching "Testing title"
+
+  @api @nosuggest
+  Scenario: The content type has the expected invalid fields (Custom Component) JSON Validation.
+    Given custom_components terms:
+      | name             | field_machine_name:value | field_default_options:value         |
+      | Test Component 1 | test_machine_name        | [{"user_id":13,"username":"stack"}] |
+    Given sites terms:
+      | name        |
+      | Test Site 1 |
+    Given topic terms:
+      | name         |
+      | Test Topic 1 |
+    Given department terms:
+      | name              | tid    |
+      | Test Department 1 | 300001 |
+    Given I am logged in as a user with the "site_admin" role
+    When I visit "node/add/landing_page"
+    And I press the "edit-field-landing-page-component-add-more-add-modal-form-area-add-more" button
+    And I wait for 5 seconds
+    And I press the "Custom component" button
+    And I wait for 5 seconds
+    And I fill in the following:
+      | title[0][value]                                                                          | Testing title    |
+      | field_landing_page_summary[0][value]                                                     | Test summary     |
+      | field_landing_page_component[0][subform][field_paragraph_options][0][value]              | test wrong json  |
+      | field_landing_page_component[0][subform][field_paragraph_custom_component][0][target_id] | Test Component 1 |
+      | field_topic[0][target_id]                                                                | Test Topic 1     |
+    And I select "Published" from "edit-moderation-state-0-state"
+    And I press "Save"
+    And I wait for 2 seconds
+    And I should see text matching "The Options field should contain a valid JSON string."

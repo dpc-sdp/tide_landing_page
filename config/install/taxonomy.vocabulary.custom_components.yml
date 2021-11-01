@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Custom components'
+vid: custom_components
+description: ''
+weight: 0

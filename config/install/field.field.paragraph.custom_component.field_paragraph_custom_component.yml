@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_paragraph_custom_component
+    - paragraphs.paragraphs_type.custom_component
+    - taxonomy.vocabulary.custom_components
+id: paragraph.custom_component.field_paragraph_custom_component
+field_name: field_paragraph_custom_component
+entity_type: paragraph
+bundle: custom_component
+label: 'Custom component'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      custom_components: custom_components
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

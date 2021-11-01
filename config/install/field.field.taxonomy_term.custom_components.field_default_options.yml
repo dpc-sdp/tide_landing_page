@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_default_options
+    - taxonomy.vocabulary.custom_components
+id: taxonomy_term.custom_components.field_default_options
+field_name: field_default_options
+entity_type: taxonomy_term
+bundle: custom_components
+label: 'Default options'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

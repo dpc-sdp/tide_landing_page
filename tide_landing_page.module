@@ -517,3 +517,12 @@ function tide_landing_page_node_presave(NodeInterface $node) {
     }
   }
 }
+
+/**
+ * Implements hook_entity_type_build().
+ */
+function tide_landing_page_entity_type_build(array &$entity_types) {
+  // Add our custom validation to the options field.
+  $entity_types['paragraph']->addConstraint('JsonValidation');
+  $entity_types['taxonomy_term']->addConstraint('JsonValidation');
+}
