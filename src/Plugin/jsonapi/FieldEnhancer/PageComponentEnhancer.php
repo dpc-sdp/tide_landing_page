@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\vicgovau_core\Plugin\jsonapi\FieldEnhancer;
+namespace Drupal\tide_landing_page\Plugin\jsonapi\FieldEnhancer;
 
 use Drupal\jsonapi_extras\Plugin\ResourceFieldEnhancerBase;
 use Shaper\Util\Context;

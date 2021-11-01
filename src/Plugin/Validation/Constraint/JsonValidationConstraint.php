@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\vicgovau_core\Plugin\Validation\Constraint;
+namespace Drupal\tide_landing_page\Plugin\Validation\Constraint;
 
 use Drupal\Core\Entity\Plugin\Validation\Constraint\CompositeConstraintBase;
 
