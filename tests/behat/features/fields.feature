@@ -315,4 +315,3 @@ Feature: Fields for Landing Page content type
     When I visit "admin/content"
     Then I select "Standard Page" from "edit-type"
     And I press "Filter"
-    And the ".menu-item [class$=node-add-landing-page]" element should contain "Standard Page"
