@@ -339,7 +339,6 @@ Feature: Fields for Landing Page content type
       | field_landing_page_component[0][subform][field_paragraph_options][0][value]              | [{"user_id":13,"username":"stack"},{"user_id":14,"username":"over"}] |
       | field_landing_page_component[0][subform][field_paragraph_custom_component][0][target_id] | Test Component 1                                                     |
       | field_topic[0][target_id]                                                                | Test Topic 1                                                         |
-    And I check "Test Site 1"
     And I select "Published" from "edit-moderation-state-0-state"
     And I press "Save"
     And I wait for 2 seconds
@@ -371,7 +370,6 @@ Feature: Fields for Landing Page content type
       | field_landing_page_component[0][subform][field_paragraph_options][0][value]              | test wrong json  |
       | field_landing_page_component[0][subform][field_paragraph_custom_component][0][target_id] | Test Component 1 |
       | field_topic[0][target_id]                                                                | Test Topic 1     |
-    And I check "Test Site 1"
     And I select "Published" from "edit-moderation-state-0-state"
     And I press "Save"
     And I wait for 2 seconds
