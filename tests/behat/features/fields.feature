@@ -311,7 +311,7 @@ Feature: Fields for Landing Page content type
     Given I am logged in as a user with the "editor" role
     When I visit "node/add"
     Then I see the text 'Standard Page'
-    And I see the text 'Use <em>Standard Page</em> content type for custom standard pages.'
+    And I see the text 'Use Standard Page content type for custom standard pages.'
     When I visit "admin/content"
     Then I select "Standard Page" from "edit-type"
     And I press "Filter"
