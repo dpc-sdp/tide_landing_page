@@ -225,7 +225,7 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
     if ($site_base_url) {
       $pattern = '/' . preg_quote($site_base_url, '/') . '\/site\-(\d+)\//';
     }
-    return preg_replace($pattern, $site_base_url . '/', $path['alias']);
+    return '#';//preg_replace($pattern, $site_base_url . '/', $path['alias']);
   }
 
 }
