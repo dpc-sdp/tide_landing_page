@@ -74,7 +74,7 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
   public function getAlias($nid) {
     $url = '';
     if (!empty($nid)) {
-      $url = \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $nid);
+      $url = \Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $nid);
     }
     return $url;
   }
@@ -197,7 +197,7 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
           $file = $media_field[0]['target_id'] ? File::load($media_field[0]['target_id']) : '';
           if ($file) {
             // Get URL of the image file.
-            $image['url'] = $file->url();
+            $image['url'] = $file->createFileUrl();
             // Get image crop values.
             $crop = !empty($file) ? ImageEnhancer::getCropEntity($file, 'focal_point') : '';
             $focal_point = !empty($crop) ? $crop->position() : '';
