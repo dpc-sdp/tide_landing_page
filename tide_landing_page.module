@@ -125,7 +125,7 @@ function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form
       unset($form['field_landing_page_hero_theme']);
     }
 
-    // @todo: the below block needs to be in a proper widget alter.
+    // @todo the below block needs to be in a proper widget alter.
     if (isset($form['field_landing_page_component']['widget'][0])) {
       foreach (Element::children($form['field_landing_page_component']['widget']) as $key) {
         if (isset($form['field_landing_page_component']['widget'][$key]['subform']['field_paragraph_cta']['widget'])) {
