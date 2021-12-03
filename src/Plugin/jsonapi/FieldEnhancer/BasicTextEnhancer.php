@@ -55,7 +55,7 @@ class BasicTextEnhancer extends ResourceFieldEnhancerBase {
    * @return array
    *   The array of fields value.
    */
-  public function replaceUnicodeWhitespace($data) {
+  public function replaceUnicodeWhitespace(array $data) {
     $codepoints = [
       '/\x{00A0}/u',
       '/\x{2000}/u',
@@ -76,8 +76,8 @@ class BasicTextEnhancer extends ResourceFieldEnhancerBase {
     ];
 
     if ($data['value'] && $data['processed']) {
-      $data['value'] = preg_replace($codepoints," ", $data['value']);
-      $data['processed'] = preg_replace($codepoints," ", $data['processed']);
+      $data['value'] = preg_replace($codepoints, " ", $data['value']);
+      $data['processed'] = preg_replace($codepoints, " ", $data['processed']);
     }
     return $data;
   }
