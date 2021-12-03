@@ -148,7 +148,7 @@ resourceFields:
     fieldName: field_paragraph_body
     publicName: field_paragraph_body
     enhancer:
-      id: ''
+      id: 'basic_text_enhancer'
     disabled: false
     advancedOptionsIcon: ''
     enhancer_label: ''
