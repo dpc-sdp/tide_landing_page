@@ -238,6 +238,16 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
         '#attributes' => ['style' => 'display: none;'],
       ];
     }
+    // Add custom validation for statistics grid.
+    if ($paragraph_type == 'statistics_grid') {
+      $delta = $element['subform']['field_statistic_block']['widget']['#max_delta'];
+      if ($delta < 1) {
+        $element['#element_validate'][] = [
+          'Drupal\tide_landing_page\Validate\StatisticsGrid',
+          'validate',
+        ];
+      }
+    }
     // Add states for navigation and promotion card paragraph type fields.
     if ($paragraph_type === 'navigation_card' || $paragraph_type === 'promotion_card') {
       if (isset($element['subform']['field_paragraph_link'])) {
