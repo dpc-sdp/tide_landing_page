@@ -9,6 +9,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
  * Validation handler for statistics grid component.
  */
 class StatisticsGrid {
+
   /**
    * Validates given element.
    *
@@ -19,8 +20,7 @@ class StatisticsGrid {
    * @param array $form
    *   The complete form structure.
    */
-  public static function validate(array &$element, FormStateInterface $formState, array &$form)
-  {
+  public static function validate(array &$element, FormStateInterface $formState, array &$form) {
     $error = FALSE;
     $max_delta = $element['subform']['field_statistic_block']['widget']['#max_delta'];
     if ($max_delta == 0) {
@@ -33,4 +33,5 @@ class StatisticsGrid {
       );
     }
   }
+
 }
