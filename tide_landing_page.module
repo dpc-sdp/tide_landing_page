@@ -240,8 +240,7 @@ function tide_landing_page_field_widget_paragraphs_form_alter(&$element, FormSta
     }
     // Add custom validation for statistics grid.
     if ($paragraph_type == 'statistics_grid') {
-      $delta = $element['subform']['field_statistic_block']['widget']['#max_delta'];
-      if ($delta < 1) {
+      if (isset($element['subform']['field_statistic_block']['widget']['#max_delta'])) {
         $element['#element_validate'][] = [
           'Drupal\tide_landing_page\Validate\StatisticsGrid',
           'validate',
