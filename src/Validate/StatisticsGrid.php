@@ -29,7 +29,7 @@ class StatisticsGrid {
     if ($error) {
       $formState->setError(
         $element,
-        new TranslatableMarkup('The statistics grid component needs minimum two blocks to be added.')
+        new TranslatableMarkup('The statistics grid component need minimum two blocks to be added.')
       );
     }
   }
