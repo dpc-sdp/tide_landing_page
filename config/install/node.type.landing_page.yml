@@ -13,7 +13,7 @@ third_party_settings:
     default_template: ''
 name: 'Standard Page'
 type: landing_page
-description: 'Use <em>Standard Page</em> content type for custom standard pages.'
+description: 'Used for all standard pages and content.'
 help: ''
 new_revision: true
 preview_mode: 1
