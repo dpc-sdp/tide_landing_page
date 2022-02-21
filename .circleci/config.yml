@@ -76,4 +76,4 @@ workflows:
     jobs:
       - build
       - build_suggest
-      - phpunit_tests:
+      - phpunit_tests
