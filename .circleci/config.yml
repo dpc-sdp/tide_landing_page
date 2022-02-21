@@ -40,6 +40,13 @@ jobs:
           BEHAT_PROFILE: "--profile=suggest"
 
   phpunit_tests:
+    <<: *job-build
+    docker:
+      - image: *builder-image
+        environment:
+          INSTALL_NEW_SITE: 1
+          LAGOON_ENVIRONMENT_TYPE: ci
+          INSTALL_SUGGEST: 1
     steps:
       - attach_workspace:
           at: /workspace
@@ -70,5 +77,3 @@ workflows:
       - build
       - build_suggest
       - phpunit_tests:
-          requires:
-            - build_suggest
