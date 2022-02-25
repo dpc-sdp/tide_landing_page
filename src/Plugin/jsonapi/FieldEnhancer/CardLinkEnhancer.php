@@ -10,6 +10,8 @@ use Drupal\taxonomy\Entity\Term;
 use Drupal\media\Entity\Media;
 use Drupal\file\Entity\File;
 use Shaper\Util\Context;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Adds necessary fields from internal link.
@@ -132,6 +134,17 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
         $paragraph = $paragraph_id ? Paragraph::load($paragraph_id) : '';
         if ($paragraph && $paragraph->field_paragraph_date_range->getValue()) {
           $event_date = $paragraph->field_paragraph_date_range->getValue()[0];
+          // Parse date with GMT timezone.
+          $storageTz = DateTimeItemInterface::STORAGE_TIMEZONE;
+          $dateValue = new DrupalDateTime($event_date['value'], $storageTz);
+          $dateEndValue = new DrupalDateTime($event_date['end_value'], $storageTz);
+          $systemTz = \Drupal::service('config.factory')->get('system.date')->get('timezone.default');
+          // Convert to local timezone.
+          $date_formatter = \Drupal::service('date.formatter');
+          $event_date = [
+            'value' => $date_formatter->format($dateValue->getTimeStamp(), 'custom', 'Y-m-d H:i:s', $systemTz),
+            'end_value' => $date_formatter->format($dateEndValue->getTimeStamp(), 'custom', 'Y-m-d H:i:s', $systemTz),
+          ];
           $card_fields['date'] = $event_date ? $event_date : '';
         }
       }
