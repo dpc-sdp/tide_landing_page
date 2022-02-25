@@ -5,5 +5,5 @@ id: statistics_grid
 label: 'Statistics Grid'
 icon_uuid: null
 icon_default: null
-description: ''
+description: 'Display between 2 and 8 statistics with short descriptions in a grid.'
 behavior_plugins: {  }
