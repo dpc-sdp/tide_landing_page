@@ -2350,3 +2350,18 @@ function tide_landing_page_update_8040() {
     }
   }
 }
+
+/**
+ * Add enhancer for basic_text.
+ */
+function tide_landing_page_update_8041() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('jsonapi_extras.jsonapi_resource_config.paragraph--basic_text');
+
+  $content = $config->get('resourceFields');
+  if (isset($content['field_paragraph_body']) && empty($content['field_paragraph_body']['enhancer']['id'])) {
+    $content['field_paragraph_body']['enhancer']['id'] = 'basic_text_enhancer';
+    $config->set('resourceFields', $content);
+  }
+  $config->save();
+}
