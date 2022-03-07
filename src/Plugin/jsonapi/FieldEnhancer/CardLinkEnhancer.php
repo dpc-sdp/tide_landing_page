@@ -135,16 +135,18 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
         if ($paragraph && $paragraph->field_paragraph_date_range->getValue()) {
           $event_date = $paragraph->field_paragraph_date_range->getValue()[0];
           // Parse date with GMT timezone.
-          $storageTz = DateTimeItemInterface::STORAGE_TIMEZONE;
-          $dateValue = new DrupalDateTime($event_date['value'], $storageTz);
-          $dateEndValue = new DrupalDateTime($event_date['end_value'], $storageTz);
-          $systemTz = \Drupal::service('config.factory')->get('system.date')->get('timezone.default');
-          // Convert to local timezone.
-          $date_formatter = \Drupal::service('date.formatter');
-          $event_date = [
-            'value' => $date_formatter->format($dateValue->getTimeStamp(), 'custom', 'Y-m-d H:i:s', $systemTz),
-            'end_value' => $date_formatter->format($dateEndValue->getTimeStamp(), 'custom', 'Y-m-d H:i:s', $systemTz),
-          ];
+          if ($event_date != NULL) {
+            $storage_tz = DateTimeItemInterface::STORAGE_TIMEZONE;
+            $date_value = new DrupalDateTime($event_date['value'], $storage_tz);
+            $date_end_value = new DrupalDateTime($event_date['end_value'], $storage_tz);
+            $system_tz = \Drupal::service('config.factory')->get('system.date')->get('timezone.default');
+            // Convert to local timezone.
+            $date_formatter = \Drupal::service('date.formatter');
+            $event_date = [
+              'value' => $date_formatter->format($date_value->getTimeStamp(), 'custom', 'Y-m-d H:i:s', $system_tz),
+              'end_value' => $date_formatter->format($date_end_value->getTimeStamp(), 'custom', 'Y-m-d H:i:s', $system_tz),
+            ];
+          }
           $card_fields['date'] = $event_date ? $event_date : '';
         }
       }
