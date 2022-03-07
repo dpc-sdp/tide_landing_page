@@ -20,6 +20,7 @@ dependencies:
     - paragraphs.paragraphs_type.media_gallery
     - paragraphs.paragraphs_type.navigation_card
     - paragraphs.paragraphs_type.promotion_card
+    - paragraphs.paragraphs_type.statistics_grid
     - paragraphs.paragraphs_type.timelines
   module:
     - entity_reference_revisions
@@ -55,6 +56,7 @@ settings:
       data_table: data_table
       card_event: card_event
       card_event_auto: card_event_auto
+      statistics_grid: statistics_grid
     target_bundles_drag_drop:
       banner:
         weight: -33
@@ -137,6 +139,12 @@ settings:
       promotion_card:
         enabled: true
         weight: -30
+      statistic_block:
+        weight: 151
+        enabled: false
+      statistics_grid:
+        enabled: true
+        weight: 150
       social_link:
         weight: 40
         enabled: false
