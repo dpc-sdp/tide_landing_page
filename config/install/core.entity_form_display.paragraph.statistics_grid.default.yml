@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.statistics_grid.field_statistic_block
+    - field.field.paragraph.statistics_grid.field_statistics_grid_theme
+    - paragraphs.paragraphs_type.statistics_grid
+  module:
+    - paragraphs
+id: paragraph.statistics_grid.default
+targetEntityType: paragraph
+bundle: statistics_grid
+mode: default
+content:
+  field_statistic_block:
+    type: entity_reference_paragraphs
+    weight: 0
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_statistics_grid_theme:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+hidden:
+  created: true
+  status: true
