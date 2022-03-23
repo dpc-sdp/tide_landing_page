@@ -39,7 +39,7 @@
   letter-spacing: normal;
 }
 
-.dropbutton-multiple .dropbutton-action .ajax-progress {
+div.dropbutton-multiple .dropbutton-action .ajax-progress {
   position: relative !important;
   top: -4px !important;
   left: 30px !important;
