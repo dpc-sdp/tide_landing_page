@@ -4,5 +4,6 @@ landing_page_form:
       css/landing_page.css: {}
   js:
     js/hide_elements.js: {}
+    js/statistics_grid.js: {}
   dependencies:
     - core/jquery
