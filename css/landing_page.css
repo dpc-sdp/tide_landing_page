@@ -38,3 +38,9 @@
   text-transform: none;
   letter-spacing: normal;
 }
+
+div.dropbutton-multiple .dropbutton-action .ajax-progress {
+  position: relative;
+  top: -4px;
+  left: 30px;
+}
