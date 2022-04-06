@@ -40,7 +40,7 @@
 }
 
 div.dropbutton-multiple .dropbutton-action .ajax-progress {
-  position: relative !important;
-  top: -4px !important;
-  left: 30px !important;
+  position: relative;
+  top: -4px;
+  left: 30px;
 }
