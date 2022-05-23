@@ -22,6 +22,7 @@ dependencies:
     - paragraphs.paragraphs_type.promotion_card
     - paragraphs.paragraphs_type.statistics_grid
     - paragraphs.paragraphs_type.timelines
+    - paragraphs.paragraphs_type.content_collection_enhanced
   module:
     - entity_reference_revisions
 id: node.landing_page.field_landing_page_component
@@ -57,6 +58,7 @@ settings:
       card_event: card_event
       card_event_auto: card_event_auto
       statistics_grid: statistics_grid
+      content_collection_enhanced: content_collection_enhanced
     target_bundles_drag_drop:
       banner:
         weight: -33
@@ -166,4 +168,7 @@ settings:
       timelines:
         enabled: true
         weight: -16
+      content_collection_enhanced:
+        enabled: true
+        weight: 96
 field_type: entity_reference_revisions
