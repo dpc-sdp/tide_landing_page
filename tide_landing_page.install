@@ -2427,7 +2427,7 @@ function tide_landing_page_update_8042() {
 /**
  * Adds content collection paragraph type to field_landing_page_component.
  */
-function tide_landing_page_update_8043() {
+function tide_landing_page_update_8045() {
   $field = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
   if ($field) {
     $handler_settings = $field->getSetting('handler_settings');
