@@ -301,6 +301,7 @@ config_devel:
     - paragraphs.paragraphs_type.phone
     - paragraphs.paragraphs_type.social_link
     - paragraphs.paragraphs_type.timelines
+    - paragraphs.paragraphs_type.content_collection_enhanced
   optional:
     - core.entity_form_display.paragraph.embedded_webform.default
     - core.entity_form_display.paragraph.featured_news.default
