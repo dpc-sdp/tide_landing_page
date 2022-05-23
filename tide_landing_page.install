@@ -2425,6 +2425,21 @@ function tide_landing_page_update_8042() {
 }
 
 /**
+ * Increase statistics_grid paragraph default type/count.
+ */
+function tide_landing_page_update_8043() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('core.entity_form_display.paragraph.statistics_grid.default');
+
+  if (!$config->isNew() && !empty($config->get('content.field_statistic_block.settings.default_paragraph_type'))) {
+    $config->set('content.field_statistic_block.settings.default_paragraph_type', 'statistic_block')->save();
+  }
+  if (!$config->isNew() && !empty($config->get('content.field_statistic_block.settings.default_paragraph_count'))) {
+    $config->set('content.field_statistic_block.settings.default_paragraph_count', '2')->save();
+  }
+}
+
+/**
  * Adds content collection paragraph type to field_landing_page_component.
  */
 function tide_landing_page_update_8045() {
