@@ -914,7 +914,7 @@ function tide_landing_page_update_8022() {
   foreach ($fields as $field) {
     $gallery_field = $field->toArray();
     $gallery_field['label'] = 'Gallery name';
-    $gallery_field['description'] = 'New galleries can be created <a href="/admin/structure/block/block-content">here</a><br>Find out <a href="https://www.singledigitalpresence.vic.gov.au/create-image-gallery" target="_blank">how to create an image gallery</a>';
+    $gallery_field['description'] = 'New galleries can be created <a href="/admin/structure/block/block-content" target="_blank">here</a><br>Find out <a href="https://www.singledigitalpresence.vic.gov.au/create-image-gallery" target="_blank">how to create an image gallery</a>';
 
     $gallery_field = FieldConfig::create($gallery_field);
     $gallery_field->original = $field;
