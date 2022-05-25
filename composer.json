@@ -6,10 +6,11 @@
     "require": {
         "dpc-sdp/tide_core": "^3.0.0",
         "dpc-sdp/tide_event": "^3.0.0",
-        "dpc-sdp/tide_media": "^3.0.0"
+        "dpc-sdp/tide_media": "^3.0.0",
+        "dpc-sdp/tide_api": "dev-feature/SDPA-6247-content-collection-phase-one as 3.0.0"
+        
     },
     "suggest": {
-        "dpc-sdp/tide_api:^3.0.0": "Allows to use Drupal in headless mode",
         "dpc-sdp/tide_webform:^3.0.0": "Allows to use questionnaires",
         "dpc-sdp/tide_news:^3.0.0": "News content type and related configuration for Tide Drupal 8 distribution"
     },
