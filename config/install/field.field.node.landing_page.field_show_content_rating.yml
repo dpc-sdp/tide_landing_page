@@ -8,8 +8,8 @@ id: node.landing_page.field_show_content_rating
 field_name: field_show_content_rating
 entity_type: node
 bundle: landing_page
-label: 'Show Related Content?'
-description: 'Check this box to display related links on this page.'
+label: 'Show content rating?'
+description: 'Show ''Was this page helpful?'' feedback form. Do not uncheck this form without admin approval. '
 required: false
 translatable: true
 default_value:
