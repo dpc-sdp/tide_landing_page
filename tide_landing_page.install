@@ -2430,11 +2430,8 @@ function tide_landing_page_update_8042() {
 function tide_landing_page_update_8043() {
   $config_factory = \Drupal::configFactory();
   $config = $config_factory->getEditable('core.entity_form_display.paragraph.statistics_grid.default');
-
-  if (!empty($config->get('content.field_statistic_block.settings.default_paragraph_type'))) {
+  if ($config) {
     $config->set('content.field_statistic_block.settings.default_paragraph_type', 'statistic_block')->save();
-  }
-  if (!empty($config->get('content.field_statistic_block.settings.default_paragraph_count'))) {
     $config->set('content.field_statistic_block.settings.default_paragraph_count', '2')->save();
   }
 }
