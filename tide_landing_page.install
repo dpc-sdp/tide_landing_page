@@ -928,7 +928,7 @@ function tide_landing_page_update_8022() {
   foreach ($fields as $field) {
     $gallery_field = $field->toArray();
     $gallery_field['label'] = 'Gallery name';
-    $gallery_field['description'] = 'New galleries can be created <a href="/admin/structure/block/block-content">here</a><br>Find out <a href="https://www.singledigitalpresence.vic.gov.au/create-image-gallery">how to create an image gallery</a>';
+    $gallery_field['description'] = 'New galleries can be created <a href="/admin/structure/block/block-content" target="_blank">here</a><br>Find out <a href="https://www.singledigitalpresence.vic.gov.au/create-image-gallery" target="_blank">how to create an image gallery</a>';
 
     $gallery_field = FieldConfig::create($gallery_field);
     $gallery_field->original = $field;
@@ -2432,8 +2432,11 @@ function tide_landing_page_update_8042() {
   foreach ($configs as $config => $type) {
     $config_read = _tide_read_config($config, $config_location, TRUE);
     $storage = \Drupal::entityTypeManager()->getStorage($type);
-    $config_entity = $storage->createFromStorageRecord($config_read);
-    $config_entity->save();
+    $id = substr($config, strrpos($config, '.') + 1);
+    if ($storage->load($id) == NULL) {
+      $config_entity = $storage->createFromStorageRecord($config_read);
+      $config_entity->save();
+    }
   }
 
   // Add the new paragraph type to field_landing_page_component.
@@ -2463,4 +2466,16 @@ function tide_landing_page_update_8042() {
   $icon_dir = drupal_get_path('module', 'tide_landing_page') . DIRECTORY_SEPARATOR . 'icons';
   $icon_filename = $icon_dir . DIRECTORY_SEPARATOR . 'statistics_grid.svg';
   _tide_set_paragraph_type_icon('statistics_grid', $icon_filename);
+}
+
+/**
+ * Increase statistics_grid paragraph default type/count.
+ */
+function tide_landing_page_update_8043() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('core.entity_form_display.paragraph.statistics_grid.default');
+  if ($config) {
+    $config->set('content.field_statistic_block.settings.default_paragraph_type', 'statistic_block')->save();
+    $config->set('content.field_statistic_block.settings.default_paragraph_count', '2')->save();
+  }
 }
