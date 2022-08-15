@@ -10,7 +10,7 @@ id: node.landing_page.field_node_display_headings
 field_name: field_node_display_headings
 entity_type: node
 bundle: landing_page
-label: 'Display headings'
+label: 'Choose headings to display'
 description: ''
 required: true
 translatable: true
