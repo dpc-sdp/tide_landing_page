@@ -2435,3 +2435,14 @@ function tide_landing_page_update_8043() {
     $config->set('content.field_statistic_block.settings.default_paragraph_count', '2')->save();
   }
 }
+
+/**
+ * Update description text's link attribute of Image gallery autocomplete field.
+ */
+function tide_landing_page_update_8044() {
+  $config = \Drupal::configFactory()
+    ->getEditable('field.field.paragraph.media_gallery.field_paragraph_media_gallery');
+  // Update description.
+  $config->set('description', "New galleries can be created <a href=\"/admin/structure/block/block-content\" target=\"_blank\">here</a><br>Find out <a href=\"https://www.singledigitalpresence.vic.gov.au/create-image-gallery\" target=\"_blank\">how to create an image gallery</a>");
+  $config->save();
+}
