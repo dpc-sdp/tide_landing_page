@@ -9,9 +9,9 @@
         "dpc-sdp/tide_media": "dev-feature/SRM-512_update_drupal_to_9.4"
     },
     "suggest": {
-        "dpc-sdp/tide_api:^3.0.0": "Allows to use Drupal in headless mode",
-        "dpc-sdp/tide_webform:^3.0.0": "Allows to use questionnaires",
-        "dpc-sdp/tide_news:^3.0.0": "News content type and related configuration for Tide Drupal 8 distribution"
+        "dpc-sdp/tide_api:dev-feature/SRM-512_update_drupal_to_9.4": "Allows to use Drupal in headless mode",
+        "dpc-sdp/tide_webform:dev-feature/SRM-512_update_drupal_to_9.4": "Allows to use questionnaires",
+        "dpc-sdp/tide_news:dev-feature/SRM-512_update_drupal_to_9.4": "News content type and related configuration for Tide Drupal 8 distribution"
     },
     "repositories": {
         "drupal": {
