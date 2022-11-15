@@ -2446,3 +2446,13 @@ function tide_landing_page_update_8044() {
   $config->set('description', "New galleries can be created <a href=\"/admin/structure/block/block-content\" target=\"_blank\">here</a><br>Find out <a href=\"https://www.singledigitalpresence.vic.gov.au/create-image-gallery\" target=\"_blank\">how to create an image gallery</a>");
   $config->save();
 }
+
+/**
+ * Update default image style at promotion_card to noImage value.
+ */
+function tide_landing_page_update_8045() {
+  $config = \Drupal::configFactory()
+    ->getEditable('field.field.paragraph.promotion_card.field_promo_card_display_style');
+  $config->set('default_value', ['noImage']);
+  $config->save();
+}
