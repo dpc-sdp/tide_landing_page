@@ -133,7 +133,7 @@ function tide_landing_page_update_dependencies() {
  */
 function tide_landing_page_update_8001() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   _tide_import_single_config('field.field.node.landing_page.field_show_social_sharing', $config_location);
 
   $pages = \Drupal::entityTypeManager()->getStorage('node')
@@ -155,7 +155,7 @@ function tide_landing_page_update_8001() {
  */
 function tide_landing_page_update_8002() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   _tide_import_single_config('field.field.node.landing_page.field_featured_image', $config_location);
 
   $pages = \Drupal::entityTypeManager()->getStorage('node')
@@ -177,7 +177,7 @@ function tide_landing_page_update_8002() {
  */
 function tide_landing_page_update_8003() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   _tide_import_single_config('field.storage.node.field_landing_page_summary', $config_location);
   _tide_import_single_config('field.field.node.landing_page.field_landing_page_summary', $config_location);
 
@@ -315,7 +315,7 @@ function _tide_landing_page_add_fields_search_api() {
  */
 function tide_landing_page_update_8004() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   _tide_import_single_config('field.storage.paragraph.field_paragraph_cta_style', $config_location);
   _tide_import_single_config('field.field.paragraph.call_to_action.field_paragraph_cta_style', $config_location);
 
@@ -345,7 +345,7 @@ function tide_landing_page_update_8004() {
  */
 function tide_landing_page_update_8005() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   _tide_import_single_config('field.storage.paragraph.field_paragraph_search_block', $config_location);
   _tide_import_single_config('field.field.paragraph.embedded_search_form.field_paragraph_search_block', $config_location);
   _tide_import_single_config('field.field.node.landing_page.field_landing_page_header', $config_location);
@@ -392,7 +392,7 @@ function tide_landing_page_update_8006() {
  */
 function tide_landing_page_update_8007() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   _tide_import_single_config('field.field.paragraph.social_link.field_paragraph_link', $config_location);
 }
 
@@ -401,7 +401,7 @@ function tide_landing_page_update_8007() {
  */
 function tide_landing_page_update_8008() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   $configs = [
     'paragraphs.paragraphs_type.complex_image',
     'field.storage.paragraph.field_complex_image_data',
@@ -463,7 +463,7 @@ function tide_landing_page_update_8009() {
  */
 function tide_landing_page_update_8010() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   $configs = [
     'field.storage.node.field_show_ack_of_country',
     'field.field.node.landing_page.field_show_ack_of_country',
@@ -503,7 +503,7 @@ function tide_landing_page_update_8010() {
 function tide_landing_page_update_8011() {
   if (\Drupal::moduleHandler()->moduleExists('jsonapi_extras')) {
     module_load_include('inc', 'tide_core', 'includes/helpers');
-    $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/optional'];
+    $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/optional'];
     _tide_import_single_config('jsonapi_extras.jsonapi_resource_config.paragraph--card_event', $config_location);
   }
 }
@@ -513,7 +513,7 @@ function tide_landing_page_update_8011() {
  */
 function tide_landing_page_update_8012() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   _tide_import_single_config('field.storage.node.field_show_hero_image_caption', $config_location);
   _tide_import_single_config('field.field.node.landing_page.field_show_hero_image_caption', $config_location);
 }
@@ -523,7 +523,7 @@ function tide_landing_page_update_8012() {
  */
 function tide_landing_page_update_8013() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   _tide_import_single_config('field.storage.node.field_show_c_primary_caption', $config_location);
   _tide_import_single_config('field.field.node.landing_page.field_show_c_primary_caption', $config_location);
 
@@ -791,7 +791,7 @@ function tide_landing_page_update_8016() {
  */
 function tide_landing_page_update_8017() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   _tide_import_single_config('field.storage.paragraph.field_paragraph_display_topic', $config_location);
   _tide_import_single_config('field.field.paragraph.card_promotion_auto.field_paragraph_display_topic', $config_location);
 
@@ -985,7 +985,7 @@ function tide_landing_page_update_8024() {
     'field.field.paragraph.introduction_banner.field_banner_display_type' => 'field_config',
   ];
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   // Check if field already exported to config/sync.
   foreach ($configs as $config => $type) {
     $config_read = _tide_read_config($config, $config_location, TRUE);
@@ -1058,7 +1058,7 @@ function tide_landing_page_update_8026() {
  */
 function tide_landing_page_update_8027() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   $config_ids = [
     'core.entity_form_display.paragraph.introduction_banner.default',
     'core.entity_view_display.paragraph.introduction_banner.default',
@@ -1085,7 +1085,7 @@ function tide_landing_page_update_8028() {
   ];
 
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   $config_storage = \Drupal::service('config.storage');
   foreach ($new_configs as $config) {
     // Check if field already exported to config/sync.
@@ -1124,7 +1124,7 @@ function tide_landing_page_update_8028() {
   // Add the field to JSON API.
   if (\Drupal::moduleHandler()->moduleExists('jsonapi_extras')) {
     $json_field = 'jsonapi_extras.jsonapi_resource_config.paragraph--form_embed_openforms';
-    $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/optional'];
+    $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/optional'];
     $config_read = _tide_read_config($json_field, $config_location, TRUE);
     $config_storage->write($json_field, $config_read);
   }
@@ -1146,7 +1146,7 @@ function tide_landing_page_update_8029() {
   ];
 
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
 
   // Check if field already exported to config/sync.
   foreach ($configs as $config => $type) {
@@ -1219,7 +1219,7 @@ function tide_landing_page_update_8031() {
  */
 function tide_landing_page_update_8032() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   $new_field = 'field.field.node.landing_page.field_node_display_headings';
   $config_read = _tide_read_config($new_field, $config_location, TRUE);
   // Obtain the storage manager for field instances.
@@ -1337,7 +1337,7 @@ function tide_landing_page_update_8033() {
     'core.entity_form_display.paragraph.promotion_card.default' => 'entity_form_display',
   ];
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   // Check if field already exported to config/sync.
   foreach ($configs as $config => $type) {
     $config_read = _tide_read_config($config, $config_location, TRUE);
@@ -1360,7 +1360,7 @@ function tide_landing_page_update_8033() {
 
   // Add paragraph type to JSON.
   $json_field = 'jsonapi_extras.jsonapi_resource_config.paragraph--promotion_card';
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/optional'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/optional'];
   $config_storage = \Drupal::service('config.storage');
   $config_read = _tide_read_config($json_field, $config_location, TRUE);
   $config_storage->write($json_field, $config_read);
@@ -1383,7 +1383,7 @@ function tide_landing_page_update_8034() {
     'core.entity_form_display.paragraph.navigation_card.default' => 'entity_form_display',
   ];
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   // Check if field already exported to config/sync.
   foreach ($configs as $config => $type) {
     $config_read = _tide_read_config($config, $config_location, TRUE);
@@ -1406,7 +1406,7 @@ function tide_landing_page_update_8034() {
 
   // Add paragraph type to JSON.
   $json_field = 'jsonapi_extras.jsonapi_resource_config.paragraph--navigation_card';
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/optional'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/optional'];
   $config_storage = \Drupal::service('config.storage');
   $config_read = _tide_read_config($json_field, $config_location, TRUE);
   $config_storage->write($json_field, $config_read);
@@ -1677,7 +1677,7 @@ function tide_landing_page_update_8036() {
     'core.entity_form_display.paragraph.data_table.default' => 'entity_form_display',
   ];
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   // Check if field already exported to config/sync.
   foreach ($configs as $config => $type) {
     $config_read = _tide_read_config($config, $config_location, TRUE);
@@ -1700,7 +1700,7 @@ function tide_landing_page_update_8036() {
 
   // Add paragraph type to JSON.
   $json_field = 'jsonapi_extras.jsonapi_resource_config.paragraph--data_table';
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/optional'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/optional'];
   $config_storage = \Drupal::service('config.storage');
   $config_read = _tide_read_config($json_field, $config_location, TRUE);
   $config_storage->write($json_field, $config_read);
@@ -2242,14 +2242,14 @@ function tide_landing_page_update_8037() {
  */
 function tide_landing_page_update_8038() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   $config = 'field.field.node.landing_page.field_landing_page_component';
   // Read only from /config/install.
   $config_read = _tide_read_config($config, $config_location, FALSE);
   // Get the sync file to update.
   $config_factory = \Drupal::configFactory();
   $config_sync = $config_factory->getEditable($config);
-  $icon_dir = drupal_get_path('module', 'tide_landing_page') . DIRECTORY_SEPARATOR . 'icons';
+  $icon_dir = \Drupal::service('extension.list.module')->getPath('tide_landing_page') . DIRECTORY_SEPARATOR . 'icons';
   $paragraphs = [
     'accordion',
     'basic_text',
@@ -2427,7 +2427,7 @@ function tide_landing_page_update_8042() {
     'core.entity_form_display.paragraph.statistic_block.default' => 'entity_form_display',
   ];
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   // Check if field already exported to config/sync.
   foreach ($configs as $config => $type) {
     $config_read = _tide_read_config($config, $config_location, TRUE);
@@ -2456,14 +2456,14 @@ function tide_landing_page_update_8042() {
     'jsonapi_extras.jsonapi_resource_config.paragraph--statistic_block',
     'jsonapi_extras.jsonapi_resource_config.paragraph--statistics_grid',
   ];
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/optional'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/optional'];
   $config_storage = \Drupal::service('config.storage');
   foreach ($json_fields as $json_field) {
     $config_read = _tide_read_config($json_field, $config_location, TRUE);
     $config_storage->write($json_field, $config_read);
   }
   // Adds statistics_grid icon.
-  $icon_dir = drupal_get_path('module', 'tide_landing_page') . DIRECTORY_SEPARATOR . 'icons';
+  $icon_dir = \Drupal::service('extension.list.module')->getPath('tide_landing_page') . DIRECTORY_SEPARATOR . 'icons';
   $icon_filename = $icon_dir . DIRECTORY_SEPARATOR . 'statistics_grid.svg';
   _tide_set_paragraph_type_icon('statistics_grid', $icon_filename);
 }
@@ -2478,4 +2478,25 @@ function tide_landing_page_update_8043() {
     $config->set('content.field_statistic_block.settings.default_paragraph_type', 'statistic_block')->save();
     $config->set('content.field_statistic_block.settings.default_paragraph_count', '2')->save();
   }
+}
+
+/**
+ * Update description text's link attribute of Image gallery autocomplete field.
+ */
+function tide_landing_page_update_8044() {
+  $config = \Drupal::configFactory()
+    ->getEditable('field.field.paragraph.media_gallery.field_paragraph_media_gallery');
+  // Update description.
+  $config->set('description', "New galleries can be created <a href=\"/admin/structure/block/block-content\" target=\"_blank\">here</a><br>Find out <a href=\"https://www.singledigitalpresence.vic.gov.au/create-image-gallery\" target=\"_blank\">how to create an image gallery</a>");
+  $config->save();
+}
+
+/**
+ * Update default image style at promotion_card to noImage value.
+ */
+function tide_landing_page_update_8045() {
+  $config = \Drupal::configFactory()
+    ->getEditable('field.field.paragraph.promotion_card.field_promo_card_display_style');
+  $config->set('default_value', ['noImage']);
+  $config->save();
 }
