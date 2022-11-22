@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - block_content.type.campaign
-    - block_content.type.campaign_with_video
     - field.storage.node.field_landing_page_c_secondary
     - node.type.landing_page
 id: node.landing_page.field_landing_page_c_secondary
