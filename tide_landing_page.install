@@ -2471,8 +2471,6 @@ function tide_landing_page_update_8046() {
       $block->delete();
     }
   }
-  else {
-    $content_type = \Drupal::entityTypeManager()->getStorage('block_content')->load('campaign_with_video');
-    $content_type->delete();
-  }
+  $content_type = \Drupal::entityTypeManager()->getStorage('block_content_type')->load('campaign_with_video');
+  $content_type->delete();
 }
