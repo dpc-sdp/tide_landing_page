@@ -77,7 +77,7 @@ jobs:
           LAGOON_ENVIRONMENT_TYPE: ci
           INSTALL_SUGGEST: 1
           BEHAT_PROFILE: "--profile=suggest"
-  
+
   phpunit_tests:
     <<: *job-build
     docker:
