@@ -1,22 +1,22 @@
 {
-    "name": "dpc-sdp/tide_landing_page",
-    "description": "Landing Page content type and related configuration for Tide Drupal 8 distribution",
-    "type": "drupal-module",
-    "license": "GPL-2.0-or-later",
-    "require": {
-        "dpc-sdp/tide_core": "^3.0.0",
-        "dpc-sdp/tide_event": "^3.0.0",
-        "dpc-sdp/tide_media": "^3.0.0"
-    },
-    "suggest": {
-        "dpc-sdp/tide_api:^3.0.0": "Allows to use Drupal in headless mode",
-        "dpc-sdp/tide_webform:^3.0.0": "Allows to use questionnaires",
-        "dpc-sdp/tide_news:^3.0.0": "News content type and related configuration for Tide Drupal 8 distribution"
-    },
-    "repositories": {
-        "drupal": {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
-        }
+  "description": "Landing Page content type and related configuration for Tide Drupal 8 distribution",
+  "license": "GPL-2.0-or-later",
+  "name": "dpc-sdp/tide_landing_page",
+  "repositories": {
+    "drupal": {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
     }
+  },
+  "require": {
+    "dpc-sdp/tide_core": "dev-reference",
+    "dpc-sdp/tide_event": "dev-reference",
+    "dpc-sdp/tide_media": "dev-reference"
+  },
+  "suggest": {
+    "dpc-sdp/tide_api:^3.0.0": "Allows to use Drupal in headless mode",
+    "dpc-sdp/tide_news:^3.0.0": "News content type and related configuration for Tide Drupal 8 distribution",
+    "dpc-sdp/tide_webform:^3.0.0": "Allows to use questionnaires"
+  },
+  "type": "drupal-module"
 }
