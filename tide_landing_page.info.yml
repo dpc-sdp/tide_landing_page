@@ -27,8 +27,10 @@ dependencies:
 config_devel:
   install:
     - block_content.type.campaign
+    - block_content.type.campaign_with_video
     - block_content.type.media_gallery
     - core.entity_form_display.block_content.campaign.default
+    - core.entity_form_display.block_content.campaign_with_video.default
     - core.entity_form_display.block_content.media_gallery.default
     - core.entity_form_display.node.landing_page.default
     - core.entity_form_display.paragraph.banner.default
@@ -54,6 +56,7 @@ config_devel:
     - core.entity_form_display.paragraph.hero_banner_with_cta.default
     - core.entity_form_display.paragraph.introduction_banner.default
     - core.entity_view_display.block_content.media_gallery.default
+    - core.entity_view_display.block_content.campaign_with_video.default
     - core.entity_view_display.node.landing_page.card
     - core.entity_view_display.node.landing_page.default
     - core.entity_view_display.node.landing_page.featured_card
@@ -91,9 +94,14 @@ config_devel:
     - field.field.block_content.campaign.field_block_cta
     - field.field.block_content.campaign.field_block_image
     - field.field.block_content.campaign.field_block_title
+    - field.field.block_content.campaign_with_video.body
+    - field.field.block_content.campaign_with_video.field_block_cta
+    - field.field.block_content.campaign_with_video.field_block_embedded_video
+    - field.field.block_content.campaign_with_video.field_block_title
     - field.field.block_content.media_gallery.field_gallery_featured_image
     - field.field.block_content.media_gallery.field_gallery_media
     - field.field.block_content.media_gallery.field_tags
+    - field.field.block_content.media_gallery.field_topic
     - field.field.node.landing_page.field_landing_page_c_secondary
     - field.field.node.landing_page.field_featured_image
     - field.field.node.landing_page.field_graphical_image
@@ -212,6 +220,7 @@ config_devel:
     - field.storage.block_content.field_block_title
     - field.storage.block_content.field_gallery_featured_image
     - field.storage.block_content.field_gallery_media
+    - field.storage.block_content.field_block_embedded_video
     - field.storage.paragraph.field_paragraph_display_topic.yml
     - field.storage.paragraph.field_paragraph_media_gallery
     - field.storage.node.field_landing_page_c_secondary
