@@ -2456,3 +2456,10 @@ function tide_landing_page_update_8045() {
   $config->set('default_value', ['noImage']);
   $config->save();
 }
+
+function tide_landing_page_update_8046()
+{
+  db_query("DELETE FROM {config} WHERE name LIKE 'field.field.block_content.media_gallery.field_topic'");
+
+  drupal_flush_all_caches();
+}
