@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - block_content.type.campaign_with_video
     - block_content.type.media_gallery
     - field.storage.block_content.field_topic
     - taxonomy.vocabulary.topic
