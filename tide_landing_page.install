@@ -16,6 +16,7 @@ use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\node\Entity\Node;
 use Drupal\Component\Utility\UrlHelper;
+use Drupal\block_content\Entity\BlockContent;
 
 /**
  * Implements hook_install().
@@ -2457,9 +2458,19 @@ function tide_landing_page_update_8045() {
   $config->save();
 }
 
-function tide_landing_page_update_8046()
-{
-  db_query("DELETE FROM {config} WHERE name LIKE 'field.field.block_content.media_gallery.field_topic'");
-
-  drupal_flush_all_caches();
+/**
+ * Delete Block content campaign with video.
+ */
+function tide_landing_page_update_8046() {
+  $ids = \Drupal::entityQuery('block_content')
+    ->condition('type', 'campaign_with_video')
+    ->execute();
+  if (!empty($ids)) {
+    foreach ($ids as $item) {
+      $block = BlockContent::load($item);
+      $block->delete();
+    }
+  }
+  $content_type = \Drupal::entityTypeManager()->getStorage('block_content_type')->load('campaign_with_video');
+  $content_type->delete();
 }
