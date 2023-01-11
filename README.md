@@ -50,8 +50,9 @@ page for [system requirements](https://github.com/dpc-sdp/dev-tools/#prerequisit
 
 To start local development stack:
 1. Checkout this project 
-2. Run `./dev-tools.sh`
-3. Run `ahoy build`
+2. Run `pygmy up`
+3. Run `./dev-tools.sh`
+4. Run `ahoy build`
  
 ## Related projects
 - [tide](https://github.com/dpc-sdp/tide)       
