@@ -2461,8 +2461,7 @@ function tide_landing_page_update_8045() {
 /**
  * Delete Block content campaign with video.
  */
-function tide_landing_page_update_8046()
-{
+function tide_landing_page_update_8046() {
   $ids = \Drupal::entityQuery('block_content')
     ->condition('type', 'campaign_with_video')
     ->execute();
