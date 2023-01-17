@@ -2456,3 +2456,20 @@ function tide_landing_page_update_8045() {
   $config->set('default_value', ['noImage']);
   $config->save();
 }
+
+/**
+ * Delete Block content campaign with video.
+ */
+function tide_landing_page_update_8046() {
+  $ids = \Drupal::entityQuery('block_content')
+    ->condition('type', 'campaign_with_video')
+    ->execute();
+  if (!empty($ids)) {
+    foreach ($ids as $item) {
+      $block = BlockContent::load($item);
+      $block->delete();
+    }
+  }
+  $content_type = \Drupal::entityTypeManager()->getStorage('block_content_type')->load('campaign_with_video');
+  $content_type->delete();
+}
