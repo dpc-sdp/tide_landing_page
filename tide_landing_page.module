@@ -51,15 +51,14 @@ function tide_landing_page_entity_bundle_create($entity_type_id, $bundle) {
     }
   }
 
-  // Add the Featured News paragraph to Landing Page component if exists.
+  // Add the Embeded webform paragraph to Landing Page component if exists.
   if ($entity_type_id == 'paragraph') {
     $field_config = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
     if ($field_config) {
       $handler_settings = $field_config->getSetting('handler_settings');
 
-      $is_featured_news = ($bundle == 'featured_news' && $moduleHandler->moduleExists('tide_news'));
       $is_embedded_webform = ($bundle == 'embedded_webform' && $moduleHandler->moduleExists('tide_webform'));
-      if ($is_featured_news || $is_embedded_webform) {
+      if ($is_embedded_webform) {
         $handler_settings['target_bundles'][$bundle] = $bundle;
         $field_config->setSetting('handler_settings', $handler_settings);
         $field_config->save();

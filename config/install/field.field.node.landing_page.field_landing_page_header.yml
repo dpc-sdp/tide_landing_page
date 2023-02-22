@@ -65,9 +65,6 @@ settings:
       embedded_webform:
         weight: 40
         enabled: false
-      featured_news:
-        weight: 41
-        enabled: false
       keydates:
         weight: 42
         enabled: false

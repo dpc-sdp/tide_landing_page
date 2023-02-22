@@ -210,7 +210,6 @@ config_devel:
     - field.field.paragraph.contact_us.field_paragraph_phones
     - field.field.paragraph.contact_us.field_paragraph_social_media
     - field.field.paragraph.contact_us.field_paragraph_title
-    - field.field.paragraph.featured_news.field_paragraph_news_reference
     - field.field.paragraph.phone.field_paragraph_phone_number
     - field.field.paragraph.phone.field_paragraph_phone_title
     - field.field.paragraph.social_link.field_paragraph_link
@@ -303,10 +302,8 @@ config_devel:
     - paragraphs.paragraphs_type.timelines
   optional:
     - core.entity_form_display.paragraph.embedded_webform.default
-    - core.entity_form_display.paragraph.featured_news.default
     - core.entity_view_display.paragraph.embedded_webform.default
     - core.entity_view_display.paragraph.embedded_webform.preview
-    - core.entity_view_display.paragraph.featured_news.default
     - field.field.paragraph.embedded_webform.field_paragraph_title
     - field.field.paragraph.embedded_webform.field_paragraph_webform
     - jsonapi_extras.jsonapi_resource_config.node--landing_page
@@ -319,7 +316,6 @@ config_devel:
     - jsonapi_extras.jsonapi_resource_config.paragraph--card_navigation
     - jsonapi_extras.jsonapi_resource_config.paragraph--card_navigation_featured
     - jsonapi_extras.jsonapi_resource_config.paragraph--card_promotion
-    - jsonapi_extras.jsonapi_resource_config.paragraph--featured_news
     - jsonapi_extras.jsonapi_resource_config.paragraph--form_embed_openforms
     - jsonapi_extras.jsonapi_resource_config.paragraph-.hero_banner_with_cta
     - jsonapi_extras.jsonapi_resource_config.paragraph--introduction_banner
