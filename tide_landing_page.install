@@ -2462,11 +2462,49 @@ function tide_landing_page_update_8045() {
  * Remove depricated paragraph featured_news.
  */
 function tide_landing_page_update_8046() {
+  // Clear the db.
   $ids = \Drupal::entityQuery('paragraph')->execute();
   foreach ($ids as $id) {
     $paragraph = Paragraph::load($id);
     if ($paragraph instanceof ParagraphInterface && $paragraph->bundle() == 'featured_news') {
       $paragraph->delete();
+    }
+  }
+
+  // Delete the configs.
+  $config_lists = [
+    'core.entity_form_display.paragraph.featured_news.default',
+    'core.entity_view_display.paragraph.featured_news.default',
+    'field.field.paragraph.featured_news.field_paragraph_news_reference',
+    'field.storage.paragraph.field_paragraph_news_reference',
+    'jsonapi_extras.jsonapi_resource_config.paragraph--featured_news',
+    'paragraphs.paragraphs_type.featured_news'
+  ];
+  foreach ($config_lists as $config) {
+    $config = \Drupal::configFactory()->getEditable($config);
+    if ($config) {
+      $config->delete();
+    }
+  }
+
+}
+
+/**
+ * Removed featured_news option from the landing_page widget.
+ */
+function tide_landing_page_update_8047() {
+  $field = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
+  if ($field) {
+    $handler_settings = $field->getSetting('handler_settings');
+    if (isset($handler_settings['target_bundles'])) {
+      if (isset($handler_settings['target_bundles']['featured_news'])) {
+        unset($handler_settings['target_bundles']['featured_news']);
+      }
+      if (isset($handler_settings['target_bundles_drag_drop']['featured_news'])) {
+        unset($handler_settings['target_bundles_drag_drop']['featured_news']);
+      }
+      $field->setSetting('handler_settings', $handler_settings);
+      $field->save();
     }
   }
 }
