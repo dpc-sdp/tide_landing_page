@@ -2478,7 +2478,7 @@ function tide_landing_page_update_8046() {
     'field.field.paragraph.featured_news.field_paragraph_news_reference',
     'field.storage.paragraph.field_paragraph_news_reference',
     'jsonapi_extras.jsonapi_resource_config.paragraph--featured_news',
-    'paragraphs.paragraphs_type.featured_news'
+    'paragraphs.paragraphs_type.featured_news',
   ];
   foreach ($config_lists as $config) {
     $config = \Drupal::configFactory()->getEditable($config);
