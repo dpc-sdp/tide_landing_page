@@ -94,6 +94,7 @@ config_devel:
     - field.field.block_content.media_gallery.field_gallery_featured_image
     - field.field.block_content.media_gallery.field_gallery_media
     - field.field.block_content.media_gallery.field_tags
+    - field.field.block_content.media_gallery.field_topic
     - field.field.node.landing_page.field_landing_page_c_secondary
     - field.field.node.landing_page.field_featured_image
     - field.field.node.landing_page.field_graphical_image
