@@ -4,9 +4,9 @@
     "type": "drupal-module",
     "license": "GPL-2.0-or-later",
     "require": {
-        "dpc-sdp/tide_core": "dev-bug/build-fail-issue-on-depenant-modules as 3.0.0",
+        "dpc-sdp/tide_core": "dev-bug/build-fail-issue-on-depenant-modules as 3.0.1",
         "dpc-sdp/tide_event": "^3.0.0",
-        "dpc-sdp/tide_media": "dev-develop as 3.0.1"
+        "dpc-sdp/tide_media": "dev-develop as 3.0.0"
     },
     "suggest": {
         "dpc-sdp/tide_api:^3.0.0": "Allows to use Drupal in headless mode",
