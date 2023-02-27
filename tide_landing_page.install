@@ -2474,3 +2474,15 @@ function tide_landing_page_update_8046() {
   $content_type = \Drupal::entityTypeManager()->getStorage('block_content_type')->load('campaign_with_video');
   $content_type->delete();
 }
+
+/**
+ * Prevent new entity reference creation.
+ */
+function tide_landing_page_update_8047() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
+  $config_storage = \Drupal::service('config.storage');
+  $field = 'field.field.block_content.media_gallery.field_topic';
+  $config_read = _tide_read_config($field, $config_location, FALSE);
+  $config_storage->write($field, $config_read);
+}
