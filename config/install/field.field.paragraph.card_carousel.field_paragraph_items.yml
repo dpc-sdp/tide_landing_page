@@ -77,9 +77,6 @@ settings:
       event_details:
         weight: -43
         enabled: false
-      featured_news:
-        weight: -42
-        enabled: false
       introduction_banner:
         weight: -41
         enabled: false
