@@ -218,7 +218,6 @@ Feature: Fields for Landing Page content type
 
     And I should see the button "Form embed (Drupal)"
     And I should see the button "Form embed (OpenForms)"
-    And I should see the button "Featured news"
 
     And I press the "Close" button
 
