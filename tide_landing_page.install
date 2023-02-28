@@ -17,6 +17,7 @@ use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\node\Entity\Node;
 use Drupal\Component\Utility\UrlHelper;
+use Drupal\block_content\Entity\BlockContent;
 
 /**
  * Implements hook_install().
@@ -2459,9 +2460,26 @@ function tide_landing_page_update_8045() {
 }
 
 /**
- * Remove depricated paragraph featured_news.
+ * Delete Block content campaign with video.
  */
 function tide_landing_page_update_8046() {
+  $ids = \Drupal::entityQuery('block_content')
+    ->condition('type', 'campaign_with_video')
+    ->execute();
+  if (!empty($ids)) {
+    foreach ($ids as $item) {
+      $block = BlockContent::load($item);
+      $block->delete();
+    }
+  }
+  $content_type = \Drupal::entityTypeManager()->getStorage('block_content_type')->load('campaign_with_video');
+  $content_type->delete();
+}
+
+/**
+ * Remove depricated paragraph featured_news.
+ */
+function tide_landing_page_update_8047() {
   // Clear the db.
   $ids = \Drupal::entityQuery('paragraph')->execute();
   foreach ($ids as $id) {
@@ -2492,7 +2510,7 @@ function tide_landing_page_update_8046() {
 /**
  * Removed featured_news option from the landing_page widget.
  */
-function tide_landing_page_update_8047() {
+function tide_landing_page_update_8048() {
   $field = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
   if ($field) {
     $handler_settings = $field->getSetting('handler_settings');
