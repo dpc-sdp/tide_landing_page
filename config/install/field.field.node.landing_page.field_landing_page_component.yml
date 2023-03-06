@@ -8,7 +8,6 @@ dependencies:
     - paragraphs.paragraphs_type.basic_text
     - paragraphs.paragraphs_type.call_to_action
     - paragraphs.paragraphs_type.card_carousel
-    - paragraphs.paragraphs_type.card_event_auto
     - paragraphs.paragraphs_type.card_keydates
     - paragraphs.paragraphs_type.card_promotion
     - paragraphs.paragraphs_type.card_promotion_auto
@@ -52,7 +51,6 @@ settings:
       call_to_action: call_to_action
       latest_events: latest_events
       data_table: data_table
-      card_event_auto: card_event_auto
       statistics_grid: statistics_grid
     target_bundles_drag_drop:
       banner:
@@ -109,9 +107,6 @@ settings:
       media_gallery:
         enabled: true
         weight: -18
-      card_event_auto:
-        enabled: true
-        weight: -4
       latest_events:
         enabled: true
         weight: -11

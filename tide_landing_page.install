@@ -2534,6 +2534,7 @@ function tide_landing_page_update_8049() {
   $pids = [
     'news_listing',
     'card_event',
+    'card_event_auto',
   ];
   // Clear the db.
   $ids = \Drupal::entityQuery('paragraph')->execute();
@@ -2565,6 +2566,11 @@ function tide_landing_page_update_8049() {
     'jsonapi_extras.jsonapi_resource_config.paragraph--card_event',
     'paragraphs.paragraphs_type.card_event',
     'field.storage.paragraph.field_paragraph_status',
+    'core.entity_form_display.paragraph.card_event_auto.default',
+    'core.entity_view_display.paragraph.card_event_auto.default',
+    'field.field.paragraph.card_event_auto.field_paragraph_reference',
+    'field.field.paragraph.card_event_auto.field_paragraph_cta_text',
+    'paragraphs.paragraphs_type.card_event_auto',
   ];
   foreach ($config_lists as $config) {
     $config = \Drupal::configFactory()->getEditable($config);
@@ -2582,6 +2588,7 @@ function tide_landing_page_update_8050() {
   $pids = [
     'news_listing',
     'card_event',
+    'card_event_auto',
   ];
   $field = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
   if ($field) {
