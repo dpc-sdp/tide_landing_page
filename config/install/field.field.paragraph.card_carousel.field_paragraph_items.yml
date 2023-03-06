@@ -92,9 +92,6 @@ settings:
       media_gallery:
         weight: -37
         enabled: false
-      news_listing:
-        weight: -36
-        enabled: false
       latest_events:
         weight: -35
         enabled: false

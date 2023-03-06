@@ -52,7 +52,6 @@ settings:
       timelines: timelines
       call_to_action: call_to_action
       latest_events: latest_events
-      news_listing: news_listing
       data_table: data_table
       card_event: card_event
       card_event_auto: card_event_auto
@@ -109,9 +108,6 @@ settings:
       form_embed_openforms:
         enabled: true
         weight: 23
-      news_listing:
-        enabled: true
-        weight: -10
       navigation_card:
         enabled: true
         weight: -29

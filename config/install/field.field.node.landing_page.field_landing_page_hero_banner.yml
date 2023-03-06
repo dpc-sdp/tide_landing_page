@@ -93,9 +93,6 @@ settings:
       media_gallery:
         weight: 62
         enabled: false
-      news_listing:
-        weight: 63
-        enabled: false
       phone:
         weight: 64
         enabled: false

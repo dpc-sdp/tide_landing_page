@@ -219,9 +219,6 @@ settings:
       navigation_card:
         weight: 142
         enabled: false
-      news_listing:
-        weight: 143
-        enabled: false
       owner:
         weight: 144
         enabled: false

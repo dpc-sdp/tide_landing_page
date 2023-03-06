@@ -74,9 +74,6 @@ settings:
       links:
         weight: 44
         enabled: false
-      news_listing:
-        weight: 45
-        enabled: false
       phone:
         weight: 46
         enabled: false

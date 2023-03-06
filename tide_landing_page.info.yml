@@ -80,11 +80,9 @@ config_devel:
     - core.entity_view_display.paragraph.key_journeys.default
     - core.entity_view_display.paragraph.media_gallery.default
     - core.entity_form_display.paragraph.contact_us.default
-    - core.entity_form_display.paragraph.news_listing.default
     - core.entity_form_display.paragraph.phone.default
     - core.entity_form_display.paragraph.social_link.default
     - core.entity_view_display.paragraph.contact_us.default
-    - core.entity_view_display.paragraph.news_listing.default
     - core.entity_view_display.paragraph.phone.default
     - core.entity_view_display.paragraph.social_link.default
     - field.field.block_content.campaign.body
@@ -189,7 +187,6 @@ config_devel:
     - field.field.paragraph.latest_events.field_paragraph_cta_card_event
     - field.field.paragraph.latest_events.field_paragraph_title
     - field.field.paragraph.media_gallery.field_paragraph_media_gallery
-    - field.field.paragraph.news_listing.field_paragraph_title
     - field.field.node.landing_page.field_landing_page_contact
     - field.field.node.landing_page.field_landing_page_show_contact
     - field.field.node.landing_page.field_landing_page_summary
@@ -288,7 +285,6 @@ config_devel:
     - paragraphs.paragraphs_type.latest_events
     - paragraphs.paragraphs_type.media_gallery
     - paragraphs.paragraphs_type.contact_us
-    - paragraphs.paragraphs_type.news_listing
     - paragraphs.paragraphs_type.phone
     - paragraphs.paragraphs_type.social_link
     - paragraphs.paragraphs_type.timelines
