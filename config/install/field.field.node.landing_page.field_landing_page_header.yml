@@ -47,9 +47,6 @@ settings:
       call_to_action:
         weight: 30
         enabled: false
-      card_event:
-        weight: 31
-        enabled: false
       card_keydates:
         weight: 32
         enabled: false

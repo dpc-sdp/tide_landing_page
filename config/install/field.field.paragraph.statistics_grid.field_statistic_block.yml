@@ -48,9 +48,6 @@ settings:
       card_carousel:
         weight: 85
         enabled: false
-      card_event:
-        weight: 86
-        enabled: false
       card_event_auto:
         weight: 87
         enabled: false

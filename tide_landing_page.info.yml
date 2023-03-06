@@ -34,7 +34,6 @@ config_devel:
     - core.entity_form_display.paragraph.banner.default
     - core.entity_form_display.paragraph.basic_text.default
     - core.entity_form_display.paragraph.call_to_action.default
-    - core.entity_form_display.paragraph.card_event.default
     - core.entity_form_display.paragraph.card_event_auto.default
     - core.entity_form_display.paragraph.card_keydates.default
     - core.entity_form_display.paragraph.card_navigation.default
@@ -61,7 +60,6 @@ config_devel:
     - core.entity_view_display.paragraph.basic_text.default
     - core.entity_view_display.paragraph.call_to_action.default
     - core.entity_view_display.paragraph.call_to_action.preview
-    - core.entity_view_display.paragraph.card_event.default
     - core.entity_view_display.paragraph.card_event_auto.default
     - core.entity_view_display.paragraph.card_keydates.default
     - core.entity_view_display.paragraph.card_navigation.default
@@ -129,14 +127,6 @@ config_devel:
     - field.field.paragraph.call_to_action.field_paragraph_title
     - field.field.paragraph.card_event_auto.field_paragraph_cta_text
     - field.field.paragraph.card_event_auto.field_paragraph_reference
-    - field.field.paragraph.card_event.field_paragraph_cta
-    - field.field.paragraph.card_event.field_paragraph_date
-    - field.field.paragraph.card_event.field_paragraph_date_range
-    - field.field.paragraph.card_event.field_paragraph_location
-    - field.field.paragraph.card_event.field_paragraph_media
-    - field.field.paragraph.card_event.field_paragraph_topic
-    - field.field.paragraph.card_event.field_paragraph_summary
-    - field.field.paragraph.card_event.field_paragraph_title
     - field.field.paragraph.card_keydates.field_paragraph_cta
     - field.field.paragraph.card_keydates.field_paragraph_keydates
     - field.field.paragraph.card_navigation.field_paragraph_link
@@ -265,7 +255,6 @@ config_devel:
     - paragraphs.paragraphs_type.banner
     - paragraphs.paragraphs_type.basic_text
     - paragraphs.paragraphs_type.call_to_action
-    - paragraphs.paragraphs_type.card_event
     - paragraphs.paragraphs_type.card_keydates
     - paragraphs.paragraphs_type.card_event_auto
     - paragraphs.paragraphs_type.card_navigation
@@ -299,7 +288,6 @@ config_devel:
     - jsonapi_extras.jsonapi_resource_config.block_content--media_gallery
     - jsonapi_extras.jsonapi_resource_config.paragraph--banner
     - jsonapi_extras.jsonapi_resource_config.paragraph--call_to_action
-    - jsonapi_extras.jsonapi_resource_config.paragraph--card_event
     - jsonapi_extras.jsonapi_resource_config.paragraph--card_keydates
     - jsonapi_extras.jsonapi_resource_config.paragraph--card_navigation
     - jsonapi_extras.jsonapi_resource_config.paragraph--card_navigation_featured

@@ -39,9 +39,6 @@ settings:
       basic_text:
         weight: 24
         enabled: false
-      card_event:
-        weight: 25
-        enabled: false
       card_keydates:
         weight: 26
         enabled: false

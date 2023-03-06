@@ -8,7 +8,6 @@ dependencies:
     - paragraphs.paragraphs_type.basic_text
     - paragraphs.paragraphs_type.call_to_action
     - paragraphs.paragraphs_type.card_carousel
-    - paragraphs.paragraphs_type.card_event
     - paragraphs.paragraphs_type.card_event_auto
     - paragraphs.paragraphs_type.card_keydates
     - paragraphs.paragraphs_type.card_promotion
@@ -53,7 +52,6 @@ settings:
       call_to_action: call_to_action
       latest_events: latest_events
       data_table: data_table
-      card_event: card_event
       card_event_auto: card_event_auto
       statistics_grid: statistics_grid
     target_bundles_drag_drop:
@@ -66,9 +64,6 @@ settings:
       accordion:
         enabled: true
         weight: -31
-      card_event:
-        enabled: true
-        weight: -28
       card_promotion:
         enabled: false
         weight: -27
