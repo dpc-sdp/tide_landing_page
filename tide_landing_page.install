@@ -2531,11 +2531,15 @@ function tide_landing_page_update_8048() {
  * Remove depricated paragraph news_listing.
  */
 function tide_landing_page_update_8049() {
+  $pids = [
+    'news_listing',
+    'card_event',
+  ];
   // Clear the db.
   $ids = \Drupal::entityQuery('paragraph')->execute();
   foreach ($ids as $id) {
     $paragraph = Paragraph::load($id);
-    if ($paragraph instanceof ParagraphInterface && $paragraph->bundle() == 'news_listing') {
+    if ($paragraph instanceof ParagraphInterface && in_array($paragraph->bundle(), $pids)) {
       $paragraph->delete();
     }
   }
@@ -2547,6 +2551,20 @@ function tide_landing_page_update_8049() {
     'field.field.paragraph.news_listing.field_paragraph_title',
     'field.field.paragraph.news_listing.field_paragraph_topic',
     'paragraphs.paragraphs_type.news_listing',
+    'core.entity_form_display.paragraph.card_event.default',
+    'core.entity_view_display.paragraph.card_event.default',
+    'field.field.paragraph.card_event.field_paragraph_topic',
+    'field.field.paragraph.card_event.field_paragraph_cta',
+    'field.field.paragraph.card_event.field_paragraph_date',
+    'field.field.paragraph.card_event.field_paragraph_date_range',
+    'field.field.paragraph.card_event.field_paragraph_location',
+    'field.field.paragraph.card_event.field_paragraph_media',
+    'field.field.paragraph.card_event.field_paragraph_status',
+    'field.field.paragraph.card_event.field_paragraph_summary',
+    'field.field.paragraph.card_event.field_paragraph_title',
+    'jsonapi_extras.jsonapi_resource_config.paragraph--card_event',
+    'paragraphs.paragraphs_type.card_event',
+    'field.storage.paragraph.field_paragraph_status',
   ];
   foreach ($config_lists as $config) {
     $config = \Drupal::configFactory()->getEditable($config);
@@ -2561,18 +2579,24 @@ function tide_landing_page_update_8049() {
  * Removed news_listing option from the landing_page widget.
  */
 function tide_landing_page_update_8050() {
+  $pids = [
+    'news_listing',
+    'card_event',
+  ];
   $field = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
   if ($field) {
     $handler_settings = $field->getSetting('handler_settings');
     if (isset($handler_settings['target_bundles'])) {
-      if (isset($handler_settings['target_bundles']['news_listing'])) {
-        unset($handler_settings['target_bundles']['news_listing']);
+      foreach ($pids as $pid) {
+        if (isset($handler_settings['target_bundles'][$pid])) {
+          unset($handler_settings['target_bundles'][$pid]);
+        }
+        if (isset($handler_settings['target_bundles_drag_drop'][$pid])) {
+          unset($handler_settings['target_bundles_drag_drop'][$pid]);
+        }
+        $field->setSetting('handler_settings', $handler_settings);
+        $field->save();
       }
-      if (isset($handler_settings['target_bundles_drag_drop']['news_listing'])) {
-        unset($handler_settings['target_bundles_drag_drop']['news_listing']);
-      }
-      $field->setSetting('handler_settings', $handler_settings);
-      $field->save();
     }
   }
 }
