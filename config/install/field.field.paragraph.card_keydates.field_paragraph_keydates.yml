@@ -33,9 +33,6 @@ settings:
       basic_text:
         weight: 16
         enabled: false
-      card_promotion:
-        weight: 22
-        enabled: false
       keydates:
         enabled: true
         weight: 23

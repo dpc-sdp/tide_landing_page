@@ -9,7 +9,6 @@ dependencies:
     - paragraphs.paragraphs_type.call_to_action
     - paragraphs.paragraphs_type.card_carousel
     - paragraphs.paragraphs_type.card_keydates
-    - paragraphs.paragraphs_type.card_promotion
     - paragraphs.paragraphs_type.card_promotion_auto
     - paragraphs.paragraphs_type.complex_image
     - paragraphs.paragraphs_type.data_table
@@ -62,9 +61,6 @@ settings:
       accordion:
         enabled: true
         weight: -31
-      card_promotion:
-        enabled: false
-        weight: -27
       card_promotion_auto:
         enabled: false
         weight: -26

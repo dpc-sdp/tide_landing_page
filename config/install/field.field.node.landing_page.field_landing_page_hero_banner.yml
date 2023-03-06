@@ -51,9 +51,6 @@ settings:
       card_keydates:
         weight: 45
         enabled: false
-      card_promotion:
-        weight: 50
-        enabled: false
       card_promotion_auto:
         weight: 51
         enabled: false

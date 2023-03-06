@@ -30,9 +30,6 @@ settings:
       links:
         enabled: true
         weight: 8
-      card_promotion:
-        weight: 9
-        enabled: false
       key_journeys:
         weight: 10
         enabled: false

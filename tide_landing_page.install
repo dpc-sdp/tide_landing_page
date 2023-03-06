@@ -2571,6 +2571,19 @@ function tide_landing_page_update_8049() {
     'field.field.paragraph.card_event_auto.field_paragraph_reference',
     'field.field.paragraph.card_event_auto.field_paragraph_cta_text',
     'paragraphs.paragraphs_type.card_event_auto',
+    'core.entity_form_display.paragraph.card_promotion.default',
+    'core.entity_view_display.paragraph.card_promotion.default',
+    'field.field.paragraph.card_promotion.field_paragraph_topic',
+    'field.storage.paragraph.field_paragraph_topic',
+    'field.field.paragraph.card_promotion.field_paragraph_cta',
+    'field.field.paragraph.card_promotion.field_paragraph_date',
+    'field.field.paragraph.card_promotion.field_paragraph_link',
+    'field.field.paragraph.card_promotion.field_paragraph_media',
+    'field.field.paragraph.card_promotion.field_paragraph_summary'.
+    'field.field.paragraph.card_promotion.field_paragraph_title',
+    'jsonapi_extras.jsonapi_resource_config.paragraph--card_promotion',
+    'paragraphs.paragraphs_type.card_promotion',
+    'field.storage.paragraph.field_paragraph_date',
   ];
   foreach ($config_lists as $config) {
     $config = \Drupal::configFactory()->getEditable($config);
