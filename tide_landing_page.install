@@ -2581,7 +2581,7 @@ function tide_landing_page_update_8049() {
     'field.field.paragraph.card_promotion.field_paragraph_date',
     'field.field.paragraph.card_promotion.field_paragraph_link',
     'field.field.paragraph.card_promotion.field_paragraph_media',
-    'field.field.paragraph.card_promotion.field_paragraph_summary'.
+    'field.field.paragraph.card_promotion.field_paragraph_summary',
     'field.field.paragraph.card_promotion.field_paragraph_title',
     'jsonapi_extras.jsonapi_resource_config.paragraph--card_promotion',
     'paragraphs.paragraphs_type.card_promotion',
