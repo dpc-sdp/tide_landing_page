@@ -2479,16 +2479,49 @@ function tide_landing_page_update_8046() {
 /**
  * Remove depricated paragraph featured_news.
  */
-function tide_landing_page_update_8047() {
+function tide_landing_page_update_8047(&$sandbox) {
   // Clear the db.
-  $ids = \Drupal::entityQuery('paragraph')->execute();
-  foreach ($ids as $id) {
-    $paragraph = Paragraph::load($id);
-    if ($paragraph instanceof ParagraphInterface && $paragraph->bundle() == 'featured_news') {
-      $paragraph->delete();
+  $paragraph_type = 'featured_news';
+
+  if (!isset($sandbox['total'])) {
+    $count = \Drupal::entityQuery('paragraph')
+      ->condition('type', $paragraph_type)
+      ->count()
+      ->execute();
+    $sandbox['total'] = $count;
+    $sandbox['current'] = 0;
+    $sandbox['processed'] = 0;
+    $sandbox['#finished'] = $count ? 0 : 1;
+
+    if (!$count) {
+      return;
     }
   }
 
+  $batch_size = 10;
+  $ids = \Drupal::entityQuery('paragraph')
+    ->condition('type', $paragraph_type)
+    ->condition('id', $sandbox['current'], '>')
+    ->sort('id', 'ASC')
+    ->range(0, $batch_size)
+    ->execute();
+
+  foreach ($ids as $id) {
+    $sandbox['current'] = $id;
+    $paragraph = Paragraph::load($id);
+    if ($paragraph) {
+      $paragraph->delete();
+    }
+    $sandbox['processed']++;
+  }
+
+  $sandbox['#finished'] = $sandbox['total'] ? ($sandbox['processed'] / $sandbox['total']) : 1;
+}
+
+/**
+ * Removed featured_news option from the landing_page widget and configs.
+ */
+function tide_landing_page_update_8048() {
   // Delete the configs.
   $config_lists = [
     'core.entity_form_display.paragraph.featured_news.default',
@@ -2504,13 +2537,6 @@ function tide_landing_page_update_8047() {
       $config->delete();
     }
   }
-
-}
-
-/**
- * Removed featured_news option from the landing_page widget.
- */
-function tide_landing_page_update_8048() {
   $field = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
   if ($field) {
     $handler_settings = $field->getSetting('handler_settings');
