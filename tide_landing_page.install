@@ -2535,6 +2535,8 @@ function tide_landing_page_update_8049() {
     'news_listing',
     'card_event',
     'card_event_auto',
+    'card_promotion',
+    'card_promotion_auto',
   ];
   // Clear the db.
   $ids = \Drupal::entityQuery('paragraph')->execute();
@@ -2611,6 +2613,8 @@ function tide_landing_page_update_8050() {
     'news_listing',
     'card_event',
     'card_event_auto',
+    'card_promotion',
+    'card_promotion_auto',
   ];
   $field = FieldConfig::loadByName('node', 'landing_page', 'field_landing_page_component');
   if ($field) {
