@@ -45,17 +45,8 @@ settings:
       call_to_action_image:
         weight: 35
         enabled: false
-      card_event:
-        weight: 36
-        enabled: false
       card_keydates:
         weight: 37
-        enabled: false
-      card_promotion:
-        weight: 42
-        enabled: false
-      card_promotion_auto:
-        weight: 43
         enabled: false
       contact_us:
         weight: 44
@@ -80,9 +71,6 @@ settings:
         enabled: false
       media_gallery:
         weight: 52
-        enabled: false
-      news_listing:
-        weight: 53
         enabled: false
       phone:
         weight: 54

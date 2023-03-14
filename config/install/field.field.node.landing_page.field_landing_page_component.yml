@@ -8,11 +8,7 @@ dependencies:
     - paragraphs.paragraphs_type.basic_text
     - paragraphs.paragraphs_type.call_to_action
     - paragraphs.paragraphs_type.card_carousel
-    - paragraphs.paragraphs_type.card_event
-    - paragraphs.paragraphs_type.card_event_auto
     - paragraphs.paragraphs_type.card_keydates
-    - paragraphs.paragraphs_type.card_promotion
-    - paragraphs.paragraphs_type.card_promotion_auto
     - paragraphs.paragraphs_type.complex_image
     - paragraphs.paragraphs_type.data_table
     - paragraphs.paragraphs_type.form_embed_openforms
@@ -52,10 +48,7 @@ settings:
       timelines: timelines
       call_to_action: call_to_action
       latest_events: latest_events
-      news_listing: news_listing
       data_table: data_table
-      card_event: card_event
-      card_event_auto: card_event_auto
       statistics_grid: statistics_grid
     target_bundles_drag_drop:
       banner:
@@ -67,15 +60,6 @@ settings:
       accordion:
         enabled: true
         weight: -31
-      card_event:
-        enabled: true
-        weight: -28
-      card_promotion:
-        enabled: false
-        weight: -27
-      card_promotion_auto:
-        enabled: false
-        weight: -26
       complex_image:
         enabled: true
         weight: -17
@@ -109,18 +93,12 @@ settings:
       form_embed_openforms:
         enabled: true
         weight: 23
-      news_listing:
-        enabled: true
-        weight: -10
       navigation_card:
         enabled: true
         weight: -29
       media_gallery:
         enabled: true
         weight: -18
-      card_event_auto:
-        enabled: true
-        weight: -4
       latest_events:
         enabled: true
         weight: -11

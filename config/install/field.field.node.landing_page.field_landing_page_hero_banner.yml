@@ -48,20 +48,8 @@ settings:
       card_carousel:
         weight: 42
         enabled: false
-      card_event:
-        weight: 43
-        enabled: false
-      card_event_auto:
-        weight: 44
-        enabled: false
       card_keydates:
         weight: 45
-        enabled: false
-      card_promotion:
-        weight: 50
-        enabled: false
-      card_promotion_auto:
-        weight: 51
         enabled: false
       contact_us:
         weight: 52
@@ -92,9 +80,6 @@ settings:
         enabled: false
       media_gallery:
         weight: 62
-        enabled: false
-      news_listing:
-        weight: 63
         enabled: false
       phone:
         weight: 64

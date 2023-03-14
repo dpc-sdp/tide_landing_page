@@ -48,20 +48,8 @@ settings:
       card_carousel:
         weight: 85
         enabled: false
-      card_event:
-        weight: 86
-        enabled: false
-      card_event_auto:
-        weight: 87
-        enabled: false
       card_keydates:
         weight: 88
-        enabled: false
-      card_promotion:
-        weight: 89
-        enabled: false
-      card_promotion_auto:
-        weight: 90
         enabled: false
       clients:
         weight: 91
@@ -218,9 +206,6 @@ settings:
         enabled: false
       navigation_card:
         weight: 142
-        enabled: false
-      news_listing:
-        weight: 143
         enabled: false
       owner:
         weight: 144
