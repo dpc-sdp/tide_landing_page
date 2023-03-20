@@ -9,7 +9,7 @@ Feature: Fields for Landing Page content type
     # Given I am logged in as a user with the "editor" role
     When I visit "node/add/landing_page"
     And save screenshot
-    Then I see field "Title"
+    Then I see field "Page title"
     And I should see an "input#edit-title-0-value.required" element
 
     And I click on the horizontal tab "Header"
