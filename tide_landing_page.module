@@ -76,9 +76,6 @@ function tide_landing_page_form_node_form_alter(&$form, FormStateInterface $form
     'node_landing_page_edit_form',
     'node_landing_page_quick_node_clone_form',
   ])) {
-    if (isset($form['title']['widget'][0]['value']['#title'])) {
-      $form['title']['widget'][0]['value']['#title'] = t('Page title');
-    }
     if (isset($form['title']['widget'][0]['value']['#description'])) {
       $form['title']['widget'][0]['value']['#description'] = t('Include a short unique title for your page and keywords.');
     }
