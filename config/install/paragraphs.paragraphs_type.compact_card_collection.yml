@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: compact_card_collection
+label: 'Compact card collection'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }
