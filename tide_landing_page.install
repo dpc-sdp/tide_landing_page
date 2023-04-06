@@ -2619,4 +2619,15 @@ function tide_landing_page_update_8049() {
   uasort($settings['handler_settings']['target_bundles_drag_drop'], 'Drupal\Component\Utility\SortArray::sortByWeightElement');
   $field->set('settings', $settings);
   $field->save();
+
+  // Set the icon.
+  $icon_dir = drupal_get_path('module',
+      'tide_landing_page') . DIRECTORY_SEPARATOR . 'icons';
+  $paragraph_icons = [
+    'compact_card_collection',
+  ];
+  foreach ($paragraph_icons as $paragraph_type_id) {
+    $icon_filename = $icon_dir . DIRECTORY_SEPARATOR . $paragraph_type_id . '.svg';
+    _tide_set_paragraph_type_icon($paragraph_type_id, $icon_filename);
+  }
 }
