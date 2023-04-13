@@ -2488,7 +2488,7 @@ function tide_landing_page_update_8046() {
 //       $paragraph->delete();
 //     }
 //   }
-
+//
 //   // Delete the configs.
 //   $config_lists = [
 //     'core.entity_form_display.paragraph.featured_news.default',
@@ -2505,7 +2505,7 @@ function tide_landing_page_update_8046() {
 //     }
 //   }
 // }
-
+//
 // /**
 //  * Removed featured_news option from the landing_page widget.
 //  */
