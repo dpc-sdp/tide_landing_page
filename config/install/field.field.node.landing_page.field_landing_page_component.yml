@@ -11,6 +11,7 @@ dependencies:
     - paragraphs.paragraphs_type.card_event
     - paragraphs.paragraphs_type.card_event_auto
     - paragraphs.paragraphs_type.card_keydates
+    - paragraphs.paragraphs_type.compact_card_collection
     - paragraphs.paragraphs_type.card_promotion
     - paragraphs.paragraphs_type.card_promotion_auto
     - paragraphs.paragraphs_type.complex_image
@@ -50,6 +51,7 @@ settings:
       media_gallery: media_gallery
       complex_image: complex_image
       timelines: timelines
+      compact_card_collection: compact_card_collection
       call_to_action: call_to_action
       latest_events: latest_events
       news_listing: news_listing
@@ -76,6 +78,12 @@ settings:
       card_promotion_auto:
         enabled: false
         weight: -26
+      compact_card:
+        weight: -1
+        enabled: false
+      compact_card_collection:
+        weight: -13
+        enabled: true
       complex_image:
         enabled: true
         weight: -17
