@@ -2553,9 +2553,22 @@ function tide_landing_page_update_8048() {
 }
 
 /**
- * Imports compact_card and compact_card_collection paragraph and its configs.
+ * Adds website option paragraph type to field_paragraph_social_list.
  */
 function tide_landing_page_update_8049() {
+  $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_paragraph_social_list');
+  $new_field = $field_storage->getSettings()['allowed_values'];
+  $new_field['website'] = 'Website';
+  $field_storage->setSettings([
+    'allowed_values' => $new_field,
+  ]);
+  $field_storage->save();
+}
+
+/**
+ * Imports compact_card and compact_card_collection paragraph and its configs.
+ */
+function tide_landing_page_update_8050() {
   $configs = [
     'paragraphs.paragraphs_type.compact_card' => 'paragraph_type',
     'paragraphs.paragraphs_type.compact_card_collection' => 'paragraph_type',
