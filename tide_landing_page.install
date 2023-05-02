@@ -2564,3 +2564,83 @@ function tide_landing_page_update_8049() {
   ]);
   $field_storage->save();
 }
+
+/**
+ * Imports compact_card and compact_card_collection paragraph and its configs.
+ */
+function tide_landing_page_update_8050() {
+  $configs = [
+    'paragraphs.paragraphs_type.compact_card' => 'paragraph_type',
+    'paragraphs.paragraphs_type.compact_card_collection' => 'paragraph_type',
+    'field.storage.paragraph.field_compact_card' => 'field_storage_config',
+    'field.field.paragraph.compact_card_collection.field_paragraph_title' => 'field_config',
+    'field.field.paragraph.compact_card_collection.field_compact_card' => 'field_config',
+    'field.field.paragraph.compact_card.field_paragraph_title' => 'field_config',
+    'field.field.paragraph.compact_card.field_paragraph_summary' => 'field_config',
+    'field.field.paragraph.compact_card.field_paragraph_media' => 'field_config',
+    'field.field.paragraph.compact_card.field_paragraph_link' => 'field_config',
+    'core.entity_form_display.paragraph.compact_card.default' => 'entity_form_display',
+    'core.entity_form_display.paragraph.compact_card_collection.default' => 'entity_form_display',
+    'core.entity_view_display.paragraph.compact_card.default' => 'entity_view_display',
+    'core.entity_view_display.paragraph.compact_card_collection.default' => 'entity_view_display',
+  ];
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  foreach ($configs as $config => $type) {
+    // Check if field already exported to config/sync.
+    $config_read = _tide_read_config($config, $config_location, TRUE);
+    if ($type == 'paragraph_type') {
+      ParagraphsType::create($config_read)->save();
+    }
+    else {
+      $storage = \Drupal::entityTypeManager()->getStorage($type);
+      $config_entity = $storage->createFromStorageRecord($config_read);
+      $config_entity->save();
+    }
+  }
+
+  // Add the field to JSON API.
+  if (\Drupal::moduleHandler()->moduleExists('jsonapi_extras')) {
+    $config_storage = \Drupal::service('config.storage');
+    $json_field = 'jsonapi_extras.jsonapi_resource_config.paragraph--compact_card';
+    $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/optional'];
+    $config_read = _tide_read_config($json_field, $config_location, TRUE);
+    $config_storage->write($json_field, $config_read);
+  }
+
+  // Check if the paragraph bundle has been enabled in the field.
+  $field = \Drupal::configFactory()
+    ->getEditable('field.field.node.landing_page.field_landing_page_component');
+  $dependencies = $field->get('dependencies');
+  if (!in_array('paragraphs.paragraphs_type.compact_card_collection', $dependencies['config'])) {
+    $dependencies['config'][] = 'paragraphs.paragraphs_type.compact_card_collection';
+    $field->set('dependencies', $dependencies);
+  }
+  $settings = $field->get('settings');
+  $bundles = \Drupal::service('entity_type.bundle.info')
+    ->getBundleInfo('paragraph');
+  $weight = count($bundles) + 1;
+  $settings['handler_settings']['target_bundles']['compact_card_collection'] = 'compact_card_collection';
+  $settings['handler_settings']['target_bundles_drag_drop']['compact_card'] = [
+    'weight' => $weight,
+    'enabled' => FALSE,
+  ];
+  $settings['handler_settings']['target_bundles_drag_drop']['compact_card_collection'] = [
+    'enabled' => TRUE,
+    'weight' => $weight + 1,
+  ];
+  uasort($settings['handler_settings']['target_bundles_drag_drop'], 'Drupal\Component\Utility\SortArray::sortByWeightElement');
+  $field->set('settings', $settings);
+  $field->save();
+
+  // Set the icon.
+  $icon_dir = drupal_get_path('module',
+      'tide_landing_page') . DIRECTORY_SEPARATOR . 'icons';
+  $paragraph_icons = [
+    'compact_card_collection',
+  ];
+  foreach ($paragraph_icons as $paragraph_type_id) {
+    $icon_filename = $icon_dir . DIRECTORY_SEPARATOR . $paragraph_type_id . '.svg';
+    _tide_set_paragraph_type_icon($paragraph_type_id, $icon_filename);
+  }
+}
