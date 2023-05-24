@@ -17,7 +17,8 @@
 .node-form-landing-page .field--widget-paragraphs .node-landing-page-alternative-paragraph > .clearfix .paragraphs-add-wrapper.form-wrapper {
   text-align: center;
 }
-.node-form-landing-page .field--widget-paragraphs .node-landing-page-alternative-paragraph > .clearfix .paragraphs-add-wrapper.form-wrapper .paragraphs-add-suffix {
+
+.node-form-landing-page .field--widget-paragraphs .node-landing-page-alternative-paragraph > .form-actions .paragraphs-add-wrapper.form-wrapper .paragraphs-add-suffix {
   display:none;
 }
 
