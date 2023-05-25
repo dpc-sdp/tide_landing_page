@@ -215,6 +215,7 @@ Feature: Fields for Landing Page content type
     And I should see the button "Image gallery"
     And I should see the button "Complex image"
     And I should see the button "Statistics Grid"
+    And I should see the button "Compact card collection"
 
     And I should see the button "Form embed (Drupal)"
     And I should see the button "Form embed (OpenForms)"
