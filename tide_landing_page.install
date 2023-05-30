@@ -2587,7 +2587,7 @@ function tide_landing_page_update_8050() {
   \Drupal::moduleHandler()->loadInclude('tide_core', 'inc', 'includes/helpers');
   $config_location = [
     \Drupal::service('extension.list.module')
-           ->getPath('tide_landing_page') . '/config/install'
+      ->getPath('tide_landing_page') . '/config/install',
   ];
   foreach ($configs as $config => $type) {
     // Check if field already exported to config/sync.
@@ -2623,7 +2623,7 @@ function tide_landing_page_update_8050() {
 
   // Check if the paragraph bundle has been enabled in the field.
   $field = \Drupal::configFactory()
-                  ->getEditable('field.field.node.landing_page.field_landing_page_component');
+    ->getEditable('field.field.node.landing_page.field_landing_page_component');
   $dependencies = $field->get('dependencies');
   if (!in_array('paragraphs.paragraphs_type.compact_card_collection', $dependencies['config'])) {
     $dependencies['config'][] = 'paragraphs.paragraphs_type.compact_card_collection';
@@ -2631,7 +2631,7 @@ function tide_landing_page_update_8050() {
   }
   $settings = $field->get('settings');
   $bundles = \Drupal::service('entity_type.bundle.info')
-                    ->getBundleInfo('paragraph');
+    ->getBundleInfo('paragraph');
   $weight = count($bundles) + 1;
   $settings['handler_settings']['target_bundles']['compact_card_collection'] = 'compact_card_collection';
   $settings['handler_settings']['target_bundles_drag_drop']['compact_card'] = [
