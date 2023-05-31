@@ -8,16 +8,38 @@
   flex-basis: 350px !important;;
 }
 
-.node-form-landing-page .layout-region-node-main .form-radios .form-item {
+.node-form-landing-page .layout-region--node-main .form-radios .form-item {
   display: inline-block;
   margin-right: 2em;
 }
 
-.node-form-landing-page .field--widget-paragraphs .node-landing-page-alternative-paragraph  > .description,
-.node-form-landing-page .field--widget-paragraphs .node-landing-page-alternative-paragraph > .clearfix .paragraphs-add-wrapper.form-wrapper {
-  text-align: center;
+.node-form-landing-page .field--widget-paragraphs .node-landing-page-alternative-paragraph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
-.node-form-landing-page .field--widget-paragraphs .node-landing-page-alternative-paragraph > .clearfix .paragraphs-add-wrapper.form-wrapper .paragraphs-add-suffix {
+
+.node-form-landing-page .field--widget-paragraphs .node-landing-page-alternative-paragraph .form-item__description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.node-form-landing-page .field--widget-paragraphs .node-landing-page-alternative-paragraph .form-item__description > h4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.node-form-landing-page .field--widget-paragraphs .node-landing-page-alternative-paragraph > .form-actions {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.node-form-landing-page .field--widget-paragraphs .node-landing-page-alternative-paragraph > .form-actions .paragraphs-add-wrapper.form-wrapper .paragraphs-add-suffix {
   display:none;
 }
 
