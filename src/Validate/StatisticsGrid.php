@@ -23,7 +23,7 @@ class StatisticsGrid {
   public static function validate(array &$element, FormStateInterface $formState, array &$form) {
     $error = FALSE;
     $max_delta = $element['subform']['field_statistic_block']['widget']['#max_delta'];
-    if ($max_delta == 0) {
+    if ($max_delta < 2) {
       $error = TRUE;
     }
     if ($error) {
