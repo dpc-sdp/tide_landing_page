@@ -25,6 +25,9 @@ settings:
     -
       value: youtube_channel
       label: Youtube channel
+    -
+      value: website
+      label: Website
   allowed_values_function: ''
 module: options
 locked: false

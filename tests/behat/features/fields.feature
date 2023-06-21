@@ -8,7 +8,8 @@ Feature: Fields for Landing Page content type
     Given I am logged in as a user with the "create landing_page content" permission
     # Given I am logged in as a user with the "editor" role
     When I visit "node/add/landing_page"
-    Then I see field "Title"
+    And save screenshot
+    Then I see field "Page title"
     And I should see an "input#edit-title-0-value.required" element
 
     And I click on the horizontal tab "Header"
@@ -213,10 +214,10 @@ Feature: Fields for Landing Page content type
     And I should see the button "Image gallery"
     And I should see the button "Complex image"
     And I should see the button "Statistics Grid"
+    And I should see the button "Compact card collection"
 
     And I should see the button "Form embed (Drupal)"
     And I should see the button "Form embed (OpenForms)"
-    And I should see the button "Featured news"
 
     And I press the "Close" button
 

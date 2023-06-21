@@ -2,11 +2,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - block_content.type.campaign_with_video
-id: block_content--campaign_with_video
+    - paragraphs.paragraphs_type.compact_card
+id: paragraph--compact_card
 disabled: false
-path: block_content/campaign_with_video
-resourceType: block_content--campaign_with_video
+path: paragraph/compact_card
+resourceType: paragraph--compact_card
 resourceFields:
   id:
     fieldName: id
@@ -38,39 +38,39 @@ resourceFields:
     enhancer:
       id: ''
     disabled: false
-  revision_created:
-    fieldName: revision_created
-    publicName: revision_created
-    enhancer:
-      id: ''
-    disabled: false
-  revision_user:
-    fieldName: revision_user
-    publicName: revision_user
-    enhancer:
-      id: ''
-    disabled: false
-  revision_log:
-    fieldName: revision_log
-    publicName: revision_log
-    enhancer:
-      id: ''
-    disabled: false
   status:
     fieldName: status
     publicName: status
     enhancer:
       id: ''
     disabled: false
-  info:
-    fieldName: info
-    publicName: info
+  created:
+    fieldName: created
+    publicName: created
     enhancer:
       id: ''
     disabled: false
-  changed:
-    fieldName: changed
-    publicName: changed
+  parent_id:
+    fieldName: parent_id
+    publicName: parent_id
+    enhancer:
+      id: ''
+    disabled: false
+  parent_type:
+    fieldName: parent_type
+    publicName: parent_type
+    enhancer:
+      id: ''
+    disabled: false
+  parent_field_name:
+    fieldName: parent_field_name
+    publicName: parent_field_name
+    enhancer:
+      id: ''
+    disabled: false
+  behavior_settings:
+    fieldName: behavior_settings
+    publicName: behavior_settings
     enhancer:
       id: ''
     disabled: false
@@ -92,45 +92,27 @@ resourceFields:
     enhancer:
       id: ''
     disabled: false
-  moderation_state:
-    fieldName: moderation_state
-    publicName: moderation_state
-    enhancer:
-      id: ''
-    disabled: false
-  metatag:
-    fieldName: metatag
-    publicName: metatag
-    enhancer:
-      id: ''
-    disabled: false
-  body:
-    fieldName: body
-    publicName: body
-    enhancer:
-      id: ''
-    disabled: false
-  field_block_cta:
-    fieldName: field_block_cta
-    publicName: field_block_cta
+  field_paragraph_link:
+    fieldName: field_paragraph_link
+    publicName: field_paragraph_link
     enhancer:
       id: link_enhancer
     disabled: false
-  field_block_embedded_video:
-    fieldName: field_block_embedded_video
-    publicName: field_block_embedded_video
+  field_paragraph_media:
+    fieldName: field_paragraph_media
+    publicName: field_paragraph_media
     enhancer:
       id: ''
     disabled: false
-  field_block_image:
-    fieldName: field_block_image
-    publicName: field_block_image
+  field_paragraph_summary:
+    fieldName: field_paragraph_summary
+    publicName: field_paragraph_summary
     enhancer:
       id: ''
     disabled: false
-  field_block_title:
-    fieldName: field_block_title
-    publicName: field_block_title
+  field_paragraph_title:
+    fieldName: field_paragraph_title
+    publicName: field_paragraph_title
     enhancer:
       id: ''
     disabled: false
