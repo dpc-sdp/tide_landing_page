@@ -2,16 +2,16 @@
 
 namespace Drupal\tide_landing_page\Plugin\jsonapi\FieldEnhancer;
 
-use Drupal\tide_media\Plugin\jsonapi\FieldEnhancer\ImageEnhancer;
-use Drupal\jsonapi_extras\Plugin\ResourceFieldEnhancerBase;
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
+use Drupal\file\Entity\File;
+use Drupal\jsonapi_extras\Plugin\ResourceFieldEnhancerBase;
+use Drupal\media\Entity\Media;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\taxonomy\Entity\Term;
-use Drupal\media\Entity\Media;
-use Drupal\file\Entity\File;
+use Drupal\tide_media\Plugin\jsonapi\FieldEnhancer\ImageEnhancer;
 use Shaper\Util\Context;
-use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
-use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Adds necessary fields from internal link.

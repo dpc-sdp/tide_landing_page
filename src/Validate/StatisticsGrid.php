@@ -22,7 +22,7 @@ class StatisticsGrid {
    */
   public static function validate(array &$element, FormStateInterface $formState, array &$form) {
     $deltas = $element['subform']['field_statistic_block']['widget'];
-    
+
     $count = 0;
     foreach (array_keys($deltas) as $key) {
       if (is_numeric($key)) {
