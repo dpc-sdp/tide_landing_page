@@ -21,9 +21,17 @@ class StatisticsGrid {
    *   The complete form structure.
    */
   public static function validate(array &$element, FormStateInterface $formState, array &$form) {
+    $deltas = $element['subform']['field_statistic_block']['widget'];
+    
+    $count = 0;
+    foreach (array_keys($deltas) as $key) {
+      if (is_numeric($key)) {
+        $count += 1;
+      }
+    }
+
     $error = FALSE;
-    $max_delta = $element['subform']['field_statistic_block']['widget']['#max_delta'];
-    if ($max_delta < 2) {
+    if ($count < 2) {
       $error = TRUE;
     }
     if ($error) {
