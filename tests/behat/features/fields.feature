@@ -36,7 +36,7 @@ Feature: Fields for Landing Page content type
     And I should see an "input#edit-field-bottom-graphical-image-entity-browser-target" element
 
     And I click on the horizontal tab "Header extras"
-    And I should see text matching "Header Components"
+    And I should see text matching "Header components"
     And I press the "edit-field-landing-page-header-add-more-add-modal-form-area-add-more" button
     And I should see the button "Introduction banner"
     And I should see the button "Search banner"
