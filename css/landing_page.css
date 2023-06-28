@@ -22,7 +22,7 @@
   margin-bottom: 5px;
 }
 
-.node-form-landing-page .field--widget-paragraphs .node-landing-page-alternative-paragraph .form-item__description {
+#edit-field-landing-page-component--description {
   display: flex;
   flex-direction: column;
   align-items: center;

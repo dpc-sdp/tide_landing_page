@@ -5,18 +5,18 @@
  * Tide Landing Page install.
  */
 
+use Drupal\block_content\Entity\BlockContent;
+use Drupal\Component\Utility\NestedArray;
+use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\paragraphs\Entity\ParagraphsType;
 use Drupal\search_api\Item\Field;
 use Drupal\workflows\Entity\Workflow;
-use Drupal\field\Entity\FieldStorageConfig;
-use Drupal\Component\Utility\NestedArray;
-use Drupal\node\Entity\Node;
-use Drupal\Component\Utility\UrlHelper;
-use Drupal\block_content\Entity\BlockContent;
 
 /**
  * Implements hook_install().
