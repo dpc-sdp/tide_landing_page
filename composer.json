@@ -11,7 +11,7 @@
     "suggest": {
         "dpc-sdp/tide_api:^3.0.8": "Allows to use Drupal in headless mode",
         "dpc-sdp/tide_webform:^3.0.0": "Allows to use questionnaires",
-        "dpc-sdp/tide_news:^3.0.0": "News content type and related configuration for Tide Drupal 8 distribution"
+        "dpc-sdp/tide_news:^3.0.5": "News content type and related configuration for Tide Drupal 8 distribution"
     },
     "repositories": {
         "drupal": {
