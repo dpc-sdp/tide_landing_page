@@ -40,9 +40,6 @@
 'view landing_page revisions':
   title: 'View landing_page revisions'
   description: 'Allows user to view landing_page revisions.'
-'view landing_page revisions':
-  title: 'View landing_page revisions'
-  description: 'Allows user to view landing_page revisions.'
 'view scheduled transitions node landing_page':
  title: 'View scheduled transitions node landing_page'
  description: 'Allows user to view scheduled transitions node landing_page.'
