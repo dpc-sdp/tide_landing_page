@@ -21,25 +21,29 @@ class StatisticsGrid {
    *   The complete form structure.
    */
   public static function validate(array &$element, FormStateInterface $formState, array &$form) {
-    $deltas = $element['subform']['field_statistic_block']['widget'];
+    $blocks = $element['subform']['field_statistic_block']['widget'];
+    $numericKeysCount = self::countNumericKeys($blocks);
 
-    $count = 0;
-    foreach (array_keys($deltas) as $key) {
-      if (is_numeric($key)) {
-        $count += 1;
-      }
-    }
-
-    $error = FALSE;
-    if ($count < 2) {
-      $error = TRUE;
-    }
-    if ($error) {
+    if ($numericKeysCount < 2) {
       $formState->setError(
         $element,
         new TranslatableMarkup('The statistics grid component need minimum two blocks to be added.')
       );
     }
+  }
+
+  /**
+   * Count the number of numeric keys in the array.
+   *
+   * @param array $array
+   *   The array to be inspected.
+   *
+   * @return int
+   *   The count of numeric keys.
+   */
+  public static function countNumericKeys(array $array): int {
+    $numericKeys = array_filter(array_keys($array), 'is_numeric');
+    return count($numericKeys);
   }
 
 }
