@@ -12,6 +12,9 @@ use Drupal\tide_landing_page\Validate\StatisticsGrid;
  */
 class StatisticsGridCountNumericKeys extends UnitTestCase {
 
+  /**
+   * Tests CountNumericKeys.
+   */
   public function testCountNumericKeys() {
     $data = [
       '1' => 'value1',
