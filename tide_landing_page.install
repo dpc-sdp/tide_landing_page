@@ -2656,3 +2656,16 @@ function tide_landing_page_update_8050() {
     _tide_set_paragraph_type_icon($paragraph_type_id, $icon_filename);
   }
 }
+
+/**
+ * Update the widget type for statistics_grid paragraph.
+ */
+function tide_landing_page_update_8051() {
+  \Drupal::moduleHandler()->loadInclude('tide_core', 'inc', 'includes/helpers');
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
+  $config_read = _tide_read_config('core.entity_form_display.paragraph.statistics_grid.default', $config_location, FALSE);
+  $entity_form_display = Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('paragraph.statistics_grid.default');
+  $entity_form_display->setComponent('field_statistic_block', $config_read['content']['field_statistic_block'])->save();
+}
