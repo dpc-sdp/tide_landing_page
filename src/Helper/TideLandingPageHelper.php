@@ -10,6 +10,15 @@ use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
  */
 class TideLandingPageHelper {
 
+  /**
+   * Convert given date to local time format.
+   *
+   * @param  string $date
+   *   The date element to process.
+   *
+   * @return string
+   *   The converted date.
+   */
   public static function localDateAndTimeFormatter($date) {
     // Parse date with GMT timezone.
     $storage_tz = DateTimeItemInterface::STORAGE_TIMEZONE;
