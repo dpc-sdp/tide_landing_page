@@ -13,7 +13,7 @@ class TideLandingPageHelper {
   /**
    * Convert given date to local time format.
    *
-   * @param  string $date
+   * @param string $date
    *   The date element to process.
    *
    * @return string
