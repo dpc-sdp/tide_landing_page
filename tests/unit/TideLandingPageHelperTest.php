@@ -1,8 +1,8 @@
 <?php
 
 use Drupal\Tests\UnitTestCase;
-use Drupal\tide_landing_page\Helper\TideLandingPageHelper;
 use Drupal\test_helpers\TestHelpers;
+use Drupal\tide_landing_page\Helper\TideLandingPageHelper;
 
 /**
  * Tests the TideLandingPageHelper class.
