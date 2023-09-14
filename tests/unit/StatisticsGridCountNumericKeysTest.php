@@ -10,7 +10,7 @@ use Drupal\tide_landing_page\Validate\StatisticsGrid;
  *
  * @group tide_landing_page
  */
-class StatisticsGridCountNumericKeys extends UnitTestCase {
+class StatisticsGridCountNumericKeysTest extends UnitTestCase {
 
   /**
    * Tests CountNumericKeys.
