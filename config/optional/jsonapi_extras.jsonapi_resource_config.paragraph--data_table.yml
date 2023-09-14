@@ -110,6 +110,18 @@ resourceFields:
     enhancer:
       id: ''
     disabled: false
+  field_paragraph_summary:
+    fieldName: field_paragraph_summary
+    publicName: field_paragraph_summary
+    enhancer:
+      id: ''
+    disabled: false
+  field_paragraph_title:
+    fieldName: field_paragraph_title
+    publicName: field_paragraph_title
+    enhancer:
+      id: ''
+    disabled: false
   field_table_orientation:
     fieldName: field_table_orientation
     publicName: field_table_orientation
