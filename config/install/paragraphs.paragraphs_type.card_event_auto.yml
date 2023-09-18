@@ -1,8 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-id: card_event_auto
-label: 'Card event automated'
-icon_uuid: null
-description: ''
-behavior_plugins: {  }
