@@ -4,8 +4,6 @@ dependencies:
   config:
   - field.storage.paragraph.field_paragraph_items
   - paragraphs.paragraphs_type.card_carousel
-  - paragraphs.paragraphs_type.card_event
-  - paragraphs.paragraphs_type.card_event_auto
   - paragraphs.paragraphs_type.card_keydates
   - paragraphs.paragraphs_type.card_promotion
   - paragraphs.paragraphs_type.card_promotion_auto
@@ -26,8 +24,6 @@ settings:
   handler_settings:
     negate: 0
     target_bundles:
-      card_event: card_event
-      card_event_auto: card_event_auto
       card_keydates: card_keydates
       card_promotion: card_promotion
       card_promotion_auto: card_promotion_auto
@@ -53,12 +49,6 @@ settings:
       card_carousel:
         weight: -55
         enabled: false
-      card_event:
-        enabled: true
-        weight: -54
-      card_event_auto:
-        enabled: true
-        weight: -53
       card_keydates:
         enabled: true
         weight: -52
