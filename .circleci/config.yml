@@ -122,6 +122,7 @@ workflows:
             branches:
               ignore:
                 - reference
+      - phpunit_tests
 
   mergetoreference:
     jobs:
