@@ -6,7 +6,8 @@
     "require": {
         "dpc-sdp/tide_core": "dev-feature/SRM-870-d10-update",
         "dpc-sdp/tide_media": "dev-feature/SRM-870-939-d10-update-d10",
-        "dpc-sdp/tide_event": "dev-feature/SRM-871-d10-update"
+        "dpc-sdp/tide_event": "dev-feature/SRM-871-d10-update",
+        "dpc-sdp/tide_api": "dev-feature/SRM-948-d10-update"
     },
     "suggest": {
         "dpc-sdp/tide_api:dev-feature/SRM-948-d10-update": "Allows to use Drupal in headless mode",

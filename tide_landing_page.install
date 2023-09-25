@@ -23,3 +23,39 @@ function tide_landing_page_install() {
   TideLandingPageOperation::addFieldsToSearchApi();
 
 }
+
+/**
+ * Update the widget type for statistics_grid paragraph.
+ */
+function tide_landing_page_update_8051() {
+  \Drupal::moduleHandler()->loadInclude('tide_core', 'inc', 'includes/helpers');
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
+  $config_read = _tide_read_config('core.entity_form_display.paragraph.statistics_grid.default', $config_location, FALSE);
+  $entity_form_display = Drupal::entityTypeManager()
+    ->getStorage('entity_form_display')
+    ->load('paragraph.statistics_grid.default');
+  $entity_form_display->setComponent('field_statistic_block', $config_read['content']['field_statistic_block'])->save();
+}
+
+/**
+ * Removes Card event and Card event automated paragraph types.
+ */
+function tide_landing_page_update_8052() {
+  $paragraph_types = [
+    'card_event',
+    'card_event_auto',
+  ];
+  foreach ($paragraph_types as $paragraph_type) {
+    $query = \Drupal::entityQuery('paragraph')->condition('type', $paragraph_type);
+    $p_ids = $query->execute();
+    if (!empty($p_ids)) {
+      $p_entities = Paragraph::loadMultiple($p_ids);
+      $storage_handler = \Drupal::entityTypeManager()->getStorage('paragraph');
+      $storage_handler->delete($p_entities);
+    }
+    $p_type = \Drupal::entityTypeManager()->getStorage('paragraphs_type')->load($paragraph_type);
+    if ($p_type) {
+      $p_type->delete();
+    }
+  }
+}
