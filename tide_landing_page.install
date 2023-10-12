@@ -23,3 +23,16 @@ function tide_landing_page_install() {
   TideLandingPageOperation::addFieldsToSearchApi();
 
 }
+
+/**
+ * Update twitter name to X.
+ */
+function tide_landing_page_update_10100() {
+  $config = \Drupal::configFactory()->getEditable('field.storage.paragraph.field_paragraph_social_list');
+  $allowed_values = $config->get('settings.allowed_values');
+  if ($allowed_values[0]['label'] == 'Twitter') {
+    $allowed_values[0]['label'] = 'X (formerly Twitter)';
+  }
+  $config->set('settings.allowed_values', $allowed_values);
+  $config->save();
+}
