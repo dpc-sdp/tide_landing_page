@@ -4,15 +4,15 @@
     "type": "drupal-module",
     "license": "GPL-2.0-or-later",
     "require": {
-        "dpc-sdp/tide_core": "dev-feature/SRM-870-d10-update",
-        "dpc-sdp/tide_media": "dev-feature/SRM-870-939-d10-update-d10",
-        "dpc-sdp/tide_event": "dev-feature/SRM-871-d10-update",
-        "dpc-sdp/tide_api": "dev-feature/SRM-948-d10-update"
+        "dpc-sdp/tide_core": "^4.0.0",
+        "dpc-sdp/tide_media": "^4.0.0",
+        "dpc-sdp/tide_event": "^4.0.0",
+        "dpc-sdp/tide_api": "^4.0.0"
     },
     "suggest": {
-        "dpc-sdp/tide_api:dev-feature/SRM-948-d10-update": "Allows to use Drupal in headless mode",
-        "dpc-sdp/tide_webform:dev-feature/SRM-942-drupal-10": "Allows to use questionnaires",
-        "dpc-sdp/tide_news:dev-feature/SRM-954-d10-update": "News content type and related configuration for Tide Drupal 10 distribution"
+        "dpc-sdp/tide_api:^4.0.0": "Allows to use Drupal in headless mode",
+        "dpc-sdp/tide_webform:^4.0.0": "Allows to use questionnaires",
+        "dpc-sdp/tide_news:^4.0.0": "News content type and related configuration for Tide Drupal 10 distribution"
     },
     "repositories": {
         "drupal": {
