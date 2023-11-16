@@ -17,7 +17,8 @@ function tide_landing_page_install() {
     return;
   }
 
-  TideLandingPageOperation::enableNecessaryModules();
+  TideLandingPageOperation::addToWorkflows();
+  TideLandingPageOperation::addToScheduledTransitions();
   TideLandingPageOperation::addWebformComponent();
   TideLandingPageOperation::assignNecessaryPermissions();
   TideLandingPageOperation::addFieldsToSearchApi();
