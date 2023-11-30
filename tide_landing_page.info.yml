@@ -263,7 +263,6 @@ config_devel:
     - field.storage.paragraph.field_paragraph_topic
     - field.storage.paragraph.field_paragraph_email
     - field.storage.paragraph.field_paragraph_name
-    - field.storage.paragraph.field_paragraph_news_reference
     - field.storage.paragraph.field_paragraph_phone_number
     - field.storage.paragraph.field_paragraph_phone_title
     - field.storage.paragraph.field_paragraph_phones
