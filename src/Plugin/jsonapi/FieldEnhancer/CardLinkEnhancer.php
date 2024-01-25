@@ -183,7 +183,7 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
       }
       // Add the date field for publication.
       if ($node->hasField('field_publication_date') && !$node->field_publication_date->isEmpty()) {
-        $card_fields['date'] = TideLandingPageHelper::localDateAndTimeFormatter($node->get('field_publication_date')->getValue()[0]);
+        $card_fields['date'] = TideLandingPageHelper::localDateAndTimeFormatter($node->get('field_publication_date')->getValue()[0]['value']);
       }
     }
     if ($module_handler->moduleExists('tide_profile')) {
