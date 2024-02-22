@@ -5,7 +5,7 @@
  * Tide Landing Page install.
  */
 
- use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\tide_landing_page\TideLandingPageOperation;
 
 /**
