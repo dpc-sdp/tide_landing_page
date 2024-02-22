@@ -2656,3 +2656,19 @@ function tide_landing_page_update_8050() {
     _tide_set_paragraph_type_icon($paragraph_type_id, $icon_filename);
   }
 }
+
+/**
+ * Remove event and news from search block.
+ */
+function tide_landing_page_update_10001() {
+  $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_paragraph_search_block');
+  if (!$field_storage) {
+    return;
+  }
+  $current_allowed_values = $field_storage->getSetting('allowed_values');
+  unset($current_allowed_values['event']);
+  unset($current_allowed_values['news']);
+  $field_storage->setSetting('allowed_values', $current_allowed_values);
+  $field_storage->save();
+
+}
