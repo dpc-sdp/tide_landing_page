@@ -2,14 +2,13 @@
 
 namespace Drupal\tide_landing_page\Plugin\jsonapi\FieldEnhancer;
 
-use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\file\Entity\File;
 use Drupal\jsonapi_extras\Plugin\ResourceFieldEnhancerBase;
 use Drupal\media\Entity\Media;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\tide_landing_page\Helper\TideLandingPageHelper;
 use Drupal\tide_media\Plugin\jsonapi\FieldEnhancer\ImageEnhancer;
 use Shaper\Util\Context;
 
@@ -124,7 +123,13 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
     if ($module_handler->moduleExists('tide_news')) {
       // Add the date field for news.
       if ($node->hasField('field_news_date') && !$node->field_news_date->isEmpty()) {
-        $card_fields['date'] = $node->get('field_news_date')->getValue()[0];
+        $start_date = $node->get('field_news_date')->getValue()[0]['value'] ?? NULL;
+        $end_date = $node->get('field_news_date')->getValue()[0]['end_value'] ?? NULL;
+        $news_dates = [
+          'value' => TideLandingPageHelper::localDateAndTimeFormatter($start_date),
+          'end_value' => TideLandingPageHelper::localDateAndTimeFormatter($end_date),
+        ];
+        $card_fields['date'] = $news_dates ? $news_dates : '';
       }
     }
     if ($module_handler->moduleExists('tide_event')) {
@@ -136,25 +141,27 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
           $event_date = $paragraph->field_paragraph_date_range->getValue()[0];
           // Parse date with GMT timezone.
           if ($event_date != NULL) {
-            $storage_tz = DateTimeItemInterface::STORAGE_TIMEZONE;
-            $date_value = new DrupalDateTime($event_date['value'], $storage_tz);
-            $date_end_value = new DrupalDateTime($event_date['end_value'], $storage_tz);
-            $system_tz = \Drupal::service('config.factory')->get('system.date')->get('timezone.default');
-            // Convert to local timezone.
-            $date_formatter = \Drupal::service('date.formatter');
-            $event_date = [
-              'value' => $date_formatter->format($date_value->getTimeStamp(), 'custom', 'Y-m-d H:i:s', $system_tz),
-              'end_value' => $date_formatter->format($date_end_value->getTimeStamp(), 'custom', 'Y-m-d H:i:s', $system_tz),
+            $start_date = $event_date['value'] ?? NULL;
+            $end_date = $event_date['end_value'] ?? NULL;
+            $event_dates = [
+              'value' => TideLandingPageHelper::localDateAndTimeFormatter($start_date),
+              'end_value' => TideLandingPageHelper::localDateAndTimeFormatter($end_date),
             ];
+            $card_fields['date'] = $event_dates ? $event_dates : '';
           }
-          $card_fields['date'] = $event_date ? $event_date : '';
         }
       }
     }
     if ($module_handler->moduleExists('tide_grant')) {
       // Add the date field for grants.
       if ($node->hasField('field_node_dates') && !$node->field_node_dates->isEmpty()) {
-        $card_fields['date'] = $node->get('field_node_dates')->getValue()[0];
+        $start_date = $node->get('field_node_dates')->getValue()[0]['value'] ?? NULL;
+        $end_date = $node->get('field_node_dates')->getValue()[0]['end_value'] ?? NULL;
+        $grants_dates = [
+          'value' => TideLandingPageHelper::localDateAndTimeFormatter($start_date),
+          'end_value' => TideLandingPageHelper::localDateAndTimeFormatter($end_date),
+        ];
+        $card_fields['date'] = $grants_dates ? $grants_dates : '';
       }
       // Add the ongoing field for grants.
       if ($node->hasField('field_node_on_going') && !$node->field_node_on_going->isEmpty()) {
@@ -176,7 +183,7 @@ class CardLinkEnhancer extends ResourceFieldEnhancerBase {
       }
       // Add the date field for publication.
       if ($node->hasField('field_publication_date') && !$node->field_publication_date->isEmpty()) {
-        $card_fields['date'] = $node->get('field_publication_date')->getValue()[0];
+        $card_fields['date'] = TideLandingPageHelper::localDateAndTimeFormatter($node->get('field_publication_date')->getValue()[0]['value']);
       }
     }
     if ($module_handler->moduleExists('tide_profile')) {
