@@ -5,6 +5,7 @@
  * Tide Landing Page install.
  */
 
+ use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\tide_landing_page\TideLandingPageOperation;
 
 /**
@@ -36,4 +37,19 @@ function tide_landing_page_update_10100() {
   }
   $config->set('settings.allowed_values', $allowed_values);
   $config->save();
+}
+
+/**
+ * Remove event and news from search block.
+ */
+function tide_landing_page_update_10101() {
+  $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_paragraph_search_block');
+  if (!$field_storage) {
+    return;
+  }
+  $current_allowed_values = $field_storage->getSetting('allowed_values');
+  unset($current_allowed_values['event']);
+  unset($current_allowed_values['news']);
+  $field_storage->setSetting('allowed_values', $current_allowed_values);
+  $field_storage->save();
 }
