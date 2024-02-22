@@ -5,7 +5,8 @@
  * Tide Landing Page install.
  */
 
-use Drupal\tide_landing_page\TideLandingPageOperation;
+use Drupal\field\Entity\FieldStorageConfig;
+ use Drupal\tide_landing_page\TideLandingPageOperation;
 
 /**
  * Implements hook_install().
