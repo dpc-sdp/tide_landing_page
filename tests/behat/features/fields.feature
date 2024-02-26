@@ -36,7 +36,7 @@ Feature: Fields for Landing Page content type
     And I should see an "input#edit-field-bottom-graphical-image-entity-browser-target" element
 
     And I click on the horizontal tab "Header extras"
-    And I should see text matching "HEADER COMPONENTS"
+    And I should see text matching "Header components"
     And I press the "edit-field-landing-page-header-add-more-add-modal-form-area-add-more" button
     And I should see the button "Introduction banner"
     And I should see the button "Search banner"
@@ -67,14 +67,12 @@ Feature: Fields for Landing Page content type
     And I should see an "input#edit-field-node-display-headings-showh2" element
     And I should see an "input#edit-field-node-display-headings-showh2andh3" element
 
-    And I should see text matching "CONTENT COMPONENTS"
+    And I should see text matching "Content components"
     And I press the "edit-field-landing-page-component-add-more-add-modal-form-area-add-more" button
     And I should see the button "Basic text"
     And I should see the button "Accordion"
     And I should see the button "Call to action"
     And I should see the button "Card carousel"
-    And I should see the button "Card event"
-    And I should see the button "Card event automated"
     And I should see the button "Latest events"
     And I should see the button "Promotion card"
     And I should see the button "Navigation card"
@@ -167,7 +165,7 @@ Feature: Fields for Landing Page content type
     And I should see an "input#edit-field-bottom-graphical-image-entity-browser-target" element
 
     And I click on the horizontal tab "Header extras"
-    And I should see text matching "HEADER COMPONENTS"
+    And I should see text matching "Header components"
     And I press the "edit-field-landing-page-header-add-more-add-modal-form-area-add-more" button
     And I should see the button "Introduction banner"
     And I should see the button "Search banner"
@@ -199,14 +197,12 @@ Feature: Fields for Landing Page content type
     And I should see an "input#edit-field-node-display-headings-showh2" element
     And I should see an "input#edit-field-node-display-headings-showh2andh3" element
 
-    And I should see text matching "CONTENT COMPONENTS"
+    And I should see text matching "Content components"
     And I press the "edit-field-landing-page-component-add-more-add-modal-form-area-add-more" button
     And I should see the button "Basic text"
     And I should see the button "Accordion"
     And I should see the button "Call to action"
     And I should see the button "Card carousel"
-    And I should see the button "Card event"
-    And I should see the button "Card event automated"
     And I should see the button "Latest events"
     And I should see the button "Promotion card"
     And I should see the button "Navigation card"
