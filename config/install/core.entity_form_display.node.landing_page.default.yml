@@ -37,6 +37,7 @@ dependencies:
     - field.field.node.landing_page.field_tags
     - field.field.node.landing_page.field_topic
     - field.field.node.landing_page.field_whats_next
+    - field.field.node.landing_page.field_content_category
     - node.type.landing_page
   module:
     - content_moderation
@@ -46,6 +47,7 @@ dependencies:
     - metatag
     - paragraphs
     - path
+    - term_reference_tree
 third_party_settings:
   field_group:
     group_components:
@@ -652,6 +654,17 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_content_category:
+    type: term_reference_tree
+    weight: 1
+    region: content
+    settings:
+      start_minimized: true
+      leaves_only: true
+      select_parents: false
+      cascading_selection: 0
+      max_depth: 0
+    third_party_settings: { }
   field_whats_next:
     type: entity_reference_paragraphs
     weight: 4
