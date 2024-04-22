@@ -14,12 +14,6 @@ settings:
       value: none
       label: 'Full site search'
     -
-      value: event
-      label: Events
-    -
-      value: news
-      label: News
-    -
       value: custom
       label: Custom
   allowed_values_function: ''
