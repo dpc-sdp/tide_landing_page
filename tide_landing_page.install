@@ -73,7 +73,9 @@ function tide_landing_page_update_10102() {
     'latest_event',
   ];
   foreach ($paragraph_types as $paragraph_type) {
-    $query = \Drupal::entityQuery('paragraph')->condition('type', $paragraph_type);
+    $query = \Drupal::entityQuery('paragraph')
+      ->accessCheck(TRUE)
+      ->condition('type', $paragraph_type);
     $p_ids = $query->execute();
     if (!empty($p_ids)) {
       $p_entities = Paragraph::loadMultiple($p_ids);
