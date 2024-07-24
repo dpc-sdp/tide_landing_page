@@ -15,7 +15,6 @@ dependencies:
     - paragraphs.paragraphs_type.complex_image
     - paragraphs.paragraphs_type.data_table
     - paragraphs.paragraphs_type.form_embed_openforms
-    - paragraphs.paragraphs_type.latest_events
     - paragraphs.paragraphs_type.media_gallery
     - paragraphs.paragraphs_type.navigation_card
     - paragraphs.paragraphs_type.promotion_card
@@ -51,7 +50,6 @@ settings:
       timelines: timelines
       compact_card_collection: compact_card_collection
       call_to_action: call_to_action
-      latest_events: latest_events
       news_listing: news_listing
       data_table: data_table
       statistics_grid: statistics_grid
@@ -119,9 +117,6 @@ settings:
       media_gallery:
         enabled: true
         weight: -18
-      latest_events:
-        enabled: true
-        weight: -11
       card_carousel:
         enabled: true
         weight: -21

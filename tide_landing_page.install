@@ -64,3 +64,25 @@ function tide_landing_page_update_10101() {
   \Drupal::moduleHandler()->loadInclude('tide_core', 'inc', 'includes/updates');
   _tide_core_content_category_form_display('landing_page');
 }
+
+/**
+ * Removes latest event paragraph types.
+ */
+function tide_landing_page_update_10102() {
+  $paragraph_types = [
+    'latest_event',
+  ];
+  foreach ($paragraph_types as $paragraph_type) {
+    $query = \Drupal::entityQuery('paragraph')->condition('type', $paragraph_type);
+    $p_ids = $query->execute();
+    if (!empty($p_ids)) {
+      $p_entities = Paragraph::loadMultiple($p_ids);
+      $storage_handler = \Drupal::entityTypeManager()->getStorage('paragraph');
+      $storage_handler->delete($p_entities);
+    }
+    $p_type = \Drupal::entityTypeManager()->getStorage('paragraphs_type')->load($paragraph_type);
+    if ($p_type) {
+      $p_type->delete();
+    }
+  }
+}
