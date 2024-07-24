@@ -6,6 +6,7 @@
  */
 
 use Drupal\tide_landing_page\TideLandingPageOperation;
+use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * Implements hook_install().
