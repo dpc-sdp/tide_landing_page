@@ -50,7 +50,6 @@ settings:
       timelines: timelines
       compact_card_collection: compact_card_collection
       call_to_action: call_to_action
-      news_listing: news_listing
       data_table: data_table
       statistics_grid: statistics_grid
     target_bundles_drag_drop:
@@ -108,9 +107,6 @@ settings:
       form_embed_openforms:
         enabled: true
         weight: 23
-      news_listing:
-        enabled: true
-        weight: -10
       navigation_card:
         enabled: true
         weight: -29

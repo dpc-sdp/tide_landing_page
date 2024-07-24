@@ -72,6 +72,7 @@ function tide_landing_page_update_10101() {
 function tide_landing_page_update_10102() {
   $paragraph_types = [
     'latest_events',
+    'news_listing',
   ];
   foreach ($paragraph_types as $paragraph_type) {
     $query = \Drupal::entityQuery('paragraph')
