@@ -5,8 +5,8 @@
  * Tide Landing Page install.
  */
 
-use Drupal\tide_landing_page\TideLandingPageOperation;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\tide_landing_page\TideLandingPageOperation;
 
 /**
  * Implements hook_install().
