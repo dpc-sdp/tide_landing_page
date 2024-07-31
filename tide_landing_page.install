@@ -125,3 +125,38 @@ function tide_landing_page_update_10103() {
     $config->save();
   }
 }
+
+/**
+ * Change weight of paragraph types.
+ */
+function tide_landing_page_update_10104() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config = 'field.field.node.landing_page.field_landing_page_component';
+  // Read only from /config/install.
+  $config_read = _tide_read_config($config, $config_location, FALSE);
+  // Get the sync file to update.
+  $config_factory = \Drupal::configFactory();
+  $config_sync = $config_factory->getEditable($config);
+  $paragraphs = [
+    'basic_text',
+    'accordion',
+    'promotion_card',
+    'navigation_card',
+    'card_keydates',
+    'call_to_action',
+    'embedded_webform',
+    'form_embed_openforms',
+    'media_gallery',
+    'complex_image',
+    'timelines',
+    'compact_card_collection',
+    'data_table',
+    'statistics_grid',
+  ];
+  foreach ($paragraphs as $paragraph_type_id) {
+    // Changing weight.
+    $new_weight = $config_read['settings']['handler_settings']['target_bundles_drag_drop'][$paragraph_type_id]['weight'];
+    $config_sync->set('settings.handler_settings.target_bundles_drag_drop.' . $paragraph_type_id . '.weight', $new_weight)->save();
+  }
+}
