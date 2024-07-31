@@ -42,6 +42,7 @@ settings:
       promotion_card: promotion_card
       navigation_card: navigation_card
       card_keydates: card_keydates
+      call_to_action: call_to_action
       card_carousel: card_carousel
       embedded_webform: embedded_webform
       form_embed_openforms: form_embed_openforms
@@ -49,7 +50,6 @@ settings:
       complex_image: complex_image
       timelines: timelines
       compact_card_collection: compact_card_collection
-      call_to_action: call_to_action
       data_table: data_table
       statistics_grid: statistics_grid
     target_bundles_drag_drop:
@@ -96,11 +96,11 @@ settings:
         weight: -6
         enabled: false
       keydates:
-        weight: -5
+        weight: -4
         enabled: false
       call_to_action:
         enabled: true
-        weight: -12
+        weight: -5
       embedded_webform:
         enabled: true
         weight: -20
