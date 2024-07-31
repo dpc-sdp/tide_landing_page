@@ -96,7 +96,7 @@ function tide_landing_page_update_10102() {
 /**
  * Remove style option field from call to action component.
  */
-function tide_landing_update_10103() {
+function tide_landing_page_update_10103() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
   $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   // Delete field configuration manually.
@@ -121,9 +121,7 @@ function tide_landing_update_10103() {
   foreach ($form_configs as $form_config) {
     $config = \Drupal::configFactory()->getEditable($form_config);
     $config_read = _tide_read_config($form_config, $config_location, FALSE);
-    $config->set('dependencies', $config_read['dependencies']);
-    $config->set('content', $config_read['content']);
-    $config->set('hidden', $config_read['hidden']);
+    $config->set('description', $config_read['description']);
     $config->save();
   }
 }
