@@ -5,6 +5,8 @@
  * Tide Landing Page install.
  */
 
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\tide_landing_page\TideLandingPageOperation;
 
