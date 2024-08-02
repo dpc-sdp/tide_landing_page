@@ -131,7 +131,7 @@ function tide_landing_page_update_10103() {
  */
 function tide_landing_page_update_10104() {
   module_load_include('inc', 'tide_core', 'includes/helpers');
-  $config_location = [drupal_get_path('module', 'tide_landing_page') . '/config/install'];
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
   $config = 'field.field.node.landing_page.field_landing_page_component';
   // Read only from /config/install.
   $config_read = _tide_read_config($config, $config_location, FALSE);
