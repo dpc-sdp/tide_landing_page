@@ -54,105 +54,105 @@ settings:
       statistics_grid: statistics_grid
     target_bundles_drag_drop:
       banner:
-        weight: -33
+        weight: -95
         enabled: false
       basic_text:
         enabled: true
-        weight: -32
+        weight: -94
       accordion:
         enabled: true
-        weight: -31
+        weight: -93
       card_promotion:
         enabled: false
-        weight: -27
+        weight: -89
       card_promotion_auto:
         enabled: false
-        weight: -26
+        weight: -88
       compact_card:
-        weight: -1
+        weight: -66
         enabled: false
       compact_card_collection:
-        weight: -13
+        weight: -65
         enabled: true
       complex_image:
         enabled: true
-        weight: -17
+        weight: -79
       data_table:
         enabled: true
-        weight: -8
+        weight: -75
       key_journeys:
-        weight: -25
+        weight: -87
         enabled: false
       related_links:
-        weight: -24
+        weight: -86
         enabled: false
       links:
-        weight: -23
+        weight: -85
         enabled: false
       card_keydates:
         enabled: true
-        weight: -22
+        weight: -84
       accordion_content:
         weight: -6
         enabled: false
       keydates:
-        weight: -4
+        weight: -73
         enabled: false
       call_to_action:
         enabled: true
-        weight: -5
+        weight: -83
       embedded_webform:
         enabled: true
-        weight: -20
+        weight: -81
       form_embed_openforms:
         enabled: true
-        weight: 23
+        weight: -71
       navigation_card:
         enabled: true
-        weight: -29
+        weight: -91
       media_gallery:
         enabled: true
-        weight: -18
+        weight: -80
       card_carousel:
         enabled: true
-        weight: -21
+        weight: -82
       contact_us:
-        weight: 34
+        weight: -70
         enabled: false
       call_to_action_image:
-        weight: 35
+        weight: -69
         enabled: false
       phone:
-        weight: 38
+        weight: -68
         enabled: false
       promotion_card:
         enabled: true
-        weight: -30
+        weight: -92
       statistic_block:
-        weight: 151
+        weight: -49
         enabled: false
       statistics_grid:
         enabled: true
-        weight: 150
+        weight: -50
       social_link:
-        weight: 40
+        weight: -67
         enabled: false
       event_details:
-        weight: 46
+        weight: -64
         enabled: false
       introduction_banner:
-        weight: 48
+        weight: -63
         enabled: false
       embedded_search_form:
-        weight: 52
+        weight: -62
         enabled: false
       grants_overview:
         weight: 56
         enabled: false
       timeline:
-        weight: 67
+        weight: -58
         enabled: false
       timelines:
         enabled: true
-        weight: -16
+        weight: -78
 field_type: entity_reference_revisions
