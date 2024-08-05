@@ -5,6 +5,8 @@
  * Tide Landing Page install.
  */
 
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\tide_landing_page\TideLandingPageOperation;
 
@@ -88,5 +90,73 @@ function tide_landing_page_update_10102() {
     if ($p_type) {
       $p_type->delete();
     }
+  }
+}
+
+/**
+ * Remove style option field from call to action component.
+ */
+function tide_landing_page_update_10103() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
+  // Delete field configuration manually.
+  $field_names = ['field_paragraph_cta_style'];
+  foreach ($field_names as $field_name) {
+    $field_config = FieldConfig::loadByName('paragraph', 'call_to_action', $field_name);
+    if ($field_config) {
+      $field_config->delete();
+    }
+
+    $field_storage_config = FieldStorageConfig::loadByName('paragraph', $field_name);
+    if ($field_storage_config) {
+      $field_storage_config->delete();
+    }
+  }
+
+  $form_configs = [
+    'core.entity_form_display.paragraph.call_to_action.default',
+    'core.entity_view_display.paragraph.call_to_action.default',
+    'paragraphs.paragraphs_type.call_to_action',
+  ];
+  foreach ($form_configs as $form_config) {
+    $config = \Drupal::configFactory()->getEditable($form_config);
+    $config_read = _tide_read_config($form_config, $config_location, FALSE);
+    $config->set('description', $config_read['description']);
+    $config->save();
+  }
+}
+
+/**
+ * Change weight of paragraph types.
+ */
+function tide_landing_page_update_10104() {
+  module_load_include('inc', 'tide_core', 'includes/helpers');
+  $config_location = [\Drupal::service('extension.list.module')->getPath('tide_landing_page') . '/config/install'];
+  $config = 'field.field.node.landing_page.field_landing_page_component';
+  // Read only from /config/install.
+  $config_read = _tide_read_config($config, $config_location, FALSE);
+  // Get the sync file to update.
+  $config_factory = \Drupal::configFactory();
+  $config_sync = $config_factory->getEditable($config);
+  $paragraphs = [
+    'basic_text',
+    'accordion',
+    'promotion_card',
+    'navigation_card',
+    'card_keydates',
+    'call_to_action',
+    'embedded_webform',
+    'form_embed_openforms',
+    'media_gallery',
+    'complex_image',
+    'timelines',
+    'compact_card_collection',
+    'data_table',
+    'statistics_grid',
+  ];
+  foreach ($paragraphs as $paragraph_type_id) {
+    // Changing weight.
+    $new_weight = $config_read['settings']['handler_settings']['target_bundles_drag_drop'][$paragraph_type_id]['weight'];
+    $config_sync->set('settings.handler_settings.target_bundles_drag_drop.' . $paragraph_type_id . '.weight', $new_weight)->save();
   }
 }

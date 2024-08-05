@@ -4,7 +4,7 @@
     "type": "drupal-module",
     "license": "GPL-2.0-or-later",
     "require": {
-        "dpc-sdp/tide_core": "^4.0.0",
+        "dpc-sdp/tide_core": "dev-feature/remove-field-group-patch as 4.1.3",
         "dpc-sdp/tide_media": "^4.0.0",
         "dpc-sdp/tide_event": "^4.0.0",
         "dpc-sdp/tide_api": "^4.0.0"
