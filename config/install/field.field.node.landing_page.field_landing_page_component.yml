@@ -41,9 +41,9 @@ settings:
       accordion: accordion
       promotion_card: promotion_card
       navigation_card: navigation_card
+      card_carousel: card_carousel
       card_keydates: card_keydates
       call_to_action: call_to_action
-      card_carousel: card_carousel
       embedded_webform: embedded_webform
       form_embed_openforms: form_embed_openforms
       media_gallery: media_gallery
@@ -62,60 +62,66 @@ settings:
       accordion:
         enabled: true
         weight: -93
+      promotion_card:
+        enabled: true
+        weight: -92
+      navigation_card:
+        enabled: true
+        weight: -91
       card_promotion:
         enabled: false
-        weight: -89
+        weight: -90
       card_promotion_auto:
         enabled: false
+        weight: -89
+      key_journeys:
         weight: -88
+        enabled: false
+      related_links:
+        weight: -87
+        enabled: false
+      links:
+        weight: -86
+        enabled: false
+      card_carousel:
+        enabled: true
+        weight: -84
+      card_keydates:
+        enabled: true
+        weight: -83
+      call_to_action:
+        enabled: true
+        weight: -82
+      form_embed_openforms:
+        enabled: true
+        weight: -81
+      media_gallery:
+        enabled: true
+        weight: -80
+      complex_image:
+        enabled: true
+        weight: -79
+      timelines:
+        enabled: true
+        weight: -78
+      data_table:
+        enabled: true
+        weight: -75
       compact_card:
         weight: -66
         enabled: false
       compact_card_collection:
         weight: -65
         enabled: true
-      complex_image:
-        enabled: true
-        weight: -79
-      data_table:
-        enabled: true
-        weight: -75
-      key_journeys:
-        weight: -87
-        enabled: false
-      related_links:
-        weight: -86
-        enabled: false
-      links:
-        weight: -85
-        enabled: false
-      card_keydates:
-        enabled: true
-        weight: -84
       accordion_content:
-        weight: -6
+        weight: -74
         enabled: false
       keydates:
         weight: -73
         enabled: false
-      call_to_action:
-        enabled: true
-        weight: -83
       embedded_webform:
         enabled: true
         weight: -81
-      form_embed_openforms:
-        enabled: true
-        weight: -71
-      navigation_card:
-        enabled: true
-        weight: -91
-      media_gallery:
-        enabled: true
-        weight: -80
-      card_carousel:
-        enabled: true
-        weight: -82
       contact_us:
         weight: -70
         enabled: false
@@ -125,15 +131,12 @@ settings:
       phone:
         weight: -68
         enabled: false
-      promotion_card:
-        enabled: true
-        weight: -92
       statistic_block:
         weight: -49
         enabled: false
       statistics_grid:
         enabled: true
-        weight: -50
+        weight: -61
       social_link:
         weight: -67
         enabled: false
@@ -150,9 +153,6 @@ settings:
         weight: 56
         enabled: false
       timeline:
-        weight: -58
+        weight: -5
         enabled: false
-      timelines:
-        enabled: true
-        weight: -78
 field_type: entity_reference_revisions
