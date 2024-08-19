@@ -98,8 +98,8 @@ function tide_landing_page_update_10102() {
  * Remove style option field from call to action component.
  */
 function tide_landing_page_update_10103() {
-  // To avoid error `table for the field couldn't be renamed to the field_deleted_data_xxxxx{long-hash-string}
-  // because the table already exists`
+  // To avoid error `table for the field couldn't be renamed to the
+  //  field_deleted_data_xxxxx{long-hash-string} because the table already exists`.
   // @link https://www.drupal.org/project/drupal/issues/2836539
   $alias_manager = Drush::service('site.alias.manager');
   Drush::drush($alias_manager->getSelf(), 'cron')->run();
