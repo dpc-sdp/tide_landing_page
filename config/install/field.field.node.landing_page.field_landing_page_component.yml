@@ -83,30 +83,36 @@ settings:
       links:
         weight: -86
         enabled: false
-      card_carousel:
-        enabled: true
-        weight: -84
       card_keydates:
         enabled: true
         weight: -83
       call_to_action:
         enabled: true
         weight: -82
-      form_embed_openforms:
-        enabled: true
+      card_event:
         weight: -81
-      media_gallery:
         enabled: true
+      card_carousel:
         weight: -80
-      complex_image:
+        enabled: true
+      embedded_webform:
         enabled: true
         weight: -79
-      timelines:
+      form_embed_openforms:
         enabled: true
         weight: -78
-      data_table:
+      media_gallery:
+        enabled: true
+        weight: -77
+      complex_image:
+        enabled: true
+        weight: -76
+      timelines:
         enabled: true
         weight: -75
+      data_table:
+        enabled: true
+        weight: -74
       compact_card:
         weight: -66
         enabled: false
@@ -114,14 +120,11 @@ settings:
         weight: -65
         enabled: true
       accordion_content:
-        weight: -74
-        enabled: false
-      keydates:
         weight: -73
         enabled: false
-      embedded_webform:
-        enabled: true
-        weight: -81
+      keydates:
+        weight: -72
+        enabled: false
       contact_us:
         weight: -70
         enabled: false
