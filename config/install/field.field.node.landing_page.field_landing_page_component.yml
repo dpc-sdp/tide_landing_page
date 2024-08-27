@@ -41,118 +41,121 @@ settings:
       accordion: accordion
       promotion_card: promotion_card
       navigation_card: navigation_card
-      card_keydates: card_keydates
       card_carousel: card_carousel
+      card_keydates: card_keydates
+      call_to_action: call_to_action
       embedded_webform: embedded_webform
       form_embed_openforms: form_embed_openforms
       media_gallery: media_gallery
       complex_image: complex_image
       timelines: timelines
       compact_card_collection: compact_card_collection
-      call_to_action: call_to_action
       data_table: data_table
       statistics_grid: statistics_grid
     target_bundles_drag_drop:
       banner:
-        weight: -33
+        weight: -95
         enabled: false
       basic_text:
         enabled: true
-        weight: -32
+        weight: -94
       accordion:
         enabled: true
-        weight: -31
+        weight: -93
+      promotion_card:
+        enabled: true
+        weight: -92
+      navigation_card:
+        enabled: true
+        weight: -91
       card_promotion:
         enabled: false
-        weight: -27
+        weight: -90
       card_promotion_auto:
         enabled: false
-        weight: -26
-      compact_card:
-        weight: -1
-        enabled: false
-      compact_card_collection:
-        weight: -13
-        enabled: true
-      complex_image:
-        enabled: true
-        weight: -17
-      data_table:
-        enabled: true
-        weight: -8
+        weight: -89
       key_journeys:
-        weight: -25
+        weight: -88
         enabled: false
       related_links:
-        weight: -24
+        weight: -87
         enabled: false
       links:
-        weight: -23
+        weight: -86
         enabled: false
       card_keydates:
         enabled: true
-        weight: -22
-      accordion_content:
-        weight: -6
-        enabled: false
-      keydates:
-        weight: -5
-        enabled: false
+        weight: -83
       call_to_action:
         enabled: true
-        weight: -12
+        weight: -82
+      card_event:
+        weight: -81
+        enabled: true
+      card_carousel:
+        weight: -80
+        enabled: true
       embedded_webform:
         enabled: true
-        weight: -20
+        weight: -79
       form_embed_openforms:
         enabled: true
-        weight: 23
-      navigation_card:
-        enabled: true
-        weight: -29
+        weight: -78
       media_gallery:
         enabled: true
-        weight: -18
-      card_carousel:
+        weight: -77
+      complex_image:
         enabled: true
-        weight: -21
+        weight: -76
+      timelines:
+        enabled: true
+        weight: -75
+      data_table:
+        enabled: true
+        weight: -74
+      compact_card:
+        weight: -66
+        enabled: false
+      compact_card_collection:
+        weight: -65
+        enabled: true
+      accordion_content:
+        weight: -73
+        enabled: false
+      keydates:
+        weight: -72
+        enabled: false
       contact_us:
-        weight: 34
+        weight: -70
         enabled: false
       call_to_action_image:
-        weight: 35
+        weight: -69
         enabled: false
       phone:
-        weight: 38
+        weight: -68
         enabled: false
-      promotion_card:
-        enabled: true
-        weight: -30
       statistic_block:
-        weight: 151
+        weight: -49
         enabled: false
       statistics_grid:
         enabled: true
-        weight: 150
+        weight: -61
       social_link:
-        weight: 40
+        weight: -67
         enabled: false
       event_details:
-        weight: 46
+        weight: -64
         enabled: false
       introduction_banner:
-        weight: 48
+        weight: -63
         enabled: false
       embedded_search_form:
-        weight: 52
+        weight: -62
         enabled: false
       grants_overview:
         weight: 56
         enabled: false
       timeline:
-        weight: 67
+        weight: -5
         enabled: false
-      timelines:
-        enabled: true
-        weight: -16
 field_type: entity_reference_revisions
