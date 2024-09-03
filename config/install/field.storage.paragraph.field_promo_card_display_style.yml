@@ -19,6 +19,9 @@ settings:
     -
       value: profile
       label: Profile
+    -
+      value: highlight
+      label: Highlight
   allowed_values_function: ''
 module: options
 locked: false
