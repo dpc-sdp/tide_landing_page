@@ -162,3 +162,16 @@ function tide_landing_page_update_10104() {
     $config_sync->set('settings.handler_settings.target_bundles_drag_drop.' . $paragraph_type_id . '.weight', $new_weight)->save();
   }
 }
+
+/**
+ * Adds highlight option new value to to field_promo_card_display_style.
+ */
+function tide_landing_page_update_10105() {
+  $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_promo_card_display_style');
+  $new_field = $field_storage->getSettings()['allowed_values'];
+  $new_field['highlight'] = 'Highlight';
+  $field_storage->setSettings([
+    'allowed_values' => $new_field,
+  ]);
+  $field_storage->save();
+}
