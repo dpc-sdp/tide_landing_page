@@ -1,10 +1,12 @@
-uuid: 1e7dabc7-e67d-4bd2-a980-8af4ccbcb365
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  enforced:
+    module:
+      - paragraphs_library
 id: from_library
 label: 'From library'
 icon_uuid: null
 icon_default: null
-description: ''
+description: null
 behavior_plugins: {  }

@@ -1,4 +1,3 @@
-uuid: 3ffee7dd-7866-464f-af4a-b041b1b17dfa
 langcode: en
 status: true
 dependencies:
@@ -31,108 +30,141 @@ settings:
     negate: 0
     target_bundles_drag_drop:
       accordion:
-        weight: 36
+        weight: 47
         enabled: true
       accordion_content:
-        weight: 37
-        enabled: false
-      banner:
-        weight: 38
-        enabled: false
-      basic_text:
-        weight: 39
-        enabled: true
-      call_to_action:
-        weight: 40
-        enabled: false
-      call_to_action_image:
-        weight: 41
-        enabled: false
-      card_carousel:
-        weight: 42
-        enabled: false
-      card_keydates:
-        weight: 43
-        enabled: false
-      card_promotion:
-        weight: 44
-        enabled: false
-      card_promotion_auto:
-        weight: 45
-        enabled: false
-      compact_card:
-        weight: 46
-        enabled: false
-      compact_card_collection:
-        weight: 47
-        enabled: false
-      complex_image:
         weight: 48
         enabled: false
-      contact_us:
+      banner:
         weight: 49
-        enabled: true
-      data_table:
-        weight: 50
         enabled: false
-      embedded_search_form:
+      basic_text:
+        weight: 50
+        enabled: true
+      call_to_action:
         weight: 51
         enabled: false
-      embedded_webform:
+      call_to_action_image:
         weight: 52
         enabled: false
-      event_details:
+      card_carousel:
         weight: 53
         enabled: false
-      form_embed_openforms:
+      card_event:
         weight: 54
         enabled: false
-      from_library:
-        weight: 70
-        enabled: false
-      hero_banner_with_cta:
+      card_event_auto:
         weight: 55
         enabled: false
-      introduction_banner:
+      card_keydates:
         weight: 56
-        enabled: true
-      key_journeys:
-        weight: 58
         enabled: false
-      keydates:
+      card_promotion:
         weight: 57
         enabled: false
-      links:
+      card_promotion_auto:
+        weight: 58
+        enabled: false
+      compact_card:
         weight: 59
         enabled: false
-      media_gallery:
+      compact_card_collection:
         weight: 60
         enabled: false
-      navigation_card:
+      complex_image:
         weight: 61
         enabled: false
-      phone:
+      contact_us:
         weight: 62
-        enabled: false
-      promotion_card:
+        enabled: true
+      content_collection:
         weight: 63
         enabled: false
-      related_links:
+      content_collection_enhanced:
         weight: 64
         enabled: false
-      social_link:
+      data_driven_component:
         weight: 65
         enabled: false
-      statistic_block:
-        weight: 67
-        enabled: false
-      statistics_grid:
+      data_table:
         weight: 66
         enabled: false
-      timeline:
+      embedded_search_form:
+        weight: 67
+        enabled: false
+      embedded_webform:
         weight: 68
         enabled: false
-      timelines:
+      event_details:
         weight: 69
+        enabled: false
+      form_embed_openforms:
+        weight: 70
+        enabled: false
+      from_library:
+        weight: 92
+        enabled: false
+      hero_banner_with_cta:
+        weight: 71
+        enabled: false
+      introduction_banner:
+        weight: 72
+        enabled: true
+      key_journeys:
+        weight: 74
+        enabled: false
+      keydates:
+        weight: 73
+        enabled: false
+      links:
+        weight: 75
+        enabled: false
+      listing_content_type:
+        weight: 76
+        enabled: false
+      listing_custom_filter:
+        weight: 77
+        enabled: false
+      listing_site:
+        weight: 78
+        enabled: false
+      listing_user_custom_filter:
+        weight: 79
+        enabled: false
+      media_gallery:
+        weight: 80
+        enabled: false
+      navigation_card:
+        weight: 81
+        enabled: false
+      phone:
+        weight: 82
+        enabled: false
+      promotion_card:
+        weight: 83
+        enabled: false
+      related_links:
+        weight: 84
+        enabled: false
+      search_listing_header_component:
+        weight: 86
+        enabled: false
+      searchable_fields:
+        weight: 85
+        enabled: false
+      social_link:
+        weight: 87
+        enabled: false
+      statistic_block:
+        weight: 89
+        enabled: false
+      statistics_grid:
+        weight: 88
+        enabled: false
+      timeline:
+        weight: 90
+        enabled: false
+      timelines:
+        weight: 91
         enabled: false
 field_type: entity_reference_revisions

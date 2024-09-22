@@ -1,19 +1,16 @@
-uuid: 1115f429-7778-4fdc-ae4a-627542904eeb
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_reusable_paragraph
     - paragraphs.paragraphs_type.from_library
-  module:
-    - entity_reference_revisions
 id: paragraph.from_library.field_reusable_paragraph
 field_name: field_reusable_paragraph
 entity_type: paragraph
 bundle: from_library
-label: 'Reusable Paragraph'
+label: 'Reusable paragraph'
 description: ''
-required: false
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''
@@ -23,6 +20,5 @@ settings:
     target_bundles: null
     sort:
       field: _none
-      direction: ASC
     auto_create: false
-field_type: entity_reference_revisions
+field_type: entity_reference
