@@ -1,3 +1,5 @@
+# This repository has been archived and is no longer actively maintained. If you need to create new PRs or Issues, please visit the following repository: https://github.com/dpc-sdp/tide_core.
+
 # Tide Landing Page
 Landing Page content type for [Tide](https://github.com/dpc-sdp/tide) distribution for [Drupal 10](https://github.com/dpc-sdp)
 
