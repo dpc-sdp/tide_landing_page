@@ -8,13 +8,17 @@ dependencies:
     - paragraphs.paragraphs_type.basic_text
     - paragraphs.paragraphs_type.call_to_action
     - paragraphs.paragraphs_type.card_carousel
+    - paragraphs.paragraphs_type.card_event
+    - paragraphs.paragraphs_type.card_event_auto
     - paragraphs.paragraphs_type.card_keydates
     - paragraphs.paragraphs_type.compact_card_collection
-    - paragraphs.paragraphs_type.card_promotion
-    - paragraphs.paragraphs_type.card_promotion_auto
     - paragraphs.paragraphs_type.complex_image
+    - paragraphs.paragraphs_type.content_collection
+    - paragraphs.paragraphs_type.content_collection_enhanced
     - paragraphs.paragraphs_type.data_table
+    - paragraphs.paragraphs_type.embedded_webform
     - paragraphs.paragraphs_type.form_embed_openforms
+    - paragraphs.paragraphs_type.from_library
     - paragraphs.paragraphs_type.media_gallery
     - paragraphs.paragraphs_type.navigation_card
     - paragraphs.paragraphs_type.promotion_card
@@ -35,127 +39,165 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       basic_text: basic_text
       accordion: accordion
       promotion_card: promotion_card
       navigation_card: navigation_card
-      card_carousel: card_carousel
+      card_event: card_event
       card_keydates: card_keydates
-      call_to_action: call_to_action
+      card_carousel: card_carousel
       embedded_webform: embedded_webform
-      form_embed_openforms: form_embed_openforms
       media_gallery: media_gallery
       complex_image: complex_image
       timelines: timelines
-      compact_card_collection: compact_card_collection
+      call_to_action: call_to_action
       data_table: data_table
+      card_event_auto: card_event_auto
+      form_embed_openforms: form_embed_openforms
+      compact_card_collection: compact_card_collection
+      content_collection: content_collection
+      content_collection_enhanced: content_collection_enhanced
+      from_library: from_library
       statistics_grid: statistics_grid
+    negate: 0
     target_bundles_drag_drop:
-      banner:
-        weight: -95
-        enabled: false
-      basic_text:
-        enabled: true
-        weight: -94
       accordion:
-        enabled: true
-        weight: -93
-      promotion_card:
-        enabled: true
-        weight: -92
-      navigation_card:
-        enabled: true
-        weight: -91
-      card_promotion:
-        enabled: false
-        weight: -90
-      card_promotion_auto:
-        enabled: false
-        weight: -89
-      key_journeys:
-        weight: -88
-        enabled: false
-      related_links:
-        weight: -87
-        enabled: false
-      links:
-        weight: -86
-        enabled: false
-      card_keydates:
-        enabled: true
-        weight: -83
-      call_to_action:
-        enabled: true
-        weight: -82
-      card_event:
-        weight: -81
-        enabled: true
-      card_carousel:
-        weight: -80
-        enabled: true
-      embedded_webform:
-        enabled: true
-        weight: -79
-      form_embed_openforms:
-        enabled: true
-        weight: -78
-      media_gallery:
-        enabled: true
-        weight: -77
-      complex_image:
-        enabled: true
-        weight: -76
-      timelines:
-        enabled: true
-        weight: -75
-      data_table:
-        enabled: true
-        weight: -74
-      compact_card:
-        weight: -66
-        enabled: false
-      compact_card_collection:
-        weight: -65
+        weight: -31
         enabled: true
       accordion_content:
-        weight: -73
+        weight: -6
         enabled: false
-      keydates:
-        weight: -72
+      banner:
+        weight: -33
         enabled: false
-      contact_us:
-        weight: -70
-        enabled: false
-      call_to_action_image:
-        weight: -69
-        enabled: false
-      phone:
-        weight: -68
-        enabled: false
-      statistic_block:
-        weight: -49
-        enabled: false
-      statistics_grid:
+      basic_text:
+        weight: -32
         enabled: true
-        weight: -61
-      social_link:
-        weight: -67
+      call_to_action:
+        weight: -12
+        enabled: true
+      call_to_action_image:
+        weight: 35
         enabled: false
+      card_carousel:
+        weight: -21
+        enabled: true
+      card_event:
+        weight: -28
+        enabled: true
+      card_event_auto:
+        weight: -4
+        enabled: true
+      card_keydates:
+        weight: -22
+        enabled: true
+      card_promotion:
+        weight: -27
+        enabled: false
+      card_promotion_auto:
+        weight: -26
+        enabled: false
+      compact_card:
+        weight: 42
+        enabled: false
+      compact_card_collection:
+        weight: 43
+        enabled: true
+      complex_image:
+        weight: -17
+        enabled: true
+      contact_us:
+        weight: 34
+        enabled: false
+      content_collection:
+        weight: 63
+        enabled: true
+      content_collection_enhanced:
+        weight: 64
+        enabled: true
+      data_driven_component:
+        weight: 65
+        enabled: false
+      data_table:
+        weight: -8
+        enabled: true
+      embedded_search_form:
+        weight: 52
+        enabled: false
+      embedded_webform:
+        weight: -20
+        enabled: true
       event_details:
-        weight: -64
+        weight: 46
+        enabled: false
+      form_embed_openforms:
+        weight: 23
+        enabled: true
+      from_library:
+        weight: 92
+        enabled: true
+      hero_banner_with_cta:
+        weight: 71
         enabled: false
       introduction_banner:
-        weight: -63
+        weight: 48
         enabled: false
-      embedded_search_form:
-        weight: -62
+      key_journeys:
+        weight: -25
         enabled: false
-      grants_overview:
-        weight: 56
-        enabled: false
-      timeline:
+      keydates:
         weight: -5
         enabled: false
+      links:
+        weight: -23
+        enabled: false
+      listing_content_type:
+        weight: 76
+        enabled: false
+      listing_custom_filter:
+        weight: 77
+        enabled: false
+      listing_site:
+        weight: 78
+        enabled: false
+      listing_user_custom_filter:
+        weight: 79
+        enabled: false
+      media_gallery:
+        weight: -18
+        enabled: true
+      navigation_card:
+        weight: -29
+        enabled: true
+      phone:
+        weight: 38
+        enabled: false
+      promotion_card:
+        weight: -30
+        enabled: true
+      related_links:
+        weight: -24
+        enabled: false
+      search_listing_header_component:
+        weight: 86
+        enabled: false
+      searchable_fields:
+        weight: 85
+        enabled: false
+      social_link:
+        weight: 40
+        enabled: false
+      statistic_block:
+        weight: 151
+        enabled: false
+      statistics_grid:
+        weight: 150
+        enabled: true
+      timeline:
+        weight: 67
+        enabled: false
+      timelines:
+        weight: -16
+        enabled: true
 field_type: entity_reference_revisions
