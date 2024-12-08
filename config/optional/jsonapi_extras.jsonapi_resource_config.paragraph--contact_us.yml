@@ -184,6 +184,14 @@ resourceFields:
     disabled: false
     advancedOptionsIcon: ''
     enhancer_label: ''
+  field_paragraph_short_desc:
+    fieldName: field_paragraph_short_desc
+    publicName: field_paragraph_short_desc
+    enhancer:
+      id: ''
+    disabled: false
+    advancedOptionsIcon: ''
+    enhancer_label: ''
   field_paragraph_social_media:
     fieldName: field_paragraph_social_media
     publicName: field_paragraph_social_media
@@ -197,6 +205,14 @@ resourceFields:
     publicName: field_paragraph_title
     enhancer:
       id: ''
+    disabled: false
+    advancedOptionsIcon: ''
+    enhancer_label: ''
+  field_paragraph_website:
+    fieldName: field_paragraph_website
+    publicName: field_paragraph_website
+    enhancer:
+      id: link_enhancer
     disabled: false
     advancedOptionsIcon: ''
     enhancer_label: ''

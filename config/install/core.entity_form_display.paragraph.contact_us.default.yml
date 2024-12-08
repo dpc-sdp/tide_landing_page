@@ -8,12 +8,15 @@ dependencies:
     - field.field.paragraph.contact_us.field_paragraph_name
     - field.field.paragraph.contact_us.field_paragraph_phones
     - field.field.paragraph.contact_us.field_paragraph_postal_address
+    - field.field.paragraph.contact_us.field_paragraph_short_desc
     - field.field.paragraph.contact_us.field_paragraph_social_media
     - field.field.paragraph.contact_us.field_paragraph_title
+    - field.field.paragraph.contact_us.field_paragraph_website
     - paragraphs.paragraphs_type.contact_us
   module:
     - address
     - content_moderation
+    - link
     - paragraphs
 id: paragraph.contact_us.default
 targetEntityType: paragraph
@@ -21,7 +24,7 @@ bundle: contact_us
 mode: default
 content:
   field_paragraph_department_name:
-    weight: 3
+    weight: 2
     settings:
       size: 60
       placeholder: ''
@@ -37,14 +40,14 @@ content:
     type: email_default
     region: content
   field_paragraph_location:
-    weight: 5
+    weight: 6
     settings:
       default_country: null
     third_party_settings: {  }
     type: address_default
     region: content
   field_paragraph_name:
-    weight: 2
+    weight: 1
     settings:
       size: 60
       placeholder: ''
@@ -53,7 +56,7 @@ content:
     region: content
   field_paragraph_phones:
     type: entity_reference_paragraphs
-    weight: 7
+    weight: 8
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -64,15 +67,23 @@ content:
     third_party_settings: {  }
     region: content
   field_paragraph_postal_address:
-    weight: 6
+    weight: 7
     settings:
       default_country: null
     third_party_settings: {  }
     type: address_default
     region: content
+  field_paragraph_short_desc:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_paragraph_social_media:
     type: entity_reference_paragraphs
-    weight: 8
+    weight: 9
     settings:
       title: 'Social Media'
       title_plural: 'Social Media'
@@ -83,12 +94,20 @@ content:
     third_party_settings: {  }
     region: content
   field_paragraph_title:
-    weight: 1
+    weight: 0
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_paragraph_website:
+    weight: 5
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
     region: content
   moderation_state:
     type: moderation_state_default
